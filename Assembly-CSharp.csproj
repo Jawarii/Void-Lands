@@ -104,6 +104,10 @@
     <Compile Include="Assets\OtherProjectScripts\LevelUpPanel.cs" />
     <Compile Include="Assets\Scripts\ReadSceneNames.cs" />
     <Compile Include="Assets\LootPopupBehaviour.cs" />
+    <Compile Include="Assets\ClickLootBehaviour.cs" />
+    <Compile Include="Assets\EnchantmentStoneInfo.cs" />
+    <Compile Include="Assets\Scripts\ItemInfo.cs" />
+    <Compile Include="Assets\Scripts\ItemInfoSO.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ImportedAssets\Knight Files\Read Me.txt" />

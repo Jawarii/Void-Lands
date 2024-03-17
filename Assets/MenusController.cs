@@ -7,6 +7,7 @@ public class MenusController : MonoBehaviour
 {
     public List<GameObject> menus;
     public List<GameObject> activeMenus;
+    public Canvas canvas;
     void Start()
     {
         
@@ -15,23 +16,45 @@ public class MenusController : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //if (Input.GetKeyDown(KeyCode.Escape))
+        //{
+        //    if (activeMenus!= null && activeMenus.Count > 0)
+        //    {
+        //        activeMenus[activeMenus.Count - 1].gameObject.SetActive(false);
+        //        activeMenus.RemoveAt(activeMenus.Count - 1);
+        //    }
+        //}   
+        //if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.B))
+        //{
+        //    if (menus[0].gameObject.activeSelf == true)
+        //    {
+        //        menus[0].gameObject.SetActive(false);
+        //    }
+        //    else
+        //    {
+        //        menus[0].gameObject.SetActive(true);
+        //        activeMenus.Add(menus[0]);
+        //    }
+        //}
+
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (activeMenus!= null && activeMenus.Count > 0)
+            if (activeMenus != null && activeMenus.Count > 0)
             {
-                activeMenus[activeMenus.Count - 1].gameObject.SetActive(false);
+                canvas.gameObject.GetComponent<Canvas>().enabled = false;
                 activeMenus.RemoveAt(activeMenus.Count - 1);
             }
-        }   
+        }
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.B))
         {
-            if (menus[0].gameObject.activeSelf == true)
+            if (canvas.gameObject.GetComponent<Canvas>().enabled == true)
             {
-                menus[0].gameObject.SetActive(false);
+                canvas.gameObject.GetComponent<Canvas>().enabled = false;
+                activeMenus.RemoveAt(activeMenus.Count - 1);
             }
             else
             {
-                menus[0].gameObject.SetActive(true);
+                canvas.gameObject.GetComponent<Canvas>().enabled = true;
                 activeMenus.Add(menus[0]);
             }
         }
