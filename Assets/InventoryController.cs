@@ -56,7 +56,7 @@ public class InventoryController : MonoBehaviour
                             GameObject.Find("Slot (" + j + ")").GetComponentInChildren<TMP_Text>().text = inventory[j].currentStackSize.ToString();
                             (GameObject.Find("Slot (" + j + ")").transform.Find("ItemIcon")).gameObject.SetActive(true);
                             (GameObject.Find("Slot (" + j + ")").transform.Find("ItemIcon")).GetComponent<Image>().sprite = item.itemIcon;
-
+                          
                             break;
                         }
                     }

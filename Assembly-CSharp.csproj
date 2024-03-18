@@ -71,6 +71,7 @@
     <Compile Include="Assets\OtherProjectScripts\LaserBehavior.cs" />
     <Compile Include="Assets\OtherProjectScripts\DelayedHP.cs" />
     <Compile Include="Assets\OtherProjectScripts\Testing.cs" />
+    <Compile Include="Assets\Scripts\ItemInfoSO.cs" />
     <Compile Include="Assets\OtherProjectScripts\ShoulderBehaviour.cs" />
     <Compile Include="Assets\OtherProjectScripts\LiveHP.cs" />
     <Compile Include="Assets\Cainos\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
@@ -92,22 +93,24 @@
     <Compile Include="Assets\Scripts\PlayerAttack.cs" />
     <Compile Include="Assets\Cainos\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
     <Compile Include="Assets\OtherProjectScripts\Skills.cs" />
+    <Compile Include="Assets\Scripts\ItemInfo.cs" />
     <Compile Include="Assets\OtherProjectScripts\BulletBehaviour.cs" />
     <Compile Include="Assets\InventoryController.cs" />
     <Compile Include="Assets\OtherProjectScripts\EnemyStats.cs" />
     <Compile Include="Assets\OtherProjectScripts\UpgradeItem.cs" />
     <Compile Include="Assets\InstantLootBehaviour.cs" />
+    <Compile Include="Assets\ClickLootBehaviour.cs" />
     <Compile Include="Assets\EnemyAgroBehaviour.cs" />
     <Compile Include="Assets\OtherProjectScripts\DelayedHPEnemy.cs" />
     <Compile Include="Assets\AttackBehaviour.cs" />
     <Compile Include="Assets\OtherProjectScripts\RotateAroundPlayer.cs" />
     <Compile Include="Assets\OtherProjectScripts\LevelUpPanel.cs" />
+    <Compile Include="Assets\EnchantmentStoneInfo.cs" />
     <Compile Include="Assets\Scripts\ReadSceneNames.cs" />
     <Compile Include="Assets\LootPopupBehaviour.cs" />
-    <Compile Include="Assets\ClickLootBehaviour.cs" />
-    <Compile Include="Assets\EnchantmentStoneInfo.cs" />
-    <Compile Include="Assets\Scripts\ItemInfo.cs" />
-    <Compile Include="Assets\Scripts\ItemInfoSO.cs" />
+    <Compile Include="Assets\ButtonHover.cs" />
+    <Compile Include="Assets\InventorySlotsManager.cs" />
+    <Compile Include="Assets\ButtonInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ImportedAssets\Knight Files\Read Me.txt" />
