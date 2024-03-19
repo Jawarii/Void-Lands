@@ -6,6 +6,8 @@ TagManager:
   tags:
   - Enemy
   - InstantLoot
+  - Weapon
+  - UpgradeMaterial
   layers:
   - Default
   - TransparentFX

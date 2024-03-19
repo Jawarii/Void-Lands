@@ -4,8 +4,14 @@ using UnityEngine;
 
 public class ItemInfo : MonoBehaviour
 {
-    public int stackSize = 999;
-    public int itemId = 1;
-    public string itemName = "Lvl 1 Enchantment Stone";
-     // Start is called before the first frame update
+    public int stackSize;
+    public int itemId;
+    public string itemName;
+    public string itemDescription;
+    public string itemType;
+
+    private void Start()
+    {
+        itemType = gameObject.tag;
+    }
 }
