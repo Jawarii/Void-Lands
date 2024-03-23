@@ -251,6 +251,7 @@ GameObject:
   - component: {fileID: 3497676198621287213}
   - component: {fileID: 3497676198621287378}
   - component: {fileID: 7005549183149520373}
+  - component: {fileID: -6739804766742491397}
   m_Layer: 0
   m_Name: Slime 1
   m_TagString: Enemy
@@ -266,7 +267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3497676198621287211}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.82, y: 2.07, z: -0.057261854}
+  m_LocalPosition: {x: -5.82, y: 1.996, z: -0.057261854}
   m_LocalScale: {x: 2, y: 2, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -365,11 +366,9 @@ MonoBehaviour:
   inPursuit: 0
   playerObject: {fileID: 0}
   atkCd: 2
-  currentAtkCd: 0
   atkTime: 1
-  currentAtkTime: 0
-  canMove: 1
   colliderObject: {fileID: 2173578112395921156}
+  agent: {fileID: 0}
 --- !u!58 &3497676198621287213
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -383,9 +382,9 @@ CircleCollider2D:
   m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.12279733}
+  m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 0.10220266
+  m_Radius: 0.1
 --- !u!114 &3497676198621287378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -511,6 +510,28 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!195 &-6739804766742491397
+NavMeshAgent:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497676198621287211}
+  m_Enabled: 1
+  m_AgentTypeID: 0
+  m_Radius: 0.05
+  m_Speed: 3.5
+  m_Acceleration: 8
+  avoidancePriority: 50
+  m_AngularSpeed: 10
+  m_StoppingDistance: 0
+  m_AutoTraverseOffMeshLink: 0
+  m_AutoBraking: 1
+  m_AutoRepath: 0
+  m_Height: 0.01
+  m_BaseOffset: 0
+  m_WalkableMask: 1
+  m_ObstacleAvoidanceType: 4
 --- !u!1 &3497676199661547604
 GameObject:
   m_ObjectHideFlags: 0

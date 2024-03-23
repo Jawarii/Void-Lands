@@ -9,7 +9,7 @@ public class EnemyAttackBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerStats>().TakeDamage(Random.Range(6,10), false);
+            other.GetComponent<PlayerStats>().TakeDamage(Random.Range(2,5), false);
         }
     }
 }

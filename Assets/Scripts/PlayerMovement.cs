@@ -1,105 +1,114 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 
 public class PlayerMovement : MonoBehaviour
 {
-    public float speed = 1;
+    public float speed = 1f;
     public bool canMove = true;
     public bool canDash = true;
     public bool isDashing = false;
+    public bool isDashAttack = false;
     public bool locChosen = true;
     public bool arrived = false;
     public float dashCd = 2.0f;
     public float currentDashCd = 0.0f;
-    private Vector3 direction;
-    private Vector3 destination;
-    private float dist = 0;
-    public Animator animator;
+    public float dashDistance = 2.5f; // Adjust the dash distance here
+
+    private Rigidbody2D rb;
+    private Vector2 moveDirection;
+    private Vector2 dashDirection;
+    private Animator animator;
+    private Vector2 dashStartPosition;
+    private float expectedDashDuration;
+
     public AudioSource source_;
     public AudioClip clip_;
-    public bool isDashAttack = false;
 
-    void Update()
+    private void Start()
+    {
+        rb = GetComponent<Rigidbody2D>();
+        animator = GetComponent<Animator>();
+    }
+
+    private void Update()
     {
         currentDashCd -= Time.deltaTime;
+
         if (canMove)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
-            Vector3 movement = new Vector3(horizontalInput, verticalInput, 0).normalized;
-            movement *= speed * Time.deltaTime;
+            moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
 
-            animator.SetFloat("Speed", Mathf.Abs(horizontalInput));
-            if (horizontalInput == 0)
+            animator.SetFloat("Speed", moveDirection.magnitude);
+
+            if (horizontalInput != 0)
             {
-                animator.SetFloat("Speed", Mathf.Abs(verticalInput));
+                transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 2.5f, 2.5f, 1f);
             }
-            Vector3 newPosition = transform.position + movement;
-
-            // Calculate the new Z rotation based on the movement direction.
-            if (movement != Vector3.zero)
-            {
-                //float newRotationZ = Mathf.Atan2(movement.x, movement.y) * Mathf.Rad2Deg;
-               // transform.rotation = Quaternion.Euler(0, 0, -newRotationZ);
-               if (horizontalInput > 0)
-                {
-                    transform.localScale = new Vector3 (2.5f, 2.5f, 1);
-                }
-               if (horizontalInput < 0)
-                {
-                    transform.localScale = new Vector3(-2.5f, 2.5f, 1);
-                }
-            }
-
-            transform.position = newPosition;
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canDash && currentDashCd <= 0.0f)
         {
-            // Calculate the destination based on the player's direction.
             animator.SetBool("CanDash", true);
-            Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
-            destination = transform.position + direction * 2.5f; // Change 2.0f to your desired dash distance
+            dashDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+            dashStartPosition = rb.position;
             canMove = false;
             canDash = false;
             isDashing = true;
             currentDashCd = dashCd;
+
+            CalculateExpectedDashDuration();
         }
+
         if (isDashAttack)
         {
-            Vector3 direction = new Vector3(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical"), 0).normalized;
-            destination = transform.position + direction * 1.5f; // Change 2.0f to your desired dash distance
+            dashDirection = new Vector2(Input.GetAxis("Horizontal"), Input.GetAxis("Vertical")).normalized;
+            dashStartPosition = rb.position;
             canDash = false;
             canMove = false;
             isDashing = true;
             isDashAttack = false;
-        }
 
+            CalculateExpectedDashDuration();
+        }
+    }
+
+    private void FixedUpdate()
+    {
         if (isDashing)
         {
-            float distanceToDestination = Vector2.Distance(new Vector2(transform.position.x, transform.position.y), new Vector2(destination.x, destination.y));
-            if (distanceToDestination > 0.1f)
+            float distanceTraveled = Vector2.Distance(dashStartPosition, rb.position);
+            if (distanceTraveled >= dashDistance || Time.time >= expectedDashDuration)
             {
-                // Move the player toward the destination, affecting only the X and Y axes.
-                transform.position = Vector2.MoveTowards(new Vector2(transform.position.x, transform.position.y), new Vector2(destination.x, destination.y), speed * 4.0f * Time.deltaTime);
+                isDashing = false;
+                canMove = true;
+                canDash = true;
+                animator.SetBool("CanDash", false);
+                rb.velocity = Vector2.zero;
             }
             else
             {
-                canMove= true;
-                canDash= true;
-                isDashing= false;
-                animator.SetBool("CanDash", false);
+                rb.velocity = dashDirection * speed * 3.5f; // Adjust force multiplier as needed
             }
         }
+        else if (canMove)
+        {
+            rb.velocity = moveDirection * speed;
+        }
     }
+
     public void PlayMovementClip()
     {
         if (source_ != null)
         {
             source_.PlayOneShot(clip_);
-        }    
+        }
+    }
+
+    private void CalculateExpectedDashDuration()
+    {
+        float distance = Vector2.Distance(rb.position, rb.position + dashDirection * dashDistance);
+        expectedDashDuration = Time.time + distance / (speed * 2.5f); // Adjust force multiplier as needed
     }
 }

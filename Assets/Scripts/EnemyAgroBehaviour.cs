@@ -16,6 +16,7 @@ public class EnemyAgroBehaviour : MonoBehaviour
         {
            SlimeMovement enemyMovement = enemy.GetComponent<SlimeMovement>();
            enemyMovement.inPursuit = true;
+            gameObject.SetActive(false);
         }
     }
 }

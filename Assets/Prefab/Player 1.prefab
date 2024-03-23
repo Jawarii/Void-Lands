@@ -337,14 +337,14 @@ MonoBehaviour:
   canMove: 1
   canDash: 1
   isDashing: 0
+  isDashAttack: 0
   locChosen: 1
   arrived: 0
   dashCd: 2
   currentDashCd: 0
-  animator: {fileID: 8898808892456111811}
+  dashDistance: 2.5
   source_: {fileID: 0}
   clip_: {fileID: 8300000, guid: 9e68ea1ebd76aa44c8cfa5beb9850830, type: 3}
-  isDashAttack: 0
 --- !u!70 &8898808892456111810
 CapsuleCollider2D:
   m_ObjectHideFlags: 0

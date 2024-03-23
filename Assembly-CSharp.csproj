@@ -59,37 +59,67 @@
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\TopDownCharacterController.cs" />
     <Compile Include="Assets\OtherProjectScripts\BossSkills.cs" />
     <Compile Include="Assets\OtherProjectScripts\BossMovement.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Path.cs" />
     <Compile Include="Assets\OtherProjectScripts\EnemyMovement.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Index.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\PathSession.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\PathRouteNode.cs" />
     <Compile Include="Assets\OtherProjectScripts\LiveHPEnemy.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Threading\ThreadManager.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Pathfinding\SearchGrid.cs" />
     <Compile Include="Assets\OtherProjectScripts\ExpBar.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\PropsAltar.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Threading\WorkerThread.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\MonoDelegate.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Collections\NodeQueue.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Pathfinding\PathNode.cs" />
     <Compile Include="Assets\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\OtherProjectScripts\Spawner.cs" />
     <Compile Include="Assets\OtherProjectScripts\ArrowSkill.cs" />
     <Compile Include="Assets\Scripts\GoldDropBehaviour.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\AnimatedAgent.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\IPathNode.cs" />
     <Compile Include="Assets\Scripts\MenusController.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Pathfinding\Algorithm\EuclideanProvider.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\ExampleScripts\EX2_Path.cs" />
     <Compile Include="Assets\OtherProjectScripts\LaserBehavior.cs" />
     <Compile Include="Assets\OtherProjectScripts\DelayedHP.cs" />
     <Compile Include="Assets\OtherProjectScripts\Testing.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\AnimatedRoamingAgent.cs" />
     <Compile Include="Assets\Scripts\ButtonHover.cs" />
     <Compile Include="Assets\Scripts\ItemInfoSO.cs" />
+    <Compile Include="Assets\WeaponInfo.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Collections\OpenNodeMap.cs" />
     <Compile Include="Assets\OtherProjectScripts\ShoulderBehaviour.cs" />
     <Compile Include="Assets\OtherProjectScripts\LiveHP.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Agent.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Pathfinding\Algorithm\HeuristicProvider.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Visualisation\PathView.cs" />
     <Compile Include="Assets\Scripts\InventorySlotsManager.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\CameraFollow.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Threading\AsyncPathResult.cs" />
     <Compile Include="Assets\OtherProjectScripts\BulletSpawner.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Visualisation\GridView.cs" />
     <Compile Include="Assets\OtherProjectScripts\ExpItemBehaviour.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\AStarGridManager.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\SelectiveSearchGrid.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\WeightPainter.cs" />
     <Compile Include="Assets\Scripts\SlimeMovement.cs" />
     <Compile Include="Assets\OtherProjectScripts\StartGame.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\EditorTilemap.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\Selection.cs" />
     <Compile Include="Assets\OtherProjectScripts\StarBehavior.cs" />
     <Compile Include="Assets\OtherProjectScripts\BoomerangSkill.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\Tile.cs" />
     <Compile Include="Assets\Scripts\EnemyAttackBehaviour.cs" />
     <Compile Include="Assets\OtherProjectScripts\DamagePopup.cs" />
     <Compile Include="Assets\Scripts\PlayerMovement.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Threading\AsyncPathRequest.cs" />
     <Compile Include="Assets\OtherProjectScripts\Damage.cs" />
     <Compile Include="Assets\OtherProjectScripts\BlinkTest.cs" />
     <Compile Include="Assets\OtherProjectScripts\PlayerController.cs" />
+    <Compile Include="Assets\AStar 2D\FollowAgent.cs" />
     <Compile Include="Assets\OtherProjectScripts\PlayerStats.cs" />
     <Compile Include="Assets\OtherProjectScripts\ArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerAttack.cs" />
@@ -99,19 +129,25 @@
     <Compile Include="Assets\OtherProjectScripts\BulletBehaviour.cs" />
     <Compile Include="Assets\Scripts\InventoryController.cs" />
     <Compile Include="Assets\OtherProjectScripts\EnemyStats.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\ExampleScripts\EX1_MonoDelegate.cs" />
     <Compile Include="Assets\Scripts\ButtonInfo.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\AnimatedObstacle.cs" />
     <Compile Include="Assets\OtherProjectScripts\UpgradeItem.cs" />
     <Compile Include="Assets\Scripts\InstantLootBehaviour.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\AStarGrid.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\TileManager.cs" />
     <Compile Include="Assets\Scripts\ClickLootBehaviour.cs" />
     <Compile Include="Assets\Scripts\EnemyAgroBehaviour.cs" />
     <Compile Include="Assets\OtherProjectScripts\DelayedHPEnemy.cs" />
+    <Compile Include="Assets\AStar 2D\Demo\Scripts\AgentSpawner.cs" />
     <Compile Include="Assets\Scripts\AttackBehaviour.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\DynamicObstacle.cs" />
     <Compile Include="Assets\OtherProjectScripts\RotateAroundPlayer.cs" />
     <Compile Include="Assets\OtherProjectScripts\LevelUpPanel.cs" />
     <Compile Include="Assets\Scripts\EnchantmentStoneInfo.cs" />
+    <Compile Include="Assets\AStar 2D\Scripts\Visualisation\Performance.cs" />
     <Compile Include="Assets\Scripts\ReadSceneNames.cs" />
     <Compile Include="Assets\Scripts\LootPopupBehaviour.cs" />
-    <Compile Include="Assets\WeaponInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ImportedAssets\Knight Files\Read Me.txt" />
@@ -120,6 +156,7 @@
     <None Include="Assets\ImportedAssets\SWAMP ENEMIES TOP-DOWN PIXEL ART v1.0\SWAMP ENEMIES TOP-DOWN PIXEL ART v1.0\README.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\StoreAssets\Bringer Of Death\License.txt" />
+    <None Include="Assets\AStar 2D\Legacy\Readme.txt" />
     <None Include="Assets\StoreAssets\IdiaSoftware\Blades&amp;Bludgeonings-Free\Documentation-Free.txt" />
     <None Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Changelog.txt" />
     <None Include="Assets\StoreAssets\Gothicvania Cemetery Artwork\about.txt" />
@@ -948,6 +985,14 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="NavMeshPlusEditor.csproj">
+      <Project>{18F3E8E4-93EE-7958-DB24-F951F1444C36}</Project>
+      <Name>NavMeshPlusEditor</Name>
+    </ProjectReference>
+    <ProjectReference Include="NavMeshPlus.csproj">
+      <Project>{0DB574C2-36AE-41EB-F43A-91EED895E289}</Project>
+      <Name>NavMeshPlus</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />
