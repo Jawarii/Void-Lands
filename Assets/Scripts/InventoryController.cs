@@ -15,6 +15,7 @@ public class InventoryController : MonoBehaviour
     void Start()
     {
         goldAmountText.text = goldAmount.ToString();
+        
     }
 
     // Update is called once per frame
@@ -31,6 +32,8 @@ public class InventoryController : MonoBehaviour
         item.stackSize = itemInfo.stackSize;
         item.itemIcon = itemInfo.GetComponent<SpriteRenderer>().sprite;
         item.itemType= itemInfo.itemType;
+        item.textColor= itemInfo.textColor;
+
         if (item.stackSize > 1)
         {
             for (int i = 0; i < inventory.Count; i++)

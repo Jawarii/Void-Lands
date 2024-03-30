@@ -37,6 +37,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
             GameObject itemNameObj = itemTooltip.transform.Find("Name").gameObject;
             itemNameObj.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemName;
+            itemNameObj.GetComponent<TMP_Text>().color = inventoryController.inventory[slotId].textColor;
             GameObject itemStatsObj = itemTooltip.transform.Find("Stats").gameObject;
             itemStatsObj.GetComponent<TMP_Text>().text = "STATS PLACE HOLDER FOR SLOT ID: " + slotId.ToString();
             GameObject itemBonusStatsObj = itemTooltip.transform.Find("BonusStats").gameObject;

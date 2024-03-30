@@ -57,9 +57,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\AStar 2D\Editor\Scripts\ThreadManagerInspector.cs" />
+    <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Editor\ReadmeHierarchy.cs" />
     <Compile Include="Assets\AStar 2D\Editor\Scripts\Controls\ThreadViewCollectionControl.cs" />
     <Compile Include="Assets\AStar 2D\Editor\Scripts\PerformanceVisualiserWindow.cs" />
+    <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Editor\ReadmeEditorStyles.cs" />
+    <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Editor\ReadmeEditor.cs" />
     <Compile Include="Assets\AStar 2D\Editor\Scripts\AgentInspector.cs" />
+    <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Editor\ReadmeBehaviourEditor.cs" />
     <Compile Include="Assets\AStar 2D\Editor\Scripts\HelpInspector.cs" />
     <Compile Include="Assets\AStar 2D\Editor\Scripts\Controls\ThreadViewControl.cs" />
     <Compile Include="Assets\AStar 2D\Editor\Scripts\AStarGridInspector.cs" />

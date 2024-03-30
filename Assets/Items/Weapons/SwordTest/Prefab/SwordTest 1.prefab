@@ -70,8 +70,8 @@ MonoBehaviour:
 
 '
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c396d6c2e1b471444a4813329c219589, type: 2}
+  m_sharedMaterial: {fileID: -444432506591344635, guid: c396d6c2e1b471444a4813329c219589, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -251,10 +251,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stackSize: 1
-  itemId: 2
+  itemId: 0
   itemName: Test Sword
   itemDescription: 
   itemType: 
+  textColor: {r: 1, g: 1, b: 1, a: 1}
   weaponMainStats:
     minAttack: 5
     maxAttack: 7
@@ -325,7 +326,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &5835571820122005077
 MonoBehaviour:

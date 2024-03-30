@@ -39,7 +39,7 @@ public class EnemyStats : MonoBehaviour
     {
         player = GameObject.FindGameObjectWithTag("Player");
        //hitAudio = GameObject.FindGameObjectWithTag("HitAudio");
-        stats = player.GetComponent<PlayerStats>();
+        stats = player.GetComponentInChildren<PlayerStats>();
        //source = hitAudio.GetComponent<AudioSource>();
         enemyLvl += (int)(stats.playTime / 20f);
         if (!isBoss)
@@ -52,7 +52,7 @@ public class EnemyStats : MonoBehaviour
         }
         hp = maxHp;
         prevHp = hp;
-        attack = 9 + enemyLvl;
+        //attack = 9 + enemyLvl;
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
 
@@ -100,7 +100,7 @@ public class EnemyStats : MonoBehaviour
             {
                 if (!isDead)
                 {
-                    goldAmount = Random.Range(1, 100);
+                    goldAmount = Random.Range(2, 6);
                     animator_.SetBool("isDead", true);
                     isDead= true;
                 }
@@ -120,5 +120,7 @@ public class EnemyStats : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         hitIndicator = 0.12f;
         source.PlayOneShot(clip);
+        SlimeMovement enemyMovement = transform.GetComponent<SlimeMovement>();
+        enemyMovement.inPursuit = true;
     }
 }

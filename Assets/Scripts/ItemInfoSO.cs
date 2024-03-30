@@ -16,6 +16,7 @@ public class ItemInfoSO : ScriptableObject
     //Special Visual Info
     public int currentStackSize = 1;
     public Sprite itemIcon;
+    public Color textColor;
 
     //Weapon Special Info
     [Serializable]

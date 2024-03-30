@@ -4,12 +4,21 @@ using UnityEngine;
 
 public class EnemyAttackBehaviour : MonoBehaviour
 {
-    // Start is called before the first frame update
+    public float basicAtkDmgMulti = 1.5f;
+
     private void OnTriggerEnter2D(Collider2D other)
     {
         if (other.gameObject.CompareTag("Player"))
         {
-            other.GetComponent<PlayerStats>().TakeDamage(Random.Range(2,5), false);
+            PlayerStats playerStats = other.GetComponent<PlayerStats>();
+            EnemyStats enemyStats = GetComponentInParent<EnemyStats>(); // Assuming the EnemyStats component is on the parent GameObject.
+
+            // Calculate damage based on enemy's attack and player's defense
+            float minDmg = basicAtkDmgMulti * (enemyStats.attack - playerStats.defense) * 0.95f;
+            float maxDmg = basicAtkDmgMulti * (enemyStats.attack - playerStats.defense) * 1.05f;
+
+            // Deal damage to the player
+            playerStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
         }
     }
 }

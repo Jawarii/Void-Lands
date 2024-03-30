@@ -11,7 +11,7 @@ public class PlayerMovement : MonoBehaviour
     public bool arrived = false;
     public float dashCd = 2.0f;
     public float currentDashCd = 0.0f;
-    public float dashDistance = 2.5f; // Adjust the dash distance here
+    public float dashDistance = 1.5f; // Adjust the dash distance here
 
     private Rigidbody2D rb;
     private Vector2 moveDirection;
@@ -28,11 +28,11 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-
+     
     private void Update()
     {
         currentDashCd -= Time.deltaTime;
-
+        RotateObjectToMouse();
         if (canMove)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
@@ -42,10 +42,15 @@ public class PlayerMovement : MonoBehaviour
 
             animator.SetFloat("Speed", moveDirection.magnitude);
 
-            if (horizontalInput != 0)
-            {
-                transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 2.5f, 2.5f, 1f);
-            }
+            //if (horizontalInput != 0)
+            //{
+            //    transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 1f, 1f, 1f);
+            //}
+        }
+        else
+        {
+            rb.velocity = new Vector2(0f, 0f);
+            animator.SetFloat("Speed", 0f);
         }
 
         if (Input.GetKeyDown(KeyCode.Space) && canDash && currentDashCd <= 0.0f)
@@ -95,6 +100,7 @@ public class PlayerMovement : MonoBehaviour
         else if (canMove)
         {
             rb.velocity = moveDirection * speed;
+
         }
     }
 
@@ -109,6 +115,37 @@ public class PlayerMovement : MonoBehaviour
     private void CalculateExpectedDashDuration()
     {
         float distance = Vector2.Distance(rb.position, rb.position + dashDirection * dashDistance);
-        expectedDashDuration = Time.time + distance / (speed * 2.5f); // Adjust force multiplier as needed
+        expectedDashDuration = Time.time + distance / (speed * 3.5f); // Adjust force multiplier as needed
+    }
+    void RotateObjectToMouse()
+    {
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.transform.position.z * -1));
+        Vector3 directionToMouse = mouseWorldPosition - transform.position;
+
+        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg + 45f;
+
+        if (angle > 0.0f && angle <= 90f)
+        {
+            animator.SetFloat("Rotation", 1f);
+            animator.SetFloat("Rotation2", 0f);
+        }
+        else if (angle > 90f && angle <= 180f)
+        {
+            animator.SetFloat("Rotation", 0f);
+            animator.SetFloat("Rotation2", 1f);
+        }
+        else if (angle > -90f && angle <= 0f)
+        {
+            animator.SetFloat("Rotation", 0f);
+            animator.SetFloat("Rotation2", -1f);
+        }
+        else
+        {
+            animator.SetFloat("Rotation", -1f);
+            animator.SetFloat("Rotation2", 0f);
+        }
+        //tra
+        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
     }
 }

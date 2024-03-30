@@ -28,7 +28,7 @@ public class InstantLootBehaviour : MonoBehaviour
         {
             source.Stop();  
             source.PlayOneShot(clip);
-            GameObject popup = Instantiate(popupPrefab, other.gameObject.transform.position, other.gameObject.transform.rotation);
+            GameObject popup = Instantiate(popupPrefab, other.gameObject.transform.position + new Vector3(0.0f, 0.45f,0.0f), other.gameObject.transform.rotation);
             popup.gameObject.GetComponentInChildren<TMP_Text>().text = "+" + other.gameObject.GetComponentInChildren<TMP_Text>().text;
             inventory.GetComponent<InventoryController>().goldAmount += other.gameObject.GetComponent<GoldDropBehaviour>().goldAmount;
             Destroy(other.gameObject);

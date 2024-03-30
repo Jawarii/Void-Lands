@@ -9,10 +9,10 @@ public class AttackBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Enemy"))
         {
-            crit = Random.RandomRange(1, 101);
+            crit = Random.Range(1, 101);
             if (crit <= 33)
             {
-                other.GetComponent<EnemyStats>().TakeDamage((int)((float)Random.Range(16, 19) * 1.8f), true);
+                other.GetComponent<EnemyStats>().TakeDamage((int)((float)Random.Range(16, 19) * 1.5f), true);
             }
             else
             {

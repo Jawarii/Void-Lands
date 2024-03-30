@@ -8,40 +8,41 @@ using TMPro;
 public class PlayerStats : MonoBehaviour
 {
     // Combat Stats
+    [Header("Combat Stats")]
     public float maxHp = 100;
     public float hp = 100;
     public float attack = 10;
     public float defense = 10;
-    public float critRate = 10.0f;
-    public float critDmg = 130.0f;
-   
+    public float critRate = 5.0f;
+    public float critDmg = 150.0f;
+    public float staggerDmgMulti = 110f;
+    public float speedMulti = 0f;
+    public float atkSpeedMulti = 0f;
+
     // Level Stats
+    [Header("Level Stats")]
     public float lvl = 1;
     public float currentExp = 0;  
     public float maxExp;
 
     // Variables
+    [Header("Variables")]
     private bool levelUp = false;
     private float prevHp;
     public float timeSince = 0;
-    public GameObject lvlUpPanel;
     public Skills playerSkills;
-    public RotateAroundPlayer orbitDia;
-    public ArrowSkill arrowSkill;
-    public BoomerangSkill boomerangSkill;
-    public int optionChoice = 0;
     public float hpRecCd = 3f;
     public float hpRecCdCur = 0;
 
     // Upgrade Variables
-    public List<UpgradeItem> possibleUpgrades = new List<UpgradeItem>();
-    private List<UpgradeItem> chosenUpgrades = new List<UpgradeItem>();
     private System.Random random = new System.Random();
 
     // PlayTime
+    [Header("PlayTime")]
     public float playTime = 0.0f;
 
     // Sound
+    [Header("Sound")]
     public AudioSource source;
     public AudioClip clip;
 
@@ -50,7 +51,6 @@ public class PlayerStats : MonoBehaviour
 
     // Spawner & Boss Objects
     public GameObject bossObj;
-    public GameObject spawnerObj;
 
     public float timeScaleMod = 1.0f;
 
@@ -101,8 +101,6 @@ public class PlayerStats : MonoBehaviour
         maxHp += lvl_;
         attack += 1;
         defense += 1;
-        critRate += 0.1f;
-        critDmg += 1.0f;
     }
     public void TakeDamage(int damage, bool isCrit)
     {

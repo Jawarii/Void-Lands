@@ -93,16 +93,16 @@ public class SlimeMovement : MonoBehaviour
     private bool IsPathClear(Vector2 direction, float distance)
     {
         float slimeRadius = 0.05f; // Adjust this value to match your slime's actual collider radius
-        Vector2 start2D = new Vector2(transform.position.x, transform.position.y) + direction.normalized * 0.3f;
+        Vector2 start2D = new Vector2(transform.position.x, transform.position.y) + direction.normalized * 0.5f;
 
         // Use CircleCast to account for the slime's radius in the path clearance check
         RaycastHit2D hit = Physics2D.CircleCast(start2D, slimeRadius, direction, 0.5f); // Subtracting 0.5f to account for the start offset
 
-        Debug.DrawRay(start2D, direction * 0.5f, Color.green, 0.5f);
+       // Debug.DrawRay(start2D, direction * 0.5f, Color.green, 0.5f);
 
         if (hit.collider != null)
         {
-            Debug.Log($"CircleCast hit: {hit.collider.name}");
+           // Debug.Log($"CircleCast hit: {hit.collider.name}");
             return !hit.collider.CompareTag("Enemy");
         }
 
@@ -159,12 +159,10 @@ public class SlimeMovement : MonoBehaviour
             }
         }
 
-        Debug.Log("No clear alternate path found, sticking to last direction");
+       // Debug.Log("No clear alternate path found, sticking to last direction");
         // Continue in the last direction if no clear path is found
         return originalDirection2D * distance;
     }
-
-
 
     private void PrepareForAttack()
     {
@@ -180,25 +178,25 @@ public class SlimeMovement : MonoBehaviour
         currentAtkTime -= Time.deltaTime;
         if (currentAtkTime < 0.9f && currentAtkTime > 0.75f)
         {
-            colliderObject.SetActive(true);
+            colliderObject.GetComponent<CircleCollider2D>().enabled = true;
         }
         else if (currentAtkTime < 0.6f && currentAtkTime > 0.45f)
         {
-            colliderObject.SetActive(true);
+            colliderObject.GetComponent<CircleCollider2D>().enabled = true;
         }
         else if (currentAtkTime < 0.3f && currentAtkTime > 0.15f)
         {
-            colliderObject.SetActive(true);
+            colliderObject.GetComponent<CircleCollider2D>().enabled = true;
         }
         else
         {
-            colliderObject.SetActive(false);
+            colliderObject.GetComponent<CircleCollider2D>().enabled = false;
         }
         if (currentAtkTime < 0)
         {
             animator_.SetBool("canAttack", false);
             canMove = true;
-            colliderObject.SetActive(false); // Reset attack cooldown
+            colliderObject.GetComponent<CircleCollider2D>().enabled = false; // Reset attack cooldown
              // Reset attack time
         }
     }

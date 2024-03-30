@@ -68,15 +68,15 @@ MonoBehaviour:
       m_Calls: []
   m_text: Lvl 1 Enchantment Stone
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: c396d6c2e1b471444a4813329c219589, type: 2}
+  m_sharedMaterial: {fileID: -444432506591344635, guid: c396d6c2e1b471444a4813329c219589, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4294967295
-  m_fontColor: {r: 1, g: 1, b: 1, a: 1}
+    rgba: 4294917920
+  m_fontColor: {r: 0.1273585, g: 0.24713287, b: 1, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -370,7 +370,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 5
+  m_SortingOrder: 1
   m_TargetDisplay: 0
 --- !u!114 &4521754464228905685
 MonoBehaviour:
@@ -488,7 +488,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 3
-  m_Sprite: {fileID: 21300000, guid: c878ec6596ed0bb4aa3e2b3beed8b4dc, type: 3}
+  m_Sprite: {fileID: -296051182, guid: 2e2c60a8428b4d74480ef0ffbae348fa, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -528,3 +528,6 @@ MonoBehaviour:
   stackSize: 999
   itemId: 1
   itemName: Lvl 1 Enchantment Stone
+  itemDescription: 
+  itemType: 
+  textColor: {r: 0.22606564, g: 0, b: 1, a: 1}
