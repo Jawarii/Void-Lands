@@ -1,0 +1,42 @@
+using System.Collections;
+using System.Collections.Generic;
+using UnityEngine;
+
+public class RapidShotSkill : SkillsScript
+{
+    public AnimationClip bowAnim;
+    public AnimationClip finisherAnim;
+    public AnimationClip bowReleaseAnim;
+    public GameObject _arrow;
+    public override void ActivateSkill()
+    {
+        playerAttack.animTime = bowAnim.length * 3f + bowReleaseAnim.length;
+        playerAttack.releaseTime = bowAnim.length * 3f;
+        playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
+        playerAttack.animator.SetBool("isAttacking", true);
+        playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
+        playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
+
+        for (float i = 1; i < 4; i++)
+        {
+            StartCoroutine(SpawnArrow(i));
+        }
+ 
+    }
+    IEnumerator SpawnArrow(float arrowNumber)
+    {
+        yield return new WaitForSeconds(bowAnim.length * arrowNumber);
+
+        Vector3 mouseScreenPosition = Input.mousePosition;
+        Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.transform.position.z * -1));
+        Vector3 directionToMouse = mouseWorldPosition - playerAttack.transform.position;
+
+        float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
+
+        Instantiate(_arrow, playerAttack.transform.position, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)));
+        playerAttack.PlayArrowClip(0.38f);
+
+        if (arrowNumber == 3)
+            Destroy(gameObject);
+    }
+}
