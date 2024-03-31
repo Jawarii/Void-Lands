@@ -9,6 +9,7 @@ public class PenetratingArrowBehaviour : MonoBehaviour
     public PlayerStats playerStats;
     public float basicAtkDmgMulti = 0.5f;
     public GameObject arrowPrefab; // Prefab of the arrow to spawn
+    public float lifeTime = 1f;
 
     private void Start()
     {
@@ -52,7 +53,7 @@ public class PenetratingArrowBehaviour : MonoBehaviour
 
     IEnumerator DestroyArrow()
     {
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(lifeTime);
         Destroy(gameObject);
     }
 

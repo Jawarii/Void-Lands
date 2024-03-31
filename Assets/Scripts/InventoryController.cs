@@ -11,6 +11,7 @@ public class InventoryController : MonoBehaviour
     public float goldAmount = 0;
     public TMP_Text goldAmountText;
     public List<ItemInfoSO> inventory = new List<ItemInfoSO>();
+    public ItemInfoSO draggedItemInfo;
     public GameObject slotsPanel;
     void Start()
     {
@@ -41,8 +42,8 @@ public class InventoryController : MonoBehaviour
                 if (inventory[i] != null && inventory[i].itemId == item.itemId)
                 {
                     inventory[i].currentStackSize++;
-                    GameObject.Find("Slot (" + i + ")").GetComponentInChildren<TMP_Text>().text = inventory[i].currentStackSize.ToString();
                     (GameObject.Find("Slot (" + i + ")").transform.Find("ItemIcon")).gameObject.SetActive(true);
+                    GameObject.Find("Slot (" + i + ")").GetComponentInChildren<TMP_Text>().text = inventory[i].currentStackSize.ToString();
                     (GameObject.Find("Slot (" + i + ")").transform.Find("ItemIcon")).GetComponent<Image>().sprite = item.itemIcon;
                     break;
                 }
@@ -57,8 +58,8 @@ public class InventoryController : MonoBehaviour
                         else
                         {
                             inventory[j] = item;
-                            GameObject.Find("Slot (" + j + ")").GetComponentInChildren<TMP_Text>().text = inventory[j].currentStackSize.ToString();
                             (GameObject.Find("Slot (" + j + ")").transform.Find("ItemIcon")).gameObject.SetActive(true);
+                            GameObject.Find("Slot (" + j + ")").GetComponentInChildren<TMP_Text>().text = inventory[j].currentStackSize.ToString();
                             (GameObject.Find("Slot (" + j + ")").transform.Find("ItemIcon")).GetComponent<Image>().sprite = item.itemIcon;
                           
                             break;

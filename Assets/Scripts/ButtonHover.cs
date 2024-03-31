@@ -12,16 +12,30 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
     private RectTransform buttonRectTransform;
     private RectTransform canvasRectTransform;
     bool isOccupied = false;
+    public bool isDragging = false;
 
     private void Start()
     {
         panelRectTransform = itemTooltip.GetComponent<RectTransform>();
         buttonRectTransform = transform.GetComponent<RectTransform>();
         canvasRectTransform = canvas.GetComponent<RectTransform>();
+        isDragging = transform.GetComponent<DraggableItemBehaviour>().isDragging;
     }
-
+    private void FixedUpdate()
+    {
+        isDragging = transform.GetComponent<DraggableItemBehaviour>().isDragging;
+        if (isDragging)
+        {
+            canvas.enabled = false;
+        }
+    }
     public void OnPointerEnter(PointerEventData eventData)
     {
+        if (isDragging) // Check if dragging is in progress
+        {
+            return; // Exit early if dragging
+        }
+
         GameObject inventoryMain = GameObject.Find("InventoryMain");
 
         if (inventoryMain.GetComponent<InventoryController>().inventory[transform.GetComponent<ButtonInfo>().slotId] != null)

@@ -9,6 +9,7 @@ public class SplitArrowBehaviour : MonoBehaviour
     public PlayerStats playerStats;
     public float basicAtkDmgMulti = 0.0f;
     public PenetratingArrowBehaviour penArrow;
+    public float lifeTime = 1f;
 
     private void Start()
     {
@@ -50,7 +51,7 @@ public class SplitArrowBehaviour : MonoBehaviour
     IEnumerator DestroyArrow()
     {
         // Wait for 2 seconds
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(lifeTime);
         // Destroy the arrow game object
         Destroy(gameObject);
     }

@@ -50,7 +50,7 @@ public class PlayerAttackArcher : MonoBehaviour
             player.GetComponent<PlayerMovement>().canDash = true;
             player.GetComponent<PlayerMovement>().canMove = true;
 
-            if (Input.GetKey("e"))
+            if (Input.GetKey("q"))
             {
                 if (skillButtons[0] != null)
                 {
@@ -69,7 +69,7 @@ public class PlayerAttackArcher : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetKey("r"))
+            if (Input.GetKey("e"))
             {
                 if (skillButtons[1] != null)
                 {
@@ -88,7 +88,7 @@ public class PlayerAttackArcher : MonoBehaviour
                     }
                 }
             }
-            if (Input.GetKey("v"))
+            if (Input.GetKey("r"))
             {
                 if (skillButtons[2] != null)
                 {

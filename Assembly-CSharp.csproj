@@ -63,6 +63,7 @@
     <Compile Include="Assets\AStar 2D\Scripts\Path.cs" />
     <Compile Include="Assets\OtherProjectScripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\SplitArrowBehaviour.cs" />
+    <Compile Include="Assets\FireArrowSkill.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\Index.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\PathSession.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\PathRouteNode.cs" />
@@ -81,6 +82,7 @@
     <Compile Include="Assets\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\OtherProjectScripts\Spawner.cs" />
     <Compile Include="Assets\OtherProjectScripts\ArrowSkill.cs" />
+    <Compile Include="Assets\FireArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerAttackArcher.cs" />
     <Compile Include="Assets\Scripts\GoldDropBehaviour.cs" />
     <Compile Include="Assets\AStar 2D\Demo\Scripts\AnimatedAgent.cs" />
@@ -89,7 +91,7 @@
     <Compile Include="Assets\AStar 2D\Scripts\Pathfinding\Algorithm\EuclideanProvider.cs" />
     <Compile Include="Assets\AStar 2D\Demo\ExampleScripts\EX2_Path.cs" />
     <Compile Include="Assets\OtherProjectScripts\LaserBehavior.cs" />
-    <Compile Include="Assets\Scripts\ArrowDamagerBehaviour.cs" />
+    <Compile Include="Assets\Scripts\RapidArrowBehaviour.cs" />
     <Compile Include="Assets\OtherProjectScripts\DelayedHP.cs" />
     <Compile Include="Assets\OtherProjectScripts\Testing.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Demo scenes\DemoShooting.cs" />
@@ -137,6 +139,7 @@
     <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Readme.cs" />
     <Compile Include="Assets\OtherProjectScripts\ArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\PlayerAttack.cs" />
+    <Compile Include="Assets\Scripts\MultishotArrowBehaviour.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\SpriteColorAnimation.cs" />
     <Compile Include="Assets\OtherProjectScripts\Skills.cs" />
     <Compile Include="Assets\Scripts\ItemInfo.cs" />
@@ -162,11 +165,15 @@
     <Compile Include="Assets\Scripts\AttackBehaviour.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\DynamicObstacle.cs" />
     <Compile Include="Assets\OtherProjectScripts\RotateAroundPlayer.cs" />
+    <Compile Include="Assets\Scripts\MultishotSkill.cs" />
     <Compile Include="Assets\OtherProjectScripts\LevelUpPanel.cs" />
     <Compile Include="Assets\Scripts\EnchantmentStoneInfo.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\Visualisation\Performance.cs" />
     <Compile Include="Assets\Scripts\ReadSceneNames.cs" />
     <Compile Include="Assets\Scripts\LootPopupBehaviour.cs" />
+    <Compile Include="Assets\SkillsWindowSlotInfo.cs" />
+    <Compile Include="Assets\SkillWindowController.cs" />
+    <Compile Include="Assets\DraggableItemBehaviour.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ImportedAssets\Knight Files\Read Me.txt" />

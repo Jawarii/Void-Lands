@@ -110,8 +110,7 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
-   
-    public void TakeDamage(int damage, bool isCrit)
+      public void TakeDamage(int damage, bool isCrit)
     {
         source.Stop();
         hp -= damage;
@@ -123,4 +122,10 @@ public class EnemyStats : MonoBehaviour
         SlimeMovement enemyMovement = transform.GetComponent<SlimeMovement>();
         enemyMovement.inPursuit = true;
     }
+    public void ApplyKnockback(Vector2 direction, float force)
+    {
+        // Move the enemy in the specified direction with the specified force
+        transform.position += (Vector3)direction * force * Time.deltaTime;
+    }
+
 }

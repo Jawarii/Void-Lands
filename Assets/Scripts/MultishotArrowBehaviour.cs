@@ -1,20 +1,23 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
-public class ArrowDamagerBehaviour : MonoBehaviour
+public class MultishotArrowBehaviour : MonoBehaviour
 {
-    public float speed = 10f; // Speed of the arrow
+    public float speed = 30f; // Speed of the arrow
     private int crit = 0;
     public GameObject player;
     public PlayerStats playerStats;
     public float basicAtkDmgMulti = 0.5f;
-
+    public float knockbackForce = 10f; // Adjust the force of knockback as needed
+    public float lifeTime = 1f;
     private void Start()
     {
         // Call the DestroyArrow function after 2 seconds
         StartCoroutine(DestroyArrow());
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
+        knockbackForce = 10f;
     }
 
     private void Update()
@@ -40,11 +43,16 @@ public class ArrowDamagerBehaviour : MonoBehaviour
             }
             else
             {
-                enemyStats.TakeDamage((int)Random.Range(minDmg, maxDmg),false);
+                enemyStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
             }
 
-            // Optionally destroy the arrow upon hitting an enemy
+            float angle = transform.rotation.eulerAngles.z - 90f;
+            Vector2 knockbackDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
+            // Apply knockback to the enemy
+            enemyStats.ApplyKnockback(knockbackDirection, knockbackForce);
+
+            // Optionally destroy the arrow upon hitting an enemy
             //Destroy(gameObject);
         }
     }
@@ -52,7 +60,7 @@ public class ArrowDamagerBehaviour : MonoBehaviour
     IEnumerator DestroyArrow()
     {
         // Wait for 2 seconds
-        yield return new WaitForSeconds(2f);
+        yield return new WaitForSeconds(lifeTime);
 
         // Destroy the arrow game object
         Destroy(gameObject);
