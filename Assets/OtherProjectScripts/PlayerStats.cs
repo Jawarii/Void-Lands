@@ -9,16 +9,29 @@ public class PlayerStats : MonoBehaviour
 {
     // Combat Stats
     [Header("Combat Stats")]
-    public float maxHp = 100;
-    public float hp = 100;
-    public float attack = 10;
-    public float defense = 10;
+    public float maxHp = 0;
+    public float currentHp = 0;
+    public float attack = 0;
+    public float atkSpd = 1.0f;
+    public float defense = 0;
     public float critRate = 5.0f;
     public float critDmg = 150.0f;
-    public float staggerDmgMulti = 110f;
+    public float staggerDmg = 110f;
+    public float speed = 1.0f;   
+    public float hpRecovery = 1f;
+    public float cdReduction = 0f;
+
+    // Bonus Stats
+    [Header("Bonus Stats")]
+    public float atkMulti = 0f;
     public float speedMulti = 0f;
     public float atkSpeedMulti = 0f;
-
+    public float defenseSpeedMulti = 0f;
+    public float critRateMulti = 0f;
+    public float hpMulti = 0f;
+    public float critDmgMulti = 0f;  
+    public float hpRecoveryMulti = 0f;
+    
     // Level Stats
     [Header("Level Stats")]
     public float lvl = 1;
@@ -56,8 +69,15 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        prevHp = hp;
+
         maxExp = lvl * 6;
+
+        maxHp = 100f + (lvl - 1) * 500f;
+        currentHp = maxHp;
+        prevHp = currentHp;
+
+        attack = 10f + (lvl - 1) * 100f;
+        defense = (lvl - 1) * 50f;
     }
 
     void Update()
@@ -68,18 +88,18 @@ public class PlayerStats : MonoBehaviour
     {
         timeSince += Time.deltaTime;
         hpRecCdCur += Time.deltaTime;
-        if (prevHp != hp)
+        if (prevHp != currentHp)
         {
             timeSince = 0;
-            prevHp = hp;
+            prevHp = currentHp;
         }
         if (currentExp >= maxExp)
         {
             LevelUp();
         }
-        if (hpRecCdCur >= hpRecCd && hp < maxHp)
+        if (hpRecCdCur >= hpRecCd && currentHp < maxHp)
         {
-            hp++;
+            currentHp += hpRecovery;
             hpRecCdCur= 0;
         }
     }
@@ -97,14 +117,13 @@ public class PlayerStats : MonoBehaviour
     }
     public void IncreaseStats(float lvl_)
     {
-        hp = hp + ((int)(hp / maxHp * (lvl_)));
-        maxHp += lvl_;
-        attack += 1;
+        maxHp += 10;
+        attack += 2;
         defense += 1;
     }
     public void TakeDamage(int damage, bool isCrit)
     {
-        hp -= damage;
+        currentHp -= damage;
         damagePopup.isPlayer = true;
         damagePopup.Create(transform.position, damage, isCrit);
     }

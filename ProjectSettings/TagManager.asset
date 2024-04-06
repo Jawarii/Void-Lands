@@ -9,6 +9,7 @@ TagManager:
   - Weapon
   - UpgradeMaterial
   - BowObject
+  - DraggedCanvas
   layers:
   - Default
   - TransparentFX

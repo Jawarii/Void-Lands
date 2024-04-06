@@ -236,7 +236,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1479683888e1abe4ca5889c3a5219ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicAtkDmgMulti: 1.5
+  basicAtkDmgMulti: 0.5
 --- !u!1 &3497676198621287211
 GameObject:
   m_ObjectHideFlags: 0
@@ -407,7 +407,7 @@ MonoBehaviour:
   timeSince: 0
   player: {fileID: 0}
   animator_: {fileID: 3497676198621287215}
-  enemyLvl: 1
+  enemyLvl: 30
   hitIndicator: 0
   source: {fileID: 7005549183149520373}
   clip: {fileID: 8300000, guid: d64e91cef03af304fa237225b23c5707, type: 3}

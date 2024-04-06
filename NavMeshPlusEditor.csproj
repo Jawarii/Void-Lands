@@ -59,16 +59,16 @@
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierEditor.cs" />
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAssetManager.cs" />
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\CollectSources2dEditor.cs" />
-    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshSurfaceEditor.cs" />
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierTilemapEditor.cs" />
-    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshLinkEditor.cs" />
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\AgentOverride2dEditor.cs" />
-    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshComponentsGUIUtility.cs" />
-    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\RootSources2dEditor.cs" />
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshModifierVolumeEditor.cs" />
-    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\CollectSourcesCache2dEditor.cs" />
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAreaAttributePropertyDrawer.cs" />
     <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshAgentAttributePropertyDrawer.cs" />
+    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshSurfaceEditor.cs" />
+    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshLinkEditor.cs" />
+    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshComponentsGUIUtility.cs" />
+    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\RootSources2dEditor.cs" />
+    <Compile Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\CollectSourcesCache2dEditor.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\NavMeshPlus-master\NavMeshComponents\Editor\NavMeshComponentsEditor.asmdef" />

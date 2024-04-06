@@ -40,19 +40,15 @@ public class EnemyStats : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
        //hitAudio = GameObject.FindGameObjectWithTag("HitAudio");
         stats = player.GetComponentInChildren<PlayerStats>();
-       //source = hitAudio.GetComponent<AudioSource>();
-        enemyLvl += (int)(stats.playTime / 20f);
-        if (!isBoss)
-        {
-            maxHp *= (((enemyLvl - 1f) / 10f) + 1f);
-        }
-        else
-        {
-            maxHp *= enemyLvl * 0.8f;
-        }
+
+
+        maxHp = 25f + (enemyLvl - 1) * 125f;
         hp = maxHp;
         prevHp = hp;
-        //attack = 9 + enemyLvl;
+
+        attack = 10f + (enemyLvl - 1) * 100f;
+        defense = (enemyLvl - 1) * 50f;
+
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
 

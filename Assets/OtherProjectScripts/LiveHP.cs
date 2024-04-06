@@ -15,7 +15,7 @@ public class LiveHP : MonoBehaviour
     void Start()
     {
         maxHp1 = stats.GetComponent<PlayerStats>().maxHp;
-        hp1 = stats.GetComponent<PlayerStats>().hp;
+        hp1 = stats.GetComponent<PlayerStats>().currentHp;
         slider.value = hp1 / maxHp1;
         hpValueText.SetText(hp1.ToString() + "/" + maxHp1.ToString());
     }
@@ -24,7 +24,7 @@ public class LiveHP : MonoBehaviour
     void Update()
     {
         maxHp1 = stats.GetComponent<PlayerStats>().maxHp;
-        hp1 = stats.GetComponent<PlayerStats>().hp;
+        hp1 = stats.GetComponent<PlayerStats>().currentHp;
         slider.value = hp1 / maxHp1;
         hpValueText.SetText(hp1.ToString() + "/" + maxHp1.ToString());
     }

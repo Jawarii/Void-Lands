@@ -120,7 +120,7 @@ MonoBehaviour:
   player: {fileID: 0}
   playerStats: {fileID: 0}
   basicAtkDmgMulti: 0.5
-  knockbackForce: 10
+  knockbackForce: 5
   lifeTime: 1
 --- !u!50 &-2375528771365983093
 Rigidbody2D:
