@@ -26,7 +26,7 @@ public class DamagePopup : MonoBehaviour
         if (isCrit)
         {
             textMesh.color = Color.yellow;
-            textMesh.fontSize *= 1.2f;
+            textMesh.fontSize *= 1.3f;
         }
         else if (isPlayer)
         {
@@ -63,12 +63,12 @@ public class DamagePopup : MonoBehaviour
         {
             if (lifeTime > DISAPPEAR_TIMER_MAX * 0.85f)
             {
-                float increaseScaleAmount = 5f;
+                float increaseScaleAmount = 10f;
                 transform.localScale += Vector3.one * increaseScaleAmount * Time.deltaTime;
             }
             else if (lifeTime >= DISAPPEAR_TIMER_MAX * 0.6f && lifeTime <= DISAPPEAR_TIMER_MAX * 0.75f)
             {
-                float decreaseScaleAmount = 5f;
+                float decreaseScaleAmount = 10f;
                 transform.localScale -= Vector3.one * decreaseScaleAmount * Time.deltaTime;
             }
         }
@@ -76,12 +76,12 @@ public class DamagePopup : MonoBehaviour
         {
             if (lifeTime > DISAPPEAR_TIMER_MAX * 0.85f)
             {
-                float increaseScaleAmount = 3f;
+                float increaseScaleAmount = 6f;
                 transform.localScale += Vector3.one * increaseScaleAmount * Time.deltaTime;
             }
             else if (lifeTime >= DISAPPEAR_TIMER_MAX * 0.6f && lifeTime <= DISAPPEAR_TIMER_MAX * 0.75f)
             {
-                float decreaseScaleAmount = 3f;
+                float decreaseScaleAmount = 6f;
                 transform.localScale -= Vector3.one * decreaseScaleAmount * Time.deltaTime;
             }
         }

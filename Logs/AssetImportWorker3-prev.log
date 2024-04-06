@@ -15,7 +15,7 @@ C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
 -logFile
 Logs/AssetImportWorker3.log
 -srvPort
-57737
+55617
 Successfully changed project path to: C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
 C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -47,7 +47,136 @@ C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Refreshing native plugins compatible for Editor in 262.37 ms, found 3 plugins.
+mdb reader table full -> cleaning up stale readers. Current readers:
+    pid     thread     txnid
+     15080 563c -
+     15080 2f5c -
+     21076 5844 -
+     29464 4270 -
+     15080 5378 -
+     15080 66ec -
+     15080 7304 -
+     37268 908c -
+     37268 8a00 -
+     31544 7b2c -
+     27676 474 -
+     25440 22d8 -
+     37268 aa48 -
+     37268 a32c -
+     31504 7b14 -
+      8460 6470 -
+     29492 98f0 -
+     25032 a2c8 -
+     26796 94fc -
+     39864 9a60 -
+     37268 9c28 -
+      7484 8bbc -
+     26980 8658 -
+     14008 66d4 -
+     17232 533c -
+     39240 abbc -
+     37268 46dc -
+     16640 9354 -
+     34100 9038 -
+     25856 392c -
+     37268 2f0c -
+      6816 41c0 -
+     35604 43dc -
+      3396 89a4 -
+     25388 9440 -
+     27348 25f4 -
+     27348 4e60 -
+     27348 4b00 -
+     39292 a5fc -
+     39292 2c74 -
+     39292 3a08 -
+      4276 9818 -
+     29312 7634 -
+     39292 6928 -
+     34692 8ecc -
+     31504 8624 -
+     33068 8914 -
+     42000 6a94 -
+      7104 a5a8 -
+     40772 9f14 -
+     11004 5f20 -
+     43200 3e08 -
+     13816 4b4c -
+     24624 a48c -
+     39292 6c5c -
+     39292 936c -
+     39292 797c -
+     39292 a070 -
+     39292 a4a0 -
+      8680 8d88 -
+     29428 6700 -
+      8680 9078 -
+      8680 37ac -
+     38760 4cd8 -
+     38856 9014 -
+     37508 6df8 -
+     41608 669c -
+      8680 476c -
+     35124 8e68 -
+      8680 4758 -
+      8680 9c30 -
+      8680 5350 -
+      8680 4998 -
+      8680 727c -
+     24860 90e4 -
+     14740 7cd4 -
+     17608 ae8 -
+     24860 80a0 -
+     24860 23dc -
+     19392 8864 -
+      5184 75d8 -
+      5244 2784 -
+     36400 787c -
+     18216 3878 -
+     16736 97c0 -
+     38596 4dc0 47149
+     27856 45dc 47149
+     24860 45e8 -
+     24860 60e8 -
+      1800 35f8 -
+      1800 7910 -
+      1800 403c -
+     28920 5fdc -
+     23516 92a0 -
+      1800 5038 -
+      1800 7e24 -
+      1800 9ac8 -
+     12180 50c0 -
+     17264 9c80 -
+      1800 8f04 -
+     17352 4054 -
+     25304 612c -
+     37608 537c -
+     36500 7f68 -
+      1800 780c -
+     39888 6aa0 -
+     25420 7668 -
+     33172 5b7c -
+     27040 6664 -
+     30152 184c -
+     39888 b774 -
+     32328 2320 -
+     46000 208c -
+       204 8c0 48562
+     26676 5bd8 48562
+     33216 b738 -
+     33740 b1f8 -
+     42888 7418 -
+     39888 1f7c -
+     30972 82d8 -
+     16512 2278 -
+     41780 799c -
+     48212 b78 -
+     20976 bc38 -
+     16380 bdbc -
+     39888 48e4 -
+Cleaned out 119 stale readers
+Refreshing native plugins compatible for Editor in 177.21 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2021.3.11f1 (0a5ca18544bf)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/Resources/UnitySubsystems
@@ -63,314 +192,44 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56212
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56636
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/PlaybackEngines/WebGLSupport/UnityEditor.WebGL.Extensions.dll
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2021.3.11f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.007354 seconds.
+Registered in 0.164727 seconds.
 Native extension for WindowsStandalone target not found
 Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 164.38 ms, found 3 plugins.
+Refreshing native plugins compatible for Editor in 156.27 ms, found 3 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Mono: successfully reloaded assembly
-- Completed reload, in  0.661 seconds
+- Completed reload, in  4.993 seconds
 Domain Reload Profiling:
-	ReloadAssembly (662ms)
-		BeginReloadAssembly (69ms)
+	ReloadAssembly (4994ms)
+		BeginReloadAssembly (3803ms)
 			ExecutionOrderSort (0ms)
 			DisableScriptedObjects (0ms)
 			BackupInstance (0ms)
 			ReleaseScriptingObjects (0ms)
 			CreateAndSetChildDomain (1ms)
-		EndReloadAssembly (491ms)
-			LoadAssemblies (66ms)
+		EndReloadAssembly (809ms)
+			LoadAssemblies (3805ms)
 			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (96ms)
+			SetupTypeCache (423ms)
 			ReleaseScriptCaches (0ms)
-			RebuildScriptCaches (21ms)
-			SetupLoadedEditorAssemblies (326ms)
+			RebuildScriptCaches (20ms)
+			SetupLoadedEditorAssemblies (313ms)
 				LogAssemblyErrors (0ms)
 				InitializePlatformSupportModulesInManaged (8ms)
 				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (164ms)
+				RefreshPlugins (156ms)
 				BeforeProcessingInitializeOnLoad (1ms)
-				ProcessInitializeOnLoadAttributes (108ms)
-				ProcessInitializeOnLoadMethodAttributes (45ms)
+				ProcessInitializeOnLoadAttributes (99ms)
+				ProcessInitializeOnLoadMethodAttributes (47ms)
 				AfterProcessingInitializeOnLoad (0ms)
 				EditorAssembliesLoaded (0ms)
 			ExecutionOrderSort2 (0ms)
 			AwakeInstancesAfterBackupRestoration (0ms)
 Platform modules already initialized, skipping
 Registering precompiled user dll's ...
-Registered in 0.008282 seconds.
-Begin MonoManager ReloadAssembly
-Symbol file LoadedFromMemory doesn't match image C:\Users\tempo\OneDrive\Desktop\Game Projects\GraduationProjectBegin\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\YamlDotNet\Unity.VisualScripting.YamlDotNet.dll
-Symbol file LoadedFromMemory doesn't match image C:\Users\tempo\OneDrive\Desktop\Game Projects\GraduationProjectBegin\Library\PackageCache\com.unity.visualscripting@1.8.0\Editor\VisualScripting.Core\Dependencies\DotNetZip\Unity.VisualScripting.IonicZip.dll
-Native extension for WindowsStandalone target not found
-Native extension for WebGL target not found
-Refreshing native plugins compatible for Editor in 177.15 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Mono: successfully reloaded assembly
-- Completed reload, in  1.579 seconds
-Domain Reload Profiling:
-	ReloadAssembly (1579ms)
-		BeginReloadAssembly (114ms)
-			ExecutionOrderSort (0ms)
-			DisableScriptedObjects (5ms)
-			BackupInstance (0ms)
-			ReleaseScriptingObjects (0ms)
-			CreateAndSetChildDomain (21ms)
-		EndReloadAssembly (1357ms)
-			LoadAssemblies (106ms)
-			RebuildTransferFunctionScriptingTraits (0ms)
-			SetupTypeCache (248ms)
-			ReleaseScriptCaches (1ms)
-			RebuildScriptCaches (74ms)
-			SetupLoadedEditorAssemblies (889ms)
-				LogAssemblyErrors (0ms)
-				InitializePlatformSupportModulesInManaged (6ms)
-				SetLoadedEditorAssemblies (0ms)
-				RefreshPlugins (177ms)
-				BeforeProcessingInitializeOnLoad (123ms)
-				ProcessInitializeOnLoadAttributes (501ms)
-				ProcessInitializeOnLoadMethodAttributes (73ms)
-				AfterProcessingInitializeOnLoad (8ms)
-				EditorAssembliesLoaded (0ms)
-			ExecutionOrderSort2 (0ms)
-			AwakeInstancesAfterBackupRestoration (9ms)
-Platform modules already initialized, skipping
-========================================================================
-Worker process is ready to serve import requests
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.05 seconds
-Refreshing native plugins compatible for Editor in 5.24 ms, found 3 plugins.
-Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 5663 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 68 unused Assets / (1.8 MB). Loaded Objects now: 6111.
-Memory consumption went from 240.2 MB to 238.4 MB.
-Total: 5.373000 ms (FindLiveObjects: 0.516700 ms CreateObjectMapping: 0.251900 ms MarkObjects: 3.948600 ms  DeleteObjects: 0.654100 ms)
-
-AssetImportParameters requested are different than current active one (requested -> active):
-  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
-  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
-  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
-  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
-  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
-  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
-  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
-  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
-========================================================================
-Received Import Request.
-  Time since last request: 865735.990248 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_02.png
-  artifactKey: Guid(f47aa78cb909bfd42baf5d618a2d0e8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_02.png using Guid(f47aa78cb909bfd42baf5d618a2d0e8e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '546d44448fef4d93786bab025daa046e') in 0.143120 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000037 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Volcano3_dark_shadow_frame4.png
-  artifactKey: Guid(1e4253475683fb849a5f2964059af1ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Volcano3_dark_shadow_frame4.png using Guid(1e4253475683fb849a5f2964059af1ab) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '61d761c6623505f7bf795bd462ad80fa') in 0.037442 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/ok.png
-  artifactKey: Guid(3238dca1e9ea9fb4aa64b28298ba6dbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.collab-proxy/Editor/PlasticSCM/Assets/Images/ok.png using Guid(3238dca1e9ea9fb4aa64b28298ba6dbd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1a577faff4e7eca419983ca223295c79') in 0.038268 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000051 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_32.png
-  artifactKey: Guid(3e0ce58094c49e84fba3956644ee586f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_32.png using Guid(3e0ce58094c49e84fba3956644ee586f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ffb2b1f706386fdad63dbfdc9ceef160') in 0.043323 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000033 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_27.png
-  artifactKey: Guid(03380d547f7aba4499043568e5fddb25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_27.png using Guid(03380d547f7aba4499043568e5fddb25) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd5f6a513cdf4a59f08d97f417a5046b7') in 0.041817 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000038 seconds.
-  path: Assets/StoreAssets/500_skillicons/BonusIcons/neutral_nobg/poison_claw_nobg.png
-  artifactKey: Guid(9871a3f1f75c5a341a69783a70212ef9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/BonusIcons/neutral_nobg/poison_claw_nobg.png using Guid(9871a3f1f75c5a341a69783a70212ef9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3defd7582702145174861335fe130fac') in 0.040647 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_50.png
-  artifactKey: Guid(bc574bbfbe60121489c62859f0f2544e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_50.png using Guid(bc574bbfbe60121489c62859f0f2544e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '154c958e8c608da8fb74172baed7dd40') in 0.042906 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000040 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Mageskill_01.png
-  artifactKey: Guid(e5e7249028adb404eaea0a0b1e674469) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Mageskill_01.png using Guid(e5e7249028adb404eaea0a0b1e674469) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f9318d2d2059e9a39538685560ff91d6') in 0.040663 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/small_mushrooms_white_dark_shadow1.png
-  artifactKey: Guid(be1781fa58946154a96395838ef726de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/small_mushrooms_white_dark_shadow1.png using Guid(be1781fa58946154a96395838ef726de) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '68a26e395c08ce93ebd0129a3e754eec') in 0.033097 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_12.png
-  artifactKey: Guid(cc538e533b0cc234e8c3c2cfb150dfb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_12.png using Guid(cc538e533b0cc234e8c3c2cfb150dfb0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'a660cbddbb5be6240472d877f4e0f274') in 0.043140 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000071 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Yellow_stone_light_shadow3.png
-  artifactKey: Guid(22d41c379816f0f49a736924ce3833e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Yellow_stone_light_shadow3.png using Guid(22d41c379816f0f49a736924ce3833e1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1fcfbafe51963b42374efe7d85fa37be') in 0.033519 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000073 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Warlock_47.png
-  artifactKey: Guid(696a7e8d0308cab49bc660e54ce25507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Warlock_47.png using Guid(696a7e8d0308cab49bc660e54ce25507) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '169abc8f0a3717baf0ef934e82d7dfb7') in 0.047004 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000038 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Walls_elements10.png
-  artifactKey: Guid(10121974533beb2458b6eff1b7a30753) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Walls_elements10.png using Guid(10121974533beb2458b6eff1b7a30753) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd797095a404f92fb5dc05ab3a852db0f') in 0.033764 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000048 seconds.
-  path: Assets/StoreAssets/Slime/Sleep/Sleep01.png
-  artifactKey: Guid(4c65fb9db70f3ef4a845982ed8949ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/Slime/Sleep/Sleep01.png using Guid(4c65fb9db70f3ef4a845982ed8949ddd) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ce803d794de4c838ee110ce622675e37') in 0.038010 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000041 seconds.
-  path: Assets/AStar 2D/Demo/Sprite/Brush.png
-  artifactKey: Guid(b1c6cf446b6c85a4f84cad08c30cab81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/AStar 2D/Demo/Sprite/Brush.png using Guid(b1c6cf446b6c85a4f84cad08c30cab81) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd68ec9ce812ed6a4432ca05e12d65d54') in 0.035067 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Parent_Bone@2x.png
-  artifactKey: Guid(698621c9178225f4b8fbaffd383d579e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Packages/com.unity.2d.animation/Editor/Assets/SkinningModule/Icons/Selected/Parent_Bone@2x.png using Guid(698621c9178225f4b8fbaffd383d579e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5be214113f733ac12cbe121d5858d6a2') in 0.033291 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000037 seconds.
-  path: Assets/StoreAssets/Sword Slashes/Sword Slashes/Pure White Slash Wide/File5.png
-  artifactKey: Guid(ab4b08f6820f7fb46b2c9f5d2d660e36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/Sword Slashes/Sword Slashes/Pure White Slash Wide/File5.png using Guid(ab4b08f6820f7fb46b2c9f5d2d660e36) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dac90f756d41e572750bc7825b7429c4') in 0.047244 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000027 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/spider_element2_light_shadow.png
-  artifactKey: Guid(2b1645dee63d3c84a80a95e1becf7382) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/spider_element2_light_shadow.png using Guid(2b1645dee63d3c84a80a95e1becf7382) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '55cf14f87f1b0639124e1d95276ed670') in 0.032994 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000072 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Priestskill_48.png
-  artifactKey: Guid(f8b08cde5e63d634bbb541ac82aa16e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Priestskill_48.png using Guid(f8b08cde5e63d634bbb541ac82aa16e0) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'ec48183eb5f2243f95e9d85c54ab7ae5') in 0.039304 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000044 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Warlock_31.png
-  artifactKey: Guid(b1b9f592c5b511c4eabb493d2b73e123) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Warlock_31.png using Guid(b1b9f592c5b511c4eabb493d2b73e123) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'dded3c53402cf2561f77ee35cf664483') in 0.040548 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/StoreAssets/Slime/Demo/Walk.gif
-  artifactKey: Guid(cd52397bf3b56414a930ceb7b3d84d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/Slime/Demo/Walk.gif using Guid(cd52397bf3b56414a930ceb7b3d84d99) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2713094c3867df2f55fbdc559903e3ec') in 0.037512 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_nobg/Shamanskill_48_nobg.png
-  artifactKey: Guid(5aed046a2955377448d1f6402feaccbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_nobg/Shamanskill_48_nobg.png using Guid(5aed046a2955377448d1f6402feaccbc) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '834641a023041a2076e5f06725cb1305') in 0.046499 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/StoreAssets/500_skillicons/BonusIcons/neutral_skills/venom.png
-  artifactKey: Guid(1a6cf42461ca6b643844bc156247332f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/BonusIcons/neutral_skills/venom.png using Guid(1a6cf42461ca6b643844bc156247332f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3f4670d07e77580ced1df5ebee79ae1a') in 0.042189 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/StoreAssets/500_skillicons/BonusIcons/Basic_Spells/No_bg/16_blizzard_nobg.png
-  artifactKey: Guid(ccf384ea5872b5b4e8718389f34c5c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/BonusIcons/Basic_Spells/No_bg/16_blizzard_nobg.png using Guid(ccf384ea5872b5b4e8718389f34c5c0f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f372b6920933dd26d3f44a4f5b3caaa3') in 0.038120 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000035 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_33.png
-  artifactKey: Guid(d77250a8d7928db4daff3e11ad0d898b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Shamanskill_33.png using Guid(d77250a8d7928db4daff3e11ad0d898b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd6b56ffc0581b649669c164fd019e9cf') in 0.038867 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000036 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_nobg/Warriorskill_26_nobg.png
-  artifactKey: Guid(5a6f57b0e1bf6d34db3ea8913affa4b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_nobg/Warriorskill_26_nobg.png using Guid(5a6f57b0e1bf6d34db3ea8913affa4b9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '47d42ece200b6dd68693a4074495000e') in 0.049200 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000036 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_nobg/Warlock_31_nobg.png
-  artifactKey: Guid(0df1567e8f8e2b347aed2bb1ee44c238) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_nobg/Warlock_31_nobg.png using Guid(0df1567e8f8e2b347aed2bb1ee44c238) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'd7ef43ac27edd91966bf687009e4e42d') in 0.040216 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000033 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Volcano2_light_shadow_frame1.png
-  artifactKey: Guid(a75387ed058d89c438fa53b345f5507f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Volcano2_light_shadow_frame1.png using Guid(a75387ed058d89c438fa53b345f5507f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '75f05a006dadf7391492644647b78b35') in 0.035558 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000043 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Engineerskill_02.png
-  artifactKey: Guid(f70ae95c5c91be74682f5bc4d7821177) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Engineerskill_02.png using Guid(f70ae95c5c91be74682f5bc4d7821177) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'be39f5c3d71ded20df5bd622eb651ba5') in 0.042955 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000047 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_44.png
-  artifactKey: Guid(2ba35c5f1bce4a64db68f967757e2ee3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_44.png using Guid(2ba35c5f1bce4a64db68f967757e2ee3) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '80e3a8ee9078f17621a920a6015e1e3e') in 0.045251 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000032 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Water_rocks3_frame2.png
-  artifactKey: Guid(a6106d22925b5c042a30d28edf246bea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Water_rocks3_frame2.png using Guid(a6106d22925b5c042a30d28edf246bea) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '59e6dcf67d1b098e776e2316f924db44') in 0.038343 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000043 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Walls_elements20.png
-  artifactKey: Guid(5431d65e1e9039244baba0c726445716) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Walls_elements20.png using Guid(5431d65e1e9039244baba0c726445716) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'e01d1b64ed7da420ce4ffa7a56aab922') in 0.031792 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000039 seconds.
-  path: Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Water_rocks1_frame3.png
-  artifactKey: Guid(01b64cb2e3712444db1614f26a06fecf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/ImportedAssets/CAVE TILESET TOP DOWN PIXEL ART v1.0/CAVE TILESET TOP DOWN PIXEL ART v1.0/PNG 1/Objects_separately/Water_rocks1_frame3.png using Guid(01b64cb2e3712444db1614f26a06fecf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06d92e90049ff95aae157aee43c0310d') in 0.033449 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000036 seconds.
-  path: Assets/StoreAssets/Slime/Sleep/Sleep02.png
-  artifactKey: Guid(9d1d07b6b1eb6a445ab163569bb3bd19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/Slime/Sleep/Sleep02.png using Guid(9d1d07b6b1eb6a445ab163569bb3bd19) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f5af777414a4531eca311a9105545a8a') in 0.035067 seconds 
-========================================================================
-Received Import Request.
-  Time since last request: 0.000030 seconds.
-  path: Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_11.png
-  artifactKey: Guid(52d90cb2cccd56240baf854f09c97862) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/StoreAssets/500_skillicons/Skill_standart/Warriorskill_11.png using Guid(52d90cb2cccd56240baf854f09c97862) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5b26695e77b71cf3895f1f78f3c8f015') in 0.040321 seconds 
-Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
-AssetImportWorker is now disconnected from the server
-Process exiting
-Exiting without the bug reporter. Application will terminate with return code 0
+Registered in 0.009098 seconds.

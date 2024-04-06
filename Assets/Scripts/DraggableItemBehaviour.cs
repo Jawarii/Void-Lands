@@ -89,7 +89,8 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                 hoveredSlotId = buttonInfo.slotId;
                 if (draggedFromEquipment == true)
                 {
-                    if (inventoryController.inventory[hoveredSlotId].itemType != inventoryController.draggedItemInfo.itemType)
+                    if (inventoryController.inventory[hoveredSlotId] != null &&
+                        inventoryController.inventory[hoveredSlotId].itemType != inventoryController.draggedItemInfo.itemType)
                         break;
                     transform.GetComponent<EquipmentController>().equipInfoSo = inventoryController.inventory[hoveredSlotId];
                     inventoryController.inventory[hoveredSlotId] = inventoryController.draggedItemInfo;

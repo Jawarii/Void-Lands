@@ -72,6 +72,7 @@
     <Compile Include="Assets\OtherProjectScripts\ExpBar.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\Threading\WorkerThread.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\MonoDelegate.cs" />
+    <Compile Include="Assets\Scripts\EquipmentHoverBehavior.cs" />
     <Compile Include="Assets\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\OtherProjectScripts\Spawner.cs" />
     <Compile Include="Assets\OtherProjectScripts\ArrowSkill.cs" />
@@ -178,7 +179,6 @@
     <Compile Include="Assets\OtherProjectScripts\LevelUpPanel.cs" />
     <Compile Include="Assets\Scripts\EnchantmentStoneInfo.cs" />
     <Compile Include="Assets\Scripts\ReadSceneNames.cs" />
-    <Compile Include="Assets\Scripts\EquipmentHoverBehavior.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\ImportedAssets\Knight Files\Read Me.txt" />
