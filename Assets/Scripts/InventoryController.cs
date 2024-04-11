@@ -20,7 +20,7 @@ public class InventoryController : MonoBehaviour
     }
 
     // Update is called once per frame
-    void Update()
+    void FixedUpdate()
     {
         goldAmountText.text = goldAmount.ToString();
     }
@@ -93,17 +93,19 @@ public class InventoryController : MonoBehaviour
                 WeaponInfo weaponInfo = itemInfo as WeaponInfo;
 
                 //MainStats
+                item.weaponMainStats.attack = weaponInfo.weaponMainStats.attack;
                 item.weaponMainStats.minAttack = weaponInfo.weaponMainStats.minAttack;
                 item.weaponMainStats.maxAttack = weaponInfo.weaponMainStats.maxAttack;
-                item.weaponMainStats.critChance = weaponInfo.weaponMainStats.critChance;
-                item.weaponMainStats.critDamage = weaponInfo.weaponMainStats.critDamage;
-                item.weaponMainStats.atkSpeed = weaponInfo.weaponMainStats.atkSpeed;
+                //item.weaponMainStats.critChance = weaponInfo.weaponMainStats.critChance;
+                //item.weaponMainStats.critDamage = weaponInfo.weaponMainStats.critDamage;
+                //item.weaponMainStats.atkSpeed = weaponInfo.weaponMainStats.atkSpeed;
 
                 //BonusStats
                 item.weaponBonusStats.attack = weaponInfo.weaponBonusStats.attack;
                 item.weaponBonusStats.atkSpeed = weaponInfo.weaponBonusStats.atkSpeed;
                 item.weaponBonusStats.critChance = weaponInfo.weaponBonusStats.critChance;
                 item.weaponBonusStats.critDamage = weaponInfo.weaponBonusStats.critDamage;
+                item.weaponBonusStats.staggerDmg = weaponInfo.weaponBonusStats.staggerDmg;
             }
         }
     }

@@ -38,8 +38,8 @@ public class StatsController : MonoBehaviour
     {
         playerStats = player.GetComponent<PlayerStats>();
         //Offense
-        minAttack = playerStats.attack * 0.95f;
-        maxAttack = playerStats.attack * 1.05f;
+        minAttack = playerStats.attack * 0.9f;
+        maxAttack = playerStats.attack * 1.1f;
         critChance = playerStats.critRate;
         critDmg = playerStats.critDmg;
         atkSpd = playerStats.atkSpd;

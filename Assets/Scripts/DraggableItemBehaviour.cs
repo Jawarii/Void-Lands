@@ -103,6 +103,8 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                     draggedItem.localPosition = new Vector3(0, 0, 0);
                     draggedItem.SetAsFirstSibling();
                     validDropTargetFound = true;
+                    transform.GetComponent<EquipmentController>().RemoveStats();
+                    transform.GetComponent<EquipmentController>().AddStats();
                     break;
                 }
                 else
@@ -153,6 +155,8 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                 equipmentController.equipInfoSo = inventoryController.draggedItemInfo;
                 inventoryController.draggedItemInfo = null;
                 validDropTargetFound = true;
+                equipmentController.RemoveStats();
+                equipmentController.AddStats();
                 break;
             }
         }

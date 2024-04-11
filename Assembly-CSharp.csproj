@@ -76,12 +76,13 @@
     <Compile Include="Assets\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\OtherProjectScripts\Spawner.cs" />
     <Compile Include="Assets\OtherProjectScripts\ArrowSkill.cs" />
+    <Compile Include="Assets\Scripts\SlimeAttack.cs" />
     <Compile Include="Assets\Scripts\PlayerAttackArcher.cs" />
     <Compile Include="Assets\OtherProjectScripts\LaserBehavior.cs" />
     <Compile Include="Assets\Scripts\ButtonHover.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\Collections\OpenNodeMap.cs" />
     <Compile Include="Assets\OtherProjectScripts\LiveHP.cs" />
-    <Compile Include="Assets\EquipmentController.cs" />
+    <Compile Include="Assets\Scripts\EquipmentController.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\Pathfinding\Algorithm\HeuristicProvider.cs" />
     <Compile Include="Assets\AStar 2D\Scripts\Visualisation\PathView.cs" />
@@ -186,6 +187,7 @@
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Demo scenes\Readme.txt" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_SDF-Mobile Overlay.shader" />
     <None Include="Assets\ImportedAssets\SWAMP ENEMIES TOP-DOWN PIXEL ART v1.0\SWAMP ENEMIES TOP-DOWN PIXEL ART v1.0\README.txt" />
+    <None Include="Assets\Opacity.shader" />
     <None Include="Assets\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\StoreAssets\Bringer Of Death\License.txt" />
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Prefabs\Readme.txt" />

@@ -9,14 +9,9 @@ public class SlimeMovement : MonoBehaviour
     public Animator animator_;
     public bool inPursuit = false;
     public GameObject playerObject;
-    public float atkCd = 2.0f;
-    private float currentAtkCd = 0.0f;
-    public float atkTime = 1.0f;
-    private float currentAtkTime = 0.0f;
-    private bool canMove = true;
+    public bool canMove = true;
     public GameObject colliderObject;
     public NavMeshAgent agent;
-    private Vector3 destination;
     private Vector3 currentTargetDirection;
     private bool isPathBlocked = false;
     private int lastDirection = 0; // 0 = not set, 1 = right, -1 = left
@@ -28,12 +23,10 @@ public class SlimeMovement : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = speed_;
-        currentAtkTime = atkTime;
     }
 
     private void Update()
     {
-        currentAtkCd -= Time.deltaTime;
         FlipSpriteDirection();
         if (inPursuit && canMove)
         {
@@ -47,10 +40,6 @@ public class SlimeMovement : MonoBehaviour
                 MoveTowardsAlternateDirection();
             }
         }
-        else if (!canMove)
-        {
-            PerformAttack();
-        }
     }
 
     private void FindPathToPlayer()
@@ -58,7 +47,7 @@ public class SlimeMovement : MonoBehaviour
         Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, playerObject.transform.position);
 
-        if (distanceToPlayer > 0.6f && currentAtkCd <= 0)
+        if (distanceToPlayer > 0.6f)
         {
             agent.isStopped = false;
             animator_.SetBool("canAttack", false);
@@ -78,15 +67,10 @@ public class SlimeMovement : MonoBehaviour
                 agent.SetDestination(playerObject.transform.position);
             }
         }
-        else if (distanceToPlayer <= 0.6f && currentAtkCd <= 0) // Close enough to stop and possibly attack
+        else if (distanceToPlayer <= 0.6f) // Close enough to stop and possibly attack
         {
-            //PrepareForAttack();
-            canMove = false;
             agent.isStopped = true;
-            animator_.SetBool("canAttack", true);
             animator_.SetFloat("Speed", 0);
-            currentAtkCd = atkCd;
-            currentAtkTime = atkTime;
         }
     }
 
@@ -159,46 +143,8 @@ public class SlimeMovement : MonoBehaviour
             }
         }
 
-       // Debug.Log("No clear alternate path found, sticking to last direction");
         // Continue in the last direction if no clear path is found
         return originalDirection2D * distance;
-    }
-
-    private void PrepareForAttack()
-    {
-        canMove = false;
-        agent.isStopped = true;
-        animator_.SetBool("canAttack", true);
-        animator_.SetFloat("Speed", 0);
-        currentAtkCd = atkCd;
-        currentAtkTime = atkTime;
-    }
-    private void PerformAttack()
-    {
-        currentAtkTime -= Time.deltaTime;
-        if (currentAtkTime < 0.9f && currentAtkTime > 0.75f)
-        {
-            colliderObject.GetComponent<CircleCollider2D>().enabled = true;
-        }
-        else if (currentAtkTime < 0.6f && currentAtkTime > 0.45f)
-        {
-            colliderObject.GetComponent<CircleCollider2D>().enabled = true;
-        }
-        else if (currentAtkTime < 0.3f && currentAtkTime > 0.15f)
-        {
-            colliderObject.GetComponent<CircleCollider2D>().enabled = true;
-        }
-        else
-        {
-            colliderObject.GetComponent<CircleCollider2D>().enabled = false;
-        }
-        if (currentAtkTime < 0)
-        {
-            animator_.SetBool("canAttack", false);
-            canMove = true;
-            colliderObject.GetComponent<CircleCollider2D>().enabled = false; // Reset attack cooldown
-             // Reset attack time
-        }
     }
     private void FlipSpriteDirection()
     {

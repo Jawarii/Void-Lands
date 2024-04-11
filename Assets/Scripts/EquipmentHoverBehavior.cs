@@ -98,9 +98,9 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
 
         //Main Stats
         itemStatsObj.GetComponent<TMP_Text>().text = "Attack " + weaponInfo.weaponMainStats.minAttack + "~" + weaponInfo.weaponMainStats.maxAttack;
-        itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Crit Chance " + weaponInfo.weaponMainStats.critChance + "%";
-        itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Crit Damage " + weaponInfo.weaponMainStats.critDamage + "%";
-        itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Attack Speed " + weaponInfo.weaponMainStats.atkSpeed;
+        //itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Crit Chance " + weaponInfo.weaponMainStats.critChance + "%";
+        //itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Crit Damage " + weaponInfo.weaponMainStats.critDamage + "%";
+        //itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Attack Speed " + weaponInfo.weaponMainStats.atkSpeed;
 
         itemBonusStatsObj.GetComponent<TMP_Text>().text = "";
 
@@ -135,6 +135,15 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
                 itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
             }
             itemBonusStatsObj.GetComponent<TMP_Text>().text += "Attack Speed +" + weaponInfo.weaponBonusStats.atkSpeed;
+            bonusStatAmount++;
+        }
+        if (weaponInfo.weaponBonusStats.staggerDmg != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Stagger Damage +" + weaponInfo.weaponBonusStats.staggerDmg;
             bonusStatAmount++;
         }
     }

@@ -14,7 +14,8 @@ public class ExpBar : MonoBehaviour
     public float lvl;
     // Start is called before the first frame update
     void Start()
-    {   
+    {
+        stats = GameObject.FindGameObjectWithTag("Player");
         lvl = stats.GetComponent<PlayerStats>().lvl;
         lvlText.SetText(lvl.ToString());
         maxExp = stats.GetComponent<PlayerStats>().maxExp;

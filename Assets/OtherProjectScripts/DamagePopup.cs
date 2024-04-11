@@ -54,6 +54,7 @@ public class DamagePopup : MonoBehaviour
             moveVector = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(0.1f, 0.3f));
         }
         Transform damagePopupTransform = Instantiate(floatDmgPf, pos + moveVector, Quaternion.identity);
+        damagePopupTransform.SetParent(GameObject.FindGameObjectWithTag("FloatCanvas").transform);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
         damagePopup.Setup(damageAmount);
     }

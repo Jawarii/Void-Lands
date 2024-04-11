@@ -8,14 +8,13 @@ using UnityEngine;
 public class WeaponInfo : ItemInfo
 {
     [Serializable]
-    public struct WeaponMainStats
+    public class WeaponMainStats
     {
+        public int attack;
         public int minAttack;
         public int maxAttack;
-        public int critChance;
-        public int critDamage;
-        public int atkSpeed;
     }
+
     public WeaponMainStats weaponMainStats;
 
     [Serializable]
@@ -24,7 +23,20 @@ public class WeaponInfo : ItemInfo
         public int attack;
         public int critChance;
         public int critDamage;
-        public int atkSpeed;    
+        public int atkSpeed;
+        public int staggerDmg;
     }
+
     public WeaponBonusStats weaponBonusStats;
+
+    void Awake()
+    {
+        SetAttackStatRange();
+    }
+    public void SetAttackStatRange()
+    {
+        // Calculate minAttack and maxAttack based on attack
+        weaponMainStats.minAttack = (int)(0.9f * weaponMainStats.attack);
+        weaponMainStats.maxAttack = (int)(1.1f * weaponMainStats.attack);
+    }
 }

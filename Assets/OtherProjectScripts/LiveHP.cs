@@ -14,6 +14,7 @@ public class LiveHP : MonoBehaviour
     
     void Start()
     {
+        stats = GameObject.FindGameObjectWithTag("Player");
         maxHp1 = stats.GetComponent<PlayerStats>().maxHp;
         hp1 = stats.GetComponent<PlayerStats>().currentHp;
         slider.value = hp1 / maxHp1;

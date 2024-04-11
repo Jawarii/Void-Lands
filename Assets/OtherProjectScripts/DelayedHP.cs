@@ -11,9 +11,9 @@ public class DelayedHP : MonoBehaviour
     public float maxHp1 = 0;
     public float oldSlider = 0;
     private bool updt = true;
-
     void Start()
     {
+        stats = GameObject.FindGameObjectWithTag("Player");
         currentHp1 = stats.GetComponent<PlayerStats>().currentHp;
         maxHp1 = stats.GetComponent<PlayerStats>().maxHp;
         slider.value = currentHp1 / maxHp1;

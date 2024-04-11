@@ -257,16 +257,15 @@ MonoBehaviour:
   itemType: 
   textColor: {r: 1, g: 1, b: 1, a: 1}
   weaponMainStats:
-    minAttack: 5
-    maxAttack: 7
-    critChance: 5
-    critDamage: 50
-    atkSpeed: 1
+    attack: 763
+    minAttack: 0
+    maxAttack: 0
   weaponBonusStats:
-    attack: 3
-    critChance: 0
-    critDamage: 0
-    atkSpeed: 0
+    attack: 73
+    critChance: 63
+    critDamage: 100
+    atkSpeed: 43
+    staggerDmg: 120
 --- !u!1 &5835571820122005032
 GameObject:
   m_ObjectHideFlags: 0

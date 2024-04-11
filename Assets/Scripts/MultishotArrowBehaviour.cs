@@ -33,8 +33,8 @@ public class MultishotArrowBehaviour : MonoBehaviour
             EnemyStats enemyStats = other.GetComponent<EnemyStats>();
             crit = Random.Range(1, 101);
 
-            float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.95f;
-            float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.05f;
+            float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.1f;
             float critDmgMulti = playerStats.critDmg / 100.0f;
 
             if (crit <= playerStats.critRate)
@@ -50,7 +50,7 @@ public class MultishotArrowBehaviour : MonoBehaviour
             Vector2 knockbackDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
             // Apply knockback to the enemy
-            enemyStats.ApplyKnockback(knockbackDirection, knockbackForce);
+            //enemyStats.ApplyKnockback(knockbackDirection, knockbackForce);
 
             // Optionally destroy the arrow upon hitting an enemy
             //Destroy(gameObject);

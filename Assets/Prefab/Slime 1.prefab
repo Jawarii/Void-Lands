@@ -124,7 +124,7 @@ Canvas:
   m_Enabled: 1
   serializedVersion: 3
   m_RenderMode: 2
-  m_Camera: {fileID: 0}
+  m_Camera: {fileID: 3826680789353045730, guid: 8a0e231c33bf38447a012ed2e6f99d52, type: 3}
   m_PlaneDistance: 100
   m_PixelPerfect: 0
   m_ReceivesEvents: 1
@@ -215,7 +215,7 @@ CircleCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2173578112395921156}
-  m_Enabled: 0
+  m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
   m_IsTrigger: 1
@@ -248,6 +248,7 @@ GameObject:
   - component: {fileID: 3497676198621287214}
   - component: {fileID: 3497676198621287209}
   - component: {fileID: 3497676198621287215}
+  - component: {fileID: 3365323441285755364}
   - component: {fileID: 3497676198621287212}
   - component: {fileID: 3497676198621287213}
   - component: {fileID: 3497676198621287378}
@@ -277,6 +278,7 @@ Transform:
   - {fileID: 3497676199661547605}
   - {fileID: 350915315305402474}
   - {fileID: 8049098496624145140}
+  - {fileID: 4928399715453717113}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -352,6 +354,22 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
+--- !u!114 &3365323441285755364
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3497676198621287211}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e24cc46d7664edf49a57882f6a20e01c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 3497676198621287215}
+  attackCooldown: 2
+  attackColliderGo: {fileID: 2173578112395921156}
+  attackCollider: {fileID: 0}
 --- !u!114 &3497676198621287212
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -368,9 +386,7 @@ MonoBehaviour:
   animator_: {fileID: 3497676198621287215}
   inPursuit: 0
   playerObject: {fileID: 0}
-  atkCd: 2
-  atkTime: 1
-  colliderObject: {fileID: 2173578112395921156}
+  colliderObject: {fileID: 0}
   agent: {fileID: 0}
 --- !u!58 &3497676198621287213
 CircleCollider2D:
@@ -407,7 +423,7 @@ MonoBehaviour:
   timeSince: 0
   player: {fileID: 0}
   animator_: {fileID: 3497676198621287215}
-  enemyLvl: 30
+  enemyLvl: 1
   hitIndicator: 0
   source: {fileID: 7005549183149520373}
   clip: {fileID: 8300000, guid: d64e91cef03af304fa237225b23c5707, type: 3}
@@ -547,7 +563,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e74646ddaf23bc94995fe9bd7b1f0b37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  sortingOrderBase: 5000
+  sortingOrderBase: 999999
   offset: 0
 --- !u!1 &3497676199661547604
 GameObject:
@@ -696,6 +712,54 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &4793519313251756784
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 4928399715453717113}
+  - component: {fileID: 2955999190020634942}
+  m_Layer: 0
+  m_Name: PivotPoint
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &4928399715453717113
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793519313251756784}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3497676198621287214}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!70 &2955999190020634942
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4793519313251756784}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: -0.0029612805, y: -0.1844626}
+  m_Size: {x: 0.2523088, y: 0.066860765}
+  m_Direction: 1
 --- !u!1 &5914114469290827580
 GameObject:
   m_ObjectHideFlags: 0

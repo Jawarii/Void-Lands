@@ -27,11 +27,11 @@ public class MultishotSkill : SkillsScript
 
         float angle = Mathf.Atan2(directionToMouse.y, directionToMouse.x) * Mathf.Rad2Deg;
 
-        Instantiate(_arrow, playerAttack.transform.position, Quaternion.Euler(new Vector3(0f, 0f, angle + 90f)));
-        Instantiate(_arrow, playerAttack.transform.position, Quaternion.Euler(new Vector3(0f, 0f, angle + 80f)));
-        Instantiate(_arrow, playerAttack.transform.position, Quaternion.Euler(new Vector3(0f, 0f, angle + 100f)));
-        Instantiate(_arrow, playerAttack.transform.position, Quaternion.Euler(new Vector3(0f, 0f, angle + 70f)));
-        Instantiate(_arrow, playerAttack.transform.position, Quaternion.Euler(new Vector3(0f, 0f, angle + 110f)));
+        for (int i = 0; i < 5; i++)
+        {
+            Quaternion rotation = Quaternion.Euler(0f, 0f, angle + 70f + i * 10f);
+            Instantiate(_arrow, playerAttack.transform.position, rotation);
+        }
 
         playerAttack.PlayArrowClip(0.38f);
         Destroy(gameObject);
