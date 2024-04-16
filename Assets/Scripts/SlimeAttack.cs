@@ -9,12 +9,12 @@ public class SlimeAttack : MonoBehaviour
     public GameObject attackColliderGo; // The GameObject holding the collider component
     public Collider2D attackCollider; // The actual collider component for the attack
     public float attackDuration = 1.0f;
-    private SlimeMovement slimeMovement;
+    private EnemyMovementController slimeMovement;
 
     void Start()
     {
         attackCollider = attackColliderGo.GetComponent<Collider2D>();
-        slimeMovement = GetComponent<SlimeMovement>();
+        slimeMovement = GetComponent<EnemyMovementController>();
         currentAttackCooldown = 0f; // Allows immediate attack if in range
     }
 

@@ -61,6 +61,12 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 SetWeaponInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
             }
+            else if (inventoryController.inventory[slotId].itemType == "Armor" || inventoryController.inventory[slotId].itemType == "Helmet" ||
+                inventoryController.inventory[slotId].itemType == "Boots" || inventoryController.inventory[slotId].itemType == "Gloves" ||
+                inventoryController.inventory[slotId].itemType == "Belt")
+            {
+                SetGearInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
+            }
             SetTooltipLocation();
         }
     }
@@ -100,9 +106,6 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
         //Main Stats
         itemStatsObj.GetComponent<TMP_Text>().text = "Attack " + weaponInfo.weaponMainStats.minAttack + "~" + weaponInfo.weaponMainStats.maxAttack;
-        //itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Crit Chance " + weaponInfo.weaponMainStats.critChance + "%";
-        //itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Crit Damage " + weaponInfo.weaponMainStats.critDamage + "%";
-        //itemStatsObj.GetComponent<TMP_Text>().text += "\n" + "Attack Speed " + weaponInfo.weaponMainStats.atkSpeed;
 
         itemBonusStatsObj.GetComponent<TMP_Text>().text = "";
 
@@ -118,7 +121,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
             }
-            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Crit Chance +" + weaponInfo.weaponBonusStats.critChance;
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Crit Chance +" + weaponInfo.weaponBonusStats.critChance.ToString("0.0") + "%";
             bonusStatAmount++;
         }
         if (weaponInfo.weaponBonusStats.critDamage != 0)
@@ -127,7 +130,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
             }
-            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Crit Damage +" + weaponInfo.weaponBonusStats.critDamage;
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Crit Damage +" + weaponInfo.weaponBonusStats.critDamage.ToString("0.0") + "%";
             bonusStatAmount++;
         }
         if (weaponInfo.weaponBonusStats.atkSpeed != 0)
@@ -136,7 +139,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
             }
-            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Attack Speed +" + weaponInfo.weaponBonusStats.atkSpeed;
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Attack Speed +" + weaponInfo.weaponBonusStats.atkSpeed.ToString("0.0") + "%";
             bonusStatAmount++;
         }
         if (weaponInfo.weaponBonusStats.staggerDmg != 0)
@@ -145,7 +148,108 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
             }
-            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Stagger Damage +" + weaponInfo.weaponBonusStats.staggerDmg;
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Stagger Damage +" + weaponInfo.weaponBonusStats.staggerDmg.ToString("0.0") + "%";
+            bonusStatAmount++;
+        }
+    }
+
+    public void SetGearInfo(InventoryController inventoryController, GameObject itemNameObj, GameObject itemStatsObj, GameObject itemBonusStatsObj, int slotId)
+    {
+        int bonusStatAmount = 0;
+        ItemInfoSO gearInfo = inventoryController.inventory[slotId];
+
+        //Main Stats
+        itemStatsObj.GetComponent<TMP_Text>().text = "Health " + gearInfo.gearMainStats.hp;
+        itemStatsObj.GetComponent<TMP_Text>().text += "\nArmor " + gearInfo.gearMainStats.armor;
+
+
+        itemBonusStatsObj.GetComponent<TMP_Text>().text = "";
+
+        //Bonus Stats
+        if (gearInfo.gearBonusStats.attack != 0)
+        {
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Attack +" + gearInfo.gearBonusStats.attack;
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.critChance != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Crit Chance +" + gearInfo.gearBonusStats.critChance.ToString("0.0") + "%";
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.critDamage != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Crit Damage +" + gearInfo.gearBonusStats.critDamage.ToString("0.0") + "%";
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.atkSpeed != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Attack Speed +" + gearInfo.gearBonusStats.atkSpeed.ToString("0.0") + "%";
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.staggerDmg != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Stagger Damage +" + gearInfo.gearBonusStats.staggerDmg.ToString("0.0") + "%";
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.hp != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Health +" + gearInfo.gearBonusStats.hp;
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.armor != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Armor +" + gearInfo.gearBonusStats.armor;
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.cdRed != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Cooldown Reduction +" + gearInfo.gearBonusStats.cdRed.ToString("0.0") + "%";
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.moveSpeed != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Movement Speed +" + gearInfo.gearBonusStats.moveSpeed.ToString("0.0") + "%";
+            bonusStatAmount++;
+        }
+        if (gearInfo.gearBonusStats.recovery != 0)
+        {
+            if (bonusStatAmount > 0)
+            {
+                itemBonusStatsObj.GetComponent<TMP_Text>().text += "\n";
+            }
+            itemBonusStatsObj.GetComponent<TMP_Text>().text += "Recovery +" + gearInfo.gearBonusStats.recovery;
             bonusStatAmount++;
         }
     }

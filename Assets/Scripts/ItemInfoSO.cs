@@ -12,6 +12,8 @@ public class ItemInfoSO : ScriptableObject
     public string itemName;
     public string itemDescription;
     public string itemType;
+    public int itemLvl;
+    public string itemQuality;
 
     //Special Visual Info
     public int currentStackSize = 1;
@@ -33,11 +35,38 @@ public class ItemInfoSO : ScriptableObject
     public struct WeaponBonusStats
     {
         public int attack;
-        public int critChance;
-        public int critDamage;
-        public int atkSpeed;
-        public int staggerDmg;
+        public float critChance;
+        public float critDamage;
+        public float atkSpeed;
+        public float staggerDmg;
     }
 
     public WeaponBonusStats weaponBonusStats;
+
+
+    [Serializable]
+    public struct GearMainStats
+    {
+        public int hp;
+        public int armor;
+    }
+
+    public GearMainStats gearMainStats;
+
+    [Serializable]
+    public struct GearBonusStats
+    {
+        public int attack;
+        public float critChance;
+        public float critDamage;
+        public float atkSpeed;
+        public float staggerDmg;
+        public int hp;
+        public int armor;
+        public float cdRed;
+        public float moveSpeed;
+        public int recovery;
+    }
+
+    public GearBonusStats gearBonusStats;
 }

@@ -59,15 +59,15 @@ public class StatsController : MonoBehaviour
         defenseValue.text = "";
         //Setting Offense Stats
         offenseValue.text += ((int) minAttack).ToString() + "~" + ((int) maxAttack).ToString() + "\n";
-        offenseValue.text += critChance.ToString() + "%\n";
-        offenseValue.text += critDmg.ToString() + "%\n";
-        offenseValue.text += atkSpd.ToString("0.0") + "\n";
-        offenseValue.text += staggerDmg.ToString() + "%";
+        offenseValue.text += critChance.ToString("0.0") + "%\n";
+        offenseValue.text += critDmg.ToString("0.0") + "%\n";
+        offenseValue.text += atkSpd.ToString("0.00") + "\n";
+        offenseValue.text += staggerDmg.ToString("0.0") + "%";
         //Setting Defense & Utility Stats
         defenseValue.text += armor.ToString() + "\n";
         defenseValue.text += health.ToString() + "\n";
         defenseValue.text += recovery.ToString() + "\n";
-        defenseValue.text += speed.ToString("0.0") + "\n";
-        defenseValue.text += cdRed.ToString() + "%";
+        defenseValue.text += speed.ToString("0.00") + "\n";
+        defenseValue.text += cdRed.ToString("0.0") + "%";
     }
 }

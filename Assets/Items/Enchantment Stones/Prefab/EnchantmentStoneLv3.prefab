@@ -259,9 +259,9 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 676779008004328742}
+      - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: ClickLootBehaviour, Assembly-CSharp
-        m_MethodName: LootItem
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -513,6 +513,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   inventory: {fileID: 0}
+  myButton: {fileID: 0}
 --- !u!114 &3600413816630274629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -527,7 +528,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stackSize: 999
   itemId: 3
-  itemName: Lvl 3 Enchantment Stone
+  itemName: Legendary Stone
   itemDescription: 
   itemType: 
+  itemLvl: 0
+  itemQuality: Legendary
   textColor: {r: 1, g: 0.38724637, b: 0, a: 1}

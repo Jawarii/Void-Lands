@@ -96,9 +96,6 @@ public class InventoryController : MonoBehaviour
                 item.weaponMainStats.attack = weaponInfo.weaponMainStats.attack;
                 item.weaponMainStats.minAttack = weaponInfo.weaponMainStats.minAttack;
                 item.weaponMainStats.maxAttack = weaponInfo.weaponMainStats.maxAttack;
-                //item.weaponMainStats.critChance = weaponInfo.weaponMainStats.critChance;
-                //item.weaponMainStats.critDamage = weaponInfo.weaponMainStats.critDamage;
-                //item.weaponMainStats.atkSpeed = weaponInfo.weaponMainStats.atkSpeed;
 
                 //BonusStats
                 item.weaponBonusStats.attack = weaponInfo.weaponBonusStats.attack;
@@ -107,6 +104,27 @@ public class InventoryController : MonoBehaviour
                 item.weaponBonusStats.critDamage = weaponInfo.weaponBonusStats.critDamage;
                 item.weaponBonusStats.staggerDmg = weaponInfo.weaponBonusStats.staggerDmg;
             }
+            if (item.itemType == "Armor" || item.itemType == "Helmet" || item.itemType == "Gloves" || item.itemType == "Boots" || item.itemType == "Belt")
+            {
+                GearInfo gearInfo = itemInfo as GearInfo;
+
+                //MainStats
+                item.gearMainStats.hp = gearInfo.gearMainStats.hp;
+                item.gearMainStats.armor = gearInfo.gearMainStats.armor;
+
+                //BonusStats
+                item.gearBonusStats.attack = gearInfo.gearBonusStats.attack;
+                item.gearBonusStats.atkSpeed = gearInfo.gearBonusStats.atkSpeed;
+                item.gearBonusStats.critChance = gearInfo.gearBonusStats.critChance;
+                item.gearBonusStats.critDamage = gearInfo.gearBonusStats.critDamage;
+                item.gearBonusStats.staggerDmg = gearInfo.gearBonusStats.staggerDmg;
+                item.gearBonusStats.hp = gearInfo.gearBonusStats.hp;
+                item.gearBonusStats.armor = gearInfo.gearBonusStats.armor;
+                item.gearBonusStats.cdRed = gearInfo.gearBonusStats.cdRed;
+                item.gearBonusStats.moveSpeed = gearInfo.gearBonusStats.moveSpeed;
+                item.gearBonusStats.recovery = gearInfo.gearBonusStats.recovery;
+            }
+
         }
     }
 }

@@ -11,6 +11,13 @@ TagManager:
   - BowObject
   - DraggedCanvas
   - FloatCanvas
+  - Boots
+  - Gloves
+  - Armor
+  - Helmet
+  - Ring
+  - Necklace
+  - Belt
   layers:
   - Default
   - TransparentFX

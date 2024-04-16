@@ -9,8 +9,10 @@ public class PlayerStats : MonoBehaviour
 {
     // Combat Stats
     [Header("Combat Stats")]
+    public float baseHp = 0;
     public float maxHp = 0;
     public float currentHp = 0;
+    public float baseAttack = 0;
     public float attack = 0;
     public float atkSpd = 1.0f;
     public float defense = 0;
@@ -72,12 +74,12 @@ public class PlayerStats : MonoBehaviour
 
         maxExp = lvl * 6;
 
-        maxHp = 100f + (lvl - 1) * 500f;
+        maxHp = 100f + (lvl - 1) * 10f;
         currentHp = maxHp;
         prevHp = currentHp;
 
-        attack = 10f + (lvl - 1) * 100f;
-        defense = (lvl - 1) * 50f;
+        attack = 10f + (lvl - 1) * 2f;
+        defense = (lvl - 1) * 1f;
     }
 
     void Update()
