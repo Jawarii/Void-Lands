@@ -12,6 +12,7 @@ public class GearInfo : ItemInfo
     {
         public int hp;
         public int armor;
+        public int attack;
     }
 
     public GearMainStats gearMainStats;
@@ -56,7 +57,7 @@ public class GearInfo : ItemInfo
             () => gearBonusStats.recovery = (int)((1 + itemLvl / 5f) * RandomRange(0.7f, 1.0f))
         };
         }
-        else if (itemType == "Gloves")
+        else if (itemType == "Gloves" || itemType == "Necklace" || itemType == "Ring")
         {
             bonusStatActions = new List<Action>()
         {
@@ -111,23 +112,20 @@ public class GearInfo : ItemInfo
     }
     void SetItemMainStats()
     {
-        string qualityNormalized = itemQuality.ToUpper();
-
-        switch (qualityNormalized)
+        switch (itemType)
         {
-            case "MAGIC":
-                gearMainStats.hp = itemLvl * 10;
-                gearMainStats.armor = itemLvl;
+            case "Necklace":
+                gearMainStats.attack = itemLvl * 2;
+                gearMainStats.hp = 0;
+                gearMainStats.armor = 0;
                 break;
-            case "RARE":
-                gearMainStats.hp = itemLvl * 10;
-                gearMainStats.armor = itemLvl;
-                break;
-            case "LEGENDARY":
-                gearMainStats.hp = itemLvl * 10;
-                gearMainStats.armor = itemLvl;
+            case "Ring":
+                gearMainStats.attack = itemLvl * 2;
+                gearMainStats.hp = 0;
+                gearMainStats.armor = 0;
                 break;
             default:
+                gearMainStats.attack = 0;
                 gearMainStats.hp = itemLvl * 10;
                 gearMainStats.armor = itemLvl;
                 break;

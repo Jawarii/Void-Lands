@@ -38,8 +38,7 @@ public class WeaponInfo : ItemInfo
 
     public void SetWeaponMainStats()
     {
-        string qualityNormalized = itemQuality.ToUpper();
-        weaponMainStats.attack = itemLvl * 6;  // Simplified as all cases do the same
+        weaponMainStats.attack = itemLvl * 6;
     }
 
     public void SetWeaponBonusStats()

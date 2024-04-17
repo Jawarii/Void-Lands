@@ -15,5 +15,6 @@ MonoBehaviour:
   skillName: RapidShot
   skillDescription: Shoots 3 arrows in a straight line
   skillLevel: 1
-  skillIcon: {fileID: 21300000, guid: 1189cf36928968e45b02625c860c4171, type: 3}
+  skillIcon: {fileID: 21300000, guid: 7c9ab204df2daae40b3fad153ed3b262, type: 3}
   skillScript: {fileID: 0}
+  _animator: {fileID: 0}

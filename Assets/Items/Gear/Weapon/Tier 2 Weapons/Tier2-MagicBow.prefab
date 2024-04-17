@@ -372,7 +372,7 @@ Canvas:
   m_SortingBucketNormalizedSize: 0
   m_AdditionalShaderChannelsFlag: 25
   m_SortingLayerID: 0
-  m_SortingOrder: 1
+  m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &6311826447493224303
 MonoBehaviour:
@@ -515,6 +515,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   inventory: {fileID: 0}
+  myButton: {fileID: 0}
 --- !u!114 &-3728177023601847190
 MonoBehaviour:
   m_ObjectHideFlags: 0

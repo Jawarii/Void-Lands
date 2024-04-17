@@ -15,6 +15,7 @@ public class EnemyMovementController : MonoBehaviour
     private Vector3 currentTargetDirection;
     private bool isPathBlocked = false;
     private int lastDirection = 0; // 0 = not set, 1 = right, -1 = left
+    public float stoppingDistance;
 
     void Start()
     {
@@ -47,11 +48,11 @@ public class EnemyMovementController : MonoBehaviour
         Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, playerObject.transform.position);
 
-        if (distanceToPlayer > 0.6f)
+        if (distanceToPlayer > stoppingDistance)
         {
             agent.isStopped = false;
             animator_.SetBool("canAttack", false);
-            animator_.SetFloat("Speed", speed_);
+            animator_.SetFloat("Speed", agent.velocity.magnitude);
 
             if (!IsPathClear(directionToPlayer, 1f))
             {
@@ -67,10 +68,10 @@ public class EnemyMovementController : MonoBehaviour
                 agent.SetDestination(playerObject.transform.position);
             }
         }
-        else if (distanceToPlayer <= 0.6f) // Close enough to stop and possibly attack
+        else if (distanceToPlayer <= stoppingDistance) // Close enough to stop and possibly attack
         {
             agent.isStopped = true;
-            animator_.SetFloat("Speed", 0);
+            animator_.SetFloat("Speed", agent.velocity.magnitude);
         }
     }
 

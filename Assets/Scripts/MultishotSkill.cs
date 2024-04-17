@@ -9,8 +9,8 @@ public class MultishotSkill : SkillsScript
     public GameObject _arrow;
     public override void ActivateSkill()
     {
-        playerAttack.animTime = bowAnim.length + bowReleaseAnim.length;
-        playerAttack.releaseTime = bowAnim.length;
+        playerAttack.animTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
+        playerAttack.releaseTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
         playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
         playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
@@ -19,7 +19,7 @@ public class MultishotSkill : SkillsScript
     }
     IEnumerator SpawnArrow()
     {
-        yield return new WaitForSeconds(bowAnim.length);
+        yield return new WaitForSeconds(bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd);
 
         Vector3 mouseScreenPosition = Input.mousePosition;
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.transform.position.z * -1));

@@ -35,6 +35,9 @@ public class PlayerAttackArcher : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        runSpeed = player.GetComponent<PlayerMovement>().speed;
+        adjustedSpeed = 0.0f * runSpeed;
+
         if (animTime > 0)
             animTime -= Time.deltaTime;
         if (releaseTime > 0)
@@ -44,7 +47,7 @@ public class PlayerAttackArcher : MonoBehaviour
        
         if (animTime <= 0)
         {
-            player.GetComponent<PlayerMovement>().speed = runSpeed;
+            player.GetComponent<PlayerMovement>().speed = player.GetComponent<PlayerStats>().speed;
             animator.SetBool("isAttacking", false);
             animator.SetBool("isReleasing", false);
             player.GetComponent<PlayerMovement>().canDash = true;

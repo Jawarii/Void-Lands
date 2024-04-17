@@ -15,6 +15,6 @@ MonoBehaviour:
   skillName: Multishot
   skillDescription: Shoots 5 Arrows in a cone in front the player.
   skillLevel: 9
-  skillIcon: {fileID: 21300000, guid: 1e4cc8ca904a05e4fbd417e679b4b0ec, type: 3}
+  skillIcon: {fileID: 21300000, guid: 135137ecfb4b57a45a5209d7452f1f79, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}

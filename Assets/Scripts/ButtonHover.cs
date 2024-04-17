@@ -63,7 +63,8 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             }
             else if (inventoryController.inventory[slotId].itemType == "Armor" || inventoryController.inventory[slotId].itemType == "Helmet" ||
                 inventoryController.inventory[slotId].itemType == "Boots" || inventoryController.inventory[slotId].itemType == "Gloves" ||
-                inventoryController.inventory[slotId].itemType == "Belt")
+                inventoryController.inventory[slotId].itemType == "Belt" || inventoryController.inventory[slotId].itemType == "Necklace"
+                || inventoryController.inventory[slotId].itemType == "Ring")
             {
                 SetGearInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
             }
@@ -159,10 +160,15 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         ItemInfoSO gearInfo = inventoryController.inventory[slotId];
 
         //Main Stats
-        itemStatsObj.GetComponent<TMP_Text>().text = "Health " + gearInfo.gearMainStats.hp;
-        itemStatsObj.GetComponent<TMP_Text>().text += "\nArmor " + gearInfo.gearMainStats.armor;
-
-
+        if (gearInfo.itemType == "Necklace" || gearInfo.itemType == "Ring")
+        {
+            itemStatsObj.GetComponent<TMP_Text>().text = "Attack " + gearInfo.gearMainStats.attack;
+        }
+        else
+        {
+            itemStatsObj.GetComponent<TMP_Text>().text = "Health " + gearInfo.gearMainStats.hp;
+            itemStatsObj.GetComponent<TMP_Text>().text += "\nArmor " + gearInfo.gearMainStats.armor;
+        }
         itemBonusStatsObj.GetComponent<TMP_Text>().text = "";
 
         //Bonus Stats

@@ -28,7 +28,7 @@ public class SlimeAttack : MonoBehaviour
         if (!slimeMovement.canMove) return; // Prevent checking for attack conditions if already attacking
 
         float distanceToPlayer = Vector3.Distance(transform.position, slimeMovement.playerObject.transform.position);
-        if (distanceToPlayer <= 0.6f && currentAttackCooldown <= 0)
+        if (distanceToPlayer <= slimeMovement.stoppingDistance && currentAttackCooldown <= 0)
         {
             StartCoroutine(PerformAttack());
         }

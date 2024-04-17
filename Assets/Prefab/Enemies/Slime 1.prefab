@@ -390,6 +390,7 @@ MonoBehaviour:
   canMove: 1
   colliderObject: {fileID: 0}
   agent: {fileID: 0}
+  stoppingDistance: 0.35
 --- !u!58 &3497676198621287213
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -426,7 +427,7 @@ MonoBehaviour:
   timeSince: 0
   player: {fileID: 0}
   animator_: {fileID: 3497676198621287215}
-  enemyLvl: 30
+  enemyLvl: 5
   hitIndicator: 0
   source: {fileID: 7005549183149520373}
   clip: {fileID: 8300000, guid: d64e91cef03af304fa237225b23c5707, type: 3}
@@ -445,6 +446,7 @@ MonoBehaviour:
   - {fileID: 4521754464397372224, guid: f52685322dee1d54c95773fd0d1fe967, type: 3}
   damagePopup: {fileID: 1755598523613924470, guid: a29b54c0139fe7449aa277e650e1fcec, type: 3}
   isBoss: 0
+  _camera: {fileID: 0}
 --- !u!82 &7005549183149520373
 AudioSource:
   m_ObjectHideFlags: 0

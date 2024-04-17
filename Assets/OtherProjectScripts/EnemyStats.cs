@@ -33,9 +33,11 @@ public class EnemyStats : MonoBehaviour
 
     public bool isBoss = false;
     private float goldAmount = 0;
+    public GameObject _camera;
 
     void Start()
     {
+        _camera = GameObject.Find("CM vcam1");
         InitializeEnemy();
     }
 
@@ -50,12 +52,12 @@ public class EnemyStats : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponentInChildren<PlayerStats>();
 
-        maxHp = 25f + (enemyLvl - 1) * 2.5f;
+        maxHp = 100f + (enemyLvl - 1) * 10f * 10f;
         hp = maxHp;
         prevHp = hp;
 
-        attack = 10f + (enemyLvl - 1) * 2f;
-        defense = (enemyLvl - 1) * 1f;
+        attack = 10f + (enemyLvl - 1) * 2f * 10f;
+        defense = (enemyLvl - 1) * 1f * 10f;
 
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
@@ -163,6 +165,8 @@ public class EnemyStats : MonoBehaviour
 
     public void TakeDamage(int damage, bool isCrit)
     {
+        if (damage < 1)
+            damage = 1;
         source.Stop();
         hp -= damage;
         damagePopup.isPlayer = false;
@@ -173,6 +177,7 @@ public class EnemyStats : MonoBehaviour
 
         EnemyMovementController enemyMovement = transform.GetComponent<EnemyMovementController>();
         enemyMovement.inPursuit = true;
+        _camera.GetComponent<CameraShake>().ShakeCamera();
     }
 
     public void ApplyKnockback(Vector2 direction, float force)

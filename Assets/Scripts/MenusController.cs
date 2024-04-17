@@ -39,18 +39,17 @@ public class MenusController : MonoBehaviour
 
         if (Input.GetKeyDown(KeyCode.Escape))
         {
-            if (activeMenus != null && activeMenus.Count > 0)
-            {
-                canvas.gameObject.GetComponent<Canvas>().enabled = false;
-                activeMenus.RemoveAt(activeMenus.Count - 1);
-            }
+            canvas.gameObject.GetComponent<Canvas>().enabled = false;
         }
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.B))
         {
             if (canvas.gameObject.GetComponent<Canvas>().enabled == true)
             {
                 canvas.gameObject.GetComponent<Canvas>().enabled = false;
-                activeMenus.RemoveAt(activeMenus.Count - 1);
+                if (activeMenus.Count > 0)
+                {
+                    activeMenus.RemoveAt(activeMenus.Count - 1);
+                }
             }
             else
             {

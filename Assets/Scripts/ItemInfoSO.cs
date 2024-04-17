@@ -47,6 +47,7 @@ public class ItemInfoSO : ScriptableObject
     [Serializable]
     public struct GearMainStats
     {
+        public int attack;
         public int hp;
         public int armor;
     }

@@ -25,6 +25,7 @@ public class PlayerMovement : MonoBehaviour
 
     private void Start()
     {
+        speed = GetComponent<PlayerStats>().speed;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }

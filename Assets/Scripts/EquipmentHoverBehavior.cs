@@ -58,7 +58,7 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
             }
             else if (itemInfoSO.itemType == "Armor" || itemInfoSO.itemType == "Helmet" ||
                      itemInfoSO.itemType == "Boots" || itemInfoSO.itemType == "Gloves" ||
-                     itemInfoSO.itemType == "Belt")
+                     itemInfoSO.itemType == "Belt" || itemInfoSO.itemType == "Necklace" || itemInfoSO.itemType == "Ring")
             {
                 SetGearInfo(itemInfoSO, itemNameObj, itemStatsObj, itemBonusStatsObj);
             }
@@ -153,8 +153,15 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
         ItemInfoSO gearInfo = itemInfoSo;
 
         //Main Stats
-        itemStatsObj.GetComponent<TMP_Text>().text = "Health " + gearInfo.gearMainStats.hp;
-        itemStatsObj.GetComponent<TMP_Text>().text += "\nArmor " + gearInfo.gearMainStats.armor;
+        if (gearInfo.itemType == "Necklace" || gearInfo.itemType == "Ring")
+        {
+            itemStatsObj.GetComponent<TMP_Text>().text = "Attack " + gearInfo.gearMainStats.attack;
+        }
+        else
+        {
+            itemStatsObj.GetComponent<TMP_Text>().text = "Health " + gearInfo.gearMainStats.hp;
+            itemStatsObj.GetComponent<TMP_Text>().text += "\nArmor " + gearInfo.gearMainStats.armor;
+        }
 
 
         itemBonusStatsObj.GetComponent<TMP_Text>().text = "";

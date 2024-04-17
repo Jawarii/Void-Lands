@@ -71,7 +71,6 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-
         maxExp = lvl * 6;
 
         maxHp = 100f + (lvl - 1) * 10f;
@@ -125,6 +124,8 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(int damage, bool isCrit)
     {
+        if (damage < 1)
+            damage = 1;
         currentHp -= damage;
         damagePopup.isPlayer = true;
         damagePopup.Create(transform.position, damage, isCrit);

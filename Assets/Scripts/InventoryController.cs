@@ -104,14 +104,16 @@ public class InventoryController : MonoBehaviour
                 item.weaponBonusStats.critDamage = weaponInfo.weaponBonusStats.critDamage;
                 item.weaponBonusStats.staggerDmg = weaponInfo.weaponBonusStats.staggerDmg;
             }
-            if (item.itemType == "Armor" || item.itemType == "Helmet" || item.itemType == "Gloves" || item.itemType == "Boots" || item.itemType == "Belt")
+            if (item.itemType == "Armor" || item.itemType == "Helmet" ||
+                item.itemType == "Gloves" || item.itemType == "Boots" ||
+                item.itemType == "Belt" || item.itemType == "Necklace" || item.itemType == "Ring")
             {
                 GearInfo gearInfo = itemInfo as GearInfo;
 
                 //MainStats
                 item.gearMainStats.hp = gearInfo.gearMainStats.hp;
                 item.gearMainStats.armor = gearInfo.gearMainStats.armor;
-
+                item.gearMainStats.attack = gearInfo.gearMainStats.attack;
                 //BonusStats
                 item.gearBonusStats.attack = gearInfo.gearBonusStats.attack;
                 item.gearBonusStats.atkSpeed = gearInfo.gearBonusStats.atkSpeed;
@@ -124,7 +126,6 @@ public class InventoryController : MonoBehaviour
                 item.gearBonusStats.moveSpeed = gearInfo.gearBonusStats.moveSpeed;
                 item.gearBonusStats.recovery = gearInfo.gearBonusStats.recovery;
             }
-
         }
     }
 }

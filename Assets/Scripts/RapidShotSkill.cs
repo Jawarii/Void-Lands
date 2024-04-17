@@ -10,8 +10,8 @@ public class RapidShotSkill : SkillsScript
     public GameObject _arrow;
     public override void ActivateSkill()
     {
-        playerAttack.animTime = bowAnim.length * 3f + bowReleaseAnim.length;
-        playerAttack.releaseTime = bowAnim.length * 3f;
+        playerAttack.animTime = bowAnim.length * 3f / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
+        playerAttack.releaseTime = bowAnim.length * 3f / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
         playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
         playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
@@ -25,7 +25,7 @@ public class RapidShotSkill : SkillsScript
     }
     IEnumerator SpawnArrow(float arrowNumber)
     {
-        yield return new WaitForSeconds(bowAnim.length * arrowNumber);
+        yield return new WaitForSeconds(bowAnim.length * arrowNumber / playerAttack.player.GetComponent<PlayerStats>().atkSpd);
 
         Vector3 mouseScreenPosition = Input.mousePosition;
         Vector3 mouseWorldPosition = Camera.main.ScreenToWorldPoint(new Vector3(mouseScreenPosition.x, mouseScreenPosition.y, Camera.main.transform.position.z * -1));
