@@ -18,6 +18,8 @@ TagManager:
   - Ring
   - Necklace
   - Belt
+  - Obstacle
+  - Interactable
   layers:
   - Default
   - TransparentFX

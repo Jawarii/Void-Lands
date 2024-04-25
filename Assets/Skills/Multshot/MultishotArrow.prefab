@@ -140,7 +140,7 @@ MonoBehaviour:
   speed: 20
   player: {fileID: 0}
   playerStats: {fileID: 0}
-  basicAtkDmgMulti: 1.5
+  basicAtkDmgMulti: 1
   knockbackForce: 0
   lifeTime: 0.2
 --- !u!1001 &4823897340555597442

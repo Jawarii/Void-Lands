@@ -125,6 +125,7 @@ MonoBehaviour:
   gearMainStats:
     hp: 16
     armor: 5
+    attack: 0
   gearBonusStats:
     attack: 0
     critChance: 0
