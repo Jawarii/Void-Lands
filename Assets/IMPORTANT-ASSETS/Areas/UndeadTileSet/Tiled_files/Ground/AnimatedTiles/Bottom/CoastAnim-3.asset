@@ -1,0 +1,27 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 13b75c95f34a00d4e8c04f76b73312e6, type: 3}
+  m_Name: CoastAnim-3
+  m_EditorClassIdentifier: 
+  m_AnimatedSprites:
+  - {fileID: 21300000, guid: d7e5076681d02544ba2df0176ae1566b, type: 2}
+  - {fileID: 21300000, guid: 24827ebce93ea4a4c9cf52dac6c5163a, type: 2}
+  - {fileID: 21300000, guid: e6ee61a830f38b4419cb207f020582a7, type: 2}
+  - {fileID: 21300000, guid: 00658662526a3314ea93dbbd81f6975d, type: 2}
+  - {fileID: 21300000, guid: 52eca12e77d5404429011c56ad0309ae, type: 2}
+  - {fileID: 21300000, guid: 35cf86953179fdd4b9e6cf5e22536dd0, type: 2}
+  m_MinSpeed: 5
+  m_MaxSpeed: 10
+  m_AnimationStartTime: 0
+  m_AnimationStartFrame: 0
+  m_TileColliderType: 0
+  m_TileAnimationFlags: 0
