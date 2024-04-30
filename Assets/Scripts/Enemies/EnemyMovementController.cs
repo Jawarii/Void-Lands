@@ -29,20 +29,47 @@ public class EnemyMovementController : MonoBehaviour
     void FixedUpdate()
     {
         FlipSpriteDirection();
+  
         if (inPursuit && canMove)
         {
             if (!isPathBlocked || IsPathClear(currentTargetDirection, 1f))
             {
                 FindPathToPlayer();
+                SetAnimatorBasedOnAngle(GetAngle());
             }
             else
             {
                 // Continue moving in the last set alternate direction
                 MoveTowardsAlternateDirection();
+                SetAnimatorBasedOnAngle(GetAngle());
             }
+        }       
+    }
+    public void SetAnimatorBasedOnAngle(float angle)
+    {
+        angle += 45f;
+        // Here we determine the correct animation state based on the angle
+        if (angle > 0.0f && angle <= 90f)
+        {
+            animator_.SetFloat("Rotation", 1f);
+            animator_.SetFloat("Rotation2", 0f);
+        }
+        else if (angle > 90f && angle <= 180f)
+        {
+            animator_.SetFloat("Rotation", 0f);
+            animator_.SetFloat("Rotation2", 1f);
+        }
+        else if (angle > -90f && angle <= 0f)
+        {
+            animator_.SetFloat("Rotation", 0f);
+            animator_.SetFloat("Rotation2", -1f);
+        }
+        else // This covers both -90 to -180 degrees and 180 to 270 degrees
+        {
+            animator_.SetFloat("Rotation", -1f);
+            animator_.SetFloat("Rotation2", 0f);
         }
     }
-
     private void FindPathToPlayer()
     {
         Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
@@ -162,5 +189,9 @@ public class EnemyMovementController : MonoBehaviour
     {
         Vector2 newPosition = transform.position + currentTargetDirection;
         agent.SetDestination(newPosition);
+    }
+    public float GetAngle()
+    {
+        return Vector2.SignedAngle(Vector2.right, (playerObject.transform.position - transform.position).normalized);
     }
 }

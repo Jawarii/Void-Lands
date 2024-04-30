@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 using FirstGearGames.SmoothCameraShaker;
+using System.Buffers.Text;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -18,7 +19,7 @@ public class EnemyStats : MonoBehaviour
     private PlayerStats stats;
     private float prevHp;
     public int enemyLvl = 1;
-
+    public int _exp = 10;
     private float deathDuration = 0;
     private bool isDead = false;
 
@@ -52,14 +53,18 @@ public class EnemyStats : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponentInChildren<PlayerStats>();
 
-        maxHp = 100f + (enemyLvl - 1) * 10f * 10f;
+        baseHp = 100; //Temporary
+
+        maxHp = (int)(baseHp * Mathf.Pow(1.1f, enemyLvl - 1));
         hp = maxHp;
         prevHp = hp;
 
-        attack = 10f + (enemyLvl - 1) * 2f * 10f;
-        defense = (enemyLvl - 1) * 1f * 10f;
+        attack = (int)(20f * Mathf.Pow(1.1f, enemyLvl - 1));
+        defense = (int)(10f * Mathf.Pow(1.1f, enemyLvl - 1));
 
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
+
+        _exp = enemyLvl * 10;
     }
 
     private void HandleHitIndicator()
@@ -96,13 +101,14 @@ public class EnemyStats : MonoBehaviour
             DropGear();
             DropUpgrades();
             player.GetComponent<ArenaResultBehaviour>().monstersKilled++;
+            stats.IncreaseExp(_exp);
             Destroy(gameObject);
         }
         else
         {
             if (!isDead)
             {
-                goldAmount = Random.Range(37, 77);
+                goldAmount = (int)Random.Range(5 * Mathf.Pow(1.2f, enemyLvl - 1) * 0.8f, 5 * Mathf.Pow(1.2f, enemyLvl - 1) * 1.2f);
                 animator_.SetBool("isDead", true);
                 isDead = true;
                 gameObject.GetComponent<EnemyMovementController>().agent.isStopped = true;
@@ -172,7 +178,7 @@ public class EnemyStats : MonoBehaviour
         if (damage < 1)
             damage = 1;
         source.Stop();
-        source.pitch = Random.Range(1.35f, 1.45f); 
+        source.pitch = Random.Range(1.35f, 1.45f);
         hp -= damage;
         damagePopup.isPlayer = false;
         damagePopup.Create(transform.position, damage, isCrit);

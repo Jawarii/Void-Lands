@@ -16,6 +16,7 @@ public class PlayerStats : MonoBehaviour
     public float baseAttack = 0;
     public float attack = 0;
     public float atkSpd = 1.0f;
+    public float baseDefense = 0;
     public float defense = 0;
     public float critRate = 5.0f;
     public float critDmg = 150.0f;
@@ -74,14 +75,17 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        maxExp = lvl * 6;
+        maxExp = lvl * 100;
 
-        maxHp = 100f + (lvl - 1) * 10f * 10f;
+        maxHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
         currentHp = maxHp;
         prevHp = currentHp;
+        baseHp = maxHp;
 
-        attack = 10f + (lvl - 1) * 2f * 10f;
-        defense = (lvl - 1) * 1f * 10f;
+        attack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        baseAttack= attack;
+        defense = (int)(10f * (int)Mathf.Pow(1.1f, lvl - 1));
+        baseDefense= defense;
 
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
@@ -130,14 +134,17 @@ public class PlayerStats : MonoBehaviour
     {
         lvl++;
         currentExp = currentExp - maxExp;
-        maxExp = lvl * 6f;
+        maxExp = lvl * 100f;
         IncreaseStats(lvl);
     }
     public void IncreaseStats(float lvl_)
-    {
-        maxHp += 10;
-        attack += 2;
-        defense += 1;
+    {        
+        maxHp += (int)(baseHp * 0.1f);
+        baseHp *= 1.1f;
+        attack += (int)(baseAttack * 0.1f);
+        baseAttack *= 1.1f;
+        defense += (int)(baseDefense * 0.1f);
+        baseDefense *= 1.1f;
     }
     public void TakeDamage(int damage, bool isCrit)
     {

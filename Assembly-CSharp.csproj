@@ -100,6 +100,7 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\BoomerangSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Script\EnemySelector.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableSkillBehaviour.cs" />
+    <Compile Include="Assets\NewSlimeAttack.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\SearchGrid.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAttackBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Threading\AsyncPathRequest.cs" />
@@ -168,6 +169,7 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\ArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\SkillButtonInformation.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\AStarGridManager.cs" />
+    <Compile Include="Assets\NewBatAttack.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakerInstance.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Transforms.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakers\ObjectShaker.cs" />
@@ -212,6 +214,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BlinkTest.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakeData.cs" />
+    <Compile Include="Assets\GoblinMeleeAttack.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Special\DynamicSortingOrder.cs" />
     <Compile Include="Assets\Scripts\Items\OpenChestBehaviour.cs" />
@@ -250,12 +253,15 @@
     <None Include="Assets\StoreAssets\craftpix-net-996288-free-bow-and-crossbow-pixel-art-icons\License.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Areas\CursedLandTileSet\License.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
+    <None Include="Assets\Bosses Sprites 2 - Fantasy Dreamland\Read Me.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Areas\CursedLandTileSet\readme.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\GlovesIcons\readme.txt" />
     <None Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Shader\SH Sprite Shadow.shader" />
+    <None Include="Assets\rpg-monster-pack v1.0 (wonderdot)\projectile_arrow.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\NotUsed\rpg_armor_sets\README.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\BootsIcons\readme.txt" />
+    <None Include="Assets\Bosses Sprites 1 - Fantasy Dreamland\Read Me.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Read Me.txt" />
     <None Include="Assets\StoreAssets\500_skillicons\README.txt" />
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Shaders\Electricity.shader" />
@@ -271,6 +277,7 @@
     <None Include="Assets\Stuff\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\ArmorIcons\readme.txt" />
+    <None Include="Assets\rpg-monster-pack v1.0 (wonderdot)\readme.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Stuff\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
