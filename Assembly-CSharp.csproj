@@ -91,6 +91,7 @@
     <Compile Include="Assets\Scripts\UI\LootPopupBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\Tile.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\Selection.cs" />
+    <Compile Include="Assets\Scripts\Enemies\NewSlimeAttack.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\AnimatedObstacle.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Visualisation\Performance.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableTransform.cs" />
@@ -100,10 +101,10 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\BoomerangSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Script\EnemySelector.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableSkillBehaviour.cs" />
-    <Compile Include="Assets\NewSlimeAttack.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\SearchGrid.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAttackBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Threading\AsyncPathRequest.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SpiderAttack.cs" />
     <Compile Include="Assets\Scripts\Items\GearInfo.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerAttack.cs" />
     <Compile Include="Assets\Scripts\Items\EnchantmentStoneInfo.cs" />
@@ -136,6 +137,7 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Threading\AsyncPathResult.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\Algorithm\HeuristicProvider.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableRigidbody.cs" />
+    <Compile Include="Assets\Scripts\Enemies\TrollAttack.cs" />
     <Compile Include="Assets\Scripts\Skills\PenetratingArrowSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\PerfMonitor.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\EnemyMovement.cs" />
@@ -150,6 +152,7 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAgroBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\StatsController.cs" />
+    <Compile Include="Assets\Scripts\Enemies\OrcAttack.cs" />
     <Compile Include="Assets\Scripts\Player\ClickLootBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Visualisation\GridView.cs" />
     <Compile Include="Assets\Scripts\Player\BowController.cs" />
@@ -162,6 +165,7 @@
     <Compile Include="Assets\Scripts\Skills\FireArrowSkill.cs" />
     <Compile Include="Assets\Scripts\Skills\AttackBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\PathNode.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SniperAttack.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\CameraShakerHandler.cs" />
     <Compile Include="Assets\Scripts\Items\GoldDropBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\GolemProjectileBehavior.cs" />
@@ -169,15 +173,18 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\ArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\SkillButtonInformation.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\AStarGridManager.cs" />
-    <Compile Include="Assets\NewBatAttack.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakerInstance.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Transforms.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakers\ObjectShaker.cs" />
+    <Compile Include="Assets\Scripts\Enemies\NewBatAttack.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\ExampleScripts\EX1_MonoDelegate.cs" />
+    <Compile Include="Assets\Scripts\Enemies\GoblinMeleeAttack.cs" />
     <Compile Include="Assets\Scripts\Skills\PenetratingArrowBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\EventArgs.cs" />
+    <Compile Include="Assets\Scripts\Enemies\RatAttack.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\UpgradeItem.cs" />
     <Compile Include="Assets\Scripts\Skills\General\SkillsSO.cs" />
+    <Compile Include="Assets\Scripts\Enemies\SniperProjectileBehaviour.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\Skills.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakers\CameraShaker.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\ExpItemBehaviour.cs" />
@@ -214,7 +221,6 @@
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BlinkTest.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakeData.cs" />
-    <Compile Include="Assets\GoblinMeleeAttack.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Special\DynamicSortingOrder.cs" />
     <Compile Include="Assets\Scripts\Items\OpenChestBehaviour.cs" />

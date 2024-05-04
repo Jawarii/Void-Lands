@@ -46,6 +46,10 @@ public class SplitArrowBehaviour : MonoBehaviour
                 enemyStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
             }
         }
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator DestroyArrow()

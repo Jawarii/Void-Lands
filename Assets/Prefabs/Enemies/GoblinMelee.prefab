@@ -228,7 +228,7 @@ PolygonCollider2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2173578112395921156}
-  m_Enabled: 1
+  m_Enabled: 0
   m_Density: 1
   m_Material: {fileID: 0}
   m_IncludeLayers:
@@ -305,8 +305,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -5.82, y: 1.965, z: -0.057261854}
-  m_LocalScale: {x: 1.2, y: 1.2, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 1.4025, y: 1.4025, z: 1.275}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 6595963853221128035}
   - {fileID: 3497676199661547605}
@@ -477,6 +477,34 @@ MonoBehaviour:
   - {fileID: 5835571819418052544, guid: d258c8669b210114780cc306e53e399f, type: 3}
   - {fileID: 5835571819418052544, guid: e2201f0a0c31e4348b24e3bc207bdf41, type: 3}
   - {fileID: 5835571819418052544, guid: 6f10afb6e3f2afb4b91aa092d38c82ca, type: 3}
+  - {fileID: 5835571819418052544, guid: ed06093cde6ab0142987df06917fe10b, type: 3}
+  - {fileID: 5835571819418052544, guid: 329e0b652e1d2e345aebdb5f888caae0, type: 3}
+  - {fileID: 5835571819418052544, guid: 8a8d25d3d8bce3e419b1362c39c3757e, type: 3}
+  - {fileID: 5835571819418052544, guid: ddd7c99bc473c6842893b650a86f0a73, type: 3}
+  - {fileID: 5835571819418052544, guid: e96d5c84e0176b349a5e9dab40addbb4, type: 3}
+  - {fileID: 5835571819418052544, guid: eca6a74e90dbf504f9662357707fcadd, type: 3}
+  - {fileID: 5835571819418052544, guid: c0d9c5890ab4ea54ba710a615140797e, type: 3}
+  - {fileID: 5835571819418052544, guid: ec23eca1eb436ff45a9c9204aae6b843, type: 3}
+  - {fileID: 5835571819418052544, guid: f144498361854ef4fa34d8dccdc74c61, type: 3}
+  - {fileID: 5835571819418052544, guid: fb4fbafd2cb0dfc419746f2f7f0c7da0, type: 3}
+  - {fileID: 5835571819418052544, guid: 909029a41be5d3647b0123fd3fe3ba8b, type: 3}
+  - {fileID: 5835571819418052544, guid: d6bb01865209b2b49b83240d974f362a, type: 3}
+  - {fileID: 5835571819418052544, guid: ecdcaf0fb8d220d45aba8309f139273d, type: 3}
+  - {fileID: 5835571819418052544, guid: 982f96395d9885a4cbf2de000ab8e378, type: 3}
+  - {fileID: 5835571819418052544, guid: 212b8b4c3f5616d4fa141c86b4d970ee, type: 3}
+  - {fileID: 5835571819418052544, guid: f2425eee26fe2414fa32cde1f9f1c109, type: 3}
+  - {fileID: 5835571819418052544, guid: cc4da25ab796fe646b7eb167a783b27a, type: 3}
+  - {fileID: 5835571819418052544, guid: 37d3d7020d7fe574f812c44cf096827f, type: 3}
+  - {fileID: 5835571819418052544, guid: 0c1b77197f560414ab0ce6fea881ce36, type: 3}
+  - {fileID: 5835571819418052544, guid: 8ae99980254a7104a9132092acc9c8f9, type: 3}
+  - {fileID: 5835571819418052544, guid: 3605f1f66d9615149aa6a68ac184a44e, type: 3}
+  - {fileID: 5835571819418052544, guid: d2c94fdcfb105314a91784131d75b26c, type: 3}
+  - {fileID: 5835571819418052544, guid: b59432e6ae8b7544e91b5bea22bce46b, type: 3}
+  - {fileID: 5835571819418052544, guid: 023cb641525f1054f8301c911319e6d1, type: 3}
+  - {fileID: 5835571819418052544, guid: 81712142db3e45b47a01d00b2e8eb2f5, type: 3}
+  - {fileID: 5835571819418052544, guid: 11a3e8e201a372a4080729215496fd16, type: 3}
+  - {fileID: 5835571819418052544, guid: 92acfbd2e74aac34581c9b229a11b3ad, type: 3}
+  - {fileID: 5835571819418052544, guid: a6aacb4a63042cb4b9301a6edc2a9573, type: 3}
   upgradeItems:
   - {fileID: 4521754464397372224, guid: b25df9aeb4f11e644821e74593faee98, type: 3}
   - {fileID: 4521754464397372224, guid: f01aab5f4f912ae47893cdfc142a2a4d, type: 3}
@@ -633,8 +661,6 @@ MonoBehaviour:
   attackCollider: {fileID: 0}
   attackDuration: 1
   isAttacking: 0
-  originalPos: {x: 0, y: 0, z: 0}
-  newPos: {x: 0, y: 0, z: 0}
 --- !u!1 &3497676199661547604
 GameObject:
   m_ObjectHideFlags: 0
@@ -702,7 +728,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 4
+  m_Radius: 2.5
 --- !u!114 &3497676199661547611
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -715,7 +741,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b23d00a68afc54ea36c08c4e5d885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  agroRadius: 1
 --- !u!1 &4793519313251756784
 GameObject:
   m_ObjectHideFlags: 0

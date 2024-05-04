@@ -36,6 +36,7 @@ public class EnemyStats : MonoBehaviour
 
     public bool isBoss = false;
     private float goldAmount = 0;
+    private float agroRadius = 1.0f;
 
     void Start()
     {
@@ -55,12 +56,12 @@ public class EnemyStats : MonoBehaviour
 
         baseHp = 100; //Temporary
 
-        maxHp = (int)(baseHp * Mathf.Pow(1.1f, enemyLvl - 1));
+        maxHp = (int)(baseHp * Mathf.Pow(1.15f, enemyLvl - 1));
         hp = maxHp;
         prevHp = hp;
 
-        attack = (int)(20f * Mathf.Pow(1.1f, enemyLvl - 1));
-        defense = (int)(10f * Mathf.Pow(1.1f, enemyLvl - 1));
+        attack = (int)(20f * Mathf.Pow(1.15f, enemyLvl - 1));
+        defense = (int)(10f * Mathf.Pow(1.15f, enemyLvl - 1));
 
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
 
@@ -132,7 +133,7 @@ public class EnemyStats : MonoBehaviour
 
     private void DropGear()
     {
-        if (Random.value > 0.99f) // 10% chance to drop gear
+        if (Random.value > 0.75f) // 15% chance to drop gear
         {
             DropItem(gearItems);
         }
@@ -140,7 +141,7 @@ public class EnemyStats : MonoBehaviour
 
     private void DropUpgrades()
     {
-        if (Random.value > 0.95f) // 30% chance to drop upgrades (due to lack of a normal tier, fix this later)
+        if (Random.value > 0.50f) // 15% chance to drop upgrades (due to lack of a normal tier, fix this later)
         {
             DropItem(upgradeItems);
         }
@@ -154,17 +155,29 @@ public class EnemyStats : MonoBehaviour
                         roll > 0.85 ? "Rare" :
                         roll > 0.50 ? "Magic" : "Normal";
 
+        // Create a list to store items of the chosen rarity
+        List<GameObject> itemsOfRarity = new List<GameObject>();
+
+        // Iterate through all items and add those of the chosen rarity to the list
         foreach (GameObject item in items)
         {
             ItemInfo info = item.GetComponent<ItemInfo>();
             if (info != null && info.itemQuality == rarity)
             {
-                Vector3 dropPosition = RandomDropPosition();
-                Instantiate(item, dropPosition, transform.rotation);
-                break; // Assuming only one item of each rarity type should be dropped
+                itemsOfRarity.Add(item);
             }
         }
+
+        // If there are items of the chosen rarity, choose one randomly to drop
+        if (itemsOfRarity.Count > 0)
+        {
+            int randomIndex = Random.Range(0, itemsOfRarity.Count);
+            GameObject itemToDrop = itemsOfRarity[randomIndex];
+            Vector3 dropPosition = RandomDropPosition();
+            Instantiate(itemToDrop, dropPosition, transform.rotation);
+        }
     }
+
 
     private Vector3 RandomDropPosition()
     {
@@ -186,8 +199,22 @@ public class EnemyStats : MonoBehaviour
         hitIndicator = 0.15f;
         source.PlayOneShot(clip);
         EnemyMovementController enemyMovement = transform.GetComponent<EnemyMovementController>();
-        enemyMovement.inPursuit = true;
-
+        if (enemyMovement.inPursuit == false)
+        {
+            enemyMovement.inPursuit = true;
+            Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, agroRadius);
+            foreach (Collider2D collider in colliders)
+            {
+                if (collider.CompareTag("Enemy") && collider.gameObject != transform.gameObject)
+                {
+                    EnemyMovementController otherEnemyMovement = collider.GetComponent<EnemyMovementController>();
+                    if (otherEnemyMovement != null)
+                    {
+                        otherEnemyMovement.inPursuit = true;
+                    }
+                }
+            }
+        }
     }
 
     public void ApplyKnockback(Vector2 direction, float force)

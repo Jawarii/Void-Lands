@@ -55,6 +55,10 @@ public class MultishotArrowBehaviour : MonoBehaviour
             // Optionally destroy the arrow upon hitting an enemy
             //Destroy(gameObject);
         }
+        else if (other.gameObject.CompareTag("Obstacle"))
+        {
+            Destroy(gameObject);
+        }
     }
 
     IEnumerator DestroyArrow()

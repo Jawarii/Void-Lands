@@ -134,7 +134,7 @@ public class PlayerStats : MonoBehaviour
     {
         lvl++;
         currentExp = currentExp - maxExp;
-        maxExp = lvl * 100f;
+        maxExp = Mathf.Pow(lvl, 1.35f) * 100f;
         IncreaseStats(lvl);
     }
     public void IncreaseStats(float lvl_)
@@ -145,6 +145,7 @@ public class PlayerStats : MonoBehaviour
         baseAttack *= 1.1f;
         defense += (int)(baseDefense * 0.1f);
         baseDefense *= 1.1f;
+        currentHp = maxHp;
     }
     public void TakeDamage(int damage, bool isCrit)
     {

@@ -115,7 +115,8 @@ public class EnemyMovementController : MonoBehaviour
         if (hit.collider != null)
         {
            // Debug.Log($"CircleCast hit: {hit.collider.name}");
-            return !hit.collider.CompareTag("Enemy");
+            if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Obstacle"))
+                return false;
         }
 
         return true;
