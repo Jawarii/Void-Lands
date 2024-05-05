@@ -381,7 +381,7 @@ MonoBehaviour:
   arrived: 0
   dashCd: 2
   currentDashCd: 0
-  dashDistance: 2.5
+  dashDistance: 2
   dashSource_: {fileID: 1460879414823648951}
   stepsSource_: {fileID: 0}
   stepsClip_: {fileID: 8300000, guid: fdc05ea2699023143ba7e93533cc5a0b, type: 3}
@@ -563,6 +563,7 @@ MonoBehaviour:
   baseAttack: 0
   attack: 10
   atkSpd: 1
+  baseDefense: 0
   defense: 1
   critRate: 5
   critDmg: 150
