@@ -9,21 +9,31 @@ public class SplitArrowBehaviour : MonoBehaviour
     public PlayerStats playerStats;
     public float basicAtkDmgMulti = 0.0f;
     public PenetratingArrowBehaviour penArrow;
-    public float lifeTime = 1f;
+    public float maxDistance = 4f; // Maximum distance the arrow can travel
+
+    private Vector2 startPosition;
 
     private void Start()
     {
-        // Call the DestroyArrow function after 2 seconds
-        StartCoroutine(DestroyArrow());
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         basicAtkDmgMulti = penArrow.basicAtkDmgMulti * 0.75f;
+        startPosition = transform.position;
     }
 
     private void Update()
     {
         // Move the arrow forward based on its current rotation
         transform.Translate(Vector2.down * speed * Time.deltaTime, Space.Self);
+
+        // Calculate the distance traveled
+        float distanceTraveled = Vector2.Distance(transform.position, startPosition);
+
+        // If the distance traveled exceeds the maximum distance, destroy the arrow
+        if (distanceTraveled >= maxDistance)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -50,13 +60,5 @@ public class SplitArrowBehaviour : MonoBehaviour
         {
             Destroy(gameObject);
         }
-    }
-
-    IEnumerator DestroyArrow()
-    {
-        // Wait for 2 seconds
-        yield return new WaitForSeconds(lifeTime);
-        // Destroy the arrow game object
-        Destroy(gameObject);
     }
 }

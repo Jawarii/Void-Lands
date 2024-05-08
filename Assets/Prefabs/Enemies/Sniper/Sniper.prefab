@@ -192,7 +192,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &350915315305402474
 Transform:
   m_ObjectHideFlags: 0
@@ -407,7 +407,6 @@ MonoBehaviour:
   colliderObject: {fileID: 0}
   agent: {fileID: 0}
   stoppingDistance: 2.5
-  roamingRadius: 5
 --- !u!58 &3497676198621287213
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -456,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myShake: {fileID: 11400000, guid: 710c880799ac4264dab849dc626d5ac8, type: 2}
-  baseHp: 0
+  baseHp: 75
   maxHp: 25
   hp: 25
   attack: 3
@@ -743,7 +742,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b23d00a68afc54ea36c08c4e5d885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  agroRadius: 1
 --- !u!1 &4793519313251756784
 GameObject:
   m_ObjectHideFlags: 0

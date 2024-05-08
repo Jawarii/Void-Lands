@@ -399,7 +399,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ea71389f05396494395f7a31665e3b5a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed_: 1
+  speed_: 1.2
   animator_: {fileID: 3497676198621287215}
   inPursuit: 0
   playerObject: {fileID: 0}
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myShake: {fileID: 11400000, guid: 710c880799ac4264dab849dc626d5ac8, type: 2}
-  baseHp: 0
+  baseHp: 100
   maxHp: 25
   hp: 25
   attack: 3

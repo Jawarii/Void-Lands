@@ -33,7 +33,7 @@ public class PlayerMovement : MonoBehaviour
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
     }
-     
+
     private void Update()
     {
         currentDashCd -= Time.deltaTime;
@@ -46,11 +46,6 @@ public class PlayerMovement : MonoBehaviour
             moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
 
             animator.SetFloat("Speed", moveDirection.magnitude);
-
-            //if (horizontalInput != 0)
-            //{
-            //    transform.localScale = new Vector3(Mathf.Sign(horizontalInput) * 1f, 1f, 1f);
-            //}
         }
         else
         {

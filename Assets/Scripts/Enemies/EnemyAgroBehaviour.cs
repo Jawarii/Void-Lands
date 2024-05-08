@@ -18,6 +18,13 @@ public class EnemyAgroBehaviour : MonoBehaviour
         {
             // Agro the current enemy.
             EnemyMovementController enemyMovement = enemy.GetComponent<EnemyMovementController>();
+            if (enemyMovement == null)
+            {
+                BossMovementController bossMovement = enemy.GetComponent<BossMovementController>();
+                bossMovement.inPursuit = true;
+                gameObject.SetActive(false);
+                return;
+            }
             enemyMovement.inPursuit = true;
 
             // Notify other enemies within the agro radius.
@@ -33,7 +40,6 @@ public class EnemyAgroBehaviour : MonoBehaviour
                     }
                 }
             }
-
             // Disable this trigger once activated.
             gameObject.SetActive(false);
         }

@@ -9,18 +9,30 @@ public class PenetratingArrowBehaviour : MonoBehaviour
     public PlayerStats playerStats;
     public float basicAtkDmgMulti = 0.5f;
     public GameObject arrowPrefab; // Prefab of the arrow to spawn
-    public float lifeTime = 1f;
+    public float maxDistance = 8f; // Maximum distance the arrow can travel
+
+    private Vector2 startPosition;
 
     private void Start()
     {
-        StartCoroutine(DestroyArrow());
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
+        startPosition = transform.position;
     }
 
     private void Update()
     {
+        // Move the arrow forward based on its current rotation
         transform.Translate(Vector2.down * speed * Time.deltaTime, Space.Self);
+
+        // Calculate the distance traveled
+        float distanceTraveled = Vector2.Distance(transform.position, startPosition);
+
+        // If the distance traveled exceeds the maximum distance, destroy the arrow
+        if (distanceTraveled >= maxDistance)
+        {
+            Destroy(gameObject);
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D other)
@@ -45,20 +57,11 @@ public class PenetratingArrowBehaviour : MonoBehaviour
 
             // Spawn additional arrows to the left and right
             SpawnAdditionalArrows();
-
-            // Optionally destroy the arrow upon hitting an enemy
-            //Destroy(gameObject);
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
             Destroy(gameObject);
         }
-    }
-
-    IEnumerator DestroyArrow()
-    {
-        yield return new WaitForSeconds(lifeTime);
-        Destroy(gameObject);
     }
 
     private void SpawnAdditionalArrows()

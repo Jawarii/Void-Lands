@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1479683888e1abe4ca5889c3a5219ce2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicAtkDmgMulti: 0.7
+  basicAtkDmgMulti: 1
 --- !u!60 &8144186967753529364
 PolygonCollider2D:
   m_ObjectHideFlags: 0
@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myShake: {fileID: 11400000, guid: 710c880799ac4264dab849dc626d5ac8, type: 2}
-  baseHp: 0
+  baseHp: 200
   maxHp: 25
   hp: 25
   attack: 3

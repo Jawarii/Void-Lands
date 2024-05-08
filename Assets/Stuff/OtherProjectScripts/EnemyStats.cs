@@ -8,7 +8,7 @@ using System.Buffers.Text;
 public class EnemyStats : MonoBehaviour
 {
     public ShakeData myShake;
-    public float baseHp;
+    public float baseHp = 100;
     public float maxHp;
     public float hp;
     public float attack;
@@ -54,7 +54,7 @@ public class EnemyStats : MonoBehaviour
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponentInChildren<PlayerStats>();
 
-        baseHp = 100; //Temporary
+        //baseHp = 100; //Temporary
 
         maxHp = (int)(baseHp * Mathf.Pow(1.15f, enemyLvl - 1));
         hp = maxHp;
@@ -112,8 +112,11 @@ public class EnemyStats : MonoBehaviour
                 goldAmount = (int)Random.Range(5 * Mathf.Pow(1.2f, enemyLvl - 1) * 0.8f, 5 * Mathf.Pow(1.2f, enemyLvl - 1) * 1.2f);
                 animator_.SetBool("isDead", true);
                 isDead = true;
-                gameObject.GetComponent<EnemyMovementController>().agent.isStopped = true;
-                gameObject.GetComponent<EnemyMovementController>().enabled = false;
+                if (GetComponent<EnemyMovementController>() != null)
+                {
+                    gameObject.GetComponent<EnemyMovementController>().agent.isStopped = true;
+                    gameObject.GetComponent<EnemyMovementController>().enabled = false;
+                }
             }
             deathDuration += Time.deltaTime;
         }
@@ -199,7 +202,7 @@ public class EnemyStats : MonoBehaviour
         hitIndicator = 0.15f;
         source.PlayOneShot(clip);
         EnemyMovementController enemyMovement = transform.GetComponent<EnemyMovementController>();
-        if (enemyMovement.inPursuit == false)
+        if (enemyMovement != null && enemyMovement.inPursuit == false)
         {
             enemyMovement.inPursuit = true;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, agroRadius);

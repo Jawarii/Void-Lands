@@ -74,6 +74,7 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\ExampleScripts\EX2_Path.cs" />
     <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\ReadmeBehaviour.cs" />
     <Compile Include="Assets\Scripts\Skills\MultishotArrowBehaviour.cs" />
+    <Compile Include="Assets\PurpleExplosionController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonHover.cs" />
     <Compile Include="Assets\Scripts\UI\SkillsWindowSlotInfo.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableRigidbody2D.cs" />
@@ -102,6 +103,7 @@
     <Compile Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Script\EnemySelector.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableSkillBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\SearchGrid.cs" />
+    <Compile Include="Assets\CircleIndicatorBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAttackBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Threading\AsyncPathRequest.cs" />
     <Compile Include="Assets\Scripts\Enemies\SpiderAttack.cs" />
@@ -146,9 +148,11 @@
     <Compile Include="Assets\Scripts\Enemies\GolemAttack.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BulletBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Structures\RangeFloat.cs" />
+    <Compile Include="Assets\BossPatternsAnimationController.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\StartGame.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Index.cs" />
+    <Compile Include="Assets\BossPatternsBehaviour.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAgroBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\StatsController.cs" />
@@ -158,6 +162,7 @@
     <Compile Include="Assets\Scripts\Player\BowController.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\StarBehavior.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\MonoDelegate.cs" />
+    <Compile Include="Assets\CircularSkillDamageController.cs" />
     <Compile Include="Assets\Scripts\UI\InventorySlotsManager.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Visualisation\PathView.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Agent.cs" />
@@ -178,6 +183,7 @@
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakers\ObjectShaker.cs" />
     <Compile Include="Assets\Scripts\Enemies\NewBatAttack.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\ExampleScripts\EX1_MonoDelegate.cs" />
+    <Compile Include="Assets\BossMovementController.cs" />
     <Compile Include="Assets\Scripts\Enemies\GoblinMeleeAttack.cs" />
     <Compile Include="Assets\Scripts\Skills\PenetratingArrowBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\EventArgs.cs" />
@@ -280,6 +286,7 @@
     <None Include="Assets\IMPORTANT-ASSETS\Gold&amp;Stuff\readme.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\SpecialItems\StonesIcons\License.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF-Surface.shader" />
+    <None Include="Assets\Bosses\Effects\craftpix-net-237444-fire-pixel-art-animation-sprites\Font.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\ArmorIcons\readme.txt" />
@@ -297,10 +304,12 @@
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Shaders\AddTrail.shader" />
     <None Include="Assets\Stuff\ImportedAssets\CAVE TILESET TOP DOWN PIXEL ART v1.0\CAVE TILESET TOP DOWN PIXEL ART v1.0\License.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\ArmorIcons\License.txt" />
+    <None Include="Assets\Bosses\Effects\craftpix-net-724953-bombs-and-explosions-pixel-art-set\Font.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\SpecialItems\RuneIcons\readme.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\BootsIcons\License.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF-Mobile Masking.shader" />
     <None Include="Assets\IMPORTANT-ASSETS\Areas\UndeadTileSet\License.txt" />
+    <None Include="Assets\Bosses\Effects\craftpix-net-237444-fire-pixel-art-animation-sprites\License.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\SpecialItems\RelicIcons\readme.txt" />
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
@@ -315,6 +324,7 @@
     <None Include="Assets\IMPORTANT-ASSETS\Gear\BeltIcons\readme.txt" />
     <None Include="Assets\GUI-Elements\license.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\AccessoryIcons\readme.txt" />
+    <None Include="Assets\Bosses\Effects\craftpix-net-724953-bombs-and-explosions-pixel-art-set\license.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF-Mobile.shader" />
     <None Include="Assets\Stuff\ImportedAssets\Warrior free set\Contact.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\GlovesIcons\License.txt" />

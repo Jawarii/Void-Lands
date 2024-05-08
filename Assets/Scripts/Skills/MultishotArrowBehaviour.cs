@@ -1,23 +1,27 @@
 using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class MultishotArrowBehaviour : MonoBehaviour
 {
-    public float speed = 30f; // Speed of the arrow
+    public float speed = 20f; // Speed of the arrow
     private int crit = 0;
     public GameObject player;
     public PlayerStats playerStats;
     public float basicAtkDmgMulti = 0.5f;
     public float knockbackForce = 10f; // Adjust the force of knockback as needed
-    public float lifeTime = 1f;
+    public float maxDistance = 3f; // Maximum distance the arrow can travel
+
+    private Vector2 startPosition;
+
     private void Start()
     {
-        // Call the DestroyArrow function after 2 seconds
-        StartCoroutine(DestroyArrow());
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         knockbackForce = 10f;
+        startPosition = transform.position;
+
+        // Call the DestroyArrow function after a certain distance has been traveled
+        StartCoroutine(DestroyArrow());
     }
 
     private void Update()
@@ -63,8 +67,11 @@ public class MultishotArrowBehaviour : MonoBehaviour
 
     IEnumerator DestroyArrow()
     {
-        // Wait for 2 seconds
-        yield return new WaitForSeconds(lifeTime);
+        // Wait until the arrow has traveled the maximum distance
+        while (Vector2.Distance(transform.position, startPosition) < maxDistance)
+        {
+            yield return null;
+        }
 
         // Destroy the arrow game object
         Destroy(gameObject);

@@ -56,7 +56,7 @@ public class TrollAttack : MonoBehaviour
         animator.SetFloat("Speed", 0f);
         currentAttackCooldown = attackCooldown;
 
-        yield return new WaitForSeconds(0.667f);
+        yield return new WaitForSeconds(1f);
 
         animator.SetBool("canAttack", false);
         enemyMovement.canMove = true;
