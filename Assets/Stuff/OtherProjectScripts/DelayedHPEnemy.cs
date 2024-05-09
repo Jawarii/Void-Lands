@@ -17,7 +17,10 @@ public class DelayedHPEnemy : MonoBehaviour
 
     void Start()
     {
-        target = transform.parent.parent;
+        if (target == null)
+        {
+            target = transform.parent.parent;
+        }
         stats = target.gameObject;
         hp1 = stats.GetComponent<EnemyStats>().hp;
         maxHp1 = stats.GetComponent<EnemyStats>().maxHp;

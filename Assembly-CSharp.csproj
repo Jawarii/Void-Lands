@@ -161,6 +161,7 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Visualisation\GridView.cs" />
     <Compile Include="Assets\Scripts\Player\BowController.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\StarBehavior.cs" />
+    <Compile Include="Assets\EyeBossCloneBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\MonoDelegate.cs" />
     <Compile Include="Assets\CircularSkillDamageController.cs" />
     <Compile Include="Assets\Scripts\UI\InventorySlotsManager.cs" />

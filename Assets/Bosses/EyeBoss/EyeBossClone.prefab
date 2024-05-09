@@ -98,9 +98,9 @@ GameObject:
   - component: {fileID: -6739804766742491397}
   - component: {fileID: 7054357304311972949}
   - component: {fileID: 671420506495271934}
-  - component: {fileID: 3066542131377178304}
+  - component: {fileID: -7272706336116780353}
   m_Layer: 0
-  m_Name: EyeBoss
+  m_Name: EyeBossClone
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -114,9 +114,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3497676198621287211}
   serializedVersion: 2
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -5.82, y: 1.965, z: -0.057261854}
-  m_LocalScale: {x: 1.7000002, y: 1.7000002, z: 1.7000002}
+  m_LocalScale: {x: 1.7, y: 1.7, z: 1.7}
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 3497676199661547605}
@@ -165,7 +165,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: -1931544441, guid: 40cf61b1ba4e5fa4dbcc12bc43303cd9, type: 3}
+  m_Sprite: {fileID: 1077903383, guid: 4b019dc3b8621784086b324119690b33, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -186,7 +186,7 @@ Animator:
   m_GameObject: {fileID: 3497676198621287211}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: b0de04075d445394ca623a08de70f182, type: 2}
+  m_Controller: {fileID: 9100000, guid: 875b643c1378f6549bc5bc590b7426e1, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -408,7 +408,7 @@ NavMeshAgent:
   m_AgentTypeID: 0
   m_Radius: 0.05
   m_Speed: 3.5
-  m_Acceleration: 1000
+  m_Acceleration: 8
   avoidancePriority: 50
   m_AngularSpeed: 10
   m_StoppingDistance: 0
@@ -452,12 +452,12 @@ MonoBehaviour:
   canMove: 1
   colliderObject: {fileID: 0}
   agent: {fileID: 0}
-  stoppingDistance: 0
+  stoppingDistance: 1
   originalPos: {x: 0, y: 0, z: 0}
-  distanceToMove: 7
+  distanceToMove: 3
   isMovingStar: 0
   pentagramPoints: []
---- !u!114 &3066542131377178304
+--- !u!114 &-7272706336116780353
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -466,30 +466,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 3497676198621287211}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: b61d196046f79c14796b66de0e08236e, type: 3}
+  m_Script: {fileID: 11500000, guid: 173c024aed6244a46b05af099b47d6cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   patterns:
-  - {fileID: 6068424098036574783, guid: 6159d99dc914f5c4f86eb5f5bdac872e, type: 3}
   - {fileID: 6068424098036574783, guid: faf309a11f0970949a819def13dd97a5, type: 3}
-  hpPercent: 0
-  isAttacking: 0
-  frontalExplosionCd: 5
-  frontalExplosionElapsedTime: 0
-  randomExplosionsCd: 3
-  randomExplosionsElapsedTime: 0
-  dashExplosionCd: 5
-  dashExplosionElapsedTime: 0
-  pentagramExplosionCd: 15
-  pentagramExplosionElapsedTime: 0
-  largeExplosionCd: 15
-  largeExplosionElapsedTime: 0
-  cloneExplosionCd: 25
-  cloneExplosionElapsedTime: 0
-  clonePrefab: {fileID: 3497676198621287211, guid: 85873aaef78daee4c8919c16f5a279e8, type: 3}
-  directionToPlayer: {x: 0, y: 0, z: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
-  moveController: {fileID: 0}
+  castTime: 3
 --- !u!1 &3497676199661547604
 GameObject:
   m_ObjectHideFlags: 0

@@ -218,6 +218,14 @@ public class EnemyStats : MonoBehaviour
                 }
             }
         }
+        else
+        {
+            BossMovementController bossMovementController= transform.GetComponent<BossMovementController>();
+            if (bossMovementController)
+            {
+                bossMovementController.inPursuit = true;
+            }
+        }
     }
 
     public void ApplyKnockback(Vector2 direction, float force)

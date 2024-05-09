@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 public class BossPatternsBehaviour : MonoBehaviour
@@ -12,14 +13,23 @@ public class BossPatternsBehaviour : MonoBehaviour
     //Phase 1 Variables
     public float frontalExplosionCd = 5;
     public float frontalExplosionElapsedTime;
-    public float randomExplosionsCd = 0.5f;
+    public float randomExplosionsCd = 3f;
     public float randomExplosionsElapsedTime;
 
     //Phase 2 Variables
     public float dashExplosionCd = 5;
     public float dashExplosionElapsedTime;
+
+    //Phase 3 Variables
     public float pentagramExplosionCd = 15;
     public float pentagramExplosionElapsedTime;
+
+    //Phase 4 Variables
+    public float largeExplosionCd = 15;
+    public float largeExplosionElapsedTime;
+    public float cloneExplosionCd = 30f;
+    public float cloneExplosionElapsedTime;
+    public GameObject clonePrefab;
 
     //Reference to the player GameObject
     private GameObject player;
@@ -36,18 +46,43 @@ public class BossPatternsBehaviour : MonoBehaviour
 
     void Update()
     {
+        if (!moveController.inPursuit)
+            return;
         hpPercent = transform.GetComponent<EnemyStats>().hp / transform.GetComponent<EnemyStats>().maxHp;
         UpdatePhases();
     }
 
     public void PhaseOneBehaviour()
     {
-
+        InvokeFrontalExplosions();
+        InvokeRandomExplosions();
+    }
+    public void PhaseTwoBehaviour()
+    {
+        InvokeDashExplosions();
+        InvokeRandomExplosions();
+    }
+    public void PhaseThreeBehaviour()
+    {
+        InvokePentagramExplosions();
+        InvokeDashExplosions();
+        InvokeRandomExplosions();
+    }
+    public void PhaseFourBehaviour()
+    {
+        InvokeCloneExplosions();
+        InvokeLargeExplosion();
+        InvokePentagramExplosions();
+        InvokeRandomExplosions();
+        InvokeDashExplosions();
+    }
+    public void InvokeFrontalExplosions()
+    {
         if (frontalExplosionElapsedTime <= 0 && !isAttacking)
         {
             if (patterns.Count > 0)
             {
-                StartCoroutine(FrontalPurpleExplosions(10, 0.05f));
+                StartCoroutine(FrontalPurpleExplosions(15, 0.05f));
                 frontalExplosionCd = Random.Range(3, 6);
                 frontalExplosionElapsedTime = frontalExplosionCd;
             }
@@ -56,7 +91,9 @@ public class BossPatternsBehaviour : MonoBehaviour
         {
             frontalExplosionElapsedTime -= Time.deltaTime;
         }
-
+    }
+    public void InvokeRandomExplosions()
+    {
         if (randomExplosionsElapsedTime <= 0)
         {
             if (patterns.Count > 0)
@@ -72,52 +109,8 @@ public class BossPatternsBehaviour : MonoBehaviour
             randomExplosionsElapsedTime -= Time.deltaTime;
         }
     }
-    public void PhaseTwoBehaviour()
+    public void InvokeDashExplosions()
     {
-        if (dashExplosionElapsedTime <= 0 && !isAttacking )
-        {
-            if (patterns.Count > 0)
-            {
-                moveController.speed_ = 10;
-                moveController.MoveTowardsPlayer(12);
-                StartCoroutine(DashPurpleExplosions(15, 0.05f));
-                dashExplosionCd = Random.Range(3, 6);
-                dashExplosionElapsedTime = dashExplosionCd;
-            }
-        }
-        else
-        {
-            dashExplosionElapsedTime -= Time.deltaTime;
-        }
-        if (randomExplosionsElapsedTime <= 0)
-        {
-            if (patterns.Count > 0)
-            {
-                SpawnRandomExplosions(phase);
-                randomExplosionsCd = Random.Range(2, 5);
-                randomExplosionsElapsedTime = randomExplosionsCd;
-            }
-        }
-        else
-        {
-            randomExplosionsElapsedTime -= Time.deltaTime;
-        }
-    }
-    public void PhaseThreeBehaviour()
-    {
-        if (randomExplosionsElapsedTime <= 0)
-        {
-            if (patterns.Count > 0)
-            {
-                SpawnRandomExplosions(phase);
-                randomExplosionsCd = Random.Range(2, 5);
-                randomExplosionsElapsedTime = randomExplosionsCd;
-            }
-        }
-        else
-        {
-            randomExplosionsElapsedTime -= Time.deltaTime;
-        }
         if (dashExplosionElapsedTime <= 0 && !isAttacking)
         {
             if (patterns.Count > 0)
@@ -133,6 +126,9 @@ public class BossPatternsBehaviour : MonoBehaviour
         {
             dashExplosionElapsedTime -= Time.deltaTime;
         }
+    }
+    public void InvokePentagramExplosions()
+    {
         if (pentagramExplosionElapsedTime <= 0 && !isAttacking)
         {
             if (patterns.Count > 0)
@@ -147,6 +143,40 @@ public class BossPatternsBehaviour : MonoBehaviour
         else
         {
             pentagramExplosionElapsedTime -= Time.deltaTime;
+        }
+    }
+    public void InvokeCloneExplosions()
+    {
+        if (cloneExplosionElapsedTime <= 0 && !isAttacking)
+        {
+            if (patterns.Count > 0)
+            {
+                StartCoroutine(CloneExplosion());
+                cloneExplosionCd = Random.Range(25, 30);
+                cloneExplosionElapsedTime = cloneExplosionCd;
+            }
+        }
+        else
+        {
+            cloneExplosionElapsedTime -= Time.deltaTime;
+        }
+    }
+    public void InvokeLargeExplosion()
+    {
+        if (largeExplosionElapsedTime <= 0 && !isAttacking)
+        {
+            if (patterns.Count > 0)
+            {
+                moveController.speed_ = 30f;
+                moveController.MoveToOriginalPosition();
+                StartCoroutine(LargeExplosion(1.25f));
+                largeExplosionCd = Random.Range(10, 15);
+                largeExplosionElapsedTime = largeExplosionCd;
+            }
+        }
+        else
+        {
+            largeExplosionElapsedTime -= Time.deltaTime;
         }
     }
     IEnumerator FrontalPurpleExplosions(float amount, float interval)
@@ -187,8 +217,9 @@ public class BossPatternsBehaviour : MonoBehaviour
     {
         float radius = 3f;
         EnemyStats enemyStats = transform.GetComponent<EnemyStats>();
-        Vector3 scale = new Vector3(2.5f, 2.5f, 1);
-
+        Vector3 scale = new Vector3(2.25f, 2.25f, 1);
+        if (phase == 4)
+            amount = 3;
         for (int i = 0; i < amount * 2; i++)
         {
             Vector3 randomOffset = Random.insideUnitCircle * radius;
@@ -196,6 +227,81 @@ public class BossPatternsBehaviour : MonoBehaviour
 
             StartCoroutine(patterns[0].GetComponent<PurpleExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
         }
+    }
+    IEnumerator LargeExplosion(float waitTime)
+    {
+        isAttacking = true;
+        yield return new WaitForSeconds(waitTime);
+
+        EnemyStats enemyStats = transform.GetComponent<EnemyStats>();
+        Vector3 scale = new Vector3(15f, 15f, 1);
+
+        Vector3 spawnPosition = transform.position;
+
+        StartCoroutine(patterns[1].GetComponent<PurpleExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
+        yield return new WaitForSeconds(3f);
+        isAttacking = false;
+    }
+    IEnumerator CloneExplosion()
+    {
+        isAttacking = true;
+        SpriteRenderer spriteRenderer = gameObject.GetComponent<SpriteRenderer>();
+        Collider2D collider = gameObject.GetComponent<Collider2D>();
+        collider.enabled = false;
+
+        // Fade out the sprite
+        float duration = 1.0f;
+        float currentTime = 0f;
+        Color startColor = spriteRenderer.color;
+        Color endColor = new Color(startColor.r, startColor.g, startColor.b, 0);
+
+        while (currentTime < duration)
+        {
+            float alpha = Mathf.Lerp(1.0f, 0.0f, currentTime / duration);
+            spriteRenderer.color = new Color(startColor.r, startColor.g, startColor.b, alpha);
+            currentTime += Time.deltaTime;
+            yield return null;
+        }
+        spriteRenderer.color = endColor; // Ensure it's fully transparent
+        spriteRenderer.enabled = false;
+
+        List<Vector3> positions = ClonePositions();
+        moveController.speed_ = 10f;
+        moveController.agent.SetDestination(positions[3]);
+        yield return new WaitUntil(() => Vector3.Distance(transform.position, positions[3]) < 0.1f);
+        yield return new WaitForSeconds(2);
+
+        spriteRenderer.color = startColor;
+        spriteRenderer.enabled = true;
+        collider.enabled = true;
+        StartCoroutine(LargeExplosion(0));
+        for (int i = 0; i < 3; i++)
+        {
+            Instantiate(clonePrefab, positions[i], Quaternion.identity);
+        }
+    }
+    public List<Vector3> ClonePositions()
+    {
+        List<Vector3> positions = new List<Vector3>
+    {
+        new Vector3(5, -6, 0),
+        new Vector3(5, 1, 0),
+        new Vector3(-6.5f, 1, 0),
+        new Vector3(-6.5f, -6, 0)
+    };
+
+        // Shuffle the positions to randomize their order
+        int n = positions.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = Random.Range(0, n + 1);
+            Vector3 value = positions[k];
+            positions[k] = positions[n];
+            positions[n] = value;
+        }
+
+        return positions;
     }
     public void UpdatePhases()
     {
@@ -207,9 +313,13 @@ public class BossPatternsBehaviour : MonoBehaviour
         {
             phase = 2;
         }
-        else
+        else if (hpPercent > 0.25f)
         {
             phase = 3;
+        }
+        else
+        {
+            phase = 4;
         }
         switch (phase)
         {
@@ -221,6 +331,9 @@ public class BossPatternsBehaviour : MonoBehaviour
                 break;
             case 3:
                 PhaseThreeBehaviour();
+                break;
+            case 4:
+                PhaseFourBehaviour();
                 break;
         }
     }
