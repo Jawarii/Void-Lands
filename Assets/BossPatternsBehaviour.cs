@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
 
 public class BossPatternsBehaviour : MonoBehaviour
@@ -192,7 +191,7 @@ public class BossPatternsBehaviour : MonoBehaviour
 
             EnemyStats enemyStats = transform.GetComponent<EnemyStats>();
             Vector3 scale = new Vector3(1.5f, 1.5f, 1);
-            StartCoroutine(patterns[0].GetComponent<PurpleExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
+            StartCoroutine(patterns[0].GetComponent<ExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
             yield return new WaitForSeconds(interval);
         }
         isAttacking = false;
@@ -206,7 +205,7 @@ public class BossPatternsBehaviour : MonoBehaviour
 
             EnemyStats enemyStats = transform.GetComponent<EnemyStats>();
             Vector3 scale = new Vector3(2f, 2f, 1);
-            StartCoroutine(patterns[0].GetComponent<PurpleExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
+            StartCoroutine(patterns[0].GetComponent<ExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
             yield return new WaitForSeconds(interval);
         }
         yield return new WaitForSeconds(1.5f);
@@ -225,7 +224,7 @@ public class BossPatternsBehaviour : MonoBehaviour
             Vector3 randomOffset = Random.insideUnitCircle * radius;
             Vector3 spawnPosition = player.transform.position + new Vector3(randomOffset.x, randomOffset.y, 0);
 
-            StartCoroutine(patterns[0].GetComponent<PurpleExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
+            StartCoroutine(patterns[0].GetComponent<ExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
         }
     }
     IEnumerator LargeExplosion(float waitTime)
@@ -238,7 +237,7 @@ public class BossPatternsBehaviour : MonoBehaviour
 
         Vector3 spawnPosition = transform.position;
 
-        StartCoroutine(patterns[1].GetComponent<PurpleExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
+        StartCoroutine(patterns[1].GetComponent<ExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
         yield return new WaitForSeconds(3f);
         isAttacking = false;
     }

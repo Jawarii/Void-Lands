@@ -9,6 +9,7 @@ public class GolemProjectileBehavior : MonoBehaviour
     public float lifeTime = 1f;
     public EnemyStats enemyStats;
 
+
     private void Start()
     {
         // Call the DestroyArrow function after 1 seconds
@@ -45,5 +46,4 @@ public class GolemProjectileBehavior : MonoBehaviour
         // Destroy the arrow game object
         Destroy(gameObject);
     }
-
 }

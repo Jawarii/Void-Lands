@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using Cinemachine;
 
 public class DamagePopup : MonoBehaviour
 {
@@ -14,10 +15,15 @@ public class DamagePopup : MonoBehaviour
     private static int sortingOrder;
     public bool isCrit = false;
     public bool isPlayer = false;
-
+    public bool isBoss = false;
+    public CinemachineVirtualCamera _camera;
+    public float cameraOrthoSize;
+    public float scaleModifier = 4f;
     private void Awake()
     {
         textMesh = transform.GetComponent<TextMeshPro>();
+        _camera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
+        cameraOrthoSize = _camera.m_Lens.OrthographicSize;
     }
     
     public void Setup(int damageAmount)
@@ -39,22 +45,23 @@ public class DamagePopup : MonoBehaviour
         lifeTime = DISAPPEAR_TIMER_MAX;    
         sortingOrder++;
         textMesh.sortingOrder = sortingOrder;
+        transform.localScale = Vector3.one * cameraOrthoSize / scaleModifier;
+        
     }
 
-    public void Create(Vector3 pos, int damageAmount, bool isCritical)
+    public void Create(Vector3 pos, float radius, int damageAmount, bool isCritical)
     {
         isCrit = isCritical;
         floatDmgPf = transform;
         if (isPlayer)
         {
-            moveVector = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(0.35f, 0.55f));
+            moveVector = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(0.35f, 0.55f));
         }    
         else
         {
-            moveVector = new Vector3(Random.Range(-0.1f, 0.1f), Random.Range(0.1f, 0.3f));
+            moveVector = new Vector3(Random.Range(-0.2f, 0.2f), radius + Random.Range(0.3f, 0.5f));
         }
         Transform damagePopupTransform = Instantiate(floatDmgPf, pos + moveVector, Quaternion.identity);
-        damagePopupTransform.SetParent(GameObject.FindGameObjectWithTag("FloatCanvas").transform);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
         damagePopup.Setup(damageAmount);
     }

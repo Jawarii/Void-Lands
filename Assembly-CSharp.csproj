@@ -74,7 +74,6 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\ExampleScripts\EX2_Path.cs" />
     <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\ReadmeBehaviour.cs" />
     <Compile Include="Assets\Scripts\Skills\MultishotArrowBehaviour.cs" />
-    <Compile Include="Assets\PurpleExplosionController.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonHover.cs" />
     <Compile Include="Assets\Scripts\UI\SkillsWindowSlotInfo.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableRigidbody2D.cs" />
@@ -142,6 +141,7 @@
     <Compile Include="Assets\Scripts\Enemies\TrollAttack.cs" />
     <Compile Include="Assets\Scripts\Skills\PenetratingArrowSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\PerfMonitor.cs" />
+    <Compile Include="Assets\ReaperBossPatternBehaviour.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\Items\EquipmentController.cs" />
     <Compile Include="Assets\Scripts\Items\ItemInfo.cs" />
@@ -154,6 +154,7 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Index.cs" />
     <Compile Include="Assets\BossPatternsBehaviour.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\OrbitSkil.cs" />
+    <Compile Include="Assets\GolemBossPatternBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAgroBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\StatsController.cs" />
     <Compile Include="Assets\Scripts\Enemies\OrcAttack.cs" />
@@ -179,6 +180,7 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\ArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\SkillButtonInformation.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\AStarGridManager.cs" />
+    <Compile Include="Assets\ExplosionController.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakerInstance.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Transforms.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakers\ObjectShaker.cs" />

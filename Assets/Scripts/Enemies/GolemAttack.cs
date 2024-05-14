@@ -67,5 +67,4 @@ public class GolemAttack : MonoBehaviour
         animator.SetFloat("Speed", golemMovement.agent.velocity.magnitude);
         isAttacking = false;
     }
-
 }

@@ -197,7 +197,7 @@ public class EnemyStats : MonoBehaviour
         source.pitch = Random.Range(1.35f, 1.45f);
         hp -= damage;
         damagePopup.isPlayer = false;
-        damagePopup.Create(transform.position, damage, isCrit);
+        damagePopup.Create(transform.position,transform.GetComponent<CircleCollider2D>().radius, damage, isCrit);
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         hitIndicator = 0.15f;
         source.PlayOneShot(clip);

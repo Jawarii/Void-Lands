@@ -154,7 +154,7 @@ public class PlayerStats : MonoBehaviour
         source.Stop();
         currentHp -= damage;
         damagePopup.isPlayer = true;
-        damagePopup.Create(transform.position, damage, isCrit);
+        damagePopup.Create(transform.position, 1f, damage, isCrit);
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         hitIndicator = 0.15f;
         source.PlayOneShot(clip);

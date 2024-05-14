@@ -24,9 +24,6 @@ public class BossMovementController : MonoBehaviour
     public bool isMovingStar = false;
     public List<Vector3> pentagramPoints = new List<Vector3>();
     private int currentPointIndex = 0;
-
-
-
     void Start()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");

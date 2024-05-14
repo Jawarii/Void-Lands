@@ -7,13 +7,13 @@ public class EyeBossCloneBehaviour : MonoBehaviour
     public List<GameObject> patterns = new List<GameObject>();
     public Vector3 spawnPosition;
     public float castTime = 3f;
-    private PurpleExplosionController purpleExplosionController;
+    private ExplosionController purpleExplosionController;
     private BossMovementController movementController;
 
     void Start()
     {
         movementController = GetComponent<BossMovementController>();
-        purpleExplosionController = patterns[0].GetComponent<PurpleExplosionController>();
+        purpleExplosionController = patterns[0].GetComponent<ExplosionController>();
         movementController.inPursuit = true;
         LargeExplosion();
         Destroy(gameObject, castTime);
