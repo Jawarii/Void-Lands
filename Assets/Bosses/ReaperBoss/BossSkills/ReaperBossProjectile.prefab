@@ -120,9 +120,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d31db1fab8a343bfbe97b628a753b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 5
-  basicAtkDmgMulti: 2.5
-  lifeTime: 2
+  speed: 4
+  basicAtkDmgMulti: 1
+  lifeTime: 3
   enemyStats: {fileID: 0}
 --- !u!60 &6220610857349729344
 PolygonCollider2D:

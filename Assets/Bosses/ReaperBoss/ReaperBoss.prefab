@@ -790,8 +790,10 @@ MonoBehaviour:
   _projectileAttackElapsedTime: 0
   targettedExplosionsCd: 7.5
   targettedExplosionsElapsedTime: 0
-  teleportProjectileCd: 10
+  teleportProjectileCd: 15
   teleportProjectileElapsedTime: 0
+  ringAttackCd: 15
+  ringAttackElapsedTime: 0
   directionToPlayer: {x: 0, y: 0, z: 0}
   spawnPosition: {x: 0, y: 0, z: 0}
   moveController: {fileID: 0}

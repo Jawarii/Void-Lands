@@ -9,7 +9,6 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
     public float hpPercent;
     public bool isAttacking = false;
     public bool isTargetExplosion = false;
-
     //Phase 1 Variables
     private int _projectileAmount = 3;
     private float _projectileInterval = 0.2f;
@@ -23,9 +22,9 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
     //Phase 3 Variables
     public float ringAttackCd = 15f;
     public float ringAttackElapsedTime = 0f;
-
     //Phase 4 Variables
-
+    public float enhancedRingAttackCd = 30f;
+    public float enhancedRingAttackElapsedTime = 0f;
     //Reference to the player GameObject
     private GameObject player;
     public Vector3 directionToPlayer;
@@ -33,7 +32,6 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
     public BossMovementController moveController;
     public GameObject projectilePrefab;
     public EnemyStats enemyStats;
-
 
     void Start()
     {
@@ -100,13 +98,16 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
     }
     private void PhaseThreeBehaviour()
     {
-        InvokeRingAttack();
         InvokeTeleportProjectileAttack();
+        InvokeRingAttack();
         InvokeProjectileFanAttack();
         InvokeTargettedExplosions();
     }
     private void PhaseFourBehaviour()
     {
+        InvokeEnhancedRingAttack();
+        InvokeTeleportProjectileAttack();
+        InvokeRingAttack();
         InvokeProjectileFanAttack();
         InvokeTargettedExplosions();
     }
@@ -162,6 +163,21 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
         else
         {
             ringAttackElapsedTime -= Time.deltaTime;
+        }
+    }
+    public void InvokeEnhancedRingAttack()
+    {
+        if (enhancedRingAttackElapsedTime <= 0 && !isAttacking)
+        {
+            if (patterns.Count > 0)
+            {
+                StartCoroutine(EnhancedRingAttack());
+                enhancedRingAttackElapsedTime = enhancedRingAttackCd;
+            }
+        }
+        else
+        {
+            enhancedRingAttackElapsedTime -= Time.deltaTime;
         }
     }
     IEnumerator TargettedExplosions(float amount, float interval)
@@ -236,8 +252,9 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
                 yield return new WaitForSeconds(_projectileInterval);
             }
         }
-        isAttacking = false;
         moveController.MoveToOriginalPosition();
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
     }
     IEnumerator RingAttack()
     {
@@ -247,9 +264,9 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
 
         for (int i = 1; i <= 3; i++)
         {
-            for (int j = 0; j < 360f / angleIncrement; j++)
+            for (int j = 0; j < (120f / angleIncrement) * i; j++)
             {
-                float angle = j * angleIncrement;
+                float angle = j * angleIncrement * 3 / i;
                 float radians = angle * Mathf.Deg2Rad;
                 Vector3 spawnPosition = transform.position + new Vector3(Mathf.Cos(radians) * i * 1.5f, Mathf.Sin(radians) * i * 1.5f, 0);
                 EnemyStats enemyStats = transform.GetComponent<EnemyStats>();
@@ -258,8 +275,64 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
             }
             yield return new WaitForSeconds(1.5f);
         }
+        yield return new WaitForSeconds(1f);
         isAttacking = false;
     }
+    IEnumerator EnhancedRingAttack()
+    {
+        if (isAttacking) yield break;
+        isAttacking = true;
+        float angleIncrement = 20f;
+
+        List<(int, int)> radiusPairs = new List<(int, int)>
+    {
+        (1, 3),
+        (2, 3),
+        (1, 2)
+    };
+
+        radiusPairs = ShufflePairs(radiusPairs);
+
+        foreach (var pair in radiusPairs)
+        {
+            StartCoroutine(SpawnRing(pair.Item1, angleIncrement));
+            StartCoroutine(SpawnRing(pair.Item2, angleIncrement));
+            yield return new WaitForSeconds(1.5f);
+        }
+        yield return new WaitForSeconds(1f);
+        isAttacking = false;
+    }
+
+    IEnumerator SpawnRing(int radius, float angleIncrement)
+    {
+        int numExplosions = (int)(120f / angleIncrement) * radius;
+        for (int j = 0; j < numExplosions; j++)
+        {
+            float angle = j * angleIncrement * 3 / radius;
+            float radians = angle * Mathf.Deg2Rad;
+            Vector3 spawnPosition = transform.position + new Vector3(Mathf.Cos(radians) * radius * 1.5f, Mathf.Sin(radians) * radius * 1.5f, 0);
+            EnemyStats enemyStats = transform.GetComponent<EnemyStats>();
+            Vector3 scale = new Vector3(2f, 2f, 1);
+            StartCoroutine(patterns[0].GetComponent<ExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
+        }
+        yield return null;
+    }
+
+    List<(int, int)> ShufflePairs(List<(int, int)> inputList)
+    {
+        System.Random rng = new System.Random();
+        int n = inputList.Count;
+        while (n > 1)
+        {
+            n--;
+            int k = rng.Next(n + 1);
+            var value = inputList[k];
+            inputList[k] = inputList[n];
+            inputList[n] = value;
+        }
+        return inputList;
+    }
+
     public List<Vector3> TeleportPositions()
     {
         List<Vector3> positions = new List<Vector3>
@@ -270,7 +343,6 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
         new Vector3(11.55f, -10.55f, 0)
     };
 
-        // Shuffle the positions to randomize their order
         int n = positions.Count;
         while (n > 1)
         {
