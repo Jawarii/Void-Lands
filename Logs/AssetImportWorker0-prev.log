@@ -15,7 +15,7 @@ C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
 -logFile
 Logs/AssetImportWorker0.log
 -srvPort
-61856
+57130
 Successfully changed project path to: C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
 C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
 [UnityMemory] Configuration Parameters - Can be set up in boot.config
@@ -49,12 +49,12 @@ C:/Users/tempo/OneDrive/Desktop/Game Projects/GraduationProjectBegin
     "memorysetup-temp-allocator-size-cloud-worker=32768"
     "memorysetup-temp-allocator-size-gi-baking-worker=262144"
     "memorysetup-temp-allocator-size-gfx=262144"
-Player connection [32924] Host "[IP] 20.30.3.31 [Port] 0 [Flags] 2 [Guid] 1200968313 [EditorId] 1200968313 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-C4HEDQB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
+Player connection [22840] Host "[IP] 192.168.0.56 [Port] 0 [Flags] 2 [Guid] 4054070965 [EditorId] 4054070965 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-C4HEDQB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined multi-casting on [225.0.0.222:54997]...
 
-Player connection [32924] Host "[IP] 20.30.3.31 [Port] 0 [Flags] 2 [Guid] 1200968313 [EditorId] 1200968313 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-C4HEDQB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
+Player connection [22840] Host "[IP] 192.168.0.56 [Port] 0 [Flags] 2 [Guid] 4054070965 [EditorId] 4054070965 [Version] 1048832 [Id] WindowsEditor(7,DESKTOP-C4HEDQB) [Debug] 1 [PackageName] WindowsEditor [ProjectName] Editor" joined alternative multi-casting on [225.0.0.222:34997]...
 
 [Physics::Module] Initialized MultithreadedJobDispatcher with 15 workers.
-Refreshing native plugins compatible for Editor in 23.56 ms, found 4 plugins.
+Refreshing native plugins compatible for Editor in 150.99 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
 Initialize engine version: 2022.3.18f1 (d29bea25151d)
 [Subsystems] Discovering subsystems at path C:/Program Files/Unity/Hub/Editor/2022.3.18f1/Editor/Data/Resources/UnitySubsystems
@@ -70,44 +70,44 @@ Initialize mono
 Mono path[0] = 'C:/Program Files/Unity/Hub/Editor/2022.3.18f1/Editor/Data/Managed'
 Mono path[1] = 'C:/Program Files/Unity/Hub/Editor/2022.3.18f1/Editor/Data/MonoBleedingEdge/lib/mono/unityjit-win32'
 Mono config path = 'C:/Program Files/Unity/Hub/Editor/2022.3.18f1/Editor/Data/MonoBleedingEdge/etc'
-Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56308
+Using monoOptions --debugger-agent=transport=dt_socket,embedding=1,server=y,suspend=n,address=127.0.0.1:56896
 Begin MonoManager ReloadAssembly
 Registering precompiled unity dll's ...
 Register platform support module: C:/Program Files/Unity/Hub/Editor/2022.3.18f1/Editor/Data/PlaybackEngines/WindowsStandaloneSupport/UnityEditor.WindowsStandalone.Extensions.dll
-Registered in 0.010826 seconds.
-- Loaded All Assemblies, in  0.438 seconds
+Registered in 0.010147 seconds.
+- Loaded All Assemblies, in  0.817 seconds
 Native extension for WindowsStandalone target not found
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  0.298 seconds
-Domain Reload Profiling: 734ms
-	BeginReloadAssembly (158ms)
+- Finished resetting the current domain, in  0.268 seconds
+Domain Reload Profiling: 1083ms
+	BeginReloadAssembly (180ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (0ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
 		CreateAndSetChildDomain (1ms)
-	RebuildCommonClasses (41ms)
-	RebuildNativeTypeToScriptingClass (11ms)
-	initialDomainReloadingComplete (71ms)
-	LoadAllAssembliesAndSetupDomain (154ms)
-		LoadAssemblies (154ms)
+	RebuildCommonClasses (40ms)
+	RebuildNativeTypeToScriptingClass (10ms)
+	initialDomainReloadingComplete (82ms)
+	LoadAllAssembliesAndSetupDomain (502ms)
+		LoadAssemblies (178ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (152ms)
-			TypeCache.Refresh (150ms)
-				TypeCache.ScanAssembly (135ms)
+		AnalyzeDomain (499ms)
+			TypeCache.Refresh (498ms)
+				TypeCache.ScanAssembly (475ms)
 			ScanForSourceGeneratedMonoScriptInfo (0ms)
-			ResolveRequiredComponents (0ms)
-	FinalizeReload (299ms)
+			ResolveRequiredComponents (1ms)
+	FinalizeReload (268ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (240ms)
+		SetupLoadedEditorAssemblies (215ms)
 			LogAssemblyErrors (0ms)
 			InitializePlatformSupportModulesInManaged (10ms)
 			SetLoadedEditorAssemblies (7ms)
 			RefreshPlugins (0ms)
 			BeforeProcessingInitializeOnLoad (2ms)
-			ProcessInitializeOnLoadAttributes (166ms)
-			ProcessInitializeOnLoadMethodAttributes (55ms)
+			ProcessInitializeOnLoadAttributes (138ms)
+			ProcessInitializeOnLoadMethodAttributes (58ms)
 			AfterProcessingInitializeOnLoad (0ms)
 			EditorAssembliesLoaded (0ms)
 		ExecutionOrderSort2 (0ms)
@@ -115,55 +115,55 @@ Domain Reload Profiling: 734ms
 ========================================================================
 Worker process is ready to serve import requests
 Begin MonoManager ReloadAssembly
-- Loaded All Assemblies, in  0.958 seconds
-Refreshing native plugins compatible for Editor in 7.43 ms, found 4 plugins.
+- Loaded All Assemblies, in  3.468 seconds
+Refreshing native plugins compatible for Editor in 6.78 ms, found 4 plugins.
 Native extension for WindowsStandalone target not found
 Package Manager log level set to [2]
 [Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
 [Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
 [Package Manager] Cannot connect to Unity Package Manager local server
 Mono: successfully reloaded assembly
-- Finished resetting the current domain, in  1.097 seconds
-Domain Reload Profiling: 2045ms
-	BeginReloadAssembly (195ms)
+- Finished resetting the current domain, in  1.347 seconds
+Domain Reload Profiling: 4809ms
+	BeginReloadAssembly (171ms)
 		ExecutionOrderSort (0ms)
 		DisableScriptedObjects (5ms)
 		BackupInstance (0ms)
 		ReleaseScriptingObjects (0ms)
-		CreateAndSetChildDomain (24ms)
-	RebuildCommonClasses (35ms)
-	RebuildNativeTypeToScriptingClass (10ms)
-	initialDomainReloadingComplete (63ms)
-	LoadAllAssembliesAndSetupDomain (645ms)
-		LoadAssemblies (559ms)
+		CreateAndSetChildDomain (20ms)
+	RebuildCommonClasses (29ms)
+	RebuildNativeTypeToScriptingClass (8ms)
+	initialDomainReloadingComplete (45ms)
+	LoadAllAssembliesAndSetupDomain (3209ms)
+		LoadAssemblies (2952ms)
 		RebuildTransferFunctionScriptingTraits (0ms)
-		AnalyzeDomain (217ms)
-			TypeCache.Refresh (168ms)
-				TypeCache.ScanAssembly (150ms)
-			ScanForSourceGeneratedMonoScriptInfo (37ms)
-			ResolveRequiredComponents (10ms)
-	FinalizeReload (1097ms)
+		AnalyzeDomain (363ms)
+			TypeCache.Refresh (301ms)
+				TypeCache.ScanAssembly (274ms)
+			ScanForSourceGeneratedMonoScriptInfo (50ms)
+			ResolveRequiredComponents (11ms)
+	FinalizeReload (1347ms)
 		ReleaseScriptCaches (0ms)
 		RebuildScriptCaches (0ms)
-		SetupLoadedEditorAssemblies (917ms)
+		SetupLoadedEditorAssemblies (1153ms)
 			LogAssemblyErrors (0ms)
-			InitializePlatformSupportModulesInManaged (10ms)
-			SetLoadedEditorAssemblies (3ms)
+			InitializePlatformSupportModulesInManaged (7ms)
+			SetLoadedEditorAssemblies (6ms)
 			RefreshPlugins (0ms)
-			BeforeProcessingInitializeOnLoad (92ms)
-			ProcessInitializeOnLoadAttributes (733ms)
-			ProcessInitializeOnLoadMethodAttributes (68ms)
+			BeforeProcessingInitializeOnLoad (101ms)
+			ProcessInitializeOnLoadAttributes (950ms)
+			ProcessInitializeOnLoadMethodAttributes (79ms)
 			AfterProcessingInitializeOnLoad (10ms)
-			EditorAssembliesLoaded (0ms)
+			EditorAssembliesLoaded (1ms)
 		ExecutionOrderSort2 (0ms)
-		AwakeInstancesAfterBackupRestoration (15ms)
-Launched and connected shader compiler UnityShaderCompiler.exe after 0.06 seconds
-Refreshing native plugins compatible for Editor in 13.88 ms, found 4 plugins.
+		AwakeInstancesAfterBackupRestoration (10ms)
+Launched and connected shader compiler UnityShaderCompiler.exe after 0.04 seconds
+Refreshing native plugins compatible for Editor in 6.75 ms, found 4 plugins.
 Preloading 0 native plugins for Editor in 0.00 ms.
-Unloading 6256 Unused Serialized files (Serialized files now loaded: 0)
-Unloading 110 unused Assets / (2.1 MB). Loaded Objects now: 6714.
-Memory consumption went from 273.4 MB to 271.3 MB.
-Total: 7.048700 ms (FindLiveObjects: 0.653800 ms CreateObjectMapping: 0.391300 ms MarkObjects: 4.957900 ms  DeleteObjects: 1.044000 ms)
+Unloading 6262 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 110 unused Assets / (2.1 MB). Loaded Objects now: 6720.
+Memory consumption went from 273.6 MB to 271.5 MB.
+Total: 4.833000 ms (FindLiveObjects: 0.535900 ms CreateObjectMapping: 0.569000 ms MarkObjects: 3.262200 ms  DeleteObjects: 0.464600 ms)
 
 AssetImportParameters requested are different than current active one (requested -> active):
   custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
@@ -180,68 +180,197 @@ AssetImportParameters requested are different than current active one (requested
   custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 ========================================================================
 Received Import Request.
-  Time since last request: 470860.754205 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_012.png
-  artifactKey: Guid(893376553be7ebd4484b1b6f58c16881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_012.png using Guid(893376553be7ebd4484b1b6f58c16881) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '06eb9858bda75f0b188008ceaed9b6ed') in 0.080252 seconds
+  Time since last request: 441003.220076 seconds.
+  path: Assets/Scenes/MainScenes/Level-3-Boss.unity
+  artifactKey: Guid(848907c96efb86b44b302e35a9b3b949) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/Level-3-Boss.unity using Guid(848907c96efb86b44b302e35a9b3b949) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '93ae8e8739f41271c03227ff8d448e45') in 0.002344 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000034 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_023.png
-  artifactKey: Guid(528252b121d460840931819e1898a8d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_023.png using Guid(528252b121d460840931819e1898a8d6) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '20544a9b5b77dba864c02667ff8f6f67') in 0.023048 seconds
+  Time since last request: 626.161629 seconds.
+  path: Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh.asset
+  artifactKey: Guid(d1844afaf03a20c418d3669ad1bec1f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh.asset using Guid(d1844afaf03a20c418d3669ad1bec1f7) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '10459940bb47dac8f0bd2ad1c148a282') in 0.010948 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000024 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_018.png
-  artifactKey: Guid(9bf761a3618961041bf9a2554762837e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_018.png using Guid(9bf761a3618961041bf9a2554762837e) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '3742fe52da622cf19072ce709ba7ed83') in 0.021985 seconds
+  Time since last request: 0.000014 seconds.
+  path: Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh 2.asset
+  artifactKey: Guid(fc666f1b306e3c349bc822d69e0420cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh 2.asset using Guid(fc666f1b306e3c349bc822d69e0420cf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '57a91115f0bd6b5ce06a96af265b9f5e') in 0.001297 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000018 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_019.png
-  artifactKey: Guid(a3409c5803b1bee43a58601905b9e0bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_019.png using Guid(a3409c5803b1bee43a58601905b9e0bf) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '1611cae68a25fde1df120d62c4f9980d') in 0.024766 seconds
+  Time since last request: 0.000012 seconds.
+  path: Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh 3.asset
+  artifactKey: Guid(39bd5f5ef9aa3224aae5d46f40c4df60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh 3.asset using Guid(39bd5f5ef9aa3224aae5d46f40c4df60) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '804f68dd73009109444001f3734225ea') in 0.001864 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000026 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_022.png
-  artifactKey: Guid(a3a544303bb9f3142bfba589e05cd9a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_022.png using Guid(a3a544303bb9f3142bfba589e05cd9a9) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'b8bbb191943707906e4d7010752ae2f2') in 0.028271 seconds
+  Time since last request: 0.000015 seconds.
+  path: Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh 4.asset
+  artifactKey: Guid(63c8f5fa907f1394fa017614c35a8fd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/Level1/NavMesh-NavMesh 4.asset using Guid(63c8f5fa907f1394fa017614c35a8fd1) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bb02ecb7d05ba6842d013fdbf99e2f17') in 0.001433 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000021 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_015.png
-  artifactKey: Guid(a9253f402ec752c4c8bc208b77e9814c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_015.png using Guid(a9253f402ec752c4c8bc208b77e9814c) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '8e215099eadd4aa1523c6307b5a107a5') in 0.031325 seconds
+  Time since last request: 2.453546 seconds.
+  path: Assets/Scenes/MainScenes/Level-1-Boss
+  artifactKey: Guid(fe4456b46af012941a80f7d33f54107f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/Level-1-Boss using Guid(fe4456b46af012941a80f7d33f54107f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'f6e4d21a5dd1304227d7e367f8928336') in 0.000894 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 0
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000017 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_003.png
-  artifactKey: Guid(9a2a73e1c394aed44945565201461527) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_003.png using Guid(9a2a73e1c394aed44945565201461527) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '708ed4473c2d8036dfd31747108ff77a') in 0.030294 seconds
+  Time since last request: 0.067175 seconds.
+  path: Assets/Scenes/MainScenes/Level-1-Boss/NavMesh-NavMesh.asset
+  artifactKey: Guid(1a13c6321ad58fb4cb280d2366d8e428) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/Level-1-Boss/NavMesh-NavMesh.asset using Guid(1a13c6321ad58fb4cb280d2366d8e428) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: 'bc616a6bd2777870766025f4edd5a8b0') in 0.001058 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 1
 ========================================================================
 Received Import Request.
-  Time since last request: 0.000028 seconds.
-  path: Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_006.png
-  artifactKey: Guid(314995033eab40d4da3447e220d1ad64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
-Start importing Assets/Bosses Sprites 1 - Fantasy Dreamland/Boss Sprites 48x48/Boss_006.png using Guid(314995033eab40d4da3447e220d1ad64) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '866da7697cded8da92cd93332e7604c0') in 0.025909 seconds
+  Time since last request: 21.862002 seconds.
+  path: Assets/Scenes/MainScenes/TestScenes/TownScene.unity
+  artifactKey: Guid(bcb81733c26057641a894d4aa398c9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/TestScenes/TownScene.unity using Guid(bcb81733c26057641a894d4aa398c9d4) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2ee61d17940aa7d6d35b27fde2e767a9') in 0.000639 seconds
 Number of updated asset objects reloaded before import = 0
-Number of asset objects unloaded after import = 2
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 7.120311 seconds.
+  path: Assets/Scenes/MainScenes/TestScenes/GradProjTestLevel1.unity
+  artifactKey: Guid(99cf727e1a6af8f4fbea7b6edc018d3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Scenes/MainScenes/TestScenes/GradProjTestLevel1.unity using Guid(99cf727e1a6af8f4fbea7b6edc018d3f) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '32d089236676c6257d2e29a61e594b5f') in 0.001103 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 0
+========================================================================
+Received Import Request.
+  Time since last request: 77.025275 seconds.
+  path: Assets/Prefabs/Enemies/Bat.prefab
+  artifactKey: Guid(323fea8968b581f418aae606acb928be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Bat.prefab using Guid(323fea8968b581f418aae606acb928be) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '060e15c1a100cfd9f1065f1b8ab60ba8') in 0.340751 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 278
+========================================================================
+Received Import Request.
+  Time since last request: 0.000038 seconds.
+  path: Assets/Prefabs/Enemies/Orc.prefab
+  artifactKey: Guid(6302ef7fe22b9554eb935be8c6eff017) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Orc.prefab using Guid(6302ef7fe22b9554eb935be8c6eff017) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '02b90ba982c81174ee348bb95d340fc7') in 0.051778 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 428
+========================================================================
+Received Import Request.
+  Time since last request: 0.000027 seconds.
+  path: Assets/Prefabs/Enemies/Rat.prefab
+  artifactKey: Guid(db1ffb4dc7b8ee740b61d329e0f70b06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Rat.prefab using Guid(db1ffb4dc7b8ee740b61d329e0f70b06) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '2050ede2ace97ac5324d04e2ab6cf806') in 0.056135 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 428
+========================================================================
+Received Import Request.
+  Time since last request: 0.000046 seconds.
+  path: Assets/Prefabs/Enemies/Slime 1.prefab
+  artifactKey: Guid(f9e445a19e898604783e8feec4713b2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Slime 1.prefab using Guid(f9e445a19e898604783e8feec4713b2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5884cf6439779754f243efd56e02e09c') in 0.254951 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 455
+========================================================================
+Received Import Request.
+  Time since last request: 8.354193 seconds.
+  path: Assets/Prefabs/Enemies/GoblinMelee.prefab
+  artifactKey: Guid(b49022baf2970e542bc6a80a2cb40e14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/GoblinMelee.prefab using Guid(b49022baf2970e542bc6a80a2cb40e14) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '33ff16e75cc164dea9c2378455056f5c') in 0.083281 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 1074
+========================================================================
+Received Import Request.
+  Time since last request: 0.000043 seconds.
+  path: Assets/Prefabs/Enemies/Slime 1.prefab
+  artifactKey: Guid(f9e445a19e898604783e8feec4713b2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Slime 1.prefab using Guid(f9e445a19e898604783e8feec4713b2b) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '08a71a01bd28a0393c91d1168dc98088') in 0.062854 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 455
+========================================================================
+Received Import Request.
+  Time since last request: 0.000048 seconds.
+  path: Assets/Prefabs/Enemies/Skull.prefab
+  artifactKey: Guid(57be9de48fce420499aa756b85ecf736) Importer(815301076,1909f56bfc062723c751e8b465ee728b)
+Start importing Assets/Prefabs/Enemies/Skull.prefab using Guid(57be9de48fce420499aa756b85ecf736) Importer(815301076,1909f56bfc062723c751e8b465ee728b)  -> (artifact id: '5fb558c8afc602b7fb56fe484a8f05a0') in 0.036710 seconds
+Number of updated asset objects reloaded before import = 0
+Number of asset objects unloaded after import = 277
+========================================================================
+Received Prepare
+Begin MonoManager ReloadAssembly
+- Loaded All Assemblies, in  0.632 seconds
+Refreshing native plugins compatible for Editor in 6.19 ms, found 4 plugins.
+Native extension for WindowsStandalone target not found
+[Package Manager] Server::EnsureServerProcessIsRunning -- launch failed, reason: Unity was launched with the -noUpm command-line argument
+[Package Manager] UpmClient::Send -- Unable to send message (not connected to UPM process).
+[Package Manager] Cannot connect to Unity Package Manager local server
+Mono: successfully reloaded assembly
+- Finished resetting the current domain, in  1.790 seconds
+Domain Reload Profiling: 2417ms
+	BeginReloadAssembly (195ms)
+		ExecutionOrderSort (0ms)
+		DisableScriptedObjects (13ms)
+		BackupInstance (0ms)
+		ReleaseScriptingObjects (0ms)
+		CreateAndSetChildDomain (56ms)
+	RebuildCommonClasses (32ms)
+	RebuildNativeTypeToScriptingClass (15ms)
+	initialDomainReloadingComplete (37ms)
+	LoadAllAssembliesAndSetupDomain (348ms)
+		LoadAssemblies (419ms)
+		RebuildTransferFunctionScriptingTraits (0ms)
+		AnalyzeDomain (20ms)
+			TypeCache.Refresh (7ms)
+				TypeCache.ScanAssembly (0ms)
+			ScanForSourceGeneratedMonoScriptInfo (0ms)
+			ResolveRequiredComponents (13ms)
+	FinalizeReload (1790ms)
+		ReleaseScriptCaches (0ms)
+		RebuildScriptCaches (0ms)
+		SetupLoadedEditorAssemblies (741ms)
+			LogAssemblyErrors (0ms)
+			InitializePlatformSupportModulesInManaged (6ms)
+			SetLoadedEditorAssemblies (3ms)
+			RefreshPlugins (0ms)
+			BeforeProcessingInitializeOnLoad (86ms)
+			ProcessInitializeOnLoadAttributes (546ms)
+			ProcessInitializeOnLoadMethodAttributes (91ms)
+			AfterProcessingInitializeOnLoad (9ms)
+			EditorAssembliesLoaded (0ms)
+		ExecutionOrderSort2 (0ms)
+		AwakeInstancesAfterBackupRestoration (19ms)
+Refreshing native plugins compatible for Editor in 7.26 ms, found 4 plugins.
+Preloading 0 native plugins for Editor in 0.00 ms.
+Unloading 6061 Unused Serialized files (Serialized files now loaded: 0)
+Unloading 62 unused Assets / (2.1 MB). Loaded Objects now: 6786.
+Memory consumption went from 242.2 MB to 240.1 MB.
+Total: 7.835100 ms (FindLiveObjects: 0.510400 ms CreateObjectMapping: 0.525600 ms MarkObjects: 6.010300 ms  DeleteObjects: 0.787500 ms)
+
+Prepare: number of updated asset objects reloaded= 0
+AssetImportParameters requested are different than current active one (requested -> active):
+  custom:container-demuxer-ogg: 62fdf1f143b41e24485cea50d1cbac27 -> 
+  custom:video-decoder-ogg-theora: a1e56fd34408186e4bbccfd4996cb3dc -> 
+  custom:framework-win-MediaFoundation: 216162199b28c13a410421893ffa2e32 -> 
+  custom:CustomObjectIndexerAttribute: 0f5f72dab822025b0759b197a3119d15 -> 
+  custom:container-demuxer-webm: 4f35f7cbe854078d1ac9338744f61a02 -> 
+  custom:container-muxer-webm: aa71ff27fc2769a1b78a27578f13a17b -> 
+  custom:video-decoder-webm-vp8: 9c59270c3fd7afecdb556c50c9e8de78 -> 
+  custom:SearchIndexIgnoredProperties: e643bd26f0fe6173181afceb89e7c659 -> 
+  custom:AudioImporter_EditorPlatform: d09bf68614088b80899f8185d706f6e7 -> 
+  custom:video-encoder-webm-vp8: eb34c28f22e8b96e1ab97ce403110664 -> 
+  custom:audio-decoder-ogg-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
+  custom:audio-encoder-webm-vorbis: bf7c407c2cedff20999df2af8eb42d56 -> 
 Editor requested this worker to shutdown with reason: Scaling down because of idle timeout
 TcpMessagingSession - receive error: operation aborted. errorcode: 995, details: The I/O operation has been aborted because of either a thread exit or an application request.
 AssetImportWorker is now disconnected from the server

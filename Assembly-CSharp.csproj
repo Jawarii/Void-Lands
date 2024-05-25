@@ -101,6 +101,7 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\BoomerangSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Script\EnemySelector.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableSkillBehaviour.cs" />
+    <Compile Include="Assets\LineSkillDamageController.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\SearchGrid.cs" />
     <Compile Include="Assets\CircleIndicatorBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAttackBehaviour.cs" />
@@ -120,7 +121,9 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\EditorTilemap.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\PlayerController.cs" />
     <Compile Include="Assets\StoreAssets\Piloto Studio\Scripts\ParticleShowcase.cs" />
+    <Compile Include="Assets\LaserController.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\Box.cs" />
+    <Compile Include="Assets\RelicBossPatternBehaviour.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableCanvas.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Floats.cs" />
@@ -228,13 +231,16 @@
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\InvertibleAxes.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\AStarGrid.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerMovement.cs" />
+    <Compile Include="Assets\ChasingLaserController.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BlinkTest.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakeData.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Special\DynamicSortingOrder.cs" />
     <Compile Include="Assets\Scripts\Items\OpenChestBehaviour.cs" />
+    <Compile Include="Assets\RotatingLasersController.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\FrameRateCalculator.cs" />
     <Compile Include="Assets\Scripts\Special\ReadSceneNames.cs" />
+    <Compile Include="Assets\LineIndicatorBehaviour.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Scripts\ParticleCollisionInstance.cs" />
     <Compile Include="Assets\Scripts\ArenaResultBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Enums.cs" />

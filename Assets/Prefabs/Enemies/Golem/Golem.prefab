@@ -394,7 +394,6 @@ MonoBehaviour:
   colliderObject: {fileID: 0}
   agent: {fileID: 0}
   stoppingDistance: 2.5
-  roamingRadius: 5
 --- !u!114 &3497676198621287378
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -408,7 +407,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myShake: {fileID: 11400000, guid: 710c880799ac4264dab849dc626d5ac8, type: 2}
-  baseHp: 0
+  baseHp: 100
   maxHp: 25
   hp: 25
   attack: 3
@@ -730,7 +729,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 12b23d00a68afc54ea36c08c4e5d885c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  enemy: {fileID: 0}
+  agroRadius: 1
 --- !u!1 &3939263860721445295
 GameObject:
   m_ObjectHideFlags: 0

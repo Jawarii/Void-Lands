@@ -455,7 +455,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myShake: {fileID: 11400000, guid: 710c880799ac4264dab849dc626d5ac8, type: 2}
-  baseHp: 0
+  baseHp: 100
   maxHp: 25
   hp: 25
   attack: 3

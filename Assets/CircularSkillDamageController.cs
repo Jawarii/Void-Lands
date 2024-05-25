@@ -29,7 +29,7 @@ public class CircularSkillDamageController : MonoBehaviour
     }
     public void PlayClip()
     {
-        audioSource.PlayOneShot(clip);
+        audioSource.PlayOneShot(clip);  
     }
     IEnumerator DisableCollider()
     {
