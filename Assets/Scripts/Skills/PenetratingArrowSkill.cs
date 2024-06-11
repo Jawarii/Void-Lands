@@ -7,8 +7,11 @@ public class PenetratingArrowSkill : SkillsScript
     public AnimationClip bowAnim;
     public AnimationClip bowReleaseAnim;
     public GameObject _arrow;
+    public float coolDown = 5f;
+    public float cdElapsedTime = 0f;
     public override void ActivateSkill()
     {
+        if (cdElapsedTime > 0f) return;
         playerAttack.animTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
         playerAttack.releaseTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
         playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;

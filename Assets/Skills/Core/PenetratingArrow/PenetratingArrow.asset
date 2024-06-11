@@ -1,0 +1,24 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d570fa8e895d81c41aa608c71f0c3d98, type: 3}
+  m_Name: PenetratingArrow
+  m_EditorClassIdentifier: 
+  skillName: Penetrating Arrow
+  skillDescription: Shoots an arrow that pierces through enemies and splits into
+    2 extra arrows on each side each time it hts a targer dealing 40% of original
+    damage.
+  skillLevel: 1
+  skillType: Core
+  skillIcon: {fileID: 21300000, guid: c4b733de993423e4fbafacea615870fc, type: 3}
+  skillScript: {fileID: -798453549716521159, guid: 2ad436c7dfb9c644da7c56c4da0699ca, type: 3}
+  _animator: {fileID: 0}
+  coolDown: 0

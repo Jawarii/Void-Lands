@@ -7,6 +7,7 @@ public class BowController : MonoBehaviour
 {
     public AudioSource source_;
     public AudioClip clip_;
+    public AudioClip chargeClip_;
     void Update()
     {
         RotateObjectToMouse();
@@ -26,7 +27,35 @@ public class BowController : MonoBehaviour
         if (source_ != null)
         {
             source_.Stop();
+            source_.pitch = 1.0f;
             source_.PlayOneShot(clip_);
+        }
+    }
+    public void PlayChargeClip1()
+    {
+        if (source_ != null)
+        {
+            source_.Stop();
+            source_.pitch = 1.0f;
+            source_.PlayOneShot(chargeClip_);
+        }
+    }
+    public void PlayChargeClip2()
+    {
+        if (source_ != null)
+        {
+            source_.Stop();
+            source_.pitch = 1.1f;
+            source_.PlayOneShot(chargeClip_);
+        }
+    }
+    public void PlayChargeClip3()
+    {
+        if (source_ != null)
+        {
+            source_.Stop();
+            source_.pitch = 1.2f;
+            source_.PlayOneShot(chargeClip_);
         }
     }
 }

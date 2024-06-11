@@ -6,6 +6,7 @@ public class SkillButtonInformation : MonoBehaviour
     public SkillsSO _skillSo;
     public GameObject skillsScript;
     public RuntimeAnimatorController newAnimatorController;
+    public string skillType;
     void Start()
     {
         if (_skillSo != null && skillsScript != null)

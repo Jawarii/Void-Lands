@@ -10,15 +10,23 @@ public class SplitArrowBehaviour : MonoBehaviour
     public float basicAtkDmgMulti = 0.0f;
     public PenetratingArrowBehaviour penArrow;
     public float maxDistance = 4f; // Maximum distance the arrow can travel
-
+    public bool isImbued = false;
     private Vector2 startPosition;
+
+    public GameObject _bow;
+    public PlayerAttackArcher attackArcher;
+    public GameObject miasmaExplosionPrefab;
 
     private void Start()
     {
+        _bow = GameObject.FindGameObjectWithTag("BowObject");
+        attackArcher = _bow.GetComponent<PlayerAttackArcher>();
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         basicAtkDmgMulti = penArrow.basicAtkDmgMulti * 0.75f;
         startPosition = transform.position;
+        if (attackArcher.hasImbueBuff)
+            isImbued = true;
     }
 
     private void Update()
@@ -46,7 +54,11 @@ public class SplitArrowBehaviour : MonoBehaviour
             float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.9f;
             float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.1f;
             float critDmgMulti = playerStats.critDmg / 100.0f;
-
+            if (isImbued)
+            {
+                GameObject explosion = Instantiate(miasmaExplosionPrefab, transform.position, Quaternion.identity);
+                explosion.GetComponent<MiasmaExplosionController>().playerStats = playerStats;
+            }
             if (crit <= playerStats.critRate)
             {
                 enemyStats.TakeDamage((int)(Random.Range(minDmg, maxDmg) * critDmgMulti), true);

@@ -73,6 +73,8 @@ public class PlayerStats : MonoBehaviour
 
     public float timeScaleMod = 1.0f;
 
+    public bool isImmune = false;
+
     void Start()
     {
         maxExp = lvl * 100;
@@ -149,6 +151,8 @@ public class PlayerStats : MonoBehaviour
     }
     public void TakeDamage(int damage, bool isCrit)
     {
+        if (isImmune)
+            return;
         if (damage < 1)
             damage = 1;
         source.Stop();

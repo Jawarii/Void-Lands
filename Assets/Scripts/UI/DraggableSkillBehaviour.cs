@@ -31,12 +31,16 @@ public class DraggableSkillBehaviour : MonoBehaviour, IBeginDragHandler, IDragHa
             skillButtonInformation = result.gameObject.GetComponent<SkillButtonInformation>();
             if (skillButtonInformation != null)
             {
-                skillButtonInformation._skillSo = draggedSkill.GetComponent<SkillsWindowSlotInfo>()._skillSo;
-                skillButtonInformation.skillsScript = draggedSkill.GetComponent<SkillsWindowSlotInfo>().skillsScript;
-                skillButtonInformation.newAnimatorController = draggedSkill.GetComponent<SkillsWindowSlotInfo>().newAnimatorController;
-                result.gameObject.transform.GetChild(0).GetComponent<RawImage>().texture = draggedSkill.GetChild(0).GetComponent<Image>().sprite.texture;
-                Debug.Log("Done");
-                break;
+                if (skillButtonInformation.skillType == draggedSkill.GetComponent<SkillsWindowSlotInfo>()._skillSo.skillType)
+                {
+                    skillButtonInformation._skillSo = draggedSkill.GetComponent<SkillsWindowSlotInfo>()._skillSo;
+                    skillButtonInformation.skillsScript = draggedSkill.GetComponent<SkillsWindowSlotInfo>().skillsScript;
+                    skillButtonInformation.newAnimatorController = draggedSkill.GetComponent<SkillsWindowSlotInfo>().newAnimatorController;
+                    result.gameObject.transform.GetChild(0).GetComponent<RawImage>().texture = draggedSkill.GetChild(0).GetComponent<Image>().sprite.texture;
+                    result.gameObject.transform.GetChild(0).GetComponent<RawImage>().enabled = true;
+                    Debug.Log("Done");
+                    break;
+                }
             }
         }
         Destroy(draggedSkill.gameObject);

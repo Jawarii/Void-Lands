@@ -12,6 +12,7 @@ public class FireArrowBehaviour : MonoBehaviour
     public float knockbackForce = 10f; // Adjust the force of knockback as needed
     public float lifeTime = 1f;
     public Collider2D _collider;
+    public bool isImbued = false;
 
     private void Start()
     {

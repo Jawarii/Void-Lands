@@ -579,7 +579,7 @@ MonoBehaviour:
   hpMulti: 0
   critDmgMulti: 0
   hpRecoveryMulti: 0
-  lvl: 20
+  lvl: 1
   currentExp: 0
   maxExp: 0
   timeSince: 0
@@ -870,6 +870,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   source_: {fileID: 8334485593516995717}
   clip_: {fileID: 8300000, guid: 28ecac922c44d264383925bb733197ce, type: 3}
+  chargeClip_: {fileID: 8300000, guid: 09cbf1573538ea445a2bc96e14be84b3, type: 3}
 --- !u!95 &1652866753653365266
 Animator:
   serializedVersion: 5
@@ -921,6 +922,11 @@ MonoBehaviour:
   - {fileID: 0}
   - {fileID: 0}
   skillScript: {fileID: 0}
+  coolDown0: 0
+  coolDown1: 0
+  coolDown2: 0
+  coolDown3: 0
+  hasImbueBuff: 0
 --- !u!82 &8334485593516995717
 AudioSource:
   m_ObjectHideFlags: 0
