@@ -15,6 +15,8 @@ public class ItemInfo : MonoBehaviour
 
     public Color textColor;
 
+    public int upgradeLevel;
+
     private void Awake()
     {
         itemType = gameObject.tag;

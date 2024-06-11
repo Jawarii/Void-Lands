@@ -9,6 +9,9 @@ public class GearInfo : ItemInfo
     [Serializable]
     public class GearMainStats
     {
+        public int baseHp;
+        public int baseArmor;
+        public int baseAttack;
         public int hp;
         public int armor;
         public int attack;
@@ -39,6 +42,7 @@ public class GearInfo : ItemInfo
         SetItemMainStats();
         SetItemBonusStats();
     }
+
     void SetItemBonusStats()
     {
         List<Action> bonusStatActions = new List<Action>();
@@ -48,34 +52,34 @@ public class GearInfo : ItemInfo
         if (itemType == "Boots")
         {
             bonusStatActions = new List<Action>()
-        {
-            () => gearBonusStats.hp = (int)((2 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)),
-            () => gearBonusStats.moveSpeed = (10 + itemLvl) * RandomRange(0.7f, 1.0f),
-            () => gearBonusStats.armor = (int) ((1 + itemLvl/3f) * RandomRange(0.7f, 1.0f)),
-            () => gearBonusStats.cdRed = (2 + itemLvl / 6f) * RandomRange(0.7f, 1.0f),
-            () => gearBonusStats.recovery = (int)((1 + itemLvl / 2f) * RandomRange(0.7f, 1.0f))
-        };
+            {
+                () => gearBonusStats.hp = (int)((2 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.moveSpeed = (10 + itemLvl) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.armor = (int) ((1 + itemLvl / 3f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.cdRed = (2 + itemLvl / 6f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.recovery = (int)((1 + itemLvl / 2f) * RandomRange(0.7f, 1.0f))
+            };
         }
         else if (itemType == "Gloves" || itemType == "Necklace" || itemType == "Ring")
         {
             bonusStatActions = new List<Action>()
-        {
-            () => gearBonusStats.attack = (int)((2 + itemLvl * 1.5f) * RandomRange(0.7f, 1.0f)),
-            () => gearBonusStats.critChance = (5 + itemLvl / 2f) * RandomRange(0.7f, 1.0f),
-            () => gearBonusStats.critDamage = (15 + itemLvl * 2f) * RandomRange(0.7f, 1.0f),
-            () => gearBonusStats.atkSpeed = (7 + itemLvl / 1.2f) * RandomRange(0.7f, 1.0f),
-            () => gearBonusStats.staggerDmg = (45 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)
-        };
+            {
+                () => gearBonusStats.attack = (int)((2 + itemLvl * 1.5f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.critChance = (5 + itemLvl / 2f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.critDamage = (15 + itemLvl * 2f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.atkSpeed = (7 + itemLvl / 1.2f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.staggerDmg = (45 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)
+            };
         }
         else
         {
             bonusStatActions = new List<Action>()
-        {
-            () => gearBonusStats.hp = (int)((2 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)),
-            () => gearBonusStats.armor = (int) ((1 + itemLvl / 3f) * RandomRange(0.7f, 1.0f)),
-            () => gearBonusStats.cdRed = (2 + itemLvl / 6f) * RandomRange(0.7f, 1.0f),
-            () => gearBonusStats.recovery = (int)((1 + itemLvl / 2f) * RandomRange(0.7f, 1.0f))
-        };
+            {
+                () => gearBonusStats.hp = (int)((2 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.armor = (int) ((1 + itemLvl / 3f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.cdRed = (2 + itemLvl / 6f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.recovery = (int)((1 + itemLvl / 2f) * RandomRange(0.7f, 1.0f))
+            };
         }
         int numberOfStats = qualityNormalized switch
         {
@@ -92,6 +96,7 @@ public class GearInfo : ItemInfo
             bonusStatActions[i](); // Apply the stat modification
         }
     }
+
     private void Shuffle(List<Action> list)
     {
         int n = list.Count;
@@ -109,27 +114,30 @@ public class GearInfo : ItemInfo
     {
         return (float)rand.NextDouble() * (max - min) + min;
     }
+
     void SetItemMainStats()
     {
         switch (itemType)
         {
             case "Necklace":
-                gearMainStats.attack = itemLvl * 2;
-                gearMainStats.hp = 0;
-                gearMainStats.armor = 0;
-                break;
             case "Ring":
-                gearMainStats.attack = itemLvl * 2;
-                gearMainStats.hp = 0;
-                gearMainStats.armor = 0;
+                gearMainStats.baseAttack = itemLvl * 2;
+                gearMainStats.baseHp = 0;
+                gearMainStats.baseArmor = 0;
                 break;
             default:
-                gearMainStats.attack = 0;
-                gearMainStats.hp = itemLvl * 10;
-                gearMainStats.armor = itemLvl;
+                gearMainStats.baseAttack = 0;
+                gearMainStats.baseHp = itemLvl * 10;
+                gearMainStats.baseArmor = itemLvl;
                 break;
         }
+
+        // Initialize current stats with base stats
+        gearMainStats.attack = gearMainStats.baseAttack;
+        gearMainStats.hp = gearMainStats.baseHp;
+        gearMainStats.armor = gearMainStats.baseArmor;
     }
+
     public void ResetBonusStats()
     {
         gearBonusStats.attack = 0;

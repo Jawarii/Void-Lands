@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.EventSystems;
+using UnityEngine.UI;
 
 public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
@@ -16,7 +17,6 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
 
     public void OnBeginDrag(PointerEventData eventData)
     {
-
         draggedCanvas = GameObject.Find("DraggedCanvas");
         isDragging = true;
         inventoryMain = GameObject.Find("InventoryMain");
@@ -38,7 +38,6 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
             parentAfterDrag = draggedItem.parent;
             draggedItem.SetParent(draggedCanvas.transform);
             draggedItem.SetAsLastSibling();
-
         }
         else
         {
@@ -53,7 +52,6 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
             parentAfterDrag = draggedItem.parent;
             draggedItem.SetParent(draggedCanvas.transform);
             draggedItem.SetAsLastSibling();
-
         }
     }
 
@@ -83,11 +81,11 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
         foreach (RaycastResult result in results)
         {
             buttonInfo = result.gameObject.GetComponent<ButtonInfo>();
-            equipmentController = result.gameObject.GetComponent<EquipmentController>(); 
+            equipmentController = result.gameObject.GetComponent<EquipmentController>();
             if (buttonInfo != null)
             {
                 hoveredSlotId = buttonInfo.slotId;
-                if (draggedFromEquipment == true)
+                if (draggedFromEquipment)
                 {
                     if (inventoryController.inventory[hoveredSlotId] != null &&
                         inventoryController.inventory[hoveredSlotId].itemType != inventoryController.draggedItemInfo.itemType)
@@ -108,7 +106,7 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                     break;
                 }
                 else
-                {               
+                {
                     if (hoveredSlotId == _slotId)
                     {
                         draggedItem.SetParent(parentAfterDrag);
@@ -132,6 +130,18 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                         draggedItem.localPosition = new Vector3(0, 0, 0);
                         draggedItem.SetAsFirstSibling();
                         validDropTargetFound = true;
+                        if (hoveredSlotId == 70) // Special handling for slot ID 70
+                        {
+                            GameObject upgradeMain = GameObject.Find("UpgradeMain");
+                            if (upgradeMain != null)
+                            {
+                                UpgradeLogic upgradeLogic = upgradeMain.GetComponent<UpgradeLogic>();
+                                if (upgradeLogic != null)
+                                {
+                                    upgradeLogic.itemToUpgrade = inventoryController.inventory[hoveredSlotId];
+                                }
+                            }
+                        }
                         break;
                     }
                 }

@@ -9,6 +9,7 @@ public class WeaponInfo : ItemInfo
     [Serializable]
     public class WeaponMainStats
     {
+        public int baseAttack;
         public int attack;
         public int minAttack;
         public int maxAttack;
@@ -38,7 +39,8 @@ public class WeaponInfo : ItemInfo
 
     public void SetWeaponMainStats()
     {
-        weaponMainStats.attack = itemLvl * 6;
+        weaponMainStats.baseAttack = itemLvl * 6;
+        weaponMainStats.attack = weaponMainStats.baseAttack;
     }
 
     public void SetWeaponBonusStats()
@@ -96,6 +98,7 @@ public class WeaponInfo : ItemInfo
         weaponMainStats.minAttack = (int)(0.9f * weaponMainStats.attack);
         weaponMainStats.maxAttack = (int)(1.1f * weaponMainStats.attack);
     }
+
     public void ResetBonusStats()
     {
         weaponBonusStats.attack = 0;

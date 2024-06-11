@@ -16,7 +16,6 @@ public class InventoryController : MonoBehaviour
     void Start()
     {
         goldAmountText.text = goldAmount.ToString();
-        
     }
 
     // Update is called once per frame
@@ -32,8 +31,10 @@ public class InventoryController : MonoBehaviour
         item.itemName = itemInfo.itemName;
         item.stackSize = itemInfo.stackSize;
         item.itemIcon = itemInfo.GetComponent<SpriteRenderer>().sprite;
-        item.itemType= itemInfo.itemType;
-        item.textColor= itemInfo.textColor;
+        item.itemType = itemInfo.itemType;
+        item.textColor = itemInfo.textColor;
+        item.itemQuality = itemInfo.itemQuality;
+        item.upgradeLevel = itemInfo.upgradeLevel;
 
         if (item.stackSize > 1)
         {
@@ -61,11 +62,11 @@ public class InventoryController : MonoBehaviour
                             (GameObject.Find("Slot (" + j + ")").transform.Find("ItemIcon")).gameObject.SetActive(true);
                             GameObject.Find("Slot (" + j + ")").GetComponentInChildren<TMP_Text>().text = inventory[j].currentStackSize.ToString();
                             (GameObject.Find("Slot (" + j + ")").transform.Find("ItemIcon")).GetComponent<Image>().sprite = item.itemIcon;
-                          
+
                             break;
                         }
                     }
-                }    
+                }
             }
         }
         else
@@ -86,13 +87,14 @@ public class InventoryController : MonoBehaviour
                 }
             }
         }
-        if (item.itemType!= null)
+        if (item.itemType != null)
         {
             if (item.itemType == "Weapon")
             {
                 WeaponInfo weaponInfo = itemInfo as WeaponInfo;
 
                 //MainStats
+                item.weaponMainStats.baseAttack = weaponInfo.weaponMainStats.baseAttack;
                 item.weaponMainStats.attack = weaponInfo.weaponMainStats.attack;
                 item.weaponMainStats.minAttack = weaponInfo.weaponMainStats.minAttack;
                 item.weaponMainStats.maxAttack = weaponInfo.weaponMainStats.maxAttack;
@@ -111,6 +113,9 @@ public class InventoryController : MonoBehaviour
                 GearInfo gearInfo = itemInfo as GearInfo;
 
                 //MainStats
+                item.gearMainStats.baseHp = gearInfo.gearMainStats.baseHp;
+                item.gearMainStats.baseArmor = gearInfo.gearMainStats.baseArmor;
+                item.gearMainStats.baseAttack = gearInfo.gearMainStats.baseAttack;
                 item.gearMainStats.hp = gearInfo.gearMainStats.hp;
                 item.gearMainStats.armor = gearInfo.gearMainStats.armor;
                 item.gearMainStats.attack = gearInfo.gearMainStats.attack;

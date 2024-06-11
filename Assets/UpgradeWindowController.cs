@@ -2,10 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SkillWindowController : MonoBehaviour
+public class UpgradeWindowController : MonoBehaviour
 {
     public List<GameObject> menus;
-    //public List<GameObject> activeMenus;
     public Canvas canvas;
 
     void Update()
@@ -15,7 +14,7 @@ public class SkillWindowController : MonoBehaviour
             canvas.gameObject.GetComponent<Canvas>().enabled = false;
         }
 
-        if (Input.GetKeyDown(KeyCode.K))
+        if (Input.GetKeyDown(KeyCode.U))
         {
             if (canvas.gameObject.GetComponent<Canvas>().enabled == true)
             {
