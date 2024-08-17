@@ -1,8 +1,6 @@
-//using Microsoft.Unity.VisualStudio.Editor;
-using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -130,6 +128,103 @@ public class InventoryController : MonoBehaviour
                 item.gearBonusStats.cdRed = gearInfo.gearBonusStats.cdRed;
                 item.gearBonusStats.moveSpeed = gearInfo.gearBonusStats.moveSpeed;
                 item.gearBonusStats.recovery = gearInfo.gearBonusStats.recovery;
+            }
+        }
+    }
+    public void LoadInventory(List<ItemInfoData> itemDataList)
+    {
+        foreach (var itemData in itemDataList)
+        {
+            ItemInfoSO item = ScriptableObject.CreateInstance<ItemInfoSO>();
+            item.stackSize = itemData.stackSize;
+            item.itemId = itemData.itemId;
+            item.itemName = itemData.itemName;
+            item.itemDescription = itemData.itemDescription;
+            item.itemType = itemData.itemType;
+            item.itemLvl = itemData.itemLvl;
+            item.itemQuality = itemData.itemQuality;
+            item.upgradeLevel = itemData.upgradeLevel;
+            item.currentStackSize = itemData.currentStackSize;
+            item.textColor = itemData.textColor.ToColor();
+
+            if (itemData.itemIcon != null)
+            {
+                item.itemIcon = SaveData.ByteArrayToSprite(itemData.itemIcon);
+            }
+
+            item.weaponMainStats = itemData.weaponMainStats;
+            item.weaponBonusStats = itemData.weaponBonusStats;
+            item.gearMainStats = itemData.gearMainStats;
+            item.gearBonusStats = itemData.gearBonusStats;
+
+            bool itemAdded = false;
+
+            for (int i = 0; i < inventory.Count; i++)
+            {
+                if (inventory[i] == null)
+                {
+                    // If the item is stackable and already exists, add to the existing stack
+                    if (itemData.stackSize > 1 && inventory.Any(slot => slot != null && slot.itemId == item.itemId))
+                    {
+                        // Item already exists in a stackable slot, so don't add a new slot
+                        itemAdded = true;
+                        break;
+                    }
+                    else
+                    {
+                        inventory[i] = item;
+                        UpdateSlotUI(i, item);
+                        itemAdded = true;
+                        break;
+                    }
+                }
+                else if (inventory[i].itemId == item.itemId)
+                {
+                    // Update stack size only if the item is stackable
+                    if (itemData.stackSize > 1)
+                    {
+                        inventory[i].currentStackSize += item.currentStackSize;
+                        UpdateSlotUI(i, inventory[i]);
+                        itemAdded = true;
+                        break;
+                    }
+                }
+            }
+
+            // If item is not added to an existing slot, it should go into a new slot
+            if (!itemAdded && itemData.stackSize <= 1)
+            {
+                for (int i = 0; i < inventory.Count; i++)
+                {
+                    if (inventory[i] == null)
+                    {
+                        inventory[i] = item;
+                        UpdateSlotUI(i, item);
+                        break;
+                    }
+                }
+            }
+        }
+    }
+
+    private void UpdateSlotUI(int index, ItemInfoSO item)
+    {
+        GameObject slot = GameObject.Find("Slot (" + index + ")");
+        if (slot != null)
+        {
+            Transform iconTransform = slot.transform.Find("ItemIcon");
+            if (iconTransform != null)
+            {
+                iconTransform.gameObject.SetActive(true);
+                iconTransform.GetComponent<Image>().sprite = item.itemIcon;
+            }
+
+            TMP_Text stackText = slot.GetComponentInChildren<TMP_Text>();
+            if (stackText != null)
+            {
+                // Ensure stack text is only visible for stackable items
+                stackText.gameObject.SetActive(item.stackSize > 1);
+                stackText.text = item.currentStackSize.ToString();
             }
         }
     }

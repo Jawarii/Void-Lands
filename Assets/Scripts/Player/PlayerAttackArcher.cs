@@ -45,7 +45,7 @@ public class PlayerAttackArcher : MonoBehaviour
         adjustedSpeed = 0.0f * runSpeed;
         if (animator != null)
         {
-            animator.SetFloat("AtkSpeed", player.GetComponent<PlayerStats>().atkSpd);
+            //animator.SetFloat("AtkSpeed", player.GetComponent<PlayerStats>().atkSpd);
         }
 
         if (animTime > 0)

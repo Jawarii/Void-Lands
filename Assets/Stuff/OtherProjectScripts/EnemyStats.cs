@@ -66,8 +66,7 @@ public class EnemyStats : MonoBehaviour
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
 
         _exp = enemyLvl * 10;
-    }
-
+    }     
     private void HandleHitIndicator()
     {
         if (hitIndicator > 0)
@@ -124,7 +123,7 @@ public class EnemyStats : MonoBehaviour
 
     private void DropGold()
     {
-        if (Random.value > 0.7f)
+        if (Random.value > 0.70f)
         {
             int goldDropIndex = goldAmount < 10 ? 0 : goldAmount < 50 ? 1 : 2;
             Vector3 dropPosition = RandomDropPosition();
@@ -136,7 +135,7 @@ public class EnemyStats : MonoBehaviour
 
     private void DropGear()
     {
-        if (Random.value > 0.75f) // 15% chance to drop gear
+        if (Random.value > 0.80f) // 15% chance to drop gear
         {
             DropItem(gearItems);
         }
@@ -144,7 +143,7 @@ public class EnemyStats : MonoBehaviour
 
     private void DropUpgrades()
     {
-        if (Random.value > 0.50f) // 15% chance to drop upgrades (due to lack of a normal tier, fix this later)
+        if (Random.value > 0.70f) // 15% chance to drop upgrades (due to lack of a normal tier, fix this later)
         {
             DropItem(upgradeItems);
         }

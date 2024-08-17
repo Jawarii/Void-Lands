@@ -19,4 +19,4 @@ MonoBehaviour:
   skillIcon: {fileID: 21300000, guid: 0fb555bd8904eba41ab9f86bf36a3774, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 18
+  coolDown: 0

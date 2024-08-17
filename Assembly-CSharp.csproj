@@ -81,7 +81,9 @@
     <Compile Include="Assets\Scripts\Enemies\LineIndicatorBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\SkillsWindowSlotInfo.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableRigidbody2D.cs" />
+    <Compile Include="Assets\ColorData.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BossMovement.cs" />
+    <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Arrays.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Threading\WorkerThread.cs" />
     <Compile Include="Assets\Scripts\ArenaSpawner.cs" />
@@ -101,6 +103,7 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\AnimatedObstacle.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Visualisation\Performance.cs" />
     <Compile Include="Assets\Scripts\Skills\PiercingArrowBehaviour.cs" />
+    <Compile Include="Assets\ItemInfoData.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableTransform.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\PathRouteNode.cs" />
     <Compile Include="Assets\Scripts\Skills\RapidArrowBehaviour.cs" />
@@ -157,6 +160,7 @@
     <Compile Include="Assets\Scripts\Enemies\TrollAttack.cs" />
     <Compile Include="Assets\Scripts\Skills\PenetratingArrowSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\PerfMonitor.cs" />
+    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\Items\EquipmentController.cs" />
     <Compile Include="Assets\Scripts\Items\ItemInfo.cs" />
@@ -166,6 +170,7 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\StartGame.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Index.cs" />
+    <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAgroBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\StatsController.cs" />
@@ -194,6 +199,7 @@
     <Compile Include="Assets\Scripts\Player\PlayerAttackArcher.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\ArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\SkillButtonInformation.cs" />
+    <Compile Include="Assets\Stuff\FullscreenGameView.cs" />
     <Compile Include="Assets\Scripts\Enemies\LineSkillDamageController.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\AStarGridManager.cs" />
     <Compile Include="Assets\UpgradeLogic.cs" />
@@ -227,6 +233,7 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Path.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Scripts\Skills\SplitArrowBehaviour.cs" />
+    <Compile Include="Assets\InventoryData.cs" />
     <Compile Include="Assets\Scripts\Enemies\CircularSkillDamageController.cs" />
     <Compile Include="Assets\Scripts\Special\ControlAllLights.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\Damage.cs" />
@@ -252,13 +259,13 @@
     <Compile Include="Assets\Scripts\Skills\MiasmaExplosionController.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BlinkTest.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakeData.cs" />
-    <Compile Include="Assets\Stuff\OtherProjectScripts\PlayerStats.cs" />
     <Compile Include="Assets\Scripts\Special\DynamicSortingOrder.cs" />
     <Compile Include="Assets\Scripts\Items\OpenChestBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\FrameRateCalculator.cs" />
     <Compile Include="Assets\Scripts\Special\ReadSceneNames.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Scripts\ParticleCollisionInstance.cs" />
     <Compile Include="Assets\Scripts\ArenaResultBehaviour.cs" />
+    <Compile Include="Assets\Scripts\SaveData.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Enums.cs" />
     <Compile Include="Assets\Scripts\Skills\MultishotSkill.cs" />
     <Compile Include="Assets\Scripts\Skills\FireArrowBehaviour.cs" />

@@ -415,8 +415,8 @@ MonoBehaviour:
   timeSince: 0
   player: {fileID: 0}
   animator_: {fileID: 3497676198621287215}
-  enemyLvl: 30
-  _exp: 10
+  enemyLvl: 20
+  _exp: 0
   hitIndicator: 0
   source: {fileID: 7005549183149520373}
   clip: {fileID: 8300000, guid: d64e91cef03af304fa237225b23c5707, type: 3}
@@ -716,7 +716,7 @@ CircleCollider2D:
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0}
   serializedVersion: 2
-  m_Radius: 2.5
+  m_Radius: 25
 --- !u!114 &3497676199661547611
 MonoBehaviour:
   m_ObjectHideFlags: 0

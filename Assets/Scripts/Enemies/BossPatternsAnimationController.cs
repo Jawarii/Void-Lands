@@ -1,10 +1,9 @@
 using UnityEngine;
-using UnityEditor.Animations;
 using System.Collections;
 
 public class BossPatternsAnimationController : MonoBehaviour
 {
-    public AnimatorController animatorController;
+    public RuntimeAnimatorController animatorController;
     public float animationDuration;
 
     void Start()
@@ -12,7 +11,7 @@ public class BossPatternsAnimationController : MonoBehaviour
         Animator animator = GetComponent<Animator>();
         if (animator != null)
         {
-            animatorController = animator.runtimeAnimatorController as AnimatorController;
+            animatorController = animator.runtimeAnimatorController as RuntimeAnimatorController;
 
             if (animatorController != null && animatorController.animationClips.Length > 0)
             {
@@ -23,7 +22,7 @@ public class BossPatternsAnimationController : MonoBehaviour
             {
                 Debug.LogWarning("AnimatorController or animation clips are missing.");
             }
-        }
+        }   
         else
         {
             Debug.LogWarning("Animator component not found.");

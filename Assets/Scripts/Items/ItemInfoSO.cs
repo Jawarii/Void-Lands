@@ -1,9 +1,6 @@
-using System;
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-[Serializable]
+[CreateAssetMenu(fileName = "ItemInfoSO", menuName = "ScriptableObjects/ItemInfo", order = 1)]
 public class ItemInfoSO : ScriptableObject
 {
     // Basic Info
@@ -19,11 +16,11 @@ public class ItemInfoSO : ScriptableObject
     // Special Visual Info
     public int currentStackSize = 1;
     public Sprite itemIcon;
-    public Color textColor;
+    public Color textColor; // Color property
 
     // Weapon Special Info
-    [Serializable]
-    public struct WeaponMainStats
+    [System.Serializable]
+    public class WeaponMainStats
     {
         public int baseAttack;
         public int attack;
@@ -31,10 +28,10 @@ public class ItemInfoSO : ScriptableObject
         public int maxAttack;
     }
 
-    public WeaponMainStats weaponMainStats;
+    public WeaponMainStats weaponMainStats = new WeaponMainStats();
 
-    [Serializable]
-    public struct WeaponBonusStats
+    [System.Serializable]
+    public class WeaponBonusStats
     {
         public int attack;
         public float critChance;
@@ -43,11 +40,11 @@ public class ItemInfoSO : ScriptableObject
         public float staggerDmg;
     }
 
-    public WeaponBonusStats weaponBonusStats;
+    public WeaponBonusStats weaponBonusStats = new WeaponBonusStats();
 
     // Gear Special Info
-    [Serializable]
-    public struct GearMainStats
+    [System.Serializable]
+    public class GearMainStats
     {
         public int baseAttack;
         public int baseHp;
@@ -57,10 +54,10 @@ public class ItemInfoSO : ScriptableObject
         public int armor;
     }
 
-    public GearMainStats gearMainStats;
+    public GearMainStats gearMainStats = new GearMainStats();
 
-    [Serializable]
-    public struct GearBonusStats
+    [System.Serializable]
+    public class GearBonusStats
     {
         public int attack;
         public float critChance;
@@ -74,7 +71,7 @@ public class ItemInfoSO : ScriptableObject
         public int recovery;
     }
 
-    public GearBonusStats gearBonusStats;
+    public GearBonusStats gearBonusStats = new GearBonusStats();
 
     private System.Random rand = new System.Random();
 
@@ -121,4 +118,56 @@ public class ItemInfoSO : ScriptableObject
         itemName = itemName.StartsWith("+") ? itemName.Substring(itemName.IndexOf(" ") + 1) : itemName;
         itemName = $"+{upgradeLevel} {itemName}";
     }
+
+    public Color GetTextColorFromString(string colorString)
+    {
+        ColorUtility.TryParseHtmlString($"#{colorString}", out Color color);
+        return color;
+    }
+
+    public ItemInfoData ToData()
+    {
+        return new ItemInfoData
+        {
+            stackSize = stackSize,
+            itemId = itemId,
+            itemName = itemName,
+            itemDescription = itemDescription,
+            itemType = itemType,
+            itemLvl = itemLvl,
+            itemQuality = itemQuality,
+            upgradeLevel = upgradeLevel,
+            currentStackSize = currentStackSize,
+            itemIcon = itemIcon ? itemIcon.texture.EncodeToPNG() : null,
+            textColor = new ColorData(textColor),
+            weaponMainStats = weaponMainStats,
+            weaponBonusStats = weaponBonusStats,
+            gearMainStats = gearMainStats,
+            gearBonusStats = gearBonusStats
+        };
+    }
+    public void FromData(ItemInfoData data)
+    {
+        stackSize = data.stackSize;
+        itemId = data.itemId;
+        itemName = data.itemName;
+        itemDescription = data.itemDescription;
+        itemType = data.itemType;
+        itemLvl = data.itemLvl;
+        itemQuality = data.itemQuality;
+        upgradeLevel = data.upgradeLevel;
+        currentStackSize = data.currentStackSize;
+        if (data.itemIcon != null)
+        {
+            Texture2D texture = new Texture2D(2, 2);
+            texture.LoadImage(data.itemIcon);
+            itemIcon = Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
+        }
+        textColor = data.textColor.ToColor();
+        weaponMainStats = data.weaponMainStats;
+        weaponBonusStats = data.weaponBonusStats;
+        gearMainStats = data.gearMainStats;
+        gearBonusStats = data.gearBonusStats;
+    }
+
 }

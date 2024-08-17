@@ -1,10 +1,4 @@
-using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using UnityEngine;
-using UnityEngine.UI;
-using TMPro;
-using static Unity.VisualScripting.Member;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -21,7 +15,7 @@ public class PlayerStats : MonoBehaviour
     public float critRate = 5.0f;
     public float critDmg = 150.0f;
     public float staggerDmg = 110f;
-    public float speed = 1.0f;   
+    public float speed = 1.0f;
     public float hpRecovery = 1f;
     public float cdReduction = 0f;
 
@@ -33,13 +27,13 @@ public class PlayerStats : MonoBehaviour
     public float defenseSpeedMulti = 0f;
     public float critRateMulti = 0f;
     public float hpMulti = 0f;
-    public float critDmgMulti = 0f;  
+    public float critDmgMulti = 0f;
     public float hpRecoveryMulti = 0f;
-    
+
     // Level Stats
     [Header("Level Stats")]
     public float lvl = 1;
-    public float currentExp = 0;  
+    public float currentExp = 0;
     public float maxExp;
 
     // Variables
@@ -77,17 +71,21 @@ public class PlayerStats : MonoBehaviour
 
     void Start()
     {
-        maxExp = lvl * 100;
+        maxExp = Mathf.Pow(lvl, 1.35f) * 100f;
 
-        maxHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
+        maxHp -= baseHp;
+        baseHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
+        maxHp += baseHp;
         currentHp = maxHp;
         prevHp = currentHp;
-        baseHp = maxHp;
 
-        attack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
-        baseAttack= attack;
-        defense = (int)(10f * (int)Mathf.Pow(1.1f, lvl - 1));
-        baseDefense= defense;
+        attack -= baseAttack;
+        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        attack += baseAttack; // Initial attack value
+
+        defense -= baseDefense;
+        baseDefense = (int)(10f * Mathf.Pow(1.1f, lvl - 1));
+        defense += baseDefense;
 
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
     }
@@ -97,15 +95,20 @@ public class PlayerStats : MonoBehaviour
         playTime += Time.deltaTime;
         HandleHitIndicator();
     }
+
     void FixedUpdate()
     {
         timeSince += Time.deltaTime;
         hpRecCdCur += Time.deltaTime;
+        //------------------------
+        // Reminder: this is used for delayedHp UI logic. dont delete.
         if (prevHp != currentHp)
         {
             timeSince = 0;
             prevHp = currentHp;
         }
+        //------------------------
+
         if (currentExp >= maxExp)
         {
             LevelUp();
@@ -113,9 +116,10 @@ public class PlayerStats : MonoBehaviour
         if (hpRecCdCur >= hpRecCd && currentHp < maxHp)
         {
             currentHp += hpRecovery;
-            hpRecCdCur= 0;
+            hpRecCdCur = 0;
         }
     }
+
     private void HandleHitIndicator()
     {
         if (hitIndicator > 0)
@@ -132,23 +136,38 @@ public class PlayerStats : MonoBehaviour
     {
         currentExp += exp;
     }
+
     public void LevelUp()
     {
         lvl++;
         currentExp = currentExp - maxExp;
         maxExp = Mathf.Pow(lvl, 1.35f) * 100f;
-        IncreaseStats(lvl);
+        IncreaseStats();
     }
-    public void IncreaseStats(float lvl_)
-    {        
-        maxHp += (int)(baseHp * 0.1f);
-        baseHp *= 1.1f;
-        attack += (int)(baseAttack * 0.1f);
-        baseAttack *= 1.1f;
-        defense += (int)(baseDefense * 0.1f);
-        baseDefense *= 1.1f;
+
+    public void IncreaseStats()
+    {
+        maxHp -= baseHp;
+        baseHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
+        maxHp += baseHp;
         currentHp = maxHp;
+
+        attack -= baseAttack;
+        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        attack += baseAttack;
+
+        //attack = CalculateAttack(); // Use dynamic calculation
+        defense -= baseDefense;
+        baseDefense = (int)(10f * Mathf.Pow(1.1f, lvl - 1));
+        defense += baseDefense;
     }
+
+    private float CalculateAttack()
+    {
+        // Calculate the final attack value considering buffs or other modifications
+        return baseAttack + atkMulti * baseAttack;
+    }
+
     public void TakeDamage(int damage, bool isCrit)
     {
         if (isImmune)
