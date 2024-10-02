@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Homing Arrows
   skillDescription: Shoots 5 arrows in a straight line that keep homing after hit.
-  skillLevel: 15
+  skillLevel: 9
   skillType: Ultimate
   skillIcon: {fileID: 21300000, guid: 0ba14632360c48742aa01fff4727ea90, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 0
+  coolDown: 36

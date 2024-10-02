@@ -11,14 +11,24 @@ public class EnemyAttackBehaviour : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             PlayerStats playerStats = other.GetComponent<PlayerStats>();
-            EnemyStats enemyStats = GetComponentInParent<EnemyStats>(); // Assuming the EnemyStats component is on the parent GameObject.
+            if (playerStats == null)
+            {
+                Debug.LogError("PlayerStats component not found on the player.");
+                return;
+            }
 
-            // Calculate damage based on enemy's attack and player's defense
-            float minDmg = basicAtkDmgMulti * (enemyStats.attack - playerStats.defense) * 0.9f;
-            float maxDmg = basicAtkDmgMulti * (enemyStats.attack - playerStats.defense) * 1.1f;
+            EnemyStats enemyStats = GetComponentInParent<EnemyStats>();
+            if (enemyStats == null)
+            {
+                Debug.LogError("EnemyStats component not found on the enemy.");
+                return;
+            }
 
-            // Deal damage to the player
+            float minDmg = basicAtkDmgMulti * (enemyStats.attack) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (enemyStats.attack) * 1.1f;
+
             playerStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
         }
     }
+
 }

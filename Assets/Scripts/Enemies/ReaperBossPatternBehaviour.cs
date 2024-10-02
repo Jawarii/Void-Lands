@@ -12,18 +12,18 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
     //Phase 1 Variables
     private int _projectileAmount = 3;
     private float _projectileInterval = 0.2f;
-    public float _projectileAttackCd = 5f;
+    public float _projectileAttackCd = 8f;
     public float _projectileAttackElapsedTime = 0f;
-    public float targettedExplosionsCd = 7.5f;
+    public float targettedExplosionsCd = 12f;
     public float targettedExplosionsElapsedTime = 0f;
     //Phase 2 Variables
-    public float teleportProjectileCd = 15f;
+    public float teleportProjectileCd = 24f;
     public float teleportProjectileElapsedTime = 0f;
     //Phase 3 Variables
-    public float ringAttackCd = 15f;
+    public float ringAttackCd = 16f;
     public float ringAttackElapsedTime = 0f;
     //Phase 4 Variables
-    public float enhancedRingAttackCd = 30f;
+    public float enhancedRingAttackCd = 24f;
     public float enhancedRingAttackElapsedTime = 0f;
     //Reference to the player GameObject
     private GameObject player;
@@ -355,4 +355,31 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
 
         return positions;
     }
+    public void ResetVariables()
+    {
+        // Reset phase and HP percentage
+        phase = 1;
+        hpPercent = transform.GetComponent<EnemyStats>().hp / transform.GetComponent<EnemyStats>().maxHp;
+
+        // Reset attack and behavior flags
+        isAttacking = false;
+        isTargetExplosion = false;
+
+        // Reset timers for all attacks
+        _projectileAttackElapsedTime = 0f;
+        targettedExplosionsElapsedTime = 0f;
+        teleportProjectileElapsedTime = 0f;
+        ringAttackElapsedTime = 0f;
+        enhancedRingAttackElapsedTime = 0f;
+
+        // Optionally reset cooldowns (if needed to change them during the battle)
+        _projectileAttackCd = 8f;
+        targettedExplosionsCd = 12f;
+        teleportProjectileCd = 24f;
+        ringAttackCd = 16f;
+        enhancedRingAttackCd = 24f;
+
+        Debug.Log("Boss variables reset to default values.");
+    }
+
 }

@@ -10,14 +10,17 @@ public class MiasmaExplosionController : MonoBehaviour
     // public AudioSource audioSource;
     // public AudioClip clip;
     private Collider2D myCollider;
-
+    public AudioSource audioSource;
+    public AudioClip audioClip;
     private void Start()
     {
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         myCollider = GetComponent<Collider2D>();
-        myCollider.enabled = false; // Disable collider initially
+        //myCollider.enabled = false; // Disable collider initially
         StartCoroutine(DisableCollider());
+        audioSource= GameObject.Find("EnemyGettingHitSource").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioClip);
         //audioSource = GameObject.Find("ExplosionSoundSource").GetComponent<AudioSource>();
     }
     private void OnTriggerEnter2D(Collider2D other)
@@ -27,8 +30,8 @@ public class MiasmaExplosionController : MonoBehaviour
             EnemyStats enemyStats = other.GetComponent<EnemyStats>();
             crit = Random.Range(1, 101);
 
-            float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.9f;
-            float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.1f;
+            float minDmg = basicAtkDmgMulti * (playerStats.attack) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (playerStats.attack) * 1.1f;
             float critDmgMulti = playerStats.critDmg / 100.0f;
 
             if (crit <= playerStats.critRate)
@@ -57,6 +60,6 @@ public class MiasmaExplosionController : MonoBehaviour
     IEnumerator DisableCollider()
     {
         yield return new WaitForSeconds(0.15f);
-        this.GetComponent<Collider2D>().enabled = false;
+        GetComponent<Collider2D>().enabled = false;
     }
 }

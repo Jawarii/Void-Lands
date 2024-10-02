@@ -1,10 +1,10 @@
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class ArenaSpawner : MonoBehaviour
 {
-    public GameObject golemPrefab;
-    public GameObject slimePrefab;
+    public List<GameObject> monsterPrefabs; // List of monster prefabs
     public int interval = 15;
     public int waves = 11;
 
@@ -16,7 +16,7 @@ public class ArenaSpawner : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
-        //yield return new WaitForSeconds(20);
+        yield return new WaitForSeconds(1.5f);
         for (int i = 1; i <= waves; i++)
         {
             StartCoroutine(SpawnMonsters(i));
@@ -26,55 +26,23 @@ public class ArenaSpawner : MonoBehaviour
 
     IEnumerator SpawnMonsters(int wave)
     {
-        if (waves == 11)
+        int monsterCount = wave <= (waves / 2) ? 2 : 3; // Spawn 2 or 4 monsters based on wave number
+
+        for (int j = 0; j < monsterCount; j++)
         {
-            if (wave <= 5)
-            {
-                for (int j = 0; j < 4; j++) // Spawn 4 monsters per wave
-                {
-                    GameObject prefabToSpawn = Random.Range(0, 2) == 0 ? golemPrefab : slimePrefab;
-                    Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-                    Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
+            GameObject prefabToSpawn = monsterPrefabs[Random.Range(0, monsterPrefabs.Count)];
+            Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
+            Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
 
-                    yield return new WaitForSeconds(0.05f); // Optional: delay between spawns
-                }
-            }
-            else
-            {
-                for (int j = 0; j < 6; j++) // Spawn 5 monsters per wave
-                {
-                    GameObject prefabToSpawn = Random.Range(0, 2) == 0 ? golemPrefab : slimePrefab;
-                    Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-                    Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-
-                    yield return new WaitForSeconds(0.05f); // Optional: delay between spawns
-                }
-            }
+            yield return new WaitForSeconds(0.2f); // Optional: delay between spawns
         }
-        if (waves == 6)
+    }
+    private void Update()
+    {
+        if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().isDead)
         {
-            if (wave <= 3)
-            {
-                for (int j = 0; j < 4; j++) // Spawn 4 monsters per wave
-                {
-                    GameObject prefabToSpawn = Random.Range(0, 2) == 0 ? golemPrefab : slimePrefab;
-                    Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-                    Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-
-                    yield return new WaitForSeconds(0.05f); // Optional: delay between spawns
-                }
-            }
-            else
-            {
-                for (int j = 0; j < 6; j++) // Spawn 6 monsters per wave
-                {
-                    GameObject prefabToSpawn = Random.Range(0, 2) == 0 ? golemPrefab : slimePrefab;
-                    Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
-                    Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
-
-                    yield return new WaitForSeconds(0.05f); // Optional: delay between spawns
-                }
-            }
+            StopAllCoroutines();
+            gameObject.SetActive(false);
         }
     }
 }

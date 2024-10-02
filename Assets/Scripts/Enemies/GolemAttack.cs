@@ -3,7 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class GolemAttack : MonoBehaviour
+public class GolemAttack : EnemyAttack
 {
     public Animator animator;
     public float attackCooldown = 2.0f;
@@ -19,10 +19,12 @@ public class GolemAttack : MonoBehaviour
         golemMovement = transform.GetComponent<EnemyMovementController>();
         enemyStats = transform.GetComponent<EnemyStats>();
         currentAttackCooldown = 0f; // Allows immediate attack if in range
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
     }
 
     void FixedUpdate()
     {
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
         if (currentAttackCooldown > 0)
         {
             currentAttackCooldown -= Time.deltaTime;
@@ -40,7 +42,8 @@ public class GolemAttack : MonoBehaviour
     IEnumerator PerformAttack()
     {
         if (isAttacking) yield break; // Ensure that we do not stack attacks
-        isAttacking = true;
+        GetComponent<EnemyStats>().isAttacking = true;
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
 
         golemMovement.agent.isStopped = true;
         golemMovement.canMove = false; // Prevent movement during attack
@@ -59,12 +62,17 @@ public class GolemAttack : MonoBehaviour
 
         // Wait for the rest of the attack duration
         yield return new WaitForSeconds(attackDuration * 0.15f);
-
+        if (gameObject.GetComponent<EnemyStats>().isDead)
+        {
+            StopCoroutine(PerformAttack());
+            yield break;
+        }
         // End the attack
         animator.SetBool("canAttack", false);
         golemMovement.canMove = true;
         golemMovement.agent.isStopped = false;
         animator.SetFloat("Speed", golemMovement.agent.velocity.magnitude);
+        GetComponent<EnemyStats>().isAttacking = false;
         isAttacking = false;
     }
 }

@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 5582648040325516672}
   - component: {fileID: 6072893732731141577}
   - component: {fileID: -7729162937420273399}
+  - component: {fileID: 462038155425173656}
   m_Layer: 0
   m_Name: MiasmaExplosion
   m_TagString: Untagged
@@ -136,10 +137,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650661699747a1742b5b44e0806aa2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicAtkDmgMulti: 0.8
+  basicAtkDmgMulti: 1.2
   playerStats: {fileID: 0}
   player: {fileID: 0}
   crit: 0
+  audioSource: {fileID: 0}
+  audioClip: {fileID: 8300000, guid: 686954b81784c1c4ab83ea6da95b6953, type: 3}
 --- !u!58 &6072893732731141577
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -202,3 +205,17 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &462038155425173656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2671462482633276915}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74646ddaf23bc94995fe9bd7b1f0b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 999999
+  offset: 0

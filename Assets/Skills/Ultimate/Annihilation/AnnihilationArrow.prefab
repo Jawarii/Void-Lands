@@ -10,9 +10,10 @@ GameObject:
   m_Component:
   - component: {fileID: 3717403527142333831}
   - component: {fileID: 3717403527142333828}
-  - component: {fileID: 3717403527142333830}
   - component: {fileID: -2375528771365983093}
   - component: {fileID: -5152404483610010690}
+  - component: {fileID: 2489096997028274162}
+  - component: {fileID: -4711772382786153745}
   m_Layer: 0
   m_Name: AnnihilationArrow
   m_TagString: Untagged
@@ -30,8 +31,8 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 7.144, y: -0.991, z: 0}
-  m_LocalScale: {x: 2.5, y: 2.5, z: 1}
-  m_ConstrainProportionsScale: 0
+  m_LocalScale: {x: 3.5, y: 3.5, z: 1.4}
+  m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 4935619226130743948}
   m_Father: {fileID: 0}
@@ -88,41 +89,6 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!58 &3717403527142333830
-CircleCollider2D:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 3717403527142333829}
-  m_Enabled: 1
-  m_Density: 1
-  m_Material: {fileID: 0}
-  m_IncludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_ExcludeLayers:
-    serializedVersion: 2
-    m_Bits: 0
-  m_LayerOverridePriority: 0
-  m_ForceSendLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ForceReceiveLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_ContactCaptureLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_CallbackLayers:
-    serializedVersion: 2
-    m_Bits: 4294967295
-  m_IsTrigger: 1
-  m_UsedByEffector: 0
-  m_UsedByComposite: 0
-  m_Offset: {x: 0, y: -0.11}
-  serializedVersion: 2
-  m_Radius: 0.04
 --- !u!50 &-2375528771365983093
 Rigidbody2D:
   serializedVersion: 4
@@ -162,15 +128,64 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b95f516b61f546240aa807baa42f9e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 20
+  speed: 25
   player: {fileID: 0}
   playerStats: {fileID: 0}
-  basicAtkDmgMulti: 32
-  maxDistance: 8
+  basicAtkDmgMulti: 40
+  maxDistance: 10
   isImbued: 0
   _bow: {fileID: 0}
   attackArcher: {fileID: 0}
   miasmaExplosionPrefab: {fileID: 2671462482633276915, guid: 7b6a78e6e85bd1741a29748d87429fe6, type: 3}
+--- !u!70 &2489096997028274162
+CapsuleCollider2D:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717403527142333829}
+  m_Enabled: 1
+  m_Density: 1
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_ForceSendLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ForceReceiveLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_ContactCaptureLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_CallbackLayers:
+    serializedVersion: 2
+    m_Bits: 4294967295
+  m_IsTrigger: 1
+  m_UsedByEffector: 0
+  m_UsedByComposite: 0
+  m_Offset: {x: 0.00000009536743, y: 0.0027293682}
+  m_Size: {x: 0.110475734, y: 0.33660465}
+  m_Direction: 0
+--- !u!114 &-4711772382786153745
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3717403527142333829}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74646ddaf23bc94995fe9bd7b1f0b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 999999
+  offset: 0
 --- !u!1 &4932735525999693228
 GameObject:
   m_ObjectHideFlags: 0

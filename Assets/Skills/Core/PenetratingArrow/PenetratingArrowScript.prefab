@@ -25,13 +25,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 148885791416195238}
+  serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &-798453549716521159
 MonoBehaviour:
@@ -49,9 +49,12 @@ MonoBehaviour:
   bowAnim: {fileID: 7400000, guid: 6457c24a048bb00469e1fefc383396e4, type: 2}
   bowReleaseAnim: {fileID: 7400000, guid: 77e7234c6245d114cb72335cf964427d, type: 2}
   _arrow: {fileID: 3717403527142333829, guid: a94e91d15d88bcc4eb56ca0afc304a40, type: 3}
+  coolDown: 5
+  cdElapsedTime: 0
+  adjustedSpeed: 0
 --- !u!95 &-4058884340705071060
 Animator:
-  serializedVersion: 4
+  serializedVersion: 5
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
@@ -68,4 +71,5 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
-  m_KeepAnimatorControllerStateOnDisable: 0
+  m_KeepAnimatorStateOnDisable: 0
+  m_WriteDefaultValuesOnDisable: 0

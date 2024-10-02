@@ -95,6 +95,7 @@ GameObject:
   - component: {fileID: 5856448639280123944}
   - component: {fileID: 3145407061877412656}
   - component: {fileID: 2762990040191911422}
+  - component: {fileID: -8631621082446039416}
   m_Layer: 0
   m_Name: CircleIndicator
   m_TagString: Untagged
@@ -184,3 +185,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fillCircle: {fileID: 0}
   castTime: 1
+--- !u!114 &-8631621082446039416
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9073742920716079178}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e74646ddaf23bc94995fe9bd7b1f0b37, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  sortingOrderBase: 999999
+  offset: 0

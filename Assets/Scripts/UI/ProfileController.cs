@@ -9,6 +9,9 @@ public class ProfileController : MonoBehaviour
     //public List<GameObject> activeMenus;
     public Canvas canvas;
 
+    public AudioSource audioSource;
+    public AudioClip profileOpenClip;
+
     void Update()
     {
         if (Input.GetKeyDown(KeyCode.Escape))
@@ -26,6 +29,7 @@ public class ProfileController : MonoBehaviour
             else
             {
                 canvas.gameObject.GetComponent<Canvas>().enabled = true;
+                audioSource.PlayOneShot(profileOpenClip);
             }
         }
     }

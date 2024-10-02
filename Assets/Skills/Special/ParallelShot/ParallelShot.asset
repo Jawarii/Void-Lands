@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Parallel Shot
   skillDescription: 'Shoots 7 parallel Arrows '
-  skillLevel: 5
+  skillLevel: 3
   skillType: Special
   skillIcon: {fileID: 21300000, guid: cfcee51d657f92141a0f1e6bdd8a6f8b, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 0
+  coolDown: 8

@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SniperAttack : MonoBehaviour
+public class SniperAttack : EnemyAttack
 {
     public Animator animator;
     public float attackCooldown = 2.0f;
@@ -18,10 +18,13 @@ public class SniperAttack : MonoBehaviour
         enemyMovement = transform.GetComponent<EnemyMovementController>();
         enemyStats = transform.GetComponent<EnemyStats>();
         currentAttackCooldown = 0f; // Allows immediate attack if in range
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
     }
 
     void FixedUpdate()
     {
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
+
         if (currentAttackCooldown > 0)
         {
             currentAttackCooldown -= Time.deltaTime;
@@ -39,7 +42,8 @@ public class SniperAttack : MonoBehaviour
     IEnumerator PerformAttack()
     {
         if (isAttacking) yield break; // Ensure that we do not stack attacks
-        isAttacking = true;
+        GetComponent<EnemyStats>().isAttacking = true;
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
 
         enemyMovement.agent.isStopped = true;
         enemyMovement.canMove = false; // Prevent movement during attack
@@ -49,11 +53,17 @@ public class SniperAttack : MonoBehaviour
 
         yield return new WaitForSeconds(0.667f);
         // End the attack
+        if (gameObject.GetComponent<EnemyStats>().isDead)
+        {
+            StopCoroutine(PerformAttack());
+            yield break;
+        }
         animator.SetBool("canAttack", false);
         enemyMovement.canMove = true;
         enemyMovement.agent.isStopped = false;
         animator.SetFloat("Speed", enemyMovement.agent.velocity.magnitude);
-        isAttacking = false;
+        GetComponent<EnemyStats>().isAttacking = false;
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
     }
     public void SpawnArrows()
     {

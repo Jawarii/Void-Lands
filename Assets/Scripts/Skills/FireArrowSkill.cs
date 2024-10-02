@@ -13,6 +13,7 @@ public class FireArrowSkill : SkillsScript
         playerAttack.releaseTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
         playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
+        playerAttack.animator.SetFloat("AtkSpeed", playerAttack.player.GetComponent<PlayerStats>().atkSpd);
         playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
         playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
         StartCoroutine(SpawnArrow());

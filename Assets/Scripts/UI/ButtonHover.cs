@@ -48,17 +48,20 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {                       
             InventoryController inventoryController = inventoryMain.GetComponent<InventoryController>();
             int slotId = transform.GetComponent<ButtonInfo>().slotId;
-
+            GameObject itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
+            itemLevelGo.GetComponent<TMP_Text>().text = "";
             GameObject itemNameObj = itemTooltip.transform.Find("Name").gameObject;
             itemNameObj.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemName;
             itemNameObj.GetComponent<TMP_Text>().color = inventoryController.inventory[slotId].textColor;
             GameObject itemStatsObj = itemTooltip.transform.Find("Stats").gameObject;
-            itemStatsObj.GetComponent<TMP_Text>().text = "STATS PLACE HOLDER FOR SLOT ID: " + slotId.ToString();
+            itemStatsObj.GetComponent<TMP_Text>().text = "Upgrade Stone";
             GameObject itemBonusStatsObj = itemTooltip.transform.Find("BonusStats").gameObject;
-            itemBonusStatsObj.GetComponent<TMP_Text>().text = "BONUS STATS PLACE HOLDER FOR SLOT ID: " + slotId.ToString();
-
+            itemBonusStatsObj.GetComponent<TMP_Text>().text = "This Stone is Used to Upgrade Your Gear or Weapons up to +9 by Using the Upgrade Window Acessible by Clicking [U] on your Keyboard";
+            
             if (inventoryController.inventory[slotId].itemType == "Weapon")
             {
+                itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
+                itemLevelGo.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemLvl.ToString() + " Item Power";
                 SetWeaponInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
             }
             else if (inventoryController.inventory[slotId].itemType == "Armor" || inventoryController.inventory[slotId].itemType == "Helmet" ||
@@ -66,8 +69,11 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 inventoryController.inventory[slotId].itemType == "Belt" || inventoryController.inventory[slotId].itemType == "Necklace"
                 || inventoryController.inventory[slotId].itemType == "Ring")
             {
+                itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
+                itemLevelGo.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemLvl.ToString() + " Item Power";
                 SetGearInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
             }
+            LayoutRebuilder.ForceRebuildLayoutImmediate(panelRectTransform);
             SetTooltipLocation();
         }
     }
@@ -79,14 +85,13 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void SetTooltipLocation()
     {
-        LayoutRebuilder.ForceRebuildLayoutImmediate(panelRectTransform);
         Vector2 canvasPos;
         float offset = buttonRectTransform.sizeDelta.x / 2f + panelRectTransform.sizeDelta.x / 2f;
         float tooltipHeight = panelRectTransform.sizeDelta.y;
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, transform.position, canvas.worldCamera, out canvasPos);
         float yUpCheck = canvasPos.y + tooltipHeight / 2f;
         float yDownCheck = canvasPos.y - tooltipHeight / 2f;
-        canvas.enabled = true;
+        
 
         if (yUpCheck > canvasRectTransform.sizeDelta.y / 2f)
         {
@@ -98,6 +103,8 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         panelRectTransform.anchoredPosition = canvasPos + new Vector2(-offset, 0f);
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelRectTransform);
+        canvas.enabled = true;
     }
 
     public void SetWeaponInfo(InventoryController inventoryController, GameObject itemNameObj, GameObject itemStatsObj, GameObject itemBonusStatsObj, int slotId)

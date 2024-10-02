@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class NewBatAttack : MonoBehaviour
+public class NewBatAttack : EnemyAttack
 {
     public Animator animator;
     public float attackCooldown = 2.0f;
@@ -21,10 +21,12 @@ public class NewBatAttack : MonoBehaviour
         attackCollider = attackColliderGo.GetComponent<Collider2D>();
         batMovement = GetComponent<EnemyMovementController>();
         currentAttackCooldown = 0f; // Allows immediate attack if in range
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
     }
 
     void FixedUpdate()
     {
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
         if (currentAttackCooldown > 0)
         {
             currentAttackCooldown -= Time.deltaTime;
@@ -49,7 +51,8 @@ public class NewBatAttack : MonoBehaviour
         float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
         attackColliderGo.transform.rotation = Quaternion.Euler(0, 0, angle + 90); // Adjust rotation to match direction
         batMovement.SetAnimatorBasedOnAngle(angle);
-        isAttacking = true;
+        GetComponent<EnemyStats>().isAttacking = true;
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
         batMovement.agent.isStopped = true;
         batMovement.canMove = false; // Prevent movement during attack
         animator.SetBool("canAttack", true);
@@ -57,11 +60,16 @@ public class NewBatAttack : MonoBehaviour
         currentAttackCooldown = attackCooldown;
 
         yield return new WaitForSeconds(0.667f);
-
+        if (gameObject.GetComponent<EnemyStats>().isDead)
+        {
+            StopCoroutine(PerformAttack());
+            yield break;
+        }
         animator.SetBool("canAttack", false);
         batMovement.canMove = true;
         batMovement.agent.isStopped = false; 
         animator.SetFloat("Speed", batMovement.agent.velocity.magnitude);
+        GetComponent<EnemyStats>().isAttacking = false;
         isAttacking = false;
         //transform.position = originalPos;
     }

@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static UnityEngine.Rendering.DebugUI.Table;
 
 public class HomingArrowBehaviour : MonoBehaviour
 {
@@ -14,7 +15,6 @@ public class HomingArrowBehaviour : MonoBehaviour
     public float homingRadius = 5f; // Radius within which the arrow will seek new targets
     public int maxHits = 5; // Maximum number of targets the arrow can hit
     public float turnSpeed; // Speed at which the arrow turns towards the target
-    public float arcChangeAngle; // Angle change after hitting a target
 
     private Vector2 startPosition;
     private Transform target;
@@ -34,35 +34,19 @@ public class HomingArrowBehaviour : MonoBehaviour
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         startPosition = transform.position;
+
         if (attackArcher.hasImbueBuff)
             isImbued = true;
-        RerollRandomValues();
+
+        randomEggFactor = 1.0f;
+        turnSpeed = 80f;
         FindInitialTarget();
     }
-
     private void Update()
     {
         if (target != null)
         {
-            Vector2 direction = (Vector2)target.position - (Vector2)transform.position;
-            direction.Normalize();
-            float angle = Mathf.Atan2(direction.y, direction.x) * Mathf.Rad2Deg;
-            float rotateAmount = Vector3.Cross(direction, transform.up).z;
-            transform.rotation = Quaternion.RotateTowards(transform.rotation, Quaternion.Euler(new Vector3(0, 0, angle + 90)), turnSpeed * Time.deltaTime);
-
-            Debug.Log($"Direction: {direction}, Rotate Amount: {rotateAmount}");
-        }
-
-        // Move the arrow forward based on its current rotation, with a random egg shape factor
-        transform.Translate(Vector2.down * speed * randomEggFactor * Time.deltaTime);
-
-        // Calculate the distance traveled
-        float distanceTraveled = Vector2.Distance(transform.position, startPosition);
-
-        // If the distance traveled exceeds the maximum distance, destroy the arrow
-        if (distanceTraveled >= maxDistance)
-        {
-            Destroy(gameObject);
+            HandleHomingArrowBehaviour();
         }
     }
 
@@ -73,14 +57,16 @@ public class HomingArrowBehaviour : MonoBehaviour
             EnemyStats enemyStats = other.GetComponent<EnemyStats>();
             crit = Random.Range(1, 101);
 
-            float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.9f;
-            float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.1f;
+            float minDmg = basicAtkDmgMulti * (playerStats.attack) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (playerStats.attack) * 1.1f;
             float critDmgMulti = playerStats.critDmg / 100.0f;
+
             if (isImbued)
             {
                 GameObject explosion = Instantiate(miasmaExplosionPrefab, transform.position, Quaternion.identity);
                 explosion.GetComponent<MiasmaExplosionController>().playerStats = playerStats;
             }
+
             if (crit <= playerStats.critRate)
             {
                 enemyStats.TakeDamage((int)(Random.Range(minDmg, maxDmg) * critDmgMulti), true);
@@ -90,16 +76,17 @@ public class HomingArrowBehaviour : MonoBehaviour
                 enemyStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
             }
 
-            hitCount++;
-
-            if (hitCount < maxHits)
+            if (other.gameObject == target.gameObject)
             {
-                RerollRandomValues();
-                FindNewTarget();
-            }
-            else
-            {
-                Destroy(gameObject);
+                hitCount++;
+                if (hitCount < maxHits)
+                {
+                    FindNewTarget();
+                }
+                else
+                {
+                    Destroy(gameObject);
+                }
             }
         }
         else if (other.gameObject.CompareTag("Obstacle"))
@@ -110,7 +97,6 @@ public class HomingArrowBehaviour : MonoBehaviour
 
     private void FindInitialTarget()
     {
-        // Find the initial target within the homing radius
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, homingRadius);
         float closestDistance = Mathf.Infinity;
         Transform closestEnemy = null;
@@ -131,19 +117,23 @@ public class HomingArrowBehaviour : MonoBehaviour
         if (closestEnemy != null)
         {
             target = closestEnemy;
+        }
+        else
+        {
+            Destroy(gameObject);
         }
     }
 
     private void FindNewTarget()
     {
-        // Find the next target within the homing radius
+
         Collider2D[] hitColliders = Physics2D.OverlapCircleAll(transform.position, homingRadius);
         float closestDistance = Mathf.Infinity;
         Transform closestEnemy = null;
 
         foreach (var hitCollider in hitColliders)
         {
-            if (hitCollider.CompareTag("Enemy"))
+            if (hitCollider.CompareTag("Enemy") && hitCollider.gameObject != target.gameObject)
             {
                 float distanceToEnemy = Vector2.Distance(transform.position, hitCollider.transform.position);
                 if (distanceToEnemy < closestDistance)
@@ -153,30 +143,53 @@ public class HomingArrowBehaviour : MonoBehaviour
                 }
             }
         }
-
-        if (closestEnemy != null)
+        if (closestEnemy != null && !closestEnemy.GetComponent<EnemyStats>().isDead)
         {
             target = closestEnemy;
+
         }
-        else
+        else if (target != null && target.GetComponent<EnemyStats>().isDead)
         {
-            // No more targets, destroy the arrow
             Destroy(gameObject);
         }
+        RerollRandomValues();
     }
 
     private void RerollRandomValues()
     {
-        // Randomize turn speed between 300 and 400
-        turnSpeed = Random.Range(350f, 450f);
+        turnSpeed = Random.Range(80f, 100f);
+        randomEggFactor = Random.Range(0.6f, 1.3f);
+    }
+    private void HandleHomingArrowBehaviour()
+    {
+        Vector2 toTarget = (Vector2)target.position - (Vector2)transform.position;
 
-        // Randomize the egg shape factor between 0.8 and 1.2
-        if (hitCount > 0)
-            randomEggFactor = Random.Range(0.5f, 1.5f);
-        else
-            randomEggFactor = 1f;
+        toTarget.Normalize();
 
-        // Randomize the angle change between 45 ~ 135 and -45 ~ -135
-        arcChangeAngle = Random.Range(45f, 135f) * (Random.value > 0.5f ? 1 : -1);
+        Vector2 arrowForward = -transform.up;
+
+        float crossProduct = Vector3.Cross(arrowForward, toTarget).z;
+
+        float distanceToTarget = Vector2.Distance(transform.position, target.position);
+
+        float adjustedTurnSpeed = 80f + turnSpeed * (1.0f / distanceToTarget);
+
+        float rotationAmount = 10f * adjustedTurnSpeed * Time.deltaTime * crossProduct;
+
+        transform.Rotate(0, 0, rotationAmount);
+
+        transform.Translate(Vector2.down * speed * randomEggFactor * Time.deltaTime);
+
+        float distanceTraveled = Vector2.Distance(transform.position, startPosition);
+
+        if (distanceTraveled >= maxDistance && hitCount == 0)
+        {
+            Destroy(gameObject);
+        }
+
+        if (target != null && target.GetComponent<EnemyStats>().isDead)
+        {
+            FindNewTarget();
+        }
     }
 }

@@ -441,7 +441,8 @@
       <FileName>Assets\Scripts\Skills\General\SkillsScript.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="SkillsSO" Collapsed="true">
+  <Class Name="
+		 " Collapsed="true">
     <Position X="19.5" Y="11" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAABCAAEAAACAAAAAEKAAAAAAAAAA=</HashCode>

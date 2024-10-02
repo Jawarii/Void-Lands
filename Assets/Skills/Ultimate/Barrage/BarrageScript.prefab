@@ -74,3 +74,4 @@ MonoBehaviour:
   duration: 5
   totalArrows: 30
   radius: 1
+  adjustedSpeed: 0

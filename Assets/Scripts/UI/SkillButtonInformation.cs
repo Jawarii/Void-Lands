@@ -3,17 +3,17 @@ using UnityEngine.UI;
 
 public class SkillButtonInformation : MonoBehaviour
 {
-    public SkillsSO _skillSo;
+    public SkillsSO skillSo;
     public GameObject skillsScript;
     public RuntimeAnimatorController newAnimatorController;
     public string skillType;
     void Start()
     {
-        if (_skillSo != null && skillsScript != null)
+        if (skillSo != null && skillsScript != null)
         {
             transform.GetComponentInChildren<RawImage>().enabled = true;
-            transform.GetComponentInChildren<RawImage>().texture = _skillSo.skillIcon.texture;
-            
+            transform.GetComponentInChildren<RawImage>().texture = skillSo.skillIcon.texture;
+
         }
         else
         {
@@ -24,7 +24,7 @@ public class SkillButtonInformation : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (_skillSo == null || skillsScript == null)
+        if (skillSo == null || skillsScript == null)
         {
             transform.GetComponentInChildren<RawImage>().enabled = false;
         }

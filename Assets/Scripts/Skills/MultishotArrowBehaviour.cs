@@ -21,12 +21,14 @@ public class MultishotArrowBehaviour : MonoBehaviour
     {
         _bow = GameObject.FindGameObjectWithTag("BowObject");
         attackArcher = _bow.GetComponent<PlayerAttackArcher>();
+        if (attackArcher.hasImbueBuff)
+            isImbued = true;
+
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         knockbackForce = 10f;
         startPosition = transform.position;
-        if (attackArcher.hasImbueBuff)
-            isImbued = true;
+
         // Call the DestroyArrow function after a certain distance has been traveled
         StartCoroutine(DestroyArrow());
     }
@@ -44,8 +46,8 @@ public class MultishotArrowBehaviour : MonoBehaviour
             EnemyStats enemyStats = other.GetComponent<EnemyStats>();
             crit = Random.Range(1, 101);
 
-            float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.9f;
-            float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.1f;
+            float minDmg = basicAtkDmgMulti * (playerStats.attack) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (playerStats.attack) * 1.1f;
             float critDmgMulti = playerStats.critDmg / 100.0f;
 
             if (isImbued)

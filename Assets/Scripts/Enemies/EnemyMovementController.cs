@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -17,6 +18,16 @@ public class EnemyMovementController : MonoBehaviour
     private int lastDirection = 0; // 0 = not set, 1 = right, -1 = left
     public float stoppingDistance;
 
+    // Roaming settings
+    public float roamingRadius = 2f;
+    public float minRoamInterval = 8f;
+    public float maxRoamInterval = 15f;
+
+    // Returning to original position settings
+    public float maxDistanceFromOriginalPos = 10f;
+    private Vector3 originalPosition;
+
+    public bool isAttacking = false;
     void Start()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -24,14 +35,25 @@ public class EnemyMovementController : MonoBehaviour
         agent.updateRotation = false;
         agent.updateUpAxis = false;
         agent.speed = speed_;
+        originalPosition = transform.position;
+        StartCoroutine(Roam());
     }
 
     void FixedUpdate()
     {
         FlipSpriteDirection();
-  
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
         if (inPursuit && canMove)
         {
+            // Check if player is dead or if the enemy is too far from the original position
+            if (IsPlayerDead() || IsTooFarFromOriginalPosition())
+            {
+                if (transform.GetComponent<EnemyStats>().isArenaMob)
+                    return;
+                ReturnToOriginalPosition();
+                return;
+            }
+
             if (!isPathBlocked || IsPathClear(currentTargetDirection, 1f))
             {
                 FindPathToPlayer();
@@ -43,12 +65,60 @@ public class EnemyMovementController : MonoBehaviour
                 MoveTowardsAlternateDirection();
                 SetAnimatorBasedOnAngle(GetAngle());
             }
-        }       
+        }
+
+        animator_.SetFloat("Speed", agent.velocity.magnitude);
     }
+
+    private IEnumerator Roam()
+    {
+        while (true)
+        {
+            if (!inPursuit && canMove)
+            {
+                Vector3 roamTarget = GetRandomRoamingPosition();
+                agent.SetDestination(roamTarget);
+                animator_.SetFloat("Speed", agent.velocity.magnitude);
+                SetAnimatorBasedOnAngle(GetAngle());
+            }
+            float roamInterval = Random.Range(minRoamInterval, maxRoamInterval);
+            yield return new WaitForSeconds(roamInterval);
+        }
+    }
+
+    private Vector3 GetRandomRoamingPosition()
+    {
+        Vector2 randomDirection = Random.insideUnitCircle * roamingRadius;
+        Vector3 roamPosition = new Vector3(randomDirection.x, randomDirection.y, 0f) + originalPosition;
+        return roamPosition;
+    }
+
+    private bool IsPlayerDead()
+    {
+        // Implement a check for whether the player is dead
+        // This could be a flag in the player's script
+        PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
+        return playerStats != null && playerStats.isDead;
+    }
+
+    private bool IsTooFarFromOriginalPosition()
+    {
+        return Vector3.Distance(transform.position, originalPosition) > maxDistanceFromOriginalPos;
+    }
+
+    private void ReturnToOriginalPosition()
+    {
+        inPursuit = false;
+        agent.isStopped = false;
+        agent.SetDestination(originalPosition);
+        animator_.SetFloat("Speed", agent.velocity.magnitude);
+        gameObject.transform.Find("AgroRadius").gameObject.SetActive(true);
+        transform.GetComponent<EnemyStats>().hp = transform.GetComponent<EnemyStats>().maxHp;
+    }
+
     public void SetAnimatorBasedOnAngle(float angle)
     {
         angle += 45f;
-        // Here we determine the correct animation state based on the angle
         if (angle > 0.0f && angle <= 90f)
         {
             animator_.SetFloat("Rotation", 1f);
@@ -64,18 +134,19 @@ public class EnemyMovementController : MonoBehaviour
             animator_.SetFloat("Rotation", 0f);
             animator_.SetFloat("Rotation2", -1f);
         }
-        else // This covers both -90 to -180 degrees and 180 to 270 degrees
+        else
         {
             animator_.SetFloat("Rotation", -1f);
             animator_.SetFloat("Rotation2", 0f);
         }
     }
+
     private void FindPathToPlayer()
     {
         Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
         float distanceToPlayer = Vector2.Distance(transform.position, playerObject.transform.position);
 
-        if (distanceToPlayer > stoppingDistance)
+        if (distanceToPlayer > stoppingDistance && !isAttacking)
         {
             agent.isStopped = false;
             animator_.SetBool("canAttack", false);
@@ -95,7 +166,7 @@ public class EnemyMovementController : MonoBehaviour
                 agent.SetDestination(playerObject.transform.position);
             }
         }
-        else if (distanceToPlayer <= stoppingDistance) // Close enough to stop and possibly attack
+        else if (distanceToPlayer <= stoppingDistance)
         {
             agent.isStopped = true;
             animator_.SetFloat("Speed", 0f);
@@ -104,23 +175,21 @@ public class EnemyMovementController : MonoBehaviour
 
     private bool IsPathClear(Vector2 direction, float distance)
     {
-        float slimeRadius = 0.05f; // Adjust this value to match your slime's actual collider radius
+        float slimeRadius = 0.05f;
         Vector2 start2D = new Vector2(transform.position.x, transform.position.y) + direction.normalized * 0.5f;
 
-        // Use CircleCast to account for the slime's radius in the path clearance check
-        RaycastHit2D hit = Physics2D.CircleCast(start2D, slimeRadius, direction, 0.5f); // Subtracting 0.5f to account for the start offset
+        // Perform a CircleCast, excluding the enemy's own collider
+        RaycastHit2D hit = Physics2D.CircleCast(start2D, slimeRadius, direction, distance);
 
-       // Debug.DrawRay(start2D, direction * 0.5f, Color.green, 0.5f);
-
-        if (hit.collider != null)
+        if (hit.collider != null && hit.collider.gameObject != gameObject) // Exclude self
         {
-           // Debug.Log($"CircleCast hit: {hit.collider.name}");
             if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Obstacle"))
                 return false;
         }
 
         return true;
     }
+
 
     private Vector2 RotateVector2(Vector2 v, float degrees)
     {
@@ -139,14 +208,12 @@ public class EnemyMovementController : MonoBehaviour
 
     private Vector2 FindAlternatePath(Vector2 originalDirection, float distance)
     {
-        float angleIncrement = 45f; // Degree to increment each attempt
+        float angleIncrement = 45f;
         Vector2 originalDirection2D = new Vector2(originalDirection.x, originalDirection.y).normalized;
 
-        // Determine at random whether to check left or right direction first
-        // but only if lastDirection was not already set
         if (lastDirection == 0)
         {
-            lastDirection = Random.Range(0, 2) * 2 - 1; // Will randomly set to 1 or -1
+            lastDirection = Random.Range(0, 2) * 2 - 1;
         }
 
         for (float angle = angleIncrement; angle <= 180; angle += angleIncrement)
@@ -159,33 +226,46 @@ public class EnemyMovementController : MonoBehaviour
             }
         }
 
-        // If no clear path was found in the preferred direction, try the opposite direction as a fallback
         for (float angle = angleIncrement; angle <= 180; angle += angleIncrement)
         {
             Vector2 newDirection = RotateVector2(originalDirection2D, -angle * lastDirection);
 
             if (IsPathClear(newDirection, distance))
             {
-                // Update lastDirection since we're now choosing the opposite side
                 lastDirection *= -1;
                 return newDirection * distance;
             }
         }
 
-        // Continue in the last direction if no clear path is found
         return originalDirection2D * distance;
     }
+
     private void FlipSpriteDirection()
     {
-        if ((playerObject.transform.position - transform.position).normalized.x > 0)
+        if (inPursuit && agent.velocity.magnitude < 0.01f)
         {
-            transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            if ((playerObject.transform.position - transform.position).normalized.x > 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if ((playerObject.transform.position - transform.position).normalized.x < 0)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
         }
-        else if ((playerObject.transform.position - transform.position).normalized.x < 0)
+        else
         {
-            transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            if ((agent.destination - transform.position).normalized.x > 0)
+            {
+                transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
+            else if ((agent.destination - transform.position).normalized.x < 0)
+            {
+                transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            }
         }
     }
+
     private void MoveTowardsAlternateDirection()
     {
         Vector2 newPosition = transform.position + currentTargetDirection;
@@ -193,6 +273,13 @@ public class EnemyMovementController : MonoBehaviour
     }
     public float GetAngle()
     {
-        return Vector2.SignedAngle(Vector2.right, (playerObject.transform.position - transform.position).normalized);
+        if (inPursuit && agent.velocity.magnitude < 0.01)
+        {
+            return Vector2.SignedAngle(Vector2.right, (playerObject.transform.position - transform.position).normalized);
+        }
+        else
+        {
+            return Vector2.SignedAngle(Vector2.right, (agent.destination - transform.position).normalized);
+        }
     }
 }

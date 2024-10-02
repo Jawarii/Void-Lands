@@ -6,12 +6,14 @@ public class PlayerMovement : MonoBehaviour
     public bool canMove = true;
     public bool canDash = true;
     public bool isDashing = false;
+    public bool isMoving = false;
     public bool isDashAttack = false;
     public bool locChosen = true;
     public bool arrived = false;
     public float dashCd = 2.0f;
     public float currentDashCd = 0.0f;
     public float dashDistance = 1.5f; // Adjust the dash distance here
+
 
     private Rigidbody2D rb;
     private Vector2 moveDirection;
@@ -36,16 +38,25 @@ public class PlayerMovement : MonoBehaviour
 
     private void Update()
     {
-        currentDashCd -= Time.deltaTime;
+        if (currentDashCd > 0)
+        {
+            currentDashCd -= Time.deltaTime;
+        }
+
         RotateObjectToMouse();
         if (canMove)
         {
             float horizontalInput = Input.GetAxis("Horizontal");
             float verticalInput = Input.GetAxis("Vertical");
 
+            if (horizontalInput != 0.0f || verticalInput != 0.0f)
+                isMoving = true;
+            else
+                isMoving = false;
+
             moveDirection = new Vector2(horizontalInput, verticalInput).normalized;
 
-            animator.SetFloat("Speed", moveDirection.magnitude);
+            animator.SetFloat("Speed", moveDirection.magnitude * GetComponent<PlayerMovement>().speed);
         }
         else
         {
@@ -64,6 +75,7 @@ public class PlayerMovement : MonoBehaviour
             currentDashCd = dashCd;
             PlayDashClip();
             CalculateExpectedDashDuration();
+            GetComponent<TrailRenderer>().enabled = true;
             //CameraShakerHandler.Shake(myShake);
         }
 
@@ -92,6 +104,7 @@ public class PlayerMovement : MonoBehaviour
                 canDash = true;
                 animator.SetBool("CanDash", false);
                 rb.velocity = Vector2.zero;
+                GetComponent<TrailRenderer>().enabled = false;
             }
             else
             {
@@ -101,6 +114,10 @@ public class PlayerMovement : MonoBehaviour
         else if (canMove)
         {
             rb.velocity = moveDirection * speed;
+        }
+        else
+        {
+            rb.velocity = Vector2.zero;
         }
     }
 

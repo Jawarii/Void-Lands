@@ -8,6 +8,8 @@ public class MenusController : MonoBehaviour
     public List<GameObject> menus;
     public List<GameObject> activeMenus;
     public Canvas canvas;
+    public AudioSource audioSource;
+    public AudioClip inventoryOpenClip;
     void Start()
     {
         
@@ -54,6 +56,7 @@ public class MenusController : MonoBehaviour
             else
             {
                 canvas.gameObject.GetComponent<Canvas>().enabled = true;
+                audioSource.PlayOneShot(inventoryOpenClip);
                 activeMenus.Add(menus[0]);
             }
         }

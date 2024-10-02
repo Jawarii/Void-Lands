@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Eternal Breath
   skillDescription: Become immortal for 2 seconds
-  skillLevel: 10
+  skillLevel: 6
   skillType: Empower
   skillIcon: {fileID: 21300000, guid: 0fb555bd8904eba41ab9f86bf36a3774, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 0
+  coolDown: 16

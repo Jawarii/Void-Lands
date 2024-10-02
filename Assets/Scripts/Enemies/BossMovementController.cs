@@ -24,6 +24,10 @@ public class BossMovementController : MonoBehaviour
     public bool isMovingStar = false;
     public List<Vector3> pentagramPoints = new List<Vector3>();
     private int currentPointIndex = 0;
+
+    // Add reference to player health
+    public PlayerStats playerStats; // You will need to assign this reference in the Unity editor or in Start()
+
     void Start()
     {
         playerObject = GameObject.FindGameObjectWithTag("Player");
@@ -32,23 +36,30 @@ public class BossMovementController : MonoBehaviour
         agent.updateUpAxis = false;
         agent.speed = speed_;
         originalPos = transform.position;
+
+        // Assuming the player has a PlayerHealth script that manages health and death
+        playerStats = playerObject.GetComponent<PlayerStats>();
     }
 
     void FixedUpdate()
     {
         agent.speed = speed_;
 
+        // Check if the player is dead
+        if (playerStats.isDead)
+        {
+            ReturnToOriginalPositionAndReset(); // Stop pursuit and reset the boss
+            return;
+        }
+
         if (inPursuit && canMove)
         {
             if (!isPathBlocked || IsPathClear(currentTargetDirection, 1f))
             {
-                //FindPathToPlayer();
                 SetAnimatorBasedOnAngle(GetAngle());
             }
             else
             {
-                // Continue moving in the last set alternate direction
-                //MoveTowardsAlternateDirection();
                 SetAnimatorBasedOnAngle(GetAngle());
             }
         }
@@ -65,6 +76,7 @@ public class BossMovementController : MonoBehaviour
             }
         }
     }
+
     public void MoveInPentagramStar()
     {
         if (!isMovingStar)
@@ -93,11 +105,13 @@ public class BossMovementController : MonoBehaviour
 
         isMovingStar = false;
     }
+
     void MoveToPentagramPoint(Vector3 point)
     {
         agent.SetDestination(point);
         isMoving = true;
     }
+
     void DefinePentagramPoints()
     {
         pentagramPoints.Clear();
@@ -143,6 +157,7 @@ public class BossMovementController : MonoBehaviour
             animator_.SetFloat("Rotation2", 0f);
         }
     }
+
     public void FindPathToPlayer()
     {
         Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
@@ -178,15 +193,11 @@ public class BossMovementController : MonoBehaviour
     private bool IsPathClear(Vector2 direction, float distance)
     {
         Vector2 start2D = new Vector2(transform.position.x, transform.position.y) + direction.normalized * 0.5f;
-
         int layerMask = ~(1 << gameObject.layer);
-
         RaycastHit2D hit = Physics2D.Raycast(start2D, direction, distance, layerMask);
-
 
         if (hit.collider != null)
         {
-            // Debug.Log($"Raycast hit: {hit.collider.name}");
             if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Obstacle"))
                 return false;
         }
@@ -241,19 +252,24 @@ public class BossMovementController : MonoBehaviour
 
         return originalDirection2D * distance;
     }
+
     public void MoveTowardsAlternateDirection()
     {
         Vector2 newPosition = transform.position + currentTargetDirection;
         agent.SetDestination(newPosition);
     }
+
     public float GetAngle()
     {
         return Vector2.SignedAngle(Vector2.right, (playerObject.transform.position - transform.position).normalized);
     }
+
     public void MoveToOriginalPosition()
     {
         agent.SetDestination(originalPos);
+        isMoving = true;
     }
+
     public void MoveTowardsPlayer(float distance)
     {
         if (!isMoving) // Check if boss is not already moving
@@ -262,37 +278,39 @@ public class BossMovementController : MonoBehaviour
             Vector3 directionToPlayer = (playerObject.transform.position - transform.position).normalized;
             Vector3 destination = transform.position + directionToPlayer * distance;
 
-            // Check if the destination is reachable
-            NavMeshHit hit;
-            if (NavMesh.SamplePosition(destination, out hit, distance, NavMesh.AllAreas))
-            {
-                agent.SetDestination(hit.position); // Set the destination to the closest valid point
-                isMoving = true; // Set the flag to indicate boss is moving
-            }
-            else
-            {
-                // If no valid NavMesh point is found, find the nearest point in the direction of the player within the allowed distance
-                float reduceDistance = distance;
-                bool validPointFound = false;
-
-                while (reduceDistance > 0 && !validPointFound)
-                {
-                    reduceDistance -= 0.5f; // Reduce the target distance
-                    Vector3 reducedDestination = transform.position + directionToPlayer * reduceDistance;
-                    if (NavMesh.SamplePosition(reducedDestination, out hit, reduceDistance, NavMesh.AllAreas))
-                    {
-                        agent.SetDestination(hit.position);
-                        isMoving = true;
-                        validPointFound = true;
-                    }
-                }
-
-                if (!validPointFound)
-                {
-                    Debug.Log("No reachable point found within the specified distance.");
-                }
-            }
+            // Set the destination using NavMeshAgent
+            agent.SetDestination(destination);
+            isMoving = true; // Set the flag to true to prevent additional moves
         }
     }
 
+    public void ReturnToOriginalPositionAndReset()
+    {
+        StopAllCoroutines();
+
+        if (GetComponent<ReaperBossPatternBehaviour>())
+        {
+            GetComponent<ReaperBossPatternBehaviour>().StopAllCoroutines();
+            GetComponent<ReaperBossPatternBehaviour>().ResetVariables();
+        }
+        // Stop the agent from pursuing the player
+        //agent.isStopped = true;
+
+        // Move the boss back to its original position
+        MoveToOriginalPosition();
+
+        // Reset the boss's health
+        ResetHealth();
+
+        // Stop pursuit logic
+        inPursuit = false;
+
+        transform.GetChild(0).gameObject.SetActive(true);
+    }
+
+    void ResetHealth()
+    {
+        // Reset health to full (assuming a maxHealth variable exists)
+        GetComponent<EnemyStats>().hp = GetComponent<EnemyStats>().maxHp;
+    }
 }

@@ -33,7 +33,7 @@ public class DraggableSkillBehaviour : MonoBehaviour, IBeginDragHandler, IDragHa
             {
                 if (skillButtonInformation.skillType == draggedSkill.GetComponent<SkillsWindowSlotInfo>()._skillSo.skillType)
                 {
-                    skillButtonInformation._skillSo = draggedSkill.GetComponent<SkillsWindowSlotInfo>()._skillSo;
+                    skillButtonInformation.skillSo = draggedSkill.GetComponent<SkillsWindowSlotInfo>()._skillSo;
                     skillButtonInformation.skillsScript = draggedSkill.GetComponent<SkillsWindowSlotInfo>().skillsScript;
                     skillButtonInformation.newAnimatorController = draggedSkill.GetComponent<SkillsWindowSlotInfo>().newAnimatorController;
                     result.gameObject.transform.GetChild(0).GetComponent<RawImage>().texture = draggedSkill.GetChild(0).GetComponent<Image>().sprite.texture;

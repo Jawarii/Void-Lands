@@ -12,6 +12,15 @@ public class FrenzyScript : SkillsScript
     private static float speedIncrease = 0.5f;
     private static bool buffIsActive = false;
 
+    public AudioSource audioSource;
+    public AudioClip audioClip;
+
+    // Reference to the prefab you want to instantiate
+    public GameObject effectPrefab;
+
+    // Reference to the instantiated effect object
+    private GameObject instantiatedEffect;
+
     public override void ActivateSkill()
     {
         playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
@@ -28,12 +37,23 @@ public class FrenzyScript : SkillsScript
         playerStats.attack += atkIncrease;
         playerStats.speed += speedIncrease;
 
+        audioSource = GameObject.Find("BuffsSoundSource").GetComponent<AudioSource>();
+        audioSource.PlayOneShot(audioClip);
+        Transform playerTransform = playerStats.gameObject.transform;
+        Vector3 playerPos = playerTransform.position;
+        Vector3 animatationPos = new Vector3(playerPos.x, playerPos.y + 0.35f, playerPos.z);
+        // Instantiate the effectPrefab at the player's location and make the player its parent
+        instantiatedEffect = Instantiate(effectPrefab, animatationPos, Quaternion.identity, playerTransform);
         buffIsActive = true;
         StartCoroutine(DisableBuff(duration));
     }
 
     private IEnumerator DestroyAfterDelay(float delay)
     {
+        if (instantiatedEffect != null)
+        {
+            Destroy(instantiatedEffect);
+        }
         yield return new WaitForSeconds(delay);
         Destroy(gameObject);
     }

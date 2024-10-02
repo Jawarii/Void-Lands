@@ -51,8 +51,8 @@ public class VolleyArrowBehaviour : MonoBehaviour
             EnemyStats enemyStats = other.GetComponent<EnemyStats>();
             crit = Random.Range(1, 101);
 
-            float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.9f;
-            float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.1f;
+            float minDmg = basicAtkDmgMulti * (playerStats.attack) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (playerStats.attack) * 1.1f;
             float critDmgMulti = playerStats.critDmg / 100.0f;
             if (isImbued)
             {
@@ -72,8 +72,8 @@ public class VolleyArrowBehaviour : MonoBehaviour
             Vector2 knockbackDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
             // Apply knockback to the enemy
-            //enemyStats.ApplyKnockback(knockbackDirection, knockbackForce);
-
+            enemyStats.ApplyKnockback(knockbackDirection, 2f);
+            enemyStats.ApplyCrowdControl("Daze", 1f);
             // Optionally destroy the arrow upon hitting an enemy
             Destroy(gameObject);
         }

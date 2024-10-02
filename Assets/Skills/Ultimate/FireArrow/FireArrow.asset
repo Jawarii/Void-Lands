@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Fire Arrow
   skillDescription: Fires a slow arrow that damages enemies in it's path constantly
-  skillLevel: 10
+  skillLevel: 9
   skillType: Ultimate
   skillIcon: {fileID: 21300000, guid: 86eb1c2c164a0f4458ea863ad4160f73, type: 3}
   skillScript: {fileID: 0}

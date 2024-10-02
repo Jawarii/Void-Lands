@@ -15,8 +15,8 @@ public class LineSkillDamageController : MonoBehaviour
         {
             PlayerStats playerStats = other.GetComponent<PlayerStats>();
 
-            float minDmg = atkDmgMulti * (enemyStats.attack - playerStats.defense) * 0.9f;
-            float maxDmg = atkDmgMulti * (enemyStats.attack - playerStats.defense) * 1.1f;
+            float minDmg = atkDmgMulti * (enemyStats.attack) * 0.9f;
+            float maxDmg = atkDmgMulti * (enemyStats.attack) * 1.1f;
 
             playerStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
             this.GetComponent<Collider2D>().enabled = false;

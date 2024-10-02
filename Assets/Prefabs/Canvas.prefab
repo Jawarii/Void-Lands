@@ -35,7 +35,6 @@ RectTransform:
   - {fileID: 8398084498361311409}
   - {fileID: 7979607213366584360}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -59,7 +58,9 @@ Canvas:
   m_OverrideSorting: 0
   m_OverridePixelPerfect: 0
   m_SortingBucketNormalizedSize: 0
+  m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 0
+  m_UpdateRectTransformForStandalone: 0
   m_SortingLayerID: 0
   m_SortingOrder: 5
   m_TargetDisplay: 0
@@ -85,7 +86,7 @@ MonoBehaviour:
   m_FallbackScreenDPI: 96
   m_DefaultSpriteDPI: 96
   m_DynamicPixelsPerUnit: 1
-  m_PresetInfoIsWorld: 0
+  m_PresetInfoIsWorld: 1
 --- !u!114 &8536710667342081691
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -108,6 +109,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8536710667342081694}
     m_Modifications:
     - target: {fileID: 1304695221066636344, guid: e37fe82e251711d41b0ee7499136e1db, type: 3}
@@ -199,6 +201,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e37fe82e251711d41b0ee7499136e1db, type: 3}
 --- !u!224 &4751615349242193150 stripped
 RectTransform:
@@ -210,6 +215,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8536710667342081694}
     m_Modifications:
     - target: {fileID: 901256812803892786, guid: b03b8211ccbd70846b29a1c8c7c5ee9d, type: 3}
@@ -309,6 +315,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b03b8211ccbd70846b29a1c8c7c5ee9d, type: 3}
 --- !u!224 &7979607213366584360 stripped
 RectTransform:
@@ -320,6 +329,7 @@ PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
   m_Modification:
+    serializedVersion: 3
     m_TransformParent: {fileID: 8536710667342081694}
     m_Modifications:
     - target: {fileID: 1339014689579850886, guid: 8880d316dd43e4c4394a90badc3ea5b9, type: 3}
@@ -419,6 +429,9 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 8880d316dd43e4c4394a90badc3ea5b9, type: 3}
 --- !u!224 &8398084498361311409 stripped
 RectTransform:

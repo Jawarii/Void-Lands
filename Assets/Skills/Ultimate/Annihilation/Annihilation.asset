@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   skillName: Annihilation
   skillDescription: Charge arrow that gets stronger the more you hold it.
-  skillLevel: 15
+  skillLevel: 9
   skillType: Ultimate
   skillIcon: {fileID: 21300000, guid: 5abf3f5b155f6bb458f00bd6c72ccd2a, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 0
+  coolDown: 36

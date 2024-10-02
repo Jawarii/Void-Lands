@@ -17,6 +17,8 @@ public class ParallelArrowBehaviour : MonoBehaviour
     public GameObject _bow;
     public PlayerAttackArcher attackArcher;
     public GameObject miasmaExplosionPrefab;
+
+    public bool canStun = false;
     private void Start()
     {
         _bow = GameObject.FindGameObjectWithTag("BowObject");
@@ -44,8 +46,8 @@ public class ParallelArrowBehaviour : MonoBehaviour
             EnemyStats enemyStats = other.GetComponent<EnemyStats>();
             crit = Random.Range(1, 101);
 
-            float minDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 0.9f;
-            float maxDmg = basicAtkDmgMulti * (playerStats.attack - enemyStats.defense) * 1.1f;
+            float minDmg = basicAtkDmgMulti * (playerStats.attack) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (playerStats.attack) * 1.1f;
             float critDmgMulti = playerStats.critDmg / 100.0f;
             if (isImbued)
             {
@@ -67,7 +69,8 @@ public class ParallelArrowBehaviour : MonoBehaviour
             // Apply knockback to the enemy
 
             // enemyStats.ApplyKnockback(knockbackDirection, knockbackForce);
-
+            if (canStun)
+                enemyStats.ApplyCrowdControl("Stun", 2f);
             // Optionally destroy the arrow upon hitting an enemy
             //Destroy(gameObject);
         }

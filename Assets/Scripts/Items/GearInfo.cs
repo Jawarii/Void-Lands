@@ -53,14 +53,14 @@ public class GearInfo : ItemInfo
         {
             bonusStatActions = new List<Action>()
             {
-                () => gearBonusStats.hp = (int)((2 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.hp = (int)((2 + itemLvl * 4.5f) * RandomRange(0.7f, 1.0f)),
                 () => gearBonusStats.moveSpeed = (10 + itemLvl) * RandomRange(0.7f, 1.0f),
-                () => gearBonusStats.armor = (int) ((1 + itemLvl / 3f) * RandomRange(0.7f, 1.0f)),
-                () => gearBonusStats.cdRed = (2 + itemLvl / 6f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.armor = (int) ((2 + itemLvl / 1.5f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.cdRed = (4 + itemLvl / 3f) * RandomRange(0.7f, 1.0f),
                 () => gearBonusStats.recovery = (int)((1 + itemLvl / 2f) * RandomRange(0.7f, 1.0f))
             };
         }
-        else if (itemType == "Gloves" || itemType == "Necklace" || itemType == "Ring")
+        else if (itemType == "Gloves" || itemType == "Ring")
         {
             bonusStatActions = new List<Action>()
             {
@@ -68,16 +68,28 @@ public class GearInfo : ItemInfo
                 () => gearBonusStats.critChance = (5 + itemLvl / 2f) * RandomRange(0.7f, 1.0f),
                 () => gearBonusStats.critDamage = (15 + itemLvl * 2f) * RandomRange(0.7f, 1.0f),
                 () => gearBonusStats.atkSpeed = (7 + itemLvl / 1.2f) * RandomRange(0.7f, 1.0f),
-                () => gearBonusStats.staggerDmg = (45 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)
+                () => gearBonusStats.staggerDmg = (20 + itemLvl * 2.5f) * RandomRange(0.7f, 1.0f)
+            };
+        }
+        else if (itemType == "Necklace")
+        {
+            bonusStatActions = new List<Action>()
+            {
+                () => gearBonusStats.attack = (int)((2 + itemLvl * 1.5f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.critChance = (5 + itemLvl / 2f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.critDamage = (15 + itemLvl * 2f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.atkSpeed = (7 + itemLvl / 1.2f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.staggerDmg = (20 + itemLvl * 2.5f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.moveSpeed = (10 + itemLvl) * RandomRange(0.7f, 1.0f)
             };
         }
         else
         {
             bonusStatActions = new List<Action>()
             {
-                () => gearBonusStats.hp = (int)((2 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)),
-                () => gearBonusStats.armor = (int) ((1 + itemLvl / 3f) * RandomRange(0.7f, 1.0f)),
-                () => gearBonusStats.cdRed = (2 + itemLvl / 6f) * RandomRange(0.7f, 1.0f),
+                () => gearBonusStats.hp = (int)((2 + itemLvl * 4.5f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.armor = (int) ((2 + itemLvl / 1.5f) * RandomRange(0.7f, 1.0f)),
+                () => gearBonusStats.cdRed = (4 + itemLvl / 3f) * RandomRange(0.7f, 1.0f),
                 () => gearBonusStats.recovery = (int)((1 + itemLvl / 2f) * RandomRange(0.7f, 1.0f))
             };
         }
@@ -127,8 +139,8 @@ public class GearInfo : ItemInfo
                 break;
             default:
                 gearMainStats.baseAttack = 0;
-                gearMainStats.baseHp = itemLvl * 10;
-                gearMainStats.baseArmor = itemLvl;
+                gearMainStats.baseHp = itemLvl * 7;
+                gearMainStats.baseArmor = (int)(itemLvl * 1.5f);
                 break;
         }
 

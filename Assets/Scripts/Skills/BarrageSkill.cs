@@ -11,15 +11,17 @@ public class BarrageSkill : SkillsScript
     public float duration = 3.0f; // Total duration for spawning arrows
     public int totalArrows = 20; // Total number of arrows to spawn
     public float radius = 5.0f; // Radius around the player to spawn arrows
+    public float adjustedSpeed = 0.35f;
 
     public override void ActivateSkill()
     {
         playerAttack.animTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
         playerAttack.releaseTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
-        playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
+        playerAttack.player.GetComponent<PlayerMovement>().speed *= adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
+        playerAttack.animator.SetFloat("AtkSpeed", playerAttack.player.GetComponent<PlayerStats>().atkSpd);
         playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
-        playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
+        //playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
         StartCoroutine(SpawnArrowsOverTime());
     }
 
@@ -51,8 +53,6 @@ public class BarrageSkill : SkillsScript
         }
 
         playerAttack.animator.SetBool("isAttacking", false);
-        playerAttack.player.GetComponent<PlayerMovement>().canDash = true;
-        playerAttack.player.GetComponent<PlayerMovement>().canMove = true;
         Destroy(gameObject);
     }
 }

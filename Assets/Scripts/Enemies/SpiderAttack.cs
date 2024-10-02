@@ -2,7 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class SpiderAttack : MonoBehaviour
+public class SpiderAttack : EnemyAttack
 {
     public Animator animator;
     public float attackCooldown = 2.0f;
@@ -21,10 +21,12 @@ public class SpiderAttack : MonoBehaviour
         attackCollider = attackColliderGo.GetComponent<Collider2D>();
         enemyMovement = GetComponent<EnemyMovementController>();
         currentAttackCooldown = 0f; // Allows immediate attack if in range
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
     }
 
     void FixedUpdate()
     {
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
         if (currentAttackCooldown > 0)
         {
             currentAttackCooldown -= Time.deltaTime;
@@ -49,7 +51,8 @@ public class SpiderAttack : MonoBehaviour
         float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
         attackColliderGo.transform.rotation = Quaternion.Euler(0, 0, angle + 90); // Adjust rotation to match direction
         enemyMovement.SetAnimatorBasedOnAngle(angle);
-        isAttacking = true;
+        GetComponent<EnemyStats>().isAttacking = true;
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
         enemyMovement.agent.isStopped = true;
         enemyMovement.canMove = false; // Prevent movement during attack
         animator.SetBool("canAttack", true);
@@ -57,12 +60,17 @@ public class SpiderAttack : MonoBehaviour
         currentAttackCooldown = attackCooldown;
 
         yield return new WaitForSeconds(0.667f);
-
+        if (gameObject.GetComponent<EnemyStats>().isDead)
+        {
+            StopCoroutine(PerformAttack());
+            yield break;
+        }
         animator.SetBool("canAttack", false);
         enemyMovement.canMove = true;
         enemyMovement.agent.isStopped = false;
         animator.SetFloat("Speed", enemyMovement.agent.velocity.magnitude);
-        isAttacking = false;
+        GetComponent<EnemyStats>().isAttacking = false;
+        isAttacking = GetComponent<EnemyStats>().isAttacking;
     }
 
     public void HandleColliderFunc()

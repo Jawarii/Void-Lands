@@ -69,7 +69,6 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\RotateAroundPlayer.cs" />
     <Compile Include="Assets\Scripts\Enemies\ReaperBossPatternBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableBase.cs" />
-    <Compile Include="Assets\UpgradeWindowController.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\PropsAltar.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\TileManager.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Demo scenes\DemoShooting.cs" />
@@ -78,10 +77,10 @@
     <Compile Include="Assets\Scripts\Skills\MultishotArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonHover.cs" />
     <Compile Include="Assets\Scripts\Skills\AnnihilationArrowBehaviour.cs" />
+    <Compile Include="Assets\Scripts\InteractButtonAnimator.cs" />
     <Compile Include="Assets\Scripts\Enemies\LineIndicatorBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\SkillsWindowSlotInfo.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableRigidbody2D.cs" />
-    <Compile Include="Assets\ColorData.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BossMovement.cs" />
     <Compile Include="Assets\Scripts\PlayerData.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Arrays.cs" />
@@ -103,7 +102,6 @@
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\AnimatedObstacle.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Visualisation\Performance.cs" />
     <Compile Include="Assets\Scripts\Skills\PiercingArrowBehaviour.cs" />
-    <Compile Include="Assets\ItemInfoData.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableTransform.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\PathRouteNode.cs" />
     <Compile Include="Assets\Scripts\Skills\RapidArrowBehaviour.cs" />
@@ -111,6 +109,8 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\BoomerangSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Script\EnemySelector.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableSkillBehaviour.cs" />
+    <Compile Include="Assets\Scripts\ReaperBossZoneTrigger.cs" />
+    <Compile Include="Assets\PotionController.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\SearchGrid.cs" />
     <Compile Include="Assets\Scripts\Skills\ParallelArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAttackBehaviour.cs" />
@@ -133,11 +133,15 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\PlayerController.cs" />
     <Compile Include="Assets\StoreAssets\Piloto Studio\Scripts\ParticleShowcase.cs" />
     <Compile Include="Assets\Scripts\Enemies\RotatingLasersController.cs" />
+    <Compile Include="Assets\Scripts\LoadSceneOnInput.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\Box.cs" />
     <Compile Include="Assets\Scripts\Skills\BarrageSkill.cs" />
     <Compile Include="Assets\Scripts\Skills\ParallelShotSkill.cs" />
+    <Compile Include="Assets\Scripts\UpgradeWindowController.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
+    <Compile Include="Assets\EnemyAttack.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableCanvas.cs" />
+    <Compile Include="Assets\Scripts\EquipmentSoInformation.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Floats.cs" />
     <Compile Include="Assets\Scripts\Skills\MiasmaScript.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyMovementController.cs" />
@@ -159,8 +163,8 @@
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableRigidbody.cs" />
     <Compile Include="Assets\Scripts\Enemies\TrollAttack.cs" />
     <Compile Include="Assets\Scripts\Skills\PenetratingArrowSkill.cs" />
+    <Compile Include="Assets\Scripts\SkillBarInfo.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\PerfMonitor.cs" />
-    <Compile Include="Assets\GameManager.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\EnemyMovement.cs" />
     <Compile Include="Assets\Scripts\Items\EquipmentController.cs" />
     <Compile Include="Assets\Scripts\Items\ItemInfo.cs" />
@@ -168,11 +172,14 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\BulletBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Structures\RangeFloat.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\StartGame.cs" />
+    <Compile Include="Assets\Scripts\ReaperBossSafeTrigger.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Scripts\ProjectileMover.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Index.cs" />
     <Compile Include="Assets\Scripts\Player\PlayerStats.cs" />
+    <Compile Include="Assets\Scripts\SkillButtonInfo.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAgroBehaviour.cs" />
+    <Compile Include="Assets\CustomCursor.cs" />
     <Compile Include="Assets\Scripts\UI\StatsController.cs" />
     <Compile Include="Assets\Scripts\Enemies\OrcAttack.cs" />
     <Compile Include="Assets\Scripts\Player\ClickLootBehaviour.cs" />
@@ -202,7 +209,8 @@
     <Compile Include="Assets\Stuff\FullscreenGameView.cs" />
     <Compile Include="Assets\Scripts\Enemies\LineSkillDamageController.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\AStarGridManager.cs" />
-    <Compile Include="Assets\UpgradeLogic.cs" />
+    <Compile Include="Assets\Scripts\InventoryData.cs" />
+    <Compile Include="Assets\Scripts\MinimapCamera.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ShakerInstance.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Transforms.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakers\ObjectShaker.cs" />
@@ -213,6 +221,7 @@
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\EventArgs.cs" />
     <Compile Include="Assets\Scripts\Enemies\RatAttack.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\UpgradeItem.cs" />
+    <Compile Include="Assets\Scripts\UpgradeLogic.cs" />
     <Compile Include="Assets\Scripts\Skills\General\SkillsSO.cs" />
     <Compile Include="Assets\Scripts\Enemies\SniperProjectileBehaviour.cs" />
     <Compile Include="Assets\Scripts\Skills\AnnihilationScript.cs" />
@@ -223,6 +232,7 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\LiveHPEnemy.cs" />
     <Compile Include="Assets\Scripts\Skills\HomingArrowsSkill.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\CameraFollow.cs" />
+    <Compile Include="Assets\Scripts\GameManager.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\EditorRuntime\BitMaskAttribute.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\Resettable.cs" />
     <Compile Include="Assets\Scripts\UI\ProfileController.cs" />
@@ -230,16 +240,18 @@
     <Compile Include="Assets\Scripts\Skills\VolleyArrowBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\DDOL.cs" />
     <Compile Include="Assets\Scripts\UI\MenusController.cs" />
+    <Compile Include="Assets\Scripts\SkillAdder.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Path.cs" />
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Scripts\AutoDestroyPS.cs" />
     <Compile Include="Assets\Scripts\Skills\SplitArrowBehaviour.cs" />
-    <Compile Include="Assets\InventoryData.cs" />
+    <Compile Include="Assets\Scripts\PlayerInformation.cs" />
     <Compile Include="Assets\Scripts\Enemies\CircularSkillDamageController.cs" />
     <Compile Include="Assets\Scripts\Special\ControlAllLights.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\Damage.cs" />
     <Compile Include="Assets\Scripts\Enemies\CircleIndicatorBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Threading\ThreadManager.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Script\EnemyTest.cs" />
+    <Compile Include="Assets\Scripts\TeleportBehaviour.cs" />
     <Compile Include="Assets\Scripts\Skills\PiercingArrowSkill.cs" />
     <Compile Include="Assets\Scripts\Skills\General\SkillsScript.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableItemBehaviour.cs" />
@@ -249,6 +261,7 @@
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\ObjectShakerHandler.cs" />
     <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Readme.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Collections\OpenNodeMap.cs" />
+    <Compile Include="Assets\Scripts\EquipmentData.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Collections\NodeQueue.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\WeightPainter.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Demo\Scripts\Rock.cs" />
@@ -270,8 +283,10 @@
     <Compile Include="Assets\Scripts\Skills\MultishotSkill.cs" />
     <Compile Include="Assets\Scripts\Skills\FireArrowBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\AgentSpawner.cs" />
+    <Compile Include="Assets\Scripts\ColorData.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\AnimatedRoamingAgent.cs" />
     <Compile Include="Assets\Scripts\Enemies\BossPatternsAnimationController.cs" />
+    <Compile Include="Assets\Scripts\ItemInfoData.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets\Stuff\ImportedAssets\Knight Files\Read Me.txt" />
@@ -284,6 +299,7 @@
     <None Include="Assets\Stuff\Opacity.shader" />
     <None Include="Assets\Stuff\___www.unityassetcollection.com___.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\HelmetIcons\readme.txt" />
+    <None Include="Assets\NewVFX\Free Pixel Effects Pack\README.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_Bitmap.shader" />
     <None Include="Assets\StoreAssets\Bringer Of Death\License.txt" />
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Prefabs\Readme.txt" />
@@ -344,6 +360,7 @@
     <None Include="Assets\IMPORTANT-ASSETS\Areas\UndeadTileSet\License.txt" />
     <None Include="Assets\Bosses\Effects\craftpix-net-237444-fire-pixel-art-animation-sprites\License.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\SpecialItems\RelicIcons\readme.txt" />
+    <None Include="Assets\1.1 - FREE CASUAL PACK SFX\(README) WELCOME_FREE CASUAL PACK SFX.txt" />
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\IMPORTANT-ASSETS\Consumables\PotionsIcons\License.txt" />

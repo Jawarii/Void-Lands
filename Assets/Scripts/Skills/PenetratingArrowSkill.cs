@@ -9,15 +9,17 @@ public class PenetratingArrowSkill : SkillsScript
     public GameObject _arrow;
     public float coolDown = 5f;
     public float cdElapsedTime = 0f;
+    public float adjustedSpeed = 0.1f;
     public override void ActivateSkill()
     {
         if (cdElapsedTime > 0f) return;
         playerAttack.animTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
         playerAttack.releaseTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
-        playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
+        playerAttack.player.GetComponent<PlayerMovement>().speed *= adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
+        playerAttack.animator.SetFloat("AtkSpeed", playerAttack.player.GetComponent<PlayerStats>().atkSpd);
         playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
-        playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
+        //playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
         StartCoroutine(SpawnArrow());
     }
     IEnumerator SpawnArrow()

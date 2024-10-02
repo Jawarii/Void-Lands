@@ -21,6 +21,8 @@ TagManager:
   - Obstacle
   - Interactable
   - TileObstacles
+  - Equipment
+  - DestroyCanvas
   layers:
   - Default
   - TransparentFX
@@ -28,7 +30,7 @@ TagManager:
   - 
   - Water
   - UI
-  - 
+  - MinimapLayer
   - 
   - 
   - 

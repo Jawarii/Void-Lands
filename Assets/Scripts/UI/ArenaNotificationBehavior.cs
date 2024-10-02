@@ -125,7 +125,43 @@ public class ArenaNotificationBehavior : MonoBehaviour
         }
 
         countdownText.fontSize = finalMessageEndSize;
-        yield return new WaitForSeconds(1); // Display final message for 1 second
+        yield return new WaitForSeconds(2); // Display final message for 1 second
+
+        // Start fading out the text
+        time = 0f;
+        float fadeDuration = 1f;  // Duration for the fade
+        while (time < fadeDuration)
+        {
+            time += Time.deltaTime;
+            canvasGroup.alpha = 1 - (time / fadeDuration);
+            yield return null;
+        }
+        canvas.enabled = false;  // Optionally disable the canvas if no longer needed
+        canvasGroup.alpha = 1;  // Reset alpha to ensure it's visible next time
+    }
+    public IEnumerator Failure()
+    {
+        countdownText.color = Color.red;
+        int finalMessageStartSize = 120;  // Start size for the final message
+        int finalMessageEndSize = 24;    // End size for the final message
+        float time;
+
+        canvas.enabled = true;  // Make sure the canvas itself is enabled
+        canvasGroup.alpha = 1;  // Ensure the canvas group is fully visible
+
+        //audioSource.pitch = 2f;
+        StartCoroutine(CrossfadeAudio(ostAudioSource, ostClip, 0.4f, 1f));
+        countdownText.text = "Failure";
+        time = 0f;  // Reset time for the new lerp
+        while (time < lerpDuration)
+        {
+            time += Time.deltaTime;
+            countdownText.fontSize = (int)Mathf.Lerp(finalMessageStartSize, finalMessageEndSize, time / lerpDuration);
+            yield return null;
+        }
+
+        countdownText.fontSize = finalMessageEndSize;
+        yield return new WaitForSeconds(2); // Display final message for 1 second
 
         // Start fading out the text
         time = 0f;

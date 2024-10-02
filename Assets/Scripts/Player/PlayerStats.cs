@@ -1,4 +1,9 @@
+using System.Collections.Generic;
+using System.Collections;
 using UnityEngine;
+using System;
+using TMPro;
+using UnityEngine.UI;
 
 public class PlayerStats : MonoBehaviour
 {
@@ -58,6 +63,10 @@ public class PlayerStats : MonoBehaviour
     [Header("Sound")]
     public AudioSource source;
     public AudioClip clip;
+    public AudioSource levelUpSource;
+    public AudioClip levelUpClip;
+    public AudioClip deathClip;
+    public AudioClip notifyClip;
 
     // Popup
     [SerializeField] private DamagePopup damagePopup;
@@ -69,9 +78,23 @@ public class PlayerStats : MonoBehaviour
 
     public bool isImmune = false;
 
+    public Canvas levelUpCanvas;
+
+    public GameObject respawnLocations;
+
+    public bool isDead = false;
+    public PlayerMovement playerMovement;
+
+    public float temSpeed = 0;
+
+    public PlayerInformation playerInformation;
     void Start()
     {
-        maxExp = Mathf.Pow(lvl, 1.35f) * 100f;
+        playerInformation = transform.GetComponent<PlayerInformation>();
+        //playerMovement = transform.GetComponent<PlayerMovement>();
+        respawnLocations = GameObject.Find("RespawnLocations");
+        source = GameObject.Find("PlayerGettingHitSource").GetComponent<AudioSource>();
+        maxExp = Mathf.Pow(lvl, 2f) * 100f;
 
         maxHp -= baseHp;
         baseHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
@@ -80,14 +103,17 @@ public class PlayerStats : MonoBehaviour
         prevHp = currentHp;
 
         attack -= baseAttack;
-        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        baseAttack = 20 + (int)(20f * Mathf.Pow(1.1f, lvl - 1));
         attack += baseAttack; // Initial attack value
 
         defense -= baseDefense;
-        baseDefense = (int)(10f * Mathf.Pow(1.1f, lvl - 1));
+        baseDefense = 15 + (int)(15f * Mathf.Pow(1.1f, lvl - 1));
         defense += baseDefense;
 
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
+
+        levelUpSource = GameObject.Find("LevelUpAudioSource").GetComponent<AudioSource>();
+        levelUpCanvas = GameObject.Find("LevelUpCanvas").GetComponent<Canvas>();
     }
 
     void Update()
@@ -113,10 +139,16 @@ public class PlayerStats : MonoBehaviour
         {
             LevelUp();
         }
-        if (hpRecCdCur >= hpRecCd && currentHp < maxHp)
+        if (hpRecCdCur >= hpRecCd && currentHp < maxHp && !isDead)
         {
             currentHp += hpRecovery;
+            if (currentHp > maxHp)
+                currentHp = maxHp;
             hpRecCdCur = 0;
+        }
+        if (lvl >= 10)
+        {
+            playerInformation.lvl1IsComplete = true;
         }
     }
 
@@ -140,9 +172,23 @@ public class PlayerStats : MonoBehaviour
     public void LevelUp()
     {
         lvl++;
+        if (lvl >= 10)
+        {
+            playerInformation.lvl1IsComplete = true;
+        }
+        if (lvl >= 20)
+        {
+            playerInformation.lvl2IsComplete = true;
+        }
+        if (lvl >= 30)
+        {
+            playerInformation.lvl3IsComplete = true;
+        }
         currentExp = currentExp - maxExp;
-        maxExp = Mathf.Pow(lvl, 1.35f) * 100f;
+        maxExp = Mathf.Pow(lvl, 2f) * 100f;
         IncreaseStats();
+        levelUpSource.PlayOneShot(levelUpClip);
+        StartCoroutine(HandleLevelUpPanel());
     }
 
     public void IncreaseStats()
@@ -150,15 +196,16 @@ public class PlayerStats : MonoBehaviour
         maxHp -= baseHp;
         baseHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
         maxHp += baseHp;
-        currentHp = maxHp;
+        if (!isDead)
+            currentHp = maxHp;
 
         attack -= baseAttack;
-        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        baseAttack = 20 + (int)(20f * Mathf.Pow(1.1f, lvl - 1));
         attack += baseAttack;
 
         //attack = CalculateAttack(); // Use dynamic calculation
         defense -= baseDefense;
-        baseDefense = (int)(10f * Mathf.Pow(1.1f, lvl - 1));
+        baseDefense = 15 + (int)(15f * Mathf.Pow(1.1f, lvl - 1));
         defense += baseDefense;
     }
 
@@ -172,6 +219,8 @@ public class PlayerStats : MonoBehaviour
     {
         if (isImmune)
             return;
+        float armorEfficiency = defense / 166f + 1f;
+        damage = (int)(damage / armorEfficiency);
         if (damage < 1)
             damage = 1;
         source.Stop();
@@ -181,5 +230,146 @@ public class PlayerStats : MonoBehaviour
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         hitIndicator = 0.15f;
         source.PlayOneShot(clip);
+        if (currentHp <= 0)
+        {
+            currentHp = 0;
+            HandleDeath();
+        }
+    }
+
+    private void HandleDeath()
+    {
+        isDead = true;
+        GetComponent<Animator>().SetBool("isDead", true);
+        source.PlayOneShot(deathClip);
+        StartCoroutine(DeathRoutine());
+    }
+
+    private IEnumerator DeathRoutine()
+    {
+        // Disable all components except for PlayerStats and SpriteRenderer
+
+        MonoBehaviour[] components = GetComponents<MonoBehaviour>();
+
+        foreach (MonoBehaviour component in components)
+        {
+            if (component != this && component != playerMovement)
+            {
+                component.enabled = false;
+            }
+        }
+        temSpeed = playerMovement.speed;
+        playerMovement.speed = 0;
+        playerMovement.canMove = false;
+        playerMovement.canDash = false;
+
+        // Disable other components like Collider but skip disabling the SpriteRenderer
+        Collider2D collider = GetComponent<Collider2D>();
+        if (collider != null) collider.enabled = false;
+
+        // Disable the first two children of the player
+        if (transform.childCount >= 2)
+        {
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
+            transform.GetChild(1).gameObject.SetActive(false);
+        }
+
+        // Wait for 3 seconds before respawning
+        yield return new WaitForSeconds(3f);
+
+        // Find the closest respawn point
+        Transform closestRespawn = FindClosestRespawnPoint();
+
+        // Re-enable all components
+        foreach (MonoBehaviour component in components)
+        {
+            if (component != this)
+            {
+                component.enabled = true;
+            }
+        }
+
+        // Re-enable other components like Collider
+        if (collider != null) collider.enabled = true;
+
+        // Re-enable the first two children of the player
+        if (transform.childCount >= 2)
+        {
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
+            transform.GetChild(1).gameObject.SetActive(true);
+        }
+
+        // Reset HP and reposition the player at the closest respawn point
+        currentHp = maxHp;
+        if (closestRespawn != null)
+        {
+            transform.position = closestRespawn.position;
+        }
+        GetComponent<Animator>().SetBool("isDead", false);
+        isDead = false;
+        playerMovement.speed = temSpeed;
+        playerMovement.canMove = true;
+        playerMovement.canDash = true;
+    }
+
+    private Transform FindClosestRespawnPoint()
+    {
+        Transform closest = null;
+        float minDistance = Mathf.Infinity;
+        Vector3 currentPosition = transform.position;
+
+        // Iterate through all child objects of respawnLocations
+        foreach (Transform respawnPoint in respawnLocations.transform)
+        {
+            float distance = Vector3.Distance(currentPosition, respawnPoint.position);
+            if (distance < minDistance)
+            {
+                minDistance = distance;
+                closest = respawnPoint;
+            }
+        }
+
+        return closest;
+    }
+
+
+    public IEnumerator HandleLevelUpPanel()
+    {
+        levelUpCanvas.GetComponent<Canvas>().enabled = true;
+        levelUpCanvas.GetComponentInChildren<Image>().color.a.Equals(1);
+        levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Leveled Up!";
+        yield return new WaitForSeconds(3f);
+        // Lerp Opacity Here
+        yield return new WaitForSeconds(1f);
+        levelUpCanvas.GetComponent<Canvas>().enabled = false;
+        yield return new WaitForSeconds(0.5f);
+        if (lvl == 3 || lvl == 6 || lvl == 9)
+        {
+            levelUpCanvas.GetComponent<Canvas>().enabled = true;
+            source.PlayOneShot(notifyClip);
+            levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Unlocked New Skills, Press [K]";
+        }
+        else if (lvl == 10 || lvl == 20 || lvl == 30)
+        {
+            levelUpCanvas.GetComponent<Canvas>().enabled = true;
+            source.PlayOneShot(notifyClip);
+            levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Unlocked The Boss of This Area";
+            yield return new WaitForSeconds(3f);
+            // Lerp Opacity Here
+            yield return new WaitForSeconds(1f);
+            levelUpCanvas.GetComponent<Canvas>().enabled = false;
+            yield return new WaitForSeconds(0.5f);
+            levelUpCanvas.GetComponent<Canvas>().enabled = true;
+            source.PlayOneShot(notifyClip);
+            levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Unlocked The Arena of This Area";
+        }
+        else
+        {
+            yield break;
+        }
+        yield return new WaitForSeconds(3f);
+        // Lerp Opacity Here
+        yield return new WaitForSeconds(1f);
+        levelUpCanvas.GetComponent<Canvas>().enabled = false;
     }
 }

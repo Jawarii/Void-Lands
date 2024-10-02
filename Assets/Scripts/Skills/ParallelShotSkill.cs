@@ -8,15 +8,16 @@ public class ParallelShotSkill : SkillsScript
     public AnimationClip bowReleaseAnim;
     public GameObject _arrow;
     public float arrowSpacing = 1.0f; // Spacing between arrows
-
+    public float adjustedSpeed = 0.3f;
     public override void ActivateSkill()
     {
         playerAttack.animTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
         playerAttack.releaseTime = bowAnim.length / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
-        playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
+        playerAttack.player.GetComponent<PlayerMovement>().speed *= adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
+        playerAttack.animator.SetFloat("AtkSpeed", playerAttack.player.GetComponent<PlayerStats>().atkSpd);
         playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
-        playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
+        //playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
         StartCoroutine(SpawnArrow());
     }
 

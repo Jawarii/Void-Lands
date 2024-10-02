@@ -72,3 +72,4 @@ MonoBehaviour:
   _arrow: {fileID: 3717403527142333829, guid: 20228e06e47d4994f90c8c022e884d57, type: 3}
   coolDown: 5
   cdElapsedTime: 0
+  adjustedSpeed: 0

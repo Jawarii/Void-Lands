@@ -4,7 +4,8 @@ using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
-public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
+public class
+    DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
     Transform parentAfterDrag;
     Transform draggedItem;
@@ -14,11 +15,22 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
     public bool isDragging = false;
     private bool draggedFromEquipment = false;
     public GameObject draggedCanvas;
+    public GameObject destroyCanvas;
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        // Check if left mouse button is pressed or the Space key is pressed as the secondary input
+        Debug.Log("Begun Drag");
+        if (eventData.button != PointerEventData.InputButton.Left)
+        {
+            Debug.Log("Canceled Drag On Beginning");
+            return; // Exit if neither left mouse button nor the Space key is pressed
+        }
+        Debug.Log("Begun Drag Accepted");
+        destroyCanvas = GameObject.Find("DestroyCanvas");
+        destroyCanvas.GetComponent<Canvas>().enabled = true;
         draggedCanvas = GameObject.Find("DraggedCanvas");
-        isDragging = true;
+
         inventoryMain = GameObject.Find("InventoryMain");
         inventoryController = inventoryMain.GetComponent<InventoryController>();
         draggedItem = transform.GetChild(0);
@@ -33,6 +45,7 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                 isDragging = false;
                 return; // Exit the function if there's no item in the slot
             }
+            isDragging = true;
             inventoryController.draggedItemInfo = inventoryController.inventory[_slotId];
             inventoryController.inventory[_slotId] = null;
             parentAfterDrag = draggedItem.parent;
@@ -46,6 +59,7 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                 isDragging = false;
                 return; // Exit the function if there's no item equipped
             }
+            isDragging = true;
             draggedFromEquipment = true;
             inventoryController.draggedItemInfo = transform.GetComponent<EquipmentController>().equipInfoSo;
             transform.GetComponent<EquipmentController>().equipInfoSo = null;
@@ -61,12 +75,18 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
             return;
 
         draggedItem.position = Input.mousePosition;
+
+        Debug.Log("Dragging...");
     }
 
     public void OnEndDrag(PointerEventData eventData)
     {
+        Debug.Log("End Drag Triggered");
+
         if (!isDragging)
             return;
+
+        Debug.Log("End Drag Started");
 
         isDragging = false;
         PointerEventData pointerEventData = new PointerEventData(EventSystem.current);
@@ -80,8 +100,27 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
 
         foreach (RaycastResult result in results)
         {
+            Debug.Log(result.gameObject.name);
+            // Check if the raycast hit a GameObject with the "destroycanvas" tag
+            if (result.gameObject.CompareTag("DestroyCanvas") && !draggedFromEquipment)
+            {
+                draggedItem.SetParent(parentAfterDrag);
+                draggedItem.localPosition = new Vector3(0, 0, 0);
+                draggedItem.SetAsFirstSibling();
+                inventoryController.inventory[_slotId] = inventoryController.draggedItemInfo;
+                inventoryController.draggedItemInfo = null;
+                parentAfterDrag.GetChild(0).gameObject.transform.GetChild(0).GetComponent<Image>().sprite = null;
+                parentAfterDrag.GetChild(0).gameObject.SetActive(false);
+                inventoryController.inventory[_slotId] = null;
+                //Destroy(draggedItem.gameObject); // Destroy the dragged item
+
+                validDropTargetFound = true;
+                break;
+            }
+
             buttonInfo = result.gameObject.GetComponent<ButtonInfo>();
             equipmentController = result.gameObject.GetComponent<EquipmentController>();
+
             if (buttonInfo != null)
             {
                 hoveredSlotId = buttonInfo.slotId;
@@ -102,19 +141,16 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                     draggedItem.SetAsFirstSibling();
                     validDropTargetFound = true;
                     transform.GetComponent<EquipmentController>().RemoveStats();
-                    transform.GetComponent<EquipmentController>().AddStats();
                     break;
                 }
                 else
                 {
+                    if (hoveredSlotId == 70 && inventoryController.draggedItemInfo.itemType == "UpgradeMaterial")
+                    {
+                        break;
+                    }
                     if (hoveredSlotId == _slotId)
                     {
-                        draggedItem.SetParent(parentAfterDrag);
-                        draggedItem.localPosition = new Vector3(0, 0, 0);
-                        draggedItem.SetAsFirstSibling();
-                        inventoryController.inventory[_slotId] = inventoryController.draggedItemInfo;
-                        inventoryController.draggedItemInfo = null;
-                        validDropTargetFound = true;
                         break;
                     }
                     else
@@ -130,18 +166,6 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                         draggedItem.localPosition = new Vector3(0, 0, 0);
                         draggedItem.SetAsFirstSibling();
                         validDropTargetFound = true;
-                        if (hoveredSlotId == 70) // Special handling for slot ID 70
-                        {
-                            GameObject upgradeMain = GameObject.Find("UpgradeMain");
-                            if (upgradeMain != null)
-                            {
-                                UpgradeLogic upgradeLogic = upgradeMain.GetComponent<UpgradeLogic>();
-                                if (upgradeLogic != null)
-                                {
-                                    upgradeLogic.itemToUpgrade = inventoryController.inventory[hoveredSlotId];
-                                }
-                            }
-                        }
                         break;
                     }
                 }
@@ -170,6 +194,7 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                 break;
             }
         }
+        destroyCanvas.GetComponent<Canvas>().enabled = false;
         if (!validDropTargetFound)
         {
             if (!draggedFromEquipment)
@@ -188,6 +213,45 @@ public class DraggableItemBehaviour : MonoBehaviour, IBeginDragHandler, IDragHan
                 transform.GetComponent<EquipmentController>().equipInfoSo = inventoryController.draggedItemInfo;
                 inventoryController.draggedItemInfo = null;
             }
+        }
+    }
+    void OnDisable()
+    {
+        Debug.Log("OnDisable Called");
+        if (isDragging)
+        {
+            // Ensure that drag state is reset if the object is disabled
+            isDragging = false;
+
+            if (!draggedFromEquipment)
+            {
+                // Reset for items dragged from inventory
+                draggedItem.SetParent(parentAfterDrag);
+                draggedItem.localPosition = new Vector3(0, 0, 0);
+                draggedItem.SetAsFirstSibling();
+                inventoryController.inventory[_slotId] = inventoryController.draggedItemInfo;
+                inventoryController.draggedItemInfo = null;
+            }
+            else
+            {
+                // Reset for items dragged from equipment
+                draggedItem.SetParent(parentAfterDrag);
+                draggedItem.localPosition = new Vector3(0, 0, 0);
+                draggedItem.SetAsFirstSibling();
+                transform.GetComponent<EquipmentController>().equipInfoSo = inventoryController.draggedItemInfo;
+                inventoryController.draggedItemInfo = null;
+            }
+
+            // Disable the DestroyCanvas after drag reset
+            destroyCanvas.GetComponent<Canvas>().enabled = false;
+        }
+    }
+    void Update()
+    {
+        if (isDragging && Input.GetMouseButtonUp(0))
+        {
+            Debug.Log("Forcing End Drag");
+            OnEndDrag(null);
         }
     }
 }

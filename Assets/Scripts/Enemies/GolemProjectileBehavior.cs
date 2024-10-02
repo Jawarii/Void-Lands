@@ -28,8 +28,8 @@ public class GolemProjectileBehavior : MonoBehaviour
         {
             PlayerStats playerStats = other.GetComponent<PlayerStats>();
 
-            float minDmg = basicAtkDmgMulti * (enemyStats.attack - playerStats.defense) * 0.9f;
-            float maxDmg = basicAtkDmgMulti * (enemyStats.attack - playerStats.defense) * 1.1f;
+            float minDmg = basicAtkDmgMulti * (enemyStats.attack) * 0.9f;
+            float maxDmg = basicAtkDmgMulti * (enemyStats.attack) * 1.1f;
 
             playerStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
 

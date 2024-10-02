@@ -8,14 +8,16 @@ public class RapidShotSkill : SkillsScript
     public AnimationClip finisherAnim;
     public AnimationClip bowReleaseAnim;
     public GameObject _arrow;
+    public float adjustedSpeed = 0.8f;
     public override void ActivateSkill()
     {
         playerAttack.animTime = bowAnim.length * 3f / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
         playerAttack.releaseTime = bowAnim.length * 3f / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
-        playerAttack.player.GetComponent<PlayerMovement>().speed = playerAttack.adjustedSpeed;
+        playerAttack.player.GetComponent<PlayerMovement>().speed *= adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
+        playerAttack.animator.SetFloat("AtkSpeed", playerAttack.player.GetComponent<PlayerStats>().atkSpd);
         playerAttack.player.GetComponent<PlayerMovement>().canDash = false;
-        playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
+        //playerAttack.player.GetComponent<PlayerMovement>().canMove = false;
 
         for (float i = 1; i < 4; i++)
         {
