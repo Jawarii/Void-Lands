@@ -437,13 +437,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 1
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 1
   m_TimeParameterActive: 0
   m_Motion: {fileID: -8503419171666032511}
   m_Tag: 
-  m_SpeedParameter: Rotation
+  m_SpeedParameter: Speed
   m_MirrorParameter: CanSlash
   m_CycleOffsetParameter: Rotation
   m_TimeParameter: Speed
@@ -590,6 +590,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: canAttack
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Speed
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5328907605510041325}
   m_Solo: 0

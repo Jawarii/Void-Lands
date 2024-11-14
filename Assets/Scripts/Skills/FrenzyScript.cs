@@ -32,7 +32,10 @@ public class FrenzyScript : SkillsScript
         }
 
         // Apply the new buff
+
+        atkSpeedIncrease = playerStats.atkSpd * 0.5f;
         atkIncrease = playerStats.attack * 0.5f;
+        speedIncrease = playerStats.speed * 0.5f;
         playerStats.atkSpd += atkSpeedIncrease;
         playerStats.attack += atkIncrease;
         playerStats.speed += speedIncrease;

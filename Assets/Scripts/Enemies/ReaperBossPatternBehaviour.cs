@@ -197,6 +197,27 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
         targettedExplosionsElapsedTime = targettedExplosionsCdRnd;
         isTargetExplosion = false;
     }
+    IEnumerator CornersExplosionPrison(float interval)
+    {
+        Vector3[] predeterminedPositions = new Vector3[]
+        {
+        new Vector3(1.89f, -3.63f, 0),  // Position 1
+        new Vector3(10.36f, -3.63f, 0), // Position 2
+        new Vector3(10.36f, -11.61f, 0), // Position 3
+        new Vector3(1.89f, -11.61f, 0) // Position 4
+        };
+
+        for (int i = 0; i < predeterminedPositions.Length; i++)
+        {
+            Vector3 spawnPosition = predeterminedPositions[i];
+
+            EnemyStats enemyStats = transform.GetComponent<EnemyStats>();
+            Vector3 scale = new Vector3(2f, 2f, 1);
+            StartCoroutine(patterns[0].GetComponent<ExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
+            yield return new WaitForSeconds(interval);
+        }
+    }
+
     IEnumerator ProjectileFanAttack()
     {
         if (isAttacking) yield break;
@@ -273,6 +294,7 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
                 Vector3 scale = new Vector3(2f, 2f, 1);
                 StartCoroutine(patterns[0].GetComponent<ExplosionController>().InvokeSkill(spawnPosition, enemyStats, scale));
             }
+            StartCoroutine(CornersExplosionPrison(0));
             yield return new WaitForSeconds(1.5f);
         }
         yield return new WaitForSeconds(1f);
@@ -297,6 +319,7 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
         {
             StartCoroutine(SpawnRing(pair.Item1, angleIncrement));
             StartCoroutine(SpawnRing(pair.Item2, angleIncrement));
+            StartCoroutine(CornersExplosionPrison(0));
             yield return new WaitForSeconds(1.5f);
         }
         yield return new WaitForSeconds(1f);
@@ -379,7 +402,14 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
         ringAttackCd = 16f;
         enhancedRingAttackCd = 24f;
 
+        enemyStats.staggerHealth = enemyStats.maxHp * 0.6f;
+
         Debug.Log("Boss variables reset to default values.");
     }
-
+    public void ResetVariablesAfterCC()
+    {
+        // Reset attack and behavior flags
+        isAttacking = false;
+        isTargetExplosion = false;
+    }
 }

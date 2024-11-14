@@ -25,10 +25,15 @@ public class DamagePopup : MonoBehaviour
         _camera = GameObject.Find("CM vcam1").GetComponent<CinemachineVirtualCamera>();
         cameraOrthoSize = _camera.m_Lens.OrthographicSize;
     }
-    
-    public void Setup(int damageAmount)
+
+    public void Setup(int damageAmount, float radius)
     {
         textMesh.SetText(damageAmount.ToString("#,#"));
+        float newRadius = ((radius * 2) - 1f) * 0.8f;
+        if (newRadius < 0)
+            newRadius = 0;
+
+        textMesh.fontSize += newRadius * textMesh.fontSize;
         if (isCrit)
         {
             textMesh.color = Color.yellow;
@@ -42,11 +47,11 @@ public class DamagePopup : MonoBehaviour
         {
             textMesh.color = Color.white;
         }
-        lifeTime = DISAPPEAR_TIMER_MAX;    
+        lifeTime = DISAPPEAR_TIMER_MAX;
         sortingOrder++;
         textMesh.sortingOrder = sortingOrder;
         transform.localScale = Vector3.one * cameraOrthoSize / scaleModifier;
-        
+
     }
 
     public void Create(Vector3 pos, float radius, int damageAmount, bool isCritical)
@@ -56,14 +61,14 @@ public class DamagePopup : MonoBehaviour
         if (isPlayer)
         {
             moveVector = new Vector3(Random.Range(-0.2f, 0.2f), Random.Range(0.35f, 0.55f));
-        }    
+        }
         else
         {
-            moveVector = new Vector3(Random.Range(-0.2f, 0.2f), radius + Random.Range(0.3f, 0.5f));
+            moveVector = new Vector3(Random.Range(-0.45f * radius, 0.45f * radius), Random.Range(0.8f * radius, radius));
         }
         Transform damagePopupTransform = Instantiate(floatDmgPf, pos + moveVector, Quaternion.identity);
         DamagePopup damagePopup = damagePopupTransform.GetComponent<DamagePopup>();
-        damagePopup.Setup(damageAmount);
+        damagePopup.Setup(damageAmount, radius);
     }
     public void Update()
     {

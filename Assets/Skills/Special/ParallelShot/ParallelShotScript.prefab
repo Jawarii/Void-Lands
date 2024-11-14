@@ -67,7 +67,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAttack: {fileID: 0}
-  bowAnim: {fileID: 7400000, guid: 6457c24a048bb00469e1fefc383396e4, type: 2}
+  bowAnim: {fileID: 7400000, guid: 601c7592b8accea428b0279087ae8434, type: 2}
   bowReleaseAnim: {fileID: 7400000, guid: 77e7234c6245d114cb72335cf964427d, type: 2}
   _arrow: {fileID: 3717403527142333829, guid: a344f3af02d219642acce3d081bfd4e5, type: 3}
   arrowSpacing: 0.3

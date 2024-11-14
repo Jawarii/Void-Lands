@@ -171,7 +171,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2189f72b04124d34e9e257bb67a904cb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  atkDmgMulti: 4
+  atkDmgMulti: 4.5
   enemyStats: {fileID: 0}
   audioSource: {fileID: 0}
   clip: {fileID: 8300000, guid: b99da9a57308d4ba1bee1cf1d9038376, type: 3}

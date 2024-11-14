@@ -53,10 +53,10 @@ public class WeaponInfo : ItemInfo
         List<Action> bonusStatActions = new List<Action>()
         {
             () => weaponBonusStats.attack = (int)((4 + itemLvl * 3f) * RandomRange(0.7f, 1.0f)),
-            () => weaponBonusStats.critChance = (10 + itemLvl) * RandomRange(0.7f, 1.0f),
-            () => weaponBonusStats.critDamage = (30 + itemLvl * 4f) * RandomRange(0.7f, 1.0f),
-            () => weaponBonusStats.atkSpeed = (14 + itemLvl * 1.66f) * RandomRange(0.7f, 1.0f),
-            () => weaponBonusStats.staggerDmg = (40 + itemLvl * 5f) * RandomRange(0.7f, 1.0f)
+            () => weaponBonusStats.critChance = (7 + itemLvl * 0.7f) * RandomRange(0.7f, 1.0f),
+            () => weaponBonusStats.critDamage = (15 + itemLvl * 2f) * RandomRange(0.7f, 1.0f),
+            () => weaponBonusStats.atkSpeed = (10 + itemLvl * 1.1f) * RandomRange(0.7f, 1.0f),
+            () => weaponBonusStats.staggerDmg = (12 + itemLvl * 2f) * RandomRange(0.7f, 1.0f)
         };
 
         int numberOfStats = qualityNormalized switch

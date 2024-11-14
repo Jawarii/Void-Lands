@@ -49,10 +49,10 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
             itemNameObj.GetComponent<TMP_Text>().text = itemInfoSO.itemName;
             itemNameObj.GetComponent<TMP_Text>().color = itemInfoSO.textColor;
             GameObject itemLvlObj = itemTooltip.transform.Find("ItemLvlText").gameObject;
-            itemLvlObj.GetComponent <TMP_Text>().text = itemInfoSO.itemLvl.ToString() + " Item Power";
+            itemLvlObj.SetActive(true);
+            itemLvlObj.GetComponent<TMP_Text>().text = itemInfoSO.itemLvl.ToString() + " Item Power";
             GameObject itemStatsObj = itemTooltip.transform.Find("Stats").gameObject;
             GameObject itemBonusStatsObj = itemTooltip.transform.Find("BonusStats").gameObject;
-
 
             if (itemInfoSO.itemType == "Weapon")
             {

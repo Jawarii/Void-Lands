@@ -43,11 +43,13 @@ public class InventoryController : MonoBehaviour
 
         if (item.stackSize > 1)
         {
+            EnchantmentStoneInfo enchantStoneInfo = itemInfo as EnchantmentStoneInfo;
+            int amountToAdd = enchantStoneInfo.amount;
             for (int i = 0; i < inventory.Count; i++)
             {
                 if (inventory[i] != null && inventory[i].itemId == item.itemId)
                 {
-                    inventory[i].currentStackSize++;
+                    inventory[i].currentStackSize += amountToAdd;
                     UpdateSlotUI(i, inventory[i]);
                     break;
                 }

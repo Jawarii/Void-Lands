@@ -19,7 +19,7 @@ public class PlayerStats : MonoBehaviour
     public float defense = 0;
     public float critRate = 5.0f;
     public float critDmg = 150.0f;
-    public float staggerDmg = 110f;
+    public float staggerDmg = 120f;
     public float speed = 1.0f;
     public float hpRecovery = 1f;
     public float cdReduction = 0f;
@@ -94,7 +94,7 @@ public class PlayerStats : MonoBehaviour
         //playerMovement = transform.GetComponent<PlayerMovement>();
         respawnLocations = GameObject.Find("RespawnLocations");
         source = GameObject.Find("PlayerGettingHitSource").GetComponent<AudioSource>();
-        maxExp = Mathf.Pow(lvl, 2f) * 100f;
+        maxExp = Mathf.Pow(lvl, 1.8f) * 100f;
 
         maxHp -= baseHp;
         baseHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
@@ -103,11 +103,11 @@ public class PlayerStats : MonoBehaviour
         prevHp = currentHp;
 
         attack -= baseAttack;
-        baseAttack = 20 + (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
         attack += baseAttack; // Initial attack value
 
         defense -= baseDefense;
-        baseDefense = 15 + (int)(15f * Mathf.Pow(1.1f, lvl - 1));
+        baseDefense = (int)(15f * Mathf.Pow(1.1f, lvl - 1));
         defense += baseDefense;
 
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
@@ -185,7 +185,7 @@ public class PlayerStats : MonoBehaviour
             playerInformation.lvl3IsComplete = true;
         }
         currentExp = currentExp - maxExp;
-        maxExp = Mathf.Pow(lvl, 2f) * 100f;
+        maxExp = Mathf.Pow(lvl, 1.8f) * 100f;
         IncreaseStats();
         levelUpSource.PlayOneShot(levelUpClip);
         StartCoroutine(HandleLevelUpPanel());
@@ -200,12 +200,12 @@ public class PlayerStats : MonoBehaviour
             currentHp = maxHp;
 
         attack -= baseAttack;
-        baseAttack = 20 + (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
         attack += baseAttack;
 
         //attack = CalculateAttack(); // Use dynamic calculation
         defense -= baseDefense;
-        baseDefense = 15 + (int)(15f * Mathf.Pow(1.1f, lvl - 1));
+        baseDefense = (int)(15f * Mathf.Pow(1.1f, lvl - 1));
         defense += baseDefense;
     }
 
@@ -226,7 +226,7 @@ public class PlayerStats : MonoBehaviour
         source.Stop();
         currentHp -= damage;
         damagePopup.isPlayer = true;
-        damagePopup.Create(transform.position, 1f, damage, isCrit);
+        damagePopup.Create(transform.position, Mathf.Abs(transform.localScale.y / 2f ), damage, isCrit);
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
         hitIndicator = 0.15f;
         source.PlayOneShot(clip);

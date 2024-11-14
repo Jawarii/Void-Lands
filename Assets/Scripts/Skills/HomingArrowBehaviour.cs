@@ -89,10 +89,10 @@ public class HomingArrowBehaviour : MonoBehaviour
                 }
             }
         }
-        else if (other.gameObject.CompareTag("Obstacle"))
-        {
-            Destroy(gameObject);
-        }
+        //else if (other.gameObject.CompareTag("Obstacle"))
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 
     private void FindInitialTarget()
@@ -136,7 +136,7 @@ public class HomingArrowBehaviour : MonoBehaviour
             if (hitCollider.CompareTag("Enemy") && hitCollider.gameObject != target.gameObject)
             {
                 float distanceToEnemy = Vector2.Distance(transform.position, hitCollider.transform.position);
-                if (distanceToEnemy < closestDistance)
+                if (distanceToEnemy < closestDistance && !hitCollider.GetComponent<EnemyStats>().isDead)
                 {
                     closestDistance = distanceToEnemy;
                     closestEnemy = hitCollider.transform;

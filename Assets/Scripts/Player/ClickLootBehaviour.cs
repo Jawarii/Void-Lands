@@ -2,22 +2,35 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
-
+using TMPro;
 public class ClickLootBehaviour : MonoBehaviour
 {
     public GameObject item;
     public GameObject inventory;
     public Button myButton;
-
+    public TMP_Text textTmp;
+    public int amount = 0;
+    EnchantmentStoneInfo enchantmentStoneInfo;
+    public int direction = 1;
     void Start()
     {
         item = transform.gameObject;
         inventory = GameObject.Find("InventoryMain");
         myButton = item.GetComponentInChildren<Button>();
+        textTmp = GetComponentInChildren<TMP_Text>();
+        enchantmentStoneInfo = GetComponent<EnchantmentStoneInfo>();
 
+        if (enchantmentStoneInfo != null)
+        {
+            amount = enchantmentStoneInfo.amount;
+        }
         if (myButton != null)
         {
             myButton.onClick.AddListener(OnClickButton);
+        }
+        if (amount > 0)
+        {
+            textTmp.text += " (" + amount + ")";
         }
     }
 
@@ -26,6 +39,7 @@ public class ClickLootBehaviour : MonoBehaviour
         if (inventory == null)
         {
             inventory = GameObject.Find("InventoryMain");
+
         }
     }
 
@@ -40,7 +54,7 @@ public class ClickLootBehaviour : MonoBehaviour
             Destroy(item); // Destroy the looted item
         }
         else
-        {   
+        {
             Debug.Log("Inventory is full!"); // Optionally, notify the player that the inventory is full
         }
     }

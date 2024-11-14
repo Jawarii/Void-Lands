@@ -9,6 +9,7 @@ using static Unity.VisualScripting.Member;
 public class EnemyStats : MonoBehaviour
 {
     public ShakeData myShake;
+    public float staggerHealth;
     public float baseHp = 100;
     public float maxHp;
     public float hp;
@@ -28,15 +29,17 @@ public class EnemyStats : MonoBehaviour
     public bool isCrowdControlled = false;
     public bool isDazed = false;
     public bool isKnockedBack = false;
+    public bool handledDrops = false;
 
-    private EnemyMovementController enemyMovement;
-
+    public EnemyMovementController enemyMovement;
+    public BossMovementController bossMovementController;
     public float hitIndicator = 0f;
     private Color baseColor;
 
     public AudioSource source;
     public AudioSource enemyGettingHitSource;
     public AudioSource dropsSource;
+    public AudioSource debuffSource;
 
     public AudioClip clip;
     public AudioClip deathClip;
@@ -60,6 +63,12 @@ public class EnemyStats : MonoBehaviour
 
     public bool isArenaMob = false;
 
+    public int directionModifier;
+    public bool isStaggered = false;
+    public bool isElite = false;
+
+    private Coroutine currentCC;
+
     void Start()
     {
         enemyMovement = GetComponent<EnemyMovementController>();
@@ -68,7 +77,7 @@ public class EnemyStats : MonoBehaviour
 
     void Update()
     {
-        isCrowdControlled = isStunned || isDazed || isKnockedBack;
+        isCrowdControlled = isStunned || isDazed || isKnockedBack || isStaggered;
 
         // Disable movement and actions when crowd-controlled
         if (player.GetComponent<PlayerStats>().isDead && isArenaMob)
@@ -83,7 +92,15 @@ public class EnemyStats : MonoBehaviour
         {
             EnableMovementAndActions();
         }
-        HandleHitIndicator();
+        //HandleHitIndicator();
+        if (staggerHealth <= 0 && isBoss)
+        {
+            staggerHealth = 0;
+            if (!isCrowdControlled)
+            {
+                ApplyCrowdControl("Stagger", 5f);
+            }
+        }
         CheckHealth();
     }
 
@@ -97,20 +114,37 @@ public class EnemyStats : MonoBehaviour
         float factor11to20 = 1.12f;
         float factor21to30 = 1.1f;
         // Calculate HP, Attack, and Defense
-        maxHp = CalculateStat(baseHp, enemyLvl, factor1to10, factor11to20);
+        maxHp = CalculateStat(baseHp, enemyLvl, factor1to10, factor11to20) - 100f; // -100f is to make earlier monsters a bit easier to kill
+        maxHp = maxHp / 10f;
+        maxHp = maxHp / 1.5f;
+        if (isElite)
+        {
+            maxHp *= 6;
+        }
         hp = maxHp;
         prevHp = hp;
 
         attack = CalculateStat(20f, enemyLvl, factor1to10, factor11to20);
         defense = CalculateStat(15f, enemyLvl, factor1to10, factor11to20);
 
+        if (isElite)
+        {
+            transform.localScale *= 1.35f;
+            attack *= 1.25f;
+        }
         // Other properties
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
-        _exp = enemyLvl * 10;
+        _exp = isBoss ? enemyLvl * 360 : isElite ? enemyLvl * 60 : enemyLvl * 10;
         originalPos = transform.position;
         isBoss = gameObject.GetComponent<BossMovementController>();
         dropsSource = GameObject.Find("DropAudioSource").GetComponent<AudioSource>();
         enemyGettingHitSource = GameObject.Find("EnemyGettingHitSource").GetComponent<AudioSource>();
+        debuffSource = GameObject.Find("DebuffSoundSource").GetComponent<AudioSource>();
+
+        if (isBoss)
+        {
+            staggerHealth = 0.6f * maxHp;
+        }
     }
 
     private int CalculateStat(float baseStat, int level, float factor1to10, float factor11to20)
@@ -139,9 +173,27 @@ public class EnemyStats : MonoBehaviour
         {
             enemyMovement.canMove = false;
             enemyMovement.agent.SetDestination(transform.position);
-            transform.GetComponent<EnemyAttack>().StopAllCoroutines();
-            transform.GetComponent<EnemyAttack>().enabled = false;
+            isAttacking = false;
+            EnemyAttack enemyAttack = transform.GetComponent<EnemyAttack>();
+            if (enemyAttack != null)
+            {
+                enemyAttack.StopAllCoroutines();
+                enemyAttack.enabled = false;
+            }
             //enemyMovement.enabled = false; // Disable movement script
+        }
+        if (isBoss)
+        {
+            BossMovementController bossMovement = gameObject.GetComponent<BossMovementController>();
+            bossMovement.canMove = false;
+            bossMovement.agent.SetDestination(transform.position);
+
+            ReaperBossPatternBehaviour enemyAttack = transform.GetComponent<ReaperBossPatternBehaviour>();
+            if (enemyAttack != null)
+            {
+                enemyAttack.StopAllCoroutines();
+                enemyAttack.enabled = false;
+            }
         }
     }
 
@@ -154,8 +206,21 @@ public class EnemyStats : MonoBehaviour
         // Check if enemyMovement and its agent are valid
         if (enemyMovement != null && enemyMovement.agent != null)
         {
-            enemyMovement.canMove = true;  // Enable the NavMeshAgent
+            transform.GetComponent<EnemyMovementController>().canMove = true;  // Enable the NavMeshAgent
             transform.GetComponent<EnemyAttack>().enabled = true;       // Enable the movement script
+        }
+        if (isBoss)
+        {
+            BossMovementController bossMovement = gameObject.GetComponent<BossMovementController>();
+            gameObject.GetComponent<BossMovementController>().canMove = true;
+            //bossMovement.agent.SetDestination(bossMovement.originalPos);
+
+            ReaperBossPatternBehaviour enemyAttack = transform.GetComponent<ReaperBossPatternBehaviour>();
+            if (enemyAttack != null)
+            {
+                transform.GetComponent<ReaperBossPatternBehaviour>().enabled = true;
+
+            }
         }
     }
 
@@ -187,30 +252,95 @@ public class EnemyStats : MonoBehaviour
     }
     public void ApplyCrowdControl(string effect, float duration)
     {
-        if (hp <= 0 || isDead || isBoss)
+        if (hp <= 0 || isDead)
             return;
-        ClearCrowdControl(name);
-        switch (effect)
+        if (enemyMovement != null)
         {
-            case "Stun":
-                isStunned = true;
-                break;
-            case "Daze":
-                isDazed = true;
-                break;
-            case "Knockback":
-                isKnockedBack = true;
-                break;
+            if (enemyMovement.isReturning == true)
+                return;
         }
-        Vector3 ccPos = new Vector3(transform.position.x, transform.position.y + (0.3f * transform.localScale.y), transform.position.z);
-        instantiatedObject = Instantiate(ccPrefab, ccPos, Quaternion.identity, transform);
-        StartCoroutine(HandleCrowdControl(effect, duration));
+        if (isBoss)
+        {
+            switch (effect)
+            {
+                case "Stagger":
+                    isStaggered = true;
+                    Vector3 ccPos = new Vector3(transform.position.x, transform.position.y + (0.3f * transform.localScale.y), transform.position.z);
+                    instantiatedObject = Instantiate(ccPrefab, ccPos, Quaternion.identity, transform);
+                    if (currentCC != null)
+                        StopCoroutine(currentCC);
+                    currentCC = StartCoroutine(HandleCrowdControl(effect, duration));
+                    break;
+                case "Stun":
+                    if (duration == 3) //Temporary solution for higher stagger rate with piercing arrow
+                    {
+                        int stunHealthReduction = (int)(maxHp * (4f * duration / 100f));
+                        staggerHealth -= stunHealthReduction;
+                    }
+                    else
+                    {
+                        int stunHealthReduction = (int)(maxHp * (duration / 100f));
+                        staggerHealth -= stunHealthReduction;
+                    }
+                    break;
+                case "Daze":
+                    int dazeHealthReduction = (int)(maxHp * (duration / 100f));
+                    staggerHealth -= dazeHealthReduction;
+                    break;
+                case "Knockback":
+                    int kbHealthReduction = (int)(maxHp * (duration / 100f));
+                    staggerHealth -= kbHealthReduction;
+                    break;
+            }
+        }
+        else
+        {
+            ClearCrowdControl(name);
+            switch (effect)
+            {
+                case "Stun":
+                    isStunned = true;
+                    break;
+                case "Daze":
+                    isDazed = true;
+                    break;
+                case "Knockback":
+                    isKnockedBack = true;
+                    break;
+            }
+            Vector3 ccPos = new Vector3(transform.position.x, transform.position.y + (0.3f * transform.localScale.y), transform.position.z);
+            instantiatedObject = Instantiate(ccPrefab, ccPos, Quaternion.identity, transform);
+            if (currentCC != null)
+                StopCoroutine(currentCC);
+            currentCC = StartCoroutine(HandleCrowdControl(effect, duration));
+        }
     }
 
     public IEnumerator HandleCrowdControl(string effect, float duration)
     {
-        source.PlayOneShot(ccClip);
-        yield return new WaitForSeconds(duration);
+        debuffSource.volume = 0.25f;
+        debuffSource.pitch = 1.4f;
+        if (effect == "Stagger")
+        {
+            debuffSource.volume = 1.0f;
+            debuffSource.pitch = 1f;
+        }
+        debuffSource.PlayOneShot(ccClip);
+        float targetStaggerHealth = maxHp * 0.6f;
+        float elapsedTime = 0f;
+
+        while (elapsedTime < duration)
+        {
+            // Calculate the current stagger health based on the elapsed time
+            staggerHealth = Mathf.Lerp(0, targetStaggerHealth, elapsedTime / duration);
+            elapsedTime += Time.deltaTime;
+
+            // Optional: Use staggerHealth here for any effect you want to display
+            yield return null;
+        }
+
+        // Ensure staggerHealth reaches the target value at the end
+        staggerHealth = targetStaggerHealth;
         ClearCrowdControl(effect);
     }
 
@@ -227,6 +357,15 @@ public class EnemyStats : MonoBehaviour
             case "Knockback":
                 isKnockedBack = false;
                 break;
+            case "Stagger":
+                isStaggered = false;
+                staggerHealth = maxHp * 0.6f;
+                ReaperBossPatternBehaviour repearBehaviour = transform.GetComponent<ReaperBossPatternBehaviour>();
+                if (repearBehaviour != null)
+                {
+                    repearBehaviour.ResetVariablesAfterCC();
+                }
+                break;
         }
         if (instantiatedObject != null)
             Destroy(instantiatedObject);
@@ -234,17 +373,23 @@ public class EnemyStats : MonoBehaviour
 
     private void HandleDeath()
     {
-        if (animator_.GetBool("isDead") == false)
+        if (animator_.GetBool("isDead") == false && !handledDrops)
         {
             animator_.SetBool("isDead", true);
             enemyGettingHitSource.PlayOneShot(deathClip);
-        }
-
-        if (deathDuration > 0.417f)
-        {
-            DropGold();
             DropGear();
             DropUpgrades();
+            goldAmount = (int)Random.Range(10 * Mathf.Pow(1.2f, enemyLvl - 1) * 0.8f, 10 * Mathf.Pow(1.2f, enemyLvl - 1) * 1.2f);
+            if (isBoss && goldAmount > 0)
+            {
+                goldAmount *= 23;
+            }
+            DropGold();
+            handledDrops = true;
+        }
+
+        if (deathDuration > 0.5f)
+        {
             //player.GetComponent<ArenaResultBehaviour>().monstersKilled++;
             int levelDiff = (int)stats.lvl - enemyLvl;
             int adjustedExp;
@@ -292,12 +437,6 @@ public class EnemyStats : MonoBehaviour
         {
             if (!isDead)
             {
-
-                goldAmount = (int)Random.Range(10 * Mathf.Pow(1.2f, enemyLvl - 1) * 0.8f, 10 * Mathf.Pow(1.2f, enemyLvl - 1) * 1.2f);
-                if (isBoss && goldAmount > 0)
-                {
-                    goldAmount *= 53;
-                }
                 isDead = true;
                 if (GetComponent<EnemyMovementController>() != null)
                 {
@@ -323,6 +462,12 @@ public class EnemyStats : MonoBehaviour
             int goldDropIndex = goldAmount < 30 ? 0 : goldAmount < 90 ? 1 : 2;
             Vector3 dropPosition = RandomDropPosition();
             GameObject goldDrop = Instantiate(goldItems[goldDropIndex], dropPosition, transform.rotation);
+            GoldDropBehaviour goldDropBehaviour = goldDrop.GetComponent<GoldDropBehaviour>();
+            if (goldDropBehaviour != null)
+            {
+                goldDropBehaviour.direction = DirectionModifier(dropPosition);
+            }
+
             goldDrop.GetComponentInChildren<TMP_Text>().text = goldAmount.ToString() + " Gold";
             goldDrop.GetComponent<GoldDropBehaviour>().goldAmount = goldAmount;
         }
@@ -331,6 +476,11 @@ public class EnemyStats : MonoBehaviour
             int goldDropIndex = goldAmount < 10 ? 0 : goldAmount < 50 ? 1 : 2;
             Vector3 dropPosition = RandomDropPosition();
             GameObject goldDrop = Instantiate(goldItems[goldDropIndex], dropPosition, transform.rotation);
+            GoldDropBehaviour goldDropBehaviour = goldDrop.GetComponent<GoldDropBehaviour>();
+            if (goldDropBehaviour != null)
+            {
+                goldDropBehaviour.direction = DirectionModifier(dropPosition);
+            }
             goldDrop.GetComponentInChildren<TMP_Text>().text = goldAmount.ToString() + " Gold";
             goldDrop.GetComponent<GoldDropBehaviour>().goldAmount = goldAmount;
         }
@@ -342,7 +492,7 @@ public class EnemyStats : MonoBehaviour
         {
             DropGearItem(gearItems);
         }
-        else if (Random.value > 0.99f && isArenaMob && !isBoss)
+        else if (Random.value > 0.995f && isArenaMob && !isBoss)
         {
             DropGearItem(gearItems);
         }
@@ -353,11 +503,11 @@ public class EnemyStats : MonoBehaviour
     }
     private void DropUpgrades()
     {
-        if (Random.value > 0.98f && !isArenaMob && !isBoss) // 2% chance to drop upgrades
+        if (Random.value > 0.99f && !isArenaMob && !isBoss) // 1% chance to drop upgrades
         {
             DropUpgradeItem(upgradeItems);
         }
-        else if (Random.value > 0.90f && isArenaMob && !isBoss)
+        else if (Random.value > 0.94f && isArenaMob && !isBoss)
         {
             DropUpgradeItem(upgradeItems);
         }
@@ -376,24 +526,27 @@ public class EnemyStats : MonoBehaviour
         // Determine the chances for each rarity
         float legendaryChance = 0.01f + (0.19f * (currentTierLevel - 1) / 9); // From 1% to 20%
         float rareChance = 0.04f + (0.36f * (currentTierLevel - 1) / 9);      // From 4% to 40%
-        float magicChance = 0.2f + (0.38f * (currentTierLevel - 1) / 9); // From 20% to 40%
+        float magicChance = 0.2f + (0.38f * (currentTierLevel - 1) / 9);      // From 20% to 40%
 
-        if (isBoss)
-        {
-            legendaryChance = 1f;
-        }
-
-        // Roll for rarity
+        // Roll for item rarity
         float roll = Random.value;
-
         string rarity = roll <= legendaryChance ? "Legendary" :
                         roll <= (legendaryChance + rareChance) ? "Rare" :
                         roll <= (legendaryChance + rareChance + magicChance) ? "Magic" : "Normal";
 
+        // If the enemy is a boss, roll 10 additional times with a 15% chance each for extra drops
         if (isBoss)
         {
-            DropItemBasedOnRarity(items, rarity);
+            rarity = "Legendary";
+            for (int i = 0; i < 5; i++)
+            {
+                if (Random.value <= 0.20f) // 15% chance per roll
+                {
+                    DropItemBasedOnRarity(items, rarity);
+                }
+            }
         }
+        // Drop the initial item based on rarity
         DropItemBasedOnRarity(items, rarity);
     }
 
@@ -412,7 +565,7 @@ public class EnemyStats : MonoBehaviour
 
         if (isBoss)
         {
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
                 float roll = Random.value;
 
@@ -437,6 +590,12 @@ public class EnemyStats : MonoBehaviour
     // Helper method to handle item drop based on rarity
     private void DropItemBasedOnRarity(List<GameObject> items, string rarity)
     {
+        int itemLevelStarter = enemyLvl;
+
+        if (enemyLvl >= 11 && enemyLvl <= 20)
+        {
+            itemLevelStarter += 3;
+        }
         // Create a list to store items of the chosen rarity
         List<GameObject> itemsOfRarity = new List<GameObject>();
 
@@ -453,17 +612,35 @@ public class EnemyStats : MonoBehaviour
         {
             float levelRoll = Random.value; // Random value between 0 and 1
 
-            if (levelRoll <= 0.10f) // 10% chance for item level 2 times higher
+            if (isBoss)
             {
-                item.GetComponent<ItemInfo>().itemLvl = enemyLvl + 2;
+                if (levelRoll <= 0.70f) // 70% chance for item level 2 times higher
+                {
+                    item.GetComponent<ItemInfo>().itemLvl = enemyLvl + 2;
+                }
+                else if (levelRoll <= 0.95f) // 25% chance for item level 1 time higher
+                {
+                    item.GetComponent<ItemInfo>().itemLvl = enemyLvl + 1;
+                }
+                else // 5% chance for same level as enemy
+                {
+                    item.GetComponent<ItemInfo>().itemLvl = enemyLvl;
+                }
             }
-            else if (levelRoll <= 0.30f) // 20% chance for item level 1 time higher
+            else
             {
-                item.GetComponent<ItemInfo>().itemLvl = enemyLvl + 1;
-            }
-            else // 70% chance for same level as enemy
-            {
-                item.GetComponent<ItemInfo>().itemLvl = enemyLvl;
+                if (levelRoll <= 0.10f) // 10% chance for item level 2 times higher
+                {
+                    item.GetComponent<ItemInfo>().itemLvl = itemLevelStarter + 2;
+                }
+                else if (levelRoll <= 0.30f) // 20% chance for item level 1 time higher
+                {
+                    item.GetComponent<ItemInfo>().itemLvl = itemLevelStarter + 1;
+                }
+                else // 70% chance for same level as enemy
+                {
+                    item.GetComponent<ItemInfo>().itemLvl = itemLevelStarter;
+                }
             }
         }
 
@@ -473,7 +650,12 @@ public class EnemyStats : MonoBehaviour
             int randomIndex = Random.Range(0, itemsOfRarity.Count);
             GameObject itemToDrop = itemsOfRarity[randomIndex];
             Vector3 dropPosition = RandomDropPosition();
-            Instantiate(itemToDrop, dropPosition, transform.rotation);
+            GameObject droppedItem = Instantiate(itemToDrop, dropPosition, transform.rotation);
+            ClickLootBehaviour clickLootBehaviour = droppedItem.transform.GetComponent<ClickLootBehaviour>();
+            if (clickLootBehaviour != null)
+            {
+                clickLootBehaviour.direction = directionModifier;
+            }
 
             // Play sound if it's a legendary item
             if (rarity == "Legendary")
@@ -485,31 +667,62 @@ public class EnemyStats : MonoBehaviour
 
     private Vector3 RandomDropPosition()
     {
-        float radius = 0.35f; // Set the radius of item drop scatter
-        Vector2 randomPoint = Random.insideUnitCircle * radius;
+        float radius = 0.2f * transform.localScale.y; // Set the radius of item drop scatter
+        Vector2 randomPoint = Random.onUnitSphere * radius;
+        directionModifier = DirectionModifier(randomPoint);
         return transform.position + new Vector3(randomPoint.x, randomPoint.y, 0);
     }
-
+    private int DirectionModifier(Vector2 randomPoint)
+    {
+        if (randomPoint.x > transform.position.x)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
     public void TakeDamage(int damage, bool isCrit)
     {
+        //if (enemyMovement != null && enemyMovement.isReturning == true)
+        //    return;
         if (isCrowdControlled)
         {
             damage = (int)((player.GetComponent<PlayerStats>().staggerDmg / 100f) * damage);
         }
-        float armorEffenciency = defense / 166f + 1f;
-        damage = (int)(damage / armorEffenciency);
+
+        float armorEfficiency = defense / 166f + 1f;
+        damage = (int)(damage / armorEfficiency);
+        damage = (int)(damage / 10f);
         if (damage < 1)
             damage = 1;
+
+        // Stop current audio and adjust pitch
         source.Stop();
         source.pitch = Random.Range(1.35f, 1.45f);
         hp -= damage;
+
+        if (isBoss)
+        {
+            float staggerDamage = Random.Range(damage * 0.8f, damage * 1.2f);
+            staggerHealth -= (int)staggerDamage;
+        }
+        // Create damage popup
         damagePopup.isPlayer = false;
-        damagePopup.Create(transform.position, transform.GetComponent<CircleCollider2D>().radius, damage, isCrit);
+        damagePopup.Create(transform.position, Mathf.Abs(transform.localScale.y * 0.5f), damage, isCrit);
+
+        // Change the enemy's color to red
         gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        hitIndicator = 0.15f;
+
+        // Reset the color back to baseColor after 0.1 seconds
+        Invoke(nameof(ResetColor), 0.1f);
+
         source.PlayOneShot(clip);
-        EnemyMovementController enemyMovement = transform.GetComponent<EnemyMovementController>();
-        if (enemyMovement != null && enemyMovement.inPursuit == false)
+
+        // Handle enemy movement and agro
+        enemyMovement = transform.GetComponent<EnemyMovementController>();
+        if (enemyMovement != null && !enemyMovement.inPursuit && !enemyMovement.isReturning)
         {
             enemyMovement.inPursuit = true;
             Collider2D[] colliders = Physics2D.OverlapCircleAll(transform.position, agroRadius);
@@ -527,7 +740,7 @@ public class EnemyStats : MonoBehaviour
         }
         else
         {
-            BossMovementController bossMovementController = transform.GetComponent<BossMovementController>();
+            bossMovementController = transform.GetComponent<BossMovementController>();
             if (bossMovementController)
             {
                 bossMovementController.inPursuit = true;
@@ -535,8 +748,17 @@ public class EnemyStats : MonoBehaviour
         }
     }
 
+    // Method to reset the color after 0.1 seconds
+    private void ResetColor()
+    {
+        gameObject.GetComponent<SpriteRenderer>().color = baseColor;
+    }
+
+
     public void ApplyKnockback(Vector2 direction, float force)
     {
+        if (isBoss)
+            return;
         transform.position += (Vector3)direction * force * Time.deltaTime;
     }
 
@@ -594,8 +816,10 @@ public class EnemyStats : MonoBehaviour
             animator_.SetFloat("Speed", enemyMovementController.agent.velocity.magnitude);
             enemyMovementController.inPursuit = false;
         }
+
         gameObject.GetComponentInChildren<Canvas>().enabled = true;
         gameObject.GetComponent<Collider2D>().enabled = true;
+
     }
 
     public void HandleRespawn()
@@ -615,6 +839,7 @@ public class EnemyStats : MonoBehaviour
         isDead = false;
         isAttacking = false;
         animator_.SetBool("isDead", false);
+        handledDrops = false;
 
         EnableAllComponents(gameObject);
     }

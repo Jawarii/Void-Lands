@@ -13,14 +13,14 @@ public class UpgradeLogic : MonoBehaviour
     public InventoryController inventoryController;
     public GameObject selectedStone;
     public GameObject _slider;
-    public float upgradeCastTime = 2f;
+    public float upgradeCastTime = 0.75f;
 
     public float magicStoneBaseChance = 1.0f;
-    public float magicStoneMaxChance = 0.01f;
+    public float magicStoneMaxChance = 0.02f;
     public float rareStoneBaseChance = 1.0f;
     public float rareStoneMaxChance = 0.06f;
     public float legendaryStoneBaseChance = 1.0f;
-    public float legendaryStoneMaxChance = 0.20f;
+    public float legendaryStoneMaxChance = 0.25f;
 
     private Color defaultColor = new Color(0.247f, 0.247f, 0.247f); // #3F3F3F
     private Color selectedColor = Color.cyan; // Neon color
@@ -269,15 +269,15 @@ public class UpgradeLogic : MonoBehaviour
             // Starts at 100%, drops to 75%, 50%, then 1%
             if (upgradeLevel < 3)
             {
-                successChance = Mathf.Lerp(1f, 0.5f, upgradeLevel / 2f);
+                successChance = Mathf.Lerp(1f, 0.8f, upgradeLevel / 2f);
             }
             else if (upgradeLevel < 6)
             {
-                successChance = Mathf.Lerp(0.3f, 0.15f, (upgradeLevel - 3) / 2f);
+                successChance = Mathf.Lerp(0.18f, 0.09f, (upgradeLevel - 3) / 2f);
             }
             else
             {
-                successChance = Mathf.Lerp(0.05f, magicStoneMaxChance, (upgradeLevel - 6) / 2f);
+                successChance = Mathf.Lerp(0.06f, magicStoneMaxChance, (upgradeLevel - 6) / 2f);
             }
         }
         else if (selectedStone == rareStoneSlot)
@@ -285,11 +285,11 @@ public class UpgradeLogic : MonoBehaviour
             // Starts at 100%, drops to 90%, 50%, then 8%
             if (upgradeLevel < 3)
             {
-                successChance = Mathf.Lerp(1f, 1.0f, upgradeLevel / 2f);
+                successChance = Mathf.Lerp(1f, 0.9f, upgradeLevel / 2f);
             }
             else if (upgradeLevel < 6)
             {
-                successChance = Mathf.Lerp(0.9f, 0.6f, (upgradeLevel - 3) / 2f);
+                successChance = Mathf.Lerp(0.75f, 0.55f, (upgradeLevel - 3) / 2f);
             }
             else
             {
@@ -309,7 +309,7 @@ public class UpgradeLogic : MonoBehaviour
             }
             else
             {
-                successChance = Mathf.Lerp(0.6f, legendaryStoneMaxChance, (upgradeLevel - 6) / 2f);
+                successChance = Mathf.Lerp(0.5f, legendaryStoneMaxChance, (upgradeLevel - 6) / 2f);
             }
         }
 

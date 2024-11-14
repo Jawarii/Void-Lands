@@ -34,6 +34,7 @@ public class PlayerAttackArcher : MonoBehaviour
     public float coolDown3 = 0;
 
     public bool hasImbueBuff = false;
+    public AudioClip stringClip;
 
     void Start()
     {
@@ -117,11 +118,23 @@ public class PlayerAttackArcher : MonoBehaviour
         if (source_ != null && clip_ != null)
         {
             source_.Stop();
+            source_.pitch = 1.0f;
+            source_.volume = 1.0f;
             source_.time = startTime; // Set the time from which the audio should start
             source_.Play();
         }
     }
 
+    public void PlayStringClip()
+    {
+        if (source_ != null && stringClip != null)
+        {
+            source_.Stop();
+            source_.pitch = 1.0f;
+            source_.volume = 0.3f;
+            source_.PlayOneShot(stringClip);
+        }
+    }
     IEnumerator ButtonClickTimer(int _index)
     {
         yield return new WaitForSeconds(0.05f);

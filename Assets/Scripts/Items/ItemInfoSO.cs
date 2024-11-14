@@ -80,7 +80,7 @@ public class ItemInfoSO : ScriptableObject
         if (upgradeLevel < 9)
         {
             upgradeLevel++;
-            float upgradeMultiplier = 1 + (0.05f * upgradeLevel);
+            float upgradeMultiplier = 1 + (0.07f * upgradeLevel);
 
             weaponMainStats.attack = Mathf.RoundToInt(weaponMainStats.baseAttack * upgradeMultiplier);
             weaponMainStats.minAttack = Mathf.RoundToInt(weaponMainStats.attack * 0.9f);
@@ -99,7 +99,7 @@ public class ItemInfoSO : ScriptableObject
         if (upgradeLevel < 9)
         {
             upgradeLevel++;
-            float upgradeMultiplier = 1 + (0.05f * upgradeLevel);
+            float upgradeMultiplier = 1 + (0.07f * upgradeLevel);
 
             gearMainStats.attack = Mathf.RoundToInt(gearMainStats.baseAttack * upgradeMultiplier);
             gearMainStats.hp = Mathf.RoundToInt(gearMainStats.baseHp * upgradeMultiplier);

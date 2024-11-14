@@ -18,18 +18,38 @@ public class EnemyMovementController : MonoBehaviour
     private int lastDirection = 0; // 0 = not set, 1 = right, -1 = left
     public float stoppingDistance;
 
+    public bool isReturning = false; // Flag to track return to position
+
     // Roaming settings
     public float roamingRadius = 2f;
     public float minRoamInterval = 8f;
     public float maxRoamInterval = 15f;
 
     // Returning to original position settings
-    public float maxDistanceFromOriginalPos = 10f;
+    private float maxDistanceFromOriginalPos = 12.5f;
     private Vector3 originalPosition;
 
     public bool isAttacking = false;
+
+    private float originalSpeed;
+    private float roamSpeed;
+
+    private float flipThreshold = 0.1f; // Define a threshold for flip adjustments
+    private float lastFlipTime = 0f;
+    private Vector3 lastScale;
+
+    // Timer for pursuit check
+    private float pursuitCheckTimer = 0f;
+    private float pursuitCheckInterval = 0.5f; // Interval in seconds
+
+    // Cooldown for MoveTowardsAlternateDirection
+    private float lastAlternateMoveTime = 0f;
+    private float alternateMoveCooldown = 0.5f;
+
     void Start()
     {
+        originalSpeed = speed_;
+        roamSpeed = speed_ * 0.5f;
         playerObject = GameObject.FindGameObjectWithTag("Player");
         agent = GetComponent<NavMeshAgent>();
         agent.updateRotation = false;
@@ -43,6 +63,14 @@ public class EnemyMovementController : MonoBehaviour
     {
         FlipSpriteDirection();
         isAttacking = GetComponent<EnemyStats>().isAttacking;
+        animator_.SetFloat("Speed", agent.velocity.magnitude);
+
+        if (isReturning) // If returning, prevent pursuit
+        {
+            SetAnimatorBasedOnAngle(GetAngle());
+            return;
+        }
+
         if (inPursuit && canMove)
         {
             // Check if player is dead or if the enemy is too far from the original position
@@ -50,40 +78,97 @@ public class EnemyMovementController : MonoBehaviour
             {
                 if (transform.GetComponent<EnemyStats>().isArenaMob)
                     return;
-                ReturnToOriginalPosition();
+
+                StartCoroutine(ReturnToOriginalPosition());
                 return;
             }
 
             if (!isPathBlocked || IsPathClear(currentTargetDirection, 1f))
             {
+                speed_ = originalSpeed;
+                agent.speed = speed_;
                 FindPathToPlayer();
                 SetAnimatorBasedOnAngle(GetAngle());
             }
-            else
+            else if (Time.time - lastAlternateMoveTime >= alternateMoveCooldown)
             {
-                // Continue moving in the last set alternate direction
+                speed_ = originalSpeed;
+                agent.speed = speed_;
                 MoveTowardsAlternateDirection();
+                lastAlternateMoveTime = Time.time;
                 SetAnimatorBasedOnAngle(GetAngle());
             }
         }
-
-        animator_.SetFloat("Speed", agent.velocity.magnitude);
     }
 
     private IEnumerator Roam()
     {
         while (true)
         {
-            if (!inPursuit && canMove)
+            yield return new WaitForSeconds(0.5f);
+            if (!inPursuit && canMove && !isReturning)
             {
                 Vector3 roamTarget = GetRandomRoamingPosition();
-                agent.SetDestination(roamTarget);
-                animator_.SetFloat("Speed", agent.velocity.magnitude);
-                SetAnimatorBasedOnAngle(GetAngle());
+
+                // Sample a point on the NavMesh closest to roamTarget
+                NavMeshHit hit;
+                if (NavMesh.SamplePosition(roamTarget, out hit, 1.0f, NavMesh.AllAreas))
+                {
+                    agent.SetDestination(hit.position);
+                    speed_ = roamSpeed;
+                    agent.speed = speed_;
+                    animator_.SetFloat("Speed", agent.velocity.magnitude);
+                    SetAnimatorBasedOnAngle(GetAngle());
+                }
             }
             float roamInterval = Random.Range(minRoamInterval, maxRoamInterval);
             yield return new WaitForSeconds(roamInterval);
         }
+    }
+
+    private bool IsTooFarFromOriginalPosition()
+    {
+        return Vector3.Distance(transform.position, originalPosition) > maxDistanceFromOriginalPos;
+    }
+
+    IEnumerator ReturnToOriginalPosition()
+    {
+        inPursuit = false;
+        isReturning = true; // Set returning flag
+        agent.isStopped = true;
+        animator_.SetFloat("Speed", agent.velocity.magnitude);
+        transform.GetComponent<EnemyStats>().hp = transform.GetComponent<EnemyStats>().maxHp;
+        yield return new WaitForSeconds(0.5f);
+        speed_ = originalSpeed * 1.5f;
+        agent.isStopped = false;
+        agent.speed = speed_;
+
+        // Ensure original position is on NavMesh
+        NavMeshHit hit;
+        if (NavMesh.SamplePosition(originalPosition, out hit, 1.0f, NavMesh.AllAreas))
+        {
+            agent.SetDestination(hit.position);
+        }
+
+        animator_.SetBool("canAttack", false);
+        animator_.SetFloat("Speed", agent.velocity.magnitude);
+    }
+
+    private void UpdateReturnStatus()
+    {
+        if (isReturning && Vector3.Distance(transform.position, originalPosition) <= 0.1f)
+        {
+            isReturning = false; // Reset returning flag once back at original position
+            transform.GetComponent<EnemyStats>().hp = transform.GetComponent<EnemyStats>().maxHp;
+            speed_ = originalSpeed;
+            agent.speed = speed_;
+            gameObject.transform.Find("AgroRadius").gameObject.SetActive(true);
+        }
+    }
+
+    void Update()
+    {
+        UpdateReturnStatus();
     }
 
     private Vector3 GetRandomRoamingPosition()
@@ -96,24 +181,8 @@ public class EnemyMovementController : MonoBehaviour
     private bool IsPlayerDead()
     {
         // Implement a check for whether the player is dead
-        // This could be a flag in the player's script
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
         return playerStats != null && playerStats.isDead;
-    }
-
-    private bool IsTooFarFromOriginalPosition()
-    {
-        return Vector3.Distance(transform.position, originalPosition) > maxDistanceFromOriginalPos;
-    }
-
-    private void ReturnToOriginalPosition()
-    {
-        inPursuit = false;
-        agent.isStopped = false;
-        agent.SetDestination(originalPosition);
-        animator_.SetFloat("Speed", agent.velocity.magnitude);
-        gameObject.transform.Find("AgroRadius").gameObject.SetActive(true);
-        transform.GetComponent<EnemyStats>().hp = transform.GetComponent<EnemyStats>().maxHp;
     }
 
     public void SetAnimatorBasedOnAngle(float angle)
@@ -157,7 +226,6 @@ public class EnemyMovementController : MonoBehaviour
                 isPathBlocked = true;
                 Vector3 alternateDirection = FindAlternatePath(directionToPlayer, distanceToPlayer);
                 currentTargetDirection = alternateDirection;
-                MoveTowardsAlternateDirection();
             }
             else
             {
@@ -175,7 +243,7 @@ public class EnemyMovementController : MonoBehaviour
 
     private bool IsPathClear(Vector2 direction, float distance)
     {
-        float slimeRadius = 0.05f;
+        float slimeRadius = 0.5f;
         Vector2 start2D = new Vector2(transform.position.x, transform.position.y) + direction.normalized * 0.5f;
 
         // Perform a CircleCast, excluding the enemy's own collider
@@ -183,13 +251,12 @@ public class EnemyMovementController : MonoBehaviour
 
         if (hit.collider != null && hit.collider.gameObject != gameObject) // Exclude self
         {
-            if (hit.collider.CompareTag("Enemy") || hit.collider.CompareTag("Obstacle"))
+            if (hit.collider.CompareTag("Enemy"))
                 return false;
         }
 
         return true;
     }
-
 
     private Vector2 RotateVector2(Vector2 v, float degrees)
     {
@@ -271,6 +338,7 @@ public class EnemyMovementController : MonoBehaviour
         Vector2 newPosition = transform.position + currentTargetDirection;
         agent.SetDestination(newPosition);
     }
+
     public float GetAngle()
     {
         if (inPursuit && agent.velocity.magnitude < 0.01)
@@ -280,6 +348,22 @@ public class EnemyMovementController : MonoBehaviour
         else
         {
             return Vector2.SignedAngle(Vector2.right, (agent.destination - transform.position).normalized);
+        }
+    }
+
+    void StopAllCoroutinesExceptCurrent()
+    {
+        // Get all components on this GameObject
+        MonoBehaviour[] components = GetComponents<MonoBehaviour>();
+
+        foreach (MonoBehaviour component in components)
+        {
+            // Skip the current script
+            if (component == this)
+                continue;
+
+            // Stop all coroutines in other scripts
+            component.StopAllCoroutines();
         }
     }
 }

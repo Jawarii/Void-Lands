@@ -61,6 +61,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Assets\NotUsed\AStar 2D\FollowAgent.cs" />
+    <Compile Include="Assets\DropFlipBehaviour.cs" />
     <Compile Include="Assets\Scripts\Items\ItemInfoSO.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\ShoulderBehaviour.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\Algorithm\EuclideanProvider.cs" />
@@ -74,6 +75,7 @@
     <Compile Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Demo scenes\DemoShooting.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\ExampleScripts\EX2_Path.cs" />
     <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\ReadmeBehaviour.cs" />
+    <Compile Include="Assets\Scripts\PotionController.cs" />
     <Compile Include="Assets\Scripts\Skills\MultishotArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonHover.cs" />
     <Compile Include="Assets\Scripts\Skills\AnnihilationArrowBehaviour.cs" />
@@ -105,12 +107,12 @@
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableTransform.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\PathRouteNode.cs" />
     <Compile Include="Assets\Scripts\Skills\RapidArrowBehaviour.cs" />
+    <Compile Include="Assets\Scripts\ChestWorldBehaviour.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Structures\RangeInt.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BoomerangSkill.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Script\EnemySelector.cs" />
     <Compile Include="Assets\Scripts\UI\DraggableSkillBehaviour.cs" />
     <Compile Include="Assets\Scripts\ReaperBossZoneTrigger.cs" />
-    <Compile Include="Assets\PotionController.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\SearchGrid.cs" />
     <Compile Include="Assets\Scripts\Skills\ParallelArrowBehaviour.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAttackBehaviour.cs" />
@@ -127,6 +129,7 @@
     <Compile Include="Assets\Scripts\UI\SkillWindowController.cs" />
     <Compile Include="Assets\Scripts\Enemies\GolemBossPatternBehaviour.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\BulletSpawner.cs" />
+    <Compile Include="Assets\DisableButtonNavigation.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\ExpBar.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\EnemyStats.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Demo\Scripts\EditorTilemap.cs" />
@@ -139,7 +142,6 @@
     <Compile Include="Assets\Scripts\Skills\ParallelShotSkill.cs" />
     <Compile Include="Assets\Scripts\UpgradeWindowController.cs" />
     <Compile Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Script\LayerTrigger.cs" />
-    <Compile Include="Assets\EnemyAttack.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableCanvas.cs" />
     <Compile Include="Assets\Scripts\EquipmentSoInformation.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Floats.cs" />
@@ -158,9 +160,11 @@
     <Compile Include="Assets\Stuff\OtherProjectScripts\BossSkills.cs" />
     <Compile Include="Assets\Scripts\UI\ButtonInfo.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\LaserBehavior.cs" />
+    <Compile Include="Assets\StaggerBarLive.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Threading\AsyncPathResult.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Pathfinding\Algorithm\HeuristicProvider.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\SmoothCameraShaker\Scripts\Shakables\ShakableRigidbody.cs" />
+    <Compile Include="Assets\Scripts\EnemyAttack.cs" />
     <Compile Include="Assets\Scripts\Enemies\TrollAttack.cs" />
     <Compile Include="Assets\Scripts\Skills\PenetratingArrowSkill.cs" />
     <Compile Include="Assets\Scripts\SkillBarInfo.cs" />
@@ -179,7 +183,6 @@
     <Compile Include="Assets\Scripts\SkillButtonInfo.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\OrbitSkil.cs" />
     <Compile Include="Assets\Scripts\Enemies\EnemyAgroBehaviour.cs" />
-    <Compile Include="Assets\CustomCursor.cs" />
     <Compile Include="Assets\Scripts\UI\StatsController.cs" />
     <Compile Include="Assets\Scripts\Enemies\OrcAttack.cs" />
     <Compile Include="Assets\Scripts\Player\ClickLootBehaviour.cs" />
@@ -191,6 +194,7 @@
     <Compile Include="Assets\Scripts\UI\InventorySlotsManager.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Visualisation\PathView.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\Agent.cs" />
+    <Compile Include="Assets\DynamicNavMeshController.cs" />
     <Compile Include="Assets\Stuff\OtherProjectScripts\Spawner.cs" />
     <Compile Include="Assets\Scripts\Skills\FireArrowSkill.cs" />
     <Compile Include="Assets\Scripts\Skills\AttackBehaviour.cs" />
@@ -238,6 +242,7 @@
     <Compile Include="Assets\Scripts\UI\ProfileController.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Scripts\DynamicObstacle.cs" />
     <Compile Include="Assets\Scripts\Skills\VolleyArrowBehaviour.cs" />
+    <Compile Include="Assets\Scripts\CustomCursor.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\DDOL.cs" />
     <Compile Include="Assets\Scripts\UI\MenusController.cs" />
     <Compile Include="Assets\Scripts\SkillAdder.cs" />
@@ -314,15 +319,15 @@
     <None Include="Assets\StoreAssets\craftpix-net-996288-free-bow-and-crossbow-pixel-art-icons\License.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Areas\CursedLandTileSet\License.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF SSD.shader" />
-    <None Include="Assets\Bosses Sprites 2 - Fantasy Dreamland\Read Me.txt" />
+    <None Include="Assets\MoreAssets\Bosses Sprites 2 - Fantasy Dreamland\Read Me.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Areas\CursedLandTileSet\readme.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\GlovesIcons\readme.txt" />
     <None Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Shader\SH Sprite Shadow.shader" />
-    <None Include="Assets\rpg-monster-pack v1.0 (wonderdot)\projectile_arrow.txt" />
+    <None Include="Assets\MoreAssets\rpg-monster-pack v1.0 (wonderdot)\projectile_arrow.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF-Surface-Mobile.shader" />
     <None Include="Assets\NotUsed\rpg_armor_sets\README.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\BootsIcons\readme.txt" />
-    <None Include="Assets\Bosses Sprites 1 - Fantasy Dreamland\Read Me.txt" />
+    <None Include="Assets\MoreAssets\Bosses Sprites 1 - Fantasy Dreamland\Read Me.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Enemy Galore 1 - Pixel Art\Read Me.txt" />
     <None Include="Assets\StoreAssets\500_skillicons\README.txt" />
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Shaders\Electricity.shader" />
@@ -339,7 +344,7 @@
     <None Include="Assets\Stuff\TextMesh Pro\Sprites\EmojiOne Attribution.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_Bitmap-Custom-Atlas.shader" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\ArmorIcons\readme.txt" />
-    <None Include="Assets\rpg-monster-pack v1.0 (wonderdot)\readme.txt" />
+    <None Include="Assets\MoreAssets\rpg-monster-pack v1.0 (wonderdot)\readme.txt" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF.shader" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF-Mobile SSD.shader" />
     <None Include="Assets\Stuff\TextMesh Pro\Resources\LineBreaking Leading Characters.txt" />
@@ -360,11 +365,11 @@
     <None Include="Assets\IMPORTANT-ASSETS\Areas\UndeadTileSet\License.txt" />
     <None Include="Assets\Bosses\Effects\craftpix-net-237444-fire-pixel-art-animation-sprites\License.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\SpecialItems\RelicIcons\readme.txt" />
-    <None Include="Assets\1.1 - FREE CASUAL PACK SFX\(README) WELCOME_FREE CASUAL PACK SFX.txt" />
+    <None Include="Assets\MoreAssets\1.1 - FREE CASUAL PACK SFX\(README) WELCOME_FREE CASUAL PACK SFX.txt" />
     <None Include="Assets\StoreAssets\Hovl Studio\AAA Projectiles Vol 1\Shaders\Add_CenterGlow.shader" />
     <None Include="Assets\Stuff\TextMesh Pro\Shaders\TMP_SDF Overlay.shader" />
     <None Include="Assets\IMPORTANT-ASSETS\Consumables\PotionsIcons\License.txt" />
-    <None Include="Assets\ClassDiagram1.cd" />
+    <None Include="Assets\Stuff\ClassDiagram1.cd" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\HelmetIcons\License.txt" />
     <None Include="Assets\IMPORTANT-ASSETS\Gear\AccessoryIcons\License.txt" />
     <None Include="Assets\StoreAssets\Cainos\Pixel Art Top Down - Basic\Shader\SH Sprite Shadow Mask.shader" />

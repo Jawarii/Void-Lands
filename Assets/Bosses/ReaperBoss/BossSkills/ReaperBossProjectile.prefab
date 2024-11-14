@@ -123,7 +123,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  basicAtkDmgMulti: 1
+  basicAtkDmgMulti: 1.2
   lifeTime: 3
   enemyStats: {fileID: 0}
 --- !u!60 &6220610857349729344

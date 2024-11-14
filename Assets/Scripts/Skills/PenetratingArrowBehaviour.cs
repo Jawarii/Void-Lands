@@ -17,6 +17,8 @@ public class PenetratingArrowBehaviour : MonoBehaviour
     public PlayerAttackArcher attackArcher;
     public GameObject miasmaExplosionPrefab;
 
+    public Transform bossTransform;
+
     private void Start()
     {
         _bow = GameObject.FindGameObjectWithTag("BowObject");
@@ -66,9 +68,12 @@ public class PenetratingArrowBehaviour : MonoBehaviour
             {
                 enemyStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
             }
+            if (enemyStats.isBoss)
+            {
+                bossTransform = other.transform;
+            }
+            SpawnAdditionalArrows(enemyStats.isBoss);
 
-            // Spawn additional arrows to the left and right
-            SpawnAdditionalArrows();
         }
         else if (other.gameObject.CompareTag("Obstacle"))
         {
@@ -76,15 +81,32 @@ public class PenetratingArrowBehaviour : MonoBehaviour
         }
     }
 
-    private void SpawnAdditionalArrows()
+    private void SpawnAdditionalArrows(bool isBoss)
     {
-        // Calculate right and left rotations
-        Quaternion rightRotation = Quaternion.Euler(0, 0, 90);
-        Quaternion leftRotation = Quaternion.Euler(0, 0, -90);
+        if (isBoss)
+        {
+            // Offset the spawn points based on the arrow's local direction (relative to its rotation)
+            Vector3 rightSpawnOffset = bossTransform.position + transform.right * (maxDistance / 2f); // Right side relative to arrow
+            Vector3 leftSpawnOffset = bossTransform.position - transform.right * (maxDistance / 2f);  // Left side relative to arrow
 
-        // Instantiate right arrow and set velocity
-        GameObject rightArrow = Instantiate(arrowPrefab, transform.position, transform.rotation * rightRotation);
-        // Instantiate left arrow and set velocity
-        GameObject leftArrow = Instantiate(arrowPrefab, transform.position, transform.rotation * leftRotation);
+            // The arrows will still rotate right and left but spawn inward
+            Quaternion rightRotation = Quaternion.Euler(0, 0, 90);
+            Quaternion leftRotation = Quaternion.Euler(0, 0, -90);
+
+            // Instantiate the right arrow at the left side (relative to its local space)
+            GameObject rightArrow = Instantiate(arrowPrefab, leftSpawnOffset, transform.rotation * rightRotation);
+            // Instantiate the left arrow at the right side (relative to its local space)
+            GameObject leftArrow = Instantiate(arrowPrefab, rightSpawnOffset, transform.rotation * leftRotation);
+        }
+        else
+        {
+            // The same behavior for non-boss arrows
+            Quaternion rightRotation = Quaternion.Euler(0, 0, 90);
+            Quaternion leftRotation = Quaternion.Euler(0, 0, -90);
+
+            // Instantiate right and left arrows at the current position
+            GameObject rightArrow = Instantiate(arrowPrefab, transform.position, transform.rotation * rightRotation);
+            GameObject leftArrow = Instantiate(arrowPrefab, transform.position, transform.rotation * leftRotation);
+        }
     }
 }

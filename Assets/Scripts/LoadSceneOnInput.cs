@@ -39,6 +39,7 @@ public class LoadSceneOnInput : MonoBehaviour
         {
             if (playerStats.transform.GetComponent<PlayerMovement>().isMoving == false)
             {
+                playerAttack = playerStats.transform.GetComponentInChildren <PlayerAttackArcher>();
                 initialPosition = playerStats.transform.position;
                 initialHealth = playerStats.currentHp;
                 audioSource = playerStats.gameObject.GetComponent<AudioSource>();

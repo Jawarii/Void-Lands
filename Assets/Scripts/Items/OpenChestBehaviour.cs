@@ -15,17 +15,28 @@ public class OpenChestBehaviour : MonoBehaviour
     public List<GameObject> upgradeItems = new List<GameObject>();
 
     public bool isOpen = false;
-
+    public int directionModifier;
     public int chestLvl = 11;
 
     public AudioSource dropSource;
     public AudioClip dropClip;
+    private bool inRange;
 
     void Start()
     {
-        objShaker = GetComponent<ObjectShaker>();
-        spriteRenderer = GetComponent<SpriteRenderer>();
+        objShaker = GetComponentInParent<ObjectShaker>();
+        spriteRenderer = GetComponentInParent<SpriteRenderer>();
         dropSource = GameObject.Find("DropAudioSource").GetComponent<AudioSource>();
+    }
+    private void Update()
+    {
+        if (!isOpen && inRange)
+        {
+            if (Input.GetKeyDown("f"))
+            {
+                StartCoroutine(OpenChest());
+            }
+        }
     }
     IEnumerator OpenChest()
     {
@@ -38,38 +49,52 @@ public class OpenChestBehaviour : MonoBehaviour
         objShaker.enabled = false;
 
     }
-
+    private int DirectionModifier(Vector2 randomPoint)
+    {
+        if (randomPoint.x > transform.position.x)
+        {
+            return 1;
+        }
+        else
+        {
+            return -1;
+        }
+    }
     IEnumerator DropLoot()
     {
         StartCoroutine(DropGold());
-        StartCoroutine(DropGear(gearItems, 2)); // Specify number of items to drop
-        StartCoroutine(DropStones(upgradeItems, 12)); // Specify number of items to drop
+        StartCoroutine(DropGear(gearItems, 1)); // Specify number of items to drop
+        StartCoroutine(DropStones(upgradeItems, 3)); // Specify number of items to drop
         yield return null;
     }
 
     private Vector3 RandomDropPosition()
     {
-        float minRadius = 0.65f;  // Minimum distance from the chest
-        float maxRadius = 1.3f;  // Maximum distance for dropping items
+        float minRadius = 0.5f;  // Minimum distance from the chest
+        float maxRadius = 0.65f;  // Maximum distance for dropping items
         float angle = Random.Range(0, 360) * Mathf.Deg2Rad; // Convert degrees to radians
 
         float randomRadius = Random.Range(minRadius, maxRadius);
         Vector2 randomPoint = new Vector2(Mathf.Cos(angle), Mathf.Sin(angle)) * randomRadius;
-
         return transform.position + new Vector3(randomPoint.x, randomPoint.y, 0);
     }
 
     IEnumerator DropGold()
     {
-        for (int i = 0; i < 15; i++)
+        for (int i = 0; i < 4; i++)
         {
-            int goldAmount = (int)(Random.value * 51f);
-            int goldDropIndex = goldAmount < 10 ? 0 : goldAmount < 50 ? 1 : 2;
+            int goldAmount = (int)(Random.value * 299f + 15f);
+            int goldDropIndex = goldAmount < 50 ? 0 : goldAmount < 250 ? 1 : 2;
             Vector3 dropPosition = RandomDropPosition();
             GameObject goldDrop = Instantiate(goldItems[goldDropIndex], dropPosition, transform.rotation);
+            GoldDropBehaviour goldDropBehaviour = goldDrop.GetComponent<GoldDropBehaviour>();
+            if (goldDropBehaviour != null)
+            {
+                goldDropBehaviour.direction = DirectionModifier(dropPosition);
+            }
             goldDrop.GetComponentInChildren<TMP_Text>().text = goldAmount.ToString() + " Gold";
             goldDrop.GetComponent<GoldDropBehaviour>().goldAmount = goldAmount;
-            yield return new WaitForSeconds(0.03f);
+            yield return new WaitForSeconds(0.15f);
         }
     }
 
@@ -94,7 +119,16 @@ public class OpenChestBehaviour : MonoBehaviour
             // Assuming the item prefab has a script that can set its level, adjust it here
             item.GetComponent<ItemInfo>().itemLvl = gearLevel;
             Vector3 dropPosition = RandomDropPosition();
-            Instantiate(item, dropPosition, transform.rotation);
+            GameObject instantiatedObj = Instantiate(item, dropPosition, transform.rotation);
+            ClickLootBehaviour clickLootBehaviour = instantiatedObj.transform.GetComponent<ClickLootBehaviour>();
+            if (clickLootBehaviour != null)
+            {
+                clickLootBehaviour.direction = DirectionModifier(dropPosition);
+            }
+            if (item.GetComponent<ItemInfo>().itemQuality == "Legendary")
+            {
+                dropSource.PlayOneShot(dropClip);
+            }
             yield return new WaitForSeconds(0.5f);
         }
     }
@@ -122,7 +156,7 @@ public class OpenChestBehaviour : MonoBehaviour
             // Call a method to drop the item based on its rarity
             DropItemBasedOnRarity(items, rarity);
 
-            yield return new WaitForSeconds(0.1f); // Adjust delay between drops if needed
+            yield return new WaitForSeconds(0.15f); // Adjust delay between drops if needed
         }
     }
 
@@ -160,7 +194,16 @@ public class OpenChestBehaviour : MonoBehaviour
             int randomIndex = Random.Range(0, itemsOfRarity.Count);
             GameObject itemToDrop = itemsOfRarity[randomIndex];
             Vector3 dropPosition = RandomDropPosition();
-            Instantiate(itemToDrop, dropPosition, transform.rotation);
+            GameObject instantiatedObj = Instantiate(itemToDrop, dropPosition, transform.rotation);
+            if (instantiatedObj.GetComponent<EnchantmentStoneInfo>())
+            {
+                instantiatedObj.GetComponent<EnchantmentStoneInfo>().amount = Random.Range(1, 4);
+            }
+            ClickLootBehaviour clickLootBehaviour = instantiatedObj.transform.GetComponent<ClickLootBehaviour>();
+            if (clickLootBehaviour != null)
+            {
+                clickLootBehaviour.direction = DirectionModifier(dropPosition);
+            }
 
             // Play sound if it's a legendary item
             if (rarity == "Legendary")
@@ -169,16 +212,14 @@ public class OpenChestBehaviour : MonoBehaviour
             }
         }
     }
-    private void OnTriggerStay2D(Collider2D other)
+    private void OnTriggerEnter2D(Collider2D other)
     {
-        if (isOpen)
-            return;
         if (other.gameObject.CompareTag("Player"))
-        {
-            if (Input.GetKeyDown("f"))
-            {
-                StartCoroutine(OpenChest());
-            }
-        }
+            inRange = true;
+    }
+    private void OnTriggerExit2D(Collider2D other)
+    {
+        if (other.gameObject.CompareTag("Player"))
+            inRange = false;
     }
 }

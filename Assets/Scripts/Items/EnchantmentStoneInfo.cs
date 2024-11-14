@@ -3,6 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class EnchantmentStoneInfo : ItemInfo
-{   
- 
+{
+    public int amount;
 }

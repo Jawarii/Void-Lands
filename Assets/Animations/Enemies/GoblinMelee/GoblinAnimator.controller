@@ -361,6 +361,7 @@ AnimatorState:
   m_Transitions:
   - {fileID: 8271859600782630632}
   - {fileID: 3938679157316993985}
+  - {fileID: 3379023416762301159}
   m_StateMachineBehaviours: []
   m_Position: {x: 50, y: 50, z: 0}
   m_IKOnFeet: 0
@@ -376,6 +377,34 @@ AnimatorState:
   m_MirrorParameter: 
   m_CycleOffsetParameter: Rotation
   m_TimeParameter: Speed
+--- !u!1101 &3379023416762301159
+AnimatorStateTransition:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_Conditions:
+  - m_ConditionMode: 2
+    m_ConditionEvent: canAttack
+    m_EventTreshold: 0
+  - m_ConditionMode: 4
+    m_ConditionEvent: Speed
+    m_EventTreshold: 0.01
+  m_DstStateMachine: {fileID: 0}
+  m_DstState: {fileID: 5504730331914503072}
+  m_Solo: 0
+  m_Mute: 0
+  m_IsExit: 0
+  serializedVersion: 3
+  m_TransitionDuration: 0
+  m_TransitionOffset: 0
+  m_ExitTime: 0.75
+  m_HasExitTime: 0
+  m_HasFixedDuration: 1
+  m_InterruptionSource: 0
+  m_OrderedInterruption: 1
+  m_CanTransitionToSelf: 1
 --- !u!1101 &3938679157316993985
 AnimatorStateTransition:
   m_ObjectHideFlags: 1
@@ -420,13 +449,13 @@ AnimatorState:
   m_IKOnFeet: 0
   m_WriteDefaultValues: 1
   m_Mirror: 1
-  m_SpeedParameterActive: 0
+  m_SpeedParameterActive: 1
   m_MirrorParameterActive: 0
   m_CycleOffsetParameterActive: 1
   m_TimeParameterActive: 0
   m_Motion: {fileID: -8503419171666032511}
   m_Tag: 
-  m_SpeedParameter: Rotation
+  m_SpeedParameter: Speed
   m_MirrorParameter: CanSlash
   m_CycleOffsetParameter: Rotation
   m_TimeParameter: Speed
@@ -504,7 +533,7 @@ AnimatorStateMachine:
     m_Position: {x: 690, y: 70, z: 0}
   - serializedVersion: 1
     m_State: {fileID: -5198431422405418507}
-    m_Position: {x: 80, y: 70, z: 0}
+    m_Position: {x: 160, y: 70, z: 0}
   m_ChildStateMachines: []
   m_AnyStateTransitions: []
   m_EntryTransitions: []
@@ -573,6 +602,9 @@ AnimatorStateTransition:
   - m_ConditionMode: 2
     m_ConditionEvent: canAttack
     m_EventTreshold: 0
+  - m_ConditionMode: 3
+    m_ConditionEvent: Speed
+    m_EventTreshold: 0.01
   m_DstStateMachine: {fileID: 0}
   m_DstState: {fileID: 5328907605510041325}
   m_Solo: 0

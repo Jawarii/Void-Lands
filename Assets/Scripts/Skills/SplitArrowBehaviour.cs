@@ -23,7 +23,7 @@ public class SplitArrowBehaviour : MonoBehaviour
         attackArcher = _bow.GetComponent<PlayerAttackArcher>();
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
-        basicAtkDmgMulti = penArrow.basicAtkDmgMulti * 0.75f;
+        basicAtkDmgMulti = penArrow.basicAtkDmgMulti * 0.4f;
         startPosition = transform.position;
         if (attackArcher.hasImbueBuff)
             isImbued = true;

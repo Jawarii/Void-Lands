@@ -1,6 +1,6 @@
 using TMPro;
 using Unity.VisualScripting;
-using UnityEngine;  
+using UnityEngine;
 using UnityEngine.EventSystems;
 using UnityEngine.UI;
 
@@ -42,10 +42,10 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         {
             isOccupied = true;
         }
-        else isOccupied= false;
+        else isOccupied = false;
 
         if (isOccupied)
-        {                       
+        {
             InventoryController inventoryController = inventoryMain.GetComponent<InventoryController>();
             int slotId = transform.GetComponent<ButtonInfo>().slotId;
             GameObject itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
@@ -56,10 +56,11 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             GameObject itemStatsObj = itemTooltip.transform.Find("Stats").gameObject;
             itemStatsObj.GetComponent<TMP_Text>().text = "Upgrade Stone";
             GameObject itemBonusStatsObj = itemTooltip.transform.Find("BonusStats").gameObject;
-            itemBonusStatsObj.GetComponent<TMP_Text>().text = "This Stone is Used to Upgrade Your Gear or Weapons up to +9 by Using the Upgrade Window Acessible by Clicking [U] on your Keyboard";
-            
+            itemBonusStatsObj.GetComponent<TMP_Text>().text = "This Stone is Used to Upgrade Your Gear or Weapons up to +9 by Using the Upgrade Window Accessible by Clicking [U] on your Keyboard";
+            itemTooltip.transform.Find("ItemLvlText").gameObject.SetActive(false);
             if (inventoryController.inventory[slotId].itemType == "Weapon")
             {
+                itemTooltip.transform.Find("ItemLvlText").gameObject.SetActive(true);
                 itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
                 itemLevelGo.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemLvl.ToString() + " Item Power";
                 SetWeaponInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
@@ -69,6 +70,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
                 inventoryController.inventory[slotId].itemType == "Belt" || inventoryController.inventory[slotId].itemType == "Necklace"
                 || inventoryController.inventory[slotId].itemType == "Ring")
             {
+                itemTooltip.transform.Find("ItemLvlText").gameObject.SetActive(true);
                 itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
                 itemLevelGo.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemLvl.ToString() + " Item Power";
                 SetGearInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
@@ -91,7 +93,7 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, transform.position, canvas.worldCamera, out canvasPos);
         float yUpCheck = canvasPos.y + tooltipHeight / 2f;
         float yDownCheck = canvasPos.y - tooltipHeight / 2f;
-        
+
 
         if (yUpCheck > canvasRectTransform.sizeDelta.y / 2f)
         {

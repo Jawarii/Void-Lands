@@ -54,6 +54,18 @@ public class GolemAttack : EnemyAttack
         // Wait for the major part of the attack animation to complete before spawning the projectile
         yield return new WaitForSeconds(attackDuration * 0.85f);
 
+        if (gameObject.GetComponent<EnemyStats>().isDead)
+        {
+            StopCoroutine(PerformAttack());
+            // End the attack
+            animator.SetBool("canAttack", false);
+            golemMovement.canMove = true;
+            golemMovement.agent.isStopped = false;
+            animator.SetFloat("Speed", golemMovement.agent.velocity.magnitude);
+            GetComponent<EnemyStats>().isAttacking = false;
+            isAttacking = false;
+            yield break;
+        }
         // Instantiate the projectile without further range checks
         Vector3 directionToPlayer = golemMovement.playerObject.transform.position - transform.position;
         float angle = Mathf.Atan2(directionToPlayer.y, directionToPlayer.x) * Mathf.Rad2Deg;
@@ -62,11 +74,6 @@ public class GolemAttack : EnemyAttack
 
         // Wait for the rest of the attack duration
         yield return new WaitForSeconds(attackDuration * 0.15f);
-        if (gameObject.GetComponent<EnemyStats>().isDead)
-        {
-            StopCoroutine(PerformAttack());
-            yield break;
-        }
         // End the attack
         animator.SetBool("canAttack", false);
         golemMovement.canMove = true;

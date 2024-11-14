@@ -10,6 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1070328160}
   - component: {fileID: 1070328161}
+  - component: {fileID: 1324607436116952681}
   m_Layer: 0
   m_Name: LootRangeCollider
   m_TagString: Untagged
@@ -67,6 +68,42 @@ CircleCollider2D:
   m_Offset: {x: 0.007050378, y: -0.20036186}
   serializedVersion: 2
   m_Radius: 3.6
+--- !u!114 &1324607436116952681
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1070328159}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e8f0b534e68506342a771f5303d5ea2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objShaker: {fileID: 1680849203494820647}
+  openChestSprite: {fileID: 21300000, guid: b4f1c0a0e5e9c2f4b95a141d9fc5354a, type: 3}
+  spriteRenderer: {fileID: 1680849203494820649}
+  goldItems:
+  - {fileID: 1832307555365820170, guid: 5aafda0f404d6f544803b649eb63e7e7, type: 3}
+  - {fileID: 3787356352293041227, guid: 8b921974434c09b4cb6cfc9eb0149976, type: 3}
+  - {fileID: 6696535211611611594, guid: 324e2bd62b8b8d34a8231efa05e5fe4d, type: 3}
+  gearItems:
+  - {fileID: 5835571819418052544, guid: ed06093cde6ab0142987df06917fe10b, type: 3}
+  - {fileID: 5835571819418052544, guid: e96d5c84e0176b349a5e9dab40addbb4, type: 3}
+  - {fileID: 5835571819418052544, guid: f144498361854ef4fa34d8dccdc74c61, type: 3}
+  - {fileID: 5835571819418052544, guid: ecdcaf0fb8d220d45aba8309f139273d, type: 3}
+  - {fileID: 5835571819418052544, guid: cc4da25ab796fe646b7eb167a783b27a, type: 3}
+  - {fileID: 5835571819418052544, guid: 3605f1f66d9615149aa6a68ac184a44e, type: 3}
+  - {fileID: 5835571819418052544, guid: 81712142db3e45b47a01d00b2e8eb2f5, type: 3}
+  - {fileID: 5835571819418052544, guid: 6f10afb6e3f2afb4b91aa092d38c82ca, type: 3}
+  upgradeItems:
+  - {fileID: 4521754464397372224, guid: b25df9aeb4f11e644821e74593faee98, type: 3}
+  - {fileID: 4521754464397372224, guid: f01aab5f4f912ae47893cdfc142a2a4d, type: 3}
+  - {fileID: 4521754464397372224, guid: f52685322dee1d54c95773fd0d1fe967, type: 3}
+  isOpen: 0
+  chestLvl: 11
+  dropSource: {fileID: 0}
+  dropClip: {fileID: 8300000, guid: 10af55788bdfb0b4b93f69523c043e5d, type: 3}
 --- !u!1 &1680849201728717044
 GameObject:
   m_ObjectHideFlags: 0
@@ -163,7 +200,6 @@ GameObject:
   - component: {fileID: 1680849203494820649}
   - component: {fileID: 1680849203494820647}
   - component: {fileID: 1680849203494820646}
-  - component: {fileID: 1680849203494820645}
   - component: {fileID: 1028027563}
   - component: {fileID: 5249222942275893637}
   m_Layer: 0
@@ -280,42 +316,6 @@ MonoBehaviour:
   _includeInactive: 0
   _localizeShake: 0
   _randomizeDirections: 1
---- !u!114 &1680849203494820645
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1680849203494820650}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e8f0b534e68506342a771f5303d5ea2d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  objShaker: {fileID: 1680849203494820647}
-  openChestSprite: {fileID: 21300000, guid: b4f1c0a0e5e9c2f4b95a141d9fc5354a, type: 3}
-  spriteRenderer: {fileID: 1680849203494820649}
-  goldItems:
-  - {fileID: 1832307555365820170, guid: 5aafda0f404d6f544803b649eb63e7e7, type: 3}
-  - {fileID: 3787356352293041227, guid: 8b921974434c09b4cb6cfc9eb0149976, type: 3}
-  - {fileID: 6696535211611611594, guid: 324e2bd62b8b8d34a8231efa05e5fe4d, type: 3}
-  gearItems:
-  - {fileID: 5835571819418052544, guid: ed06093cde6ab0142987df06917fe10b, type: 3}
-  - {fileID: 5835571819418052544, guid: e96d5c84e0176b349a5e9dab40addbb4, type: 3}
-  - {fileID: 5835571819418052544, guid: f144498361854ef4fa34d8dccdc74c61, type: 3}
-  - {fileID: 5835571819418052544, guid: ecdcaf0fb8d220d45aba8309f139273d, type: 3}
-  - {fileID: 5835571819418052544, guid: cc4da25ab796fe646b7eb167a783b27a, type: 3}
-  - {fileID: 5835571819418052544, guid: 3605f1f66d9615149aa6a68ac184a44e, type: 3}
-  - {fileID: 5835571819418052544, guid: 81712142db3e45b47a01d00b2e8eb2f5, type: 3}
-  - {fileID: 5835571819418052544, guid: 6f10afb6e3f2afb4b91aa092d38c82ca, type: 3}
-  upgradeItems:
-  - {fileID: 4521754464397372224, guid: b25df9aeb4f11e644821e74593faee98, type: 3}
-  - {fileID: 4521754464397372224, guid: f01aab5f4f912ae47893cdfc142a2a4d, type: 3}
-  - {fileID: 4521754464397372224, guid: f52685322dee1d54c95773fd0d1fe967, type: 3}
-  isOpen: 0
-  chestLvl: 11
-  dropSource: {fileID: 0}
-  dropClip: {fileID: 8300000, guid: 10af55788bdfb0b4b93f69523c043e5d, type: 3}
 --- !u!61 &1028027563
 BoxCollider2D:
   m_ObjectHideFlags: 0

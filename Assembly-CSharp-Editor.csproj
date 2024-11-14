@@ -63,6 +63,7 @@
     <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Editor\ReadmeBehaviourEditor.cs" />
     <Compile Include="Assets\StoreAssets\Piloto Studio\Readme\Scripts\Editor\ReadmeEditorStyles.cs" />
     <Compile Include="Assets\IMPORTANT-ASSETS\FirstGearGames\Utilities\Editor\DrawBitMaskField.cs" />
+    <Compile Include="Assets\Editor\ReplaceChildInClickLoot.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Editor\Scripts\Controls\ThreadViewControl.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Editor\Scripts\AStarGridInspector.cs" />
     <Compile Include="Assets\NotUsed\AStar 2D\Editor\Scripts\ThreadManagerInspector.cs" />
