@@ -131,9 +131,9 @@ MonoBehaviour:
   speed: 15
   player: {fileID: 0}
   playerStats: {fileID: 0}
-  basicAtkDmgMulti: 0.64
-  knockbackForce: 1
-  maxDistance: 8
+  basicAtkDmgMulti: 0.35
+  knockbackForce: 1.5
+  maxDistance: 7
   isImbued: 0
   _bow: {fileID: 0}
   attackArcher: {fileID: 0}

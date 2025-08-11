@@ -22,6 +22,8 @@ public class ArenaNotificationBehavior : MonoBehaviour
     public AudioClip combatOstClip;
     public AudioSource ostAudioSource;
 
+    public AudioClip victoryClip;
+    public AudioClip failureClip;
     //public ControlAllLights controlAllLights;
     //public Light2D globalLight;
 
@@ -59,9 +61,10 @@ public class ArenaNotificationBehavior : MonoBehaviour
 
         canvas.enabled = true;  // Make sure the canvas itself is enabled
         canvasGroup.alpha = 1;  // Ensure the canvas group is fully visible
-        StartCoroutine(CrossfadeAudio(ostAudioSource, combatOstClip, 0.4f, 3f));
+        StartCoroutine(CrossfadeAudio(ostAudioSource, combatOstClip, 0.3f, 3f));
         for (int i = 3; i > 0; i--)
         {
+            audioSource.volume = 1.0f;
             audioSource.pitch = 1f;
             audioSource.PlayOneShot(audioClip);
             countdownText.text = i.ToString();
@@ -105,6 +108,8 @@ public class ArenaNotificationBehavior : MonoBehaviour
 
     public IEnumerator Victory()
     {
+        audioSource.volume = 0.25f;
+        audioSource.PlayOneShot(victoryClip);
         countdownText.color = Color.yellow;
         int finalMessageStartSize = 120;  // Start size for the final message
         int finalMessageEndSize = 24;    // End size for the final message
@@ -125,7 +130,7 @@ public class ArenaNotificationBehavior : MonoBehaviour
         }
 
         countdownText.fontSize = finalMessageEndSize;
-        yield return new WaitForSeconds(2); // Display final message for 1 second
+        yield return new WaitForSeconds(6); // Display final message for 1 second
 
         // Start fading out the text
         time = 0f;
@@ -141,6 +146,8 @@ public class ArenaNotificationBehavior : MonoBehaviour
     }
     public IEnumerator Failure()
     {
+        audioSource.volume = 0.4f;
+        audioSource.PlayOneShot(failureClip);
         countdownText.color = Color.red;
         int finalMessageStartSize = 120;  // Start size for the final message
         int finalMessageEndSize = 24;    // End size for the final message
@@ -161,7 +168,7 @@ public class ArenaNotificationBehavior : MonoBehaviour
         }
 
         countdownText.fontSize = finalMessageEndSize;
-        yield return new WaitForSeconds(2); // Display final message for 1 second
+        yield return new WaitForSeconds(4); // Display final message for 1 second
 
         // Start fading out the text
         time = 0f;

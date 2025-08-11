@@ -13,10 +13,29 @@ MonoBehaviour:
   m_Name: Volley
   m_EditorClassIdentifier: 
   skillName: Volley
-  skillDescription: Shoots 9 arrows in a straight line
+  skillDescription: Fires 5 arrows, each knocking back enemies and stunning them
+    for 1.5 seconds on impact.
   skillLevel: 3
   skillType: Special
   skillIcon: {fileID: 21300000, guid: 6d0b2dd760ffdd346ab598752b00fc00, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 8
+  coolDown: 12
+  baseDamage: 1
+  baseDuration: 1
+  baseRange: 1
+  baseArea: 1
+  currentDamage: 0
+  currentDuration: 0
+  currentRange: 0
+  currentArea: 0
+  currentCooldown: 0
+  hasStun: 0
+  stunDuration: 0
+  hasSlow: 0
+  slowPercentage: 0
+  hasBleed: 0
+  bleedDamage: 0
+  bleedDuration: 0
+  effectColor: {r: 1, g: 1, b: 1, a: 1}
+  currentProjectilePrefab: {fileID: 0}

@@ -32,9 +32,7 @@ public class WeaponInfo : ItemInfo
 
     void Start()
     {
-        SetWeaponMainStats();
-        SetWeaponBonusStats();
-        SetAttackStatRange();
+        HandleStatsRoll();
     }
 
     public void SetWeaponMainStats()
@@ -106,5 +104,13 @@ public class WeaponInfo : ItemInfo
         weaponBonusStats.critDamage = 0;
         weaponBonusStats.atkSpeed = 0;
         weaponBonusStats.staggerDmg = 0;
+    }
+
+    public override void HandleStatsRoll()
+    {
+        itemLvl = itemTier * 5;
+        SetWeaponMainStats();
+        SetWeaponBonusStats();
+        SetAttackStatRange();
     }
 }

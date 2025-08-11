@@ -1,9 +1,10 @@
-using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
-using TMPro;
+using Cinemachine;
 using FirstGearGames.SmoothCameraShaker;
 using System.Buffers.Text;
+using System.Collections;
+using System.Collections.Generic;
+using TMPro;
+using UnityEngine;
 using static Unity.VisualScripting.Member;
 
 public class EnemyStats : MonoBehaviour
@@ -19,7 +20,8 @@ public class EnemyStats : MonoBehaviour
     public GameObject player;
     public Animator animator_;
     private PlayerStats stats;
-    private float prevHp;
+    public float prevHp;
+    public float delayedHp;
     public int enemyLvl = 1;
     public int _exp = 10;
     private float deathDuration = 0;
@@ -55,7 +57,8 @@ public class EnemyStats : MonoBehaviour
     public bool isBoss = false;
     private float goldAmount = 0;
     private float agroRadius = 1.0f;
-    private float respawnTimer = 60.0f;
+
+    public float respawnTimer = 300.0f;
 
     public GameObject ccPrefab;
     public GameObject instantiatedObject;
@@ -66,13 +69,28 @@ public class EnemyStats : MonoBehaviour
     public int directionModifier;
     public bool isStaggered = false;
     public bool isElite = false;
+    public bool isNormal = true;
 
     private Coroutine currentCC;
+
+    public CinemachineImpulseSource impulseSource;
+    public CinemachineImpulseDefinition def;
+
+    [Header("Corruption Loot Modifiers")]
+    public float lootAmountMod = 1f;
+    public float lootRarityMod = 1f;
+    public float lootQuantityMod = 1f;
+    public float lootChanceMod = 1f;
 
     void Start()
     {
         enemyMovement = GetComponent<EnemyMovementController>();
         InitializeEnemy();
+
+        if (isElite || isBoss)
+        {
+            isNormal = false;
+        }
     }
 
     void Update()
@@ -106,31 +124,41 @@ public class EnemyStats : MonoBehaviour
 
     private void InitializeEnemy()
     {
+        if (isArenaMob)
+        {
+            CircleCollider2D collider2d = transform.Find("AgroRadius").gameObject.GetComponent<CircleCollider2D>();
+            collider2d.radius = 50f;
+            enemyLvl = 10; // Temporary for main arena level, adjust later to be dynamic depending on arena level.
+        }
         player = GameObject.FindGameObjectWithTag("Player");
         stats = player.GetComponentInChildren<PlayerStats>();
 
+        //Impulse Info
+        impulseSource = player.GetComponent<CinemachineImpulseSource>();
+        def = impulseSource.m_ImpulseDefinition;
         // Base factor for levels 1-10 and levels 11+
         float factor1to10 = 1.25f;
         float factor11to20 = 1.12f;
-        float factor21to30 = 1.1f;
+        float factor21to30 = 1.09f;
+        float factor31to40 = 1.06f;
         // Calculate HP, Attack, and Defense
-        maxHp = CalculateStat(baseHp, enemyLvl, factor1to10, factor11to20) - 100f; // -100f is to make earlier monsters a bit easier to kill
+        maxHp = CalculateStat(baseHp, enemyLvl, factor1to10, factor11to20, factor21to30, factor31to40) - 100f; // -100f is to make earlier monsters a bit easier to kill
         maxHp = maxHp / 10f;
         maxHp = maxHp / 1.5f;
         if (isElite)
         {
-            maxHp *= 6;
+            maxHp *= 8;
         }
         hp = maxHp;
         prevHp = hp;
-
-        attack = CalculateStat(20f, enemyLvl, factor1to10, factor11to20);
-        defense = CalculateStat(15f, enemyLvl, factor1to10, factor11to20);
+        delayedHp = hp;
+        attack = CalculateStat(20f, enemyLvl, factor1to10, factor11to20, factor21to30, factor31to40);
+        defense = CalculateStat(15f, enemyLvl, factor1to10, factor11to20, factor21to30, factor31to40);
 
         if (isElite)
         {
             transform.localScale *= 1.35f;
-            attack *= 1.25f;
+            attack *= 1.4f;
         }
         // Other properties
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
@@ -141,26 +169,47 @@ public class EnemyStats : MonoBehaviour
         enemyGettingHitSource = GameObject.Find("EnemyGettingHitSource").GetComponent<AudioSource>();
         debuffSource = GameObject.Find("DebuffSoundSource").GetComponent<AudioSource>();
 
+        source.minDistance = 1f;
+        source.maxDistance = 15f;
+        source.rolloffMode = AudioRolloffMode.Logarithmic;
+
         if (isBoss)
         {
             staggerHealth = 0.6f * maxHp;
         }
+        CalculateEffectiveArmor();
     }
 
-    private int CalculateStat(float baseStat, int level, float factor1to10, float factor11to20)
+    private int CalculateStat(float baseStat, int level, float factor1to10, float factor11to20, float factor21to30, float factor31to40)
     {
+        float stat = baseStat;
+
         if (level <= 10)
         {
-            // Apply only the 1.25 factor for levels 1 to 10
-            return (int)(baseStat * Mathf.Pow(factor1to10, level - 1));
+            stat *= Mathf.Pow(factor1to10, level - 1);
         }
-        else
+        else if (level <= 20)
         {
-            // Apply the 1.25 factor for levels 1 to 10, then apply the 1.20 factor for levels 11 to the current level
-            int remainingLevels = level - 10;
-            return (int)(baseStat * Mathf.Pow(factor1to10, 10 - 1) * Mathf.Pow(factor11to20, remainingLevels));
+            stat *= Mathf.Pow(factor1to10, 9);
+            stat *= Mathf.Pow(factor11to20, level - 10);
         }
+        else if (level <= 30)
+        {
+            stat *= Mathf.Pow(factor1to10, 9);
+            stat *= Mathf.Pow(factor11to20, 10);
+            stat *= Mathf.Pow(factor21to30, level - 20);
+        }
+        else // level 31 to 40
+        {
+            stat *= Mathf.Pow(factor1to10, 9);
+            stat *= Mathf.Pow(factor11to20, 10);
+            stat *= Mathf.Pow(factor21to30, 10);
+            stat *= Mathf.Pow(factor31to40, level - 30);
+        }
+
+        return Mathf.RoundToInt(stat);
     }
+
 
     private void DisableMovementAndActions()
     {
@@ -243,6 +292,10 @@ public class EnemyStats : MonoBehaviour
         {
             timeSince = 0;
             prevHp = hp;
+        }
+        if (timeSince >= 0.3f)
+        {
+            delayedHp = hp;
         }
         if (hp <= 0)
         {
@@ -376,16 +429,32 @@ public class EnemyStats : MonoBehaviour
         if (animator_.GetBool("isDead") == false && !handledDrops)
         {
             animator_.SetBool("isDead", true);
-            enemyGettingHitSource.PlayOneShot(deathClip);
-            DropGear();
-            DropUpgrades();
-            goldAmount = (int)Random.Range(10 * Mathf.Pow(1.2f, enemyLvl - 1) * 0.8f, 10 * Mathf.Pow(1.2f, enemyLvl - 1) * 1.2f);
+            source.Stop();
+            source.volume = 0.2f;
+            source.PlayOneShot(deathClip);
+            FindObjectOfType<QuestManager>()?.NotifyKill(tag);
+            goldAmount = (int)Random.Range(3 * Mathf.Pow(1.2f, enemyLvl - 1) * 0.8f, 3 * Mathf.Pow(1.2f, enemyLvl - 1) * 1.2f);
+            goldAmount = (int)(goldAmount * lootQuantityMod); // Boost per-stack amount
             if (isBoss && goldAmount > 0)
             {
-                goldAmount *= 23;
+                goldAmount *= 24;
             }
-            DropGold();
+            float baseRolls = lootAmountMod;
+            float randomOffset = Random.Range(-0.0f, 0.0f); // Slight upward skew
+            float totalRolls = baseRolls + randomOffset;
+            int lootAttempts = Mathf.Clamp(Mathf.RoundToInt(totalRolls), 1, 10);
+
+            for (int i = 0; i < lootAttempts; i++)
+            {
+                PerformLootAttempt();
+            }
+
             handledDrops = true;
+            GameObject lightSource = transform.Find("LightMob").gameObject;
+            if (lightSource != null)
+            {
+                lightSource.SetActive(false);
+            }
         }
 
         if (deathDuration > 0.5f)
@@ -457,7 +526,7 @@ public class EnemyStats : MonoBehaviour
 
     private void DropGold()
     {
-        if (Random.value > 0.85f && !isBoss)
+        if (Random.value <= (0.1f * lootChanceMod) && !isBoss && !isElite)
         {
             int goldDropIndex = goldAmount < 30 ? 0 : goldAmount < 90 ? 1 : 2;
             Vector3 dropPosition = RandomDropPosition();
@@ -473,7 +542,7 @@ public class EnemyStats : MonoBehaviour
         }
         else if (isBoss)
         {
-            int goldDropIndex = goldAmount < 10 ? 0 : goldAmount < 50 ? 1 : 2;
+            int goldDropIndex = goldAmount < 30 ? 0 : goldAmount < 90 ? 1 : 2;
             Vector3 dropPosition = RandomDropPosition();
             GameObject goldDrop = Instantiate(goldItems[goldDropIndex], dropPosition, transform.rotation);
             GoldDropBehaviour goldDropBehaviour = goldDrop.GetComponent<GoldDropBehaviour>();
@@ -484,34 +553,49 @@ public class EnemyStats : MonoBehaviour
             goldDrop.GetComponentInChildren<TMP_Text>().text = goldAmount.ToString() + " Gold";
             goldDrop.GetComponent<GoldDropBehaviour>().goldAmount = goldAmount;
         }
+        else if (Random.value <= (0.4f * lootChanceMod) && isElite)
+
+        {
+            int goldDropIndex = goldAmount < 30 ? 0 : goldAmount < 90 ? 1 : 2;
+            Vector3 dropPosition = RandomDropPosition();
+            GameObject goldDrop = Instantiate(goldItems[goldDropIndex], dropPosition, transform.rotation);
+            GoldDropBehaviour goldDropBehaviour = goldDrop.GetComponent<GoldDropBehaviour>();
+            if (goldDropBehaviour != null)
+            {
+                goldDropBehaviour.direction = DirectionModifier(dropPosition);
+            }
+
+            goldDrop.GetComponentInChildren<TMP_Text>().text = goldAmount.ToString() + " Gold";
+            goldDrop.GetComponent<GoldDropBehaviour>().goldAmount = goldAmount;
+        }
     }
 
     private void DropGear()
     {
-        if (Random.value > 0.90f && !isArenaMob && !isBoss) // 10% chance to drop gear
+        if (Random.value <= 0.04f * lootChanceMod && isNormal && !isArenaMob) // 4% chance to drop gear for World Normal Mobs
         {
             DropGearItem(gearItems);
         }
-        else if (Random.value > 0.995f && isArenaMob && !isBoss)
+        else if (Random.value <= 0.005f * lootChanceMod && isArenaMob) // 0.5% chance to drop gear for Arena Normal & Elite mobs.
         {
             DropGearItem(gearItems);
         }
-        else if (isBoss)
+        else if (isBoss || (isElite && !isArenaMob)) // Always drop gear from World Elites & all Bosses.
         {
             DropGearItem(gearItems);
         }
     }
     private void DropUpgrades()
     {
-        if (Random.value > 0.99f && !isArenaMob && !isBoss) // 1% chance to drop upgrades
+        if (Random.value <= 0.04f * lootChanceMod && isNormal) // 0.5% chance to drop upgrades from World Normal Mobs & Elites
         {
             DropUpgradeItem(upgradeItems);
         }
-        else if (Random.value > 0.94f && isArenaMob && !isBoss)
+        else if (Random.value <= 0.04f * lootChanceMod && isNormal && isArenaMob) // 4% chance to drop upgrades from Arena Normal Mobs
         {
             DropUpgradeItem(upgradeItems);
         }
-        else if (isBoss)
+        else if (isBoss || (isElite && isArenaMob)) // Always drop gear from World Elites & all Bosses.
         {
             DropUpgradeItem(upgradeItems);
         }
@@ -527,27 +611,55 @@ public class EnemyStats : MonoBehaviour
         float legendaryChance = 0.01f + (0.19f * (currentTierLevel - 1) / 9); // From 1% to 20%
         float rareChance = 0.04f + (0.36f * (currentTierLevel - 1) / 9);      // From 4% to 40%
         float magicChance = 0.2f + (0.38f * (currentTierLevel - 1) / 9);      // From 20% to 40%
+        if (enemyLvl > 30)
+        {
+            legendaryChance = 0.2f;
+            rareChance = 0.35f;
+            magicChance = 0.45f;
+        }
+        legendaryChance *= lootRarityMod;
+        rareChance *= lootRarityMod;
+        magicChance = 1f - (rareChance + legendaryChance);
 
+        string rarity;
+        float roll;
         // Roll for item rarity
-        float roll = Random.value;
-        string rarity = roll <= legendaryChance ? "Legendary" :
+        roll = Random.value;
+        rarity = roll <= legendaryChance ? "Legendary" :
                         roll <= (legendaryChance + rareChance) ? "Rare" :
                         roll <= (legendaryChance + rareChance + magicChance) ? "Magic" : "Normal";
+        DropItemBasedOnRarity(items, rarity);
 
-        // If the enemy is a boss, roll 10 additional times with a 15% chance each for extra drops
+        // If the enemy is a boss, roll 3 additional times with a 35% chance each for extra drops
         if (isBoss)
         {
             rarity = "Legendary";
-            for (int i = 0; i < 5; i++)
+            for (int i = 0; i < 3; i++)
             {
-                if (Random.value <= 0.20f) // 15% chance per roll
+                if (Random.value <= 0.35f) // 35% chance per roll
                 {
                     DropItemBasedOnRarity(items, rarity);
                 }
             }
         }
-        // Drop the initial item based on rarity
-        DropItemBasedOnRarity(items, rarity);
+    }
+    private void PerformLootAttempt()
+    {
+        float roll = Random.value;
+
+        // Example weights: 50% chance gear, 25% upgrade, 25% gold � adjust as you like
+        if (roll <= 0.5f)
+        {
+            DropGear(); // uses internal chance
+        }
+        else if (roll <= 0.75f)
+        {
+            DropUpgrades(); // uses internal chance
+        }
+        else
+        {
+            DropGold(); // uses internal chance
+        }
     }
 
     // Handle the drop logic for upgrade items
@@ -578,24 +690,19 @@ public class EnemyStats : MonoBehaviour
         else
         {
             float roll = Random.value;
-
             string rarity = roll <= legendaryChance ? "Legendary" :
                             roll <= (legendaryChance + rareChance) ? "Rare" :
                             roll <= (legendaryChance + rareChance + magicChance) ? "Magic" : "Normal";
             DropItemBasedOnRarity(items, rarity);
-        }
 
+        }
     }
 
     // Helper method to handle item drop based on rarity
     private void DropItemBasedOnRarity(List<GameObject> items, string rarity)
     {
-        int itemLevelStarter = enemyLvl;
+        int itemTier = (enemyLvl - 1) / 5 + 1;
 
-        if (enemyLvl >= 11 && enemyLvl <= 20)
-        {
-            itemLevelStarter += 3;
-        }
         // Create a list to store items of the chosen rarity
         List<GameObject> itemsOfRarity = new List<GameObject>();
 
@@ -608,41 +715,6 @@ public class EnemyStats : MonoBehaviour
                 itemsOfRarity.Add(item);
             }
         }
-        foreach (GameObject item in itemsOfRarity)
-        {
-            float levelRoll = Random.value; // Random value between 0 and 1
-
-            if (isBoss)
-            {
-                if (levelRoll <= 0.70f) // 70% chance for item level 2 times higher
-                {
-                    item.GetComponent<ItemInfo>().itemLvl = enemyLvl + 2;
-                }
-                else if (levelRoll <= 0.95f) // 25% chance for item level 1 time higher
-                {
-                    item.GetComponent<ItemInfo>().itemLvl = enemyLvl + 1;
-                }
-                else // 5% chance for same level as enemy
-                {
-                    item.GetComponent<ItemInfo>().itemLvl = enemyLvl;
-                }
-            }
-            else
-            {
-                if (levelRoll <= 0.10f) // 10% chance for item level 2 times higher
-                {
-                    item.GetComponent<ItemInfo>().itemLvl = itemLevelStarter + 2;
-                }
-                else if (levelRoll <= 0.30f) // 20% chance for item level 1 time higher
-                {
-                    item.GetComponent<ItemInfo>().itemLvl = itemLevelStarter + 1;
-                }
-                else // 70% chance for same level as enemy
-                {
-                    item.GetComponent<ItemInfo>().itemLvl = itemLevelStarter;
-                }
-            }
-        }
 
         // If there are items of the chosen rarity, choose one randomly to drop
         if (itemsOfRarity.Count > 0)
@@ -651,16 +723,27 @@ public class EnemyStats : MonoBehaviour
             GameObject itemToDrop = itemsOfRarity[randomIndex];
             Vector3 dropPosition = RandomDropPosition();
             GameObject droppedItem = Instantiate(itemToDrop, dropPosition, transform.rotation);
+
+            ItemInfo droppedItemInfo = droppedItem.GetComponent<ItemInfo>();
+            if (droppedItemInfo != null)
+            {
+                droppedItemInfo.itemLvl = 0; // no longer using this
+                droppedItemInfo.itemTier = itemTier;
+            }
+
             ClickLootBehaviour clickLootBehaviour = droppedItem.transform.GetComponent<ClickLootBehaviour>();
             if (clickLootBehaviour != null)
             {
                 clickLootBehaviour.direction = directionModifier;
             }
 
-            // Play sound if it's a legendary item
-            if (rarity == "Legendary")
+            // Apply lootQuantityMod to stackable upgrade materials
+            if (droppedItem.GetComponent<EnchantmentStoneInfo>())
             {
-                dropsSource.PlayOneShot(dropClip);
+                int newAmount = (int)lootQuantityMod * clickLootBehaviour.amount;
+                int finalAmount = Random.Range(1, newAmount);
+                clickLootBehaviour.amount = finalAmount;
+                droppedItem.GetComponent<EnchantmentStoneInfo>().amount = finalAmount;
             }
         }
     }
@@ -692,14 +775,14 @@ public class EnemyStats : MonoBehaviour
             damage = (int)((player.GetComponent<PlayerStats>().staggerDmg / 100f) * damage);
         }
 
-        float armorEfficiency = defense / 166f + 1f;
-        damage = (int)(damage / armorEfficiency);
+        damage = (int)CalculateEffectiveDamage(damage);
         damage = (int)(damage / 10f);
         if (damage < 1)
             damage = 1;
 
-        // Stop current audio and adjust pitch
+        // Stop current audio and adjust pitch and volume
         source.Stop();
+        source.volume = 0.4f;
         source.pitch = Random.Range(1.35f, 1.45f);
         hp -= damage;
 
@@ -746,6 +829,7 @@ public class EnemyStats : MonoBehaviour
                 bossMovementController.inPursuit = true;
             }
         }
+        DefineAndGenerateImpulse();
     }
 
     // Method to reset the color after 0.1 seconds
@@ -820,8 +904,12 @@ public class EnemyStats : MonoBehaviour
         gameObject.GetComponentInChildren<Canvas>().enabled = true;
         gameObject.GetComponent<Collider2D>().enabled = true;
 
+        GameObject lightSource = transform.Find("LightMob").gameObject;
+        if (lightSource != null)
+        {
+            lightSource.SetActive(true);
+        }
     }
-
     public void HandleRespawn()
     {
         StartCoroutine(RespawnAfterDelay(respawnTimer));
@@ -842,5 +930,47 @@ public class EnemyStats : MonoBehaviour
         handledDrops = false;
 
         EnableAllComponents(gameObject);
+    }
+    public float CalculateEffectiveDamage(int incomingDamage)
+    {
+        float armorEfficiency = defense / 166f + 1f;
+        float rawReduction = 1f - (1f / armorEfficiency); // Turn efficiency into % reduction
+
+        float maxReduction = 0.75f;
+
+        if (rawReduction > maxReduction)
+        {
+            rawReduction = maxReduction;
+        }
+
+        return Mathf.Max(1, incomingDamage * (1f - rawReduction));
+    }
+    public void CalculateEffectiveArmor()
+    {
+        float armorEfficiency = defense / 166f + 1f;
+        float rawReduction = 1f - (1f / armorEfficiency); // Turn efficiency into % reduction
+
+        float maxReduction = 0.75f;
+
+        if (rawReduction > maxReduction)
+        {
+            float overflow = rawReduction - maxReduction;
+            float bonusHpMultiplier = 1f + overflow;
+            maxHp *= bonusHpMultiplier;
+            hp = maxHp;
+            prevHp = hp;
+            delayedHp = hp;
+        }
+    }
+    public void DefineAndGenerateImpulse()
+    {
+        def.m_ImpulseType = CinemachineImpulseDefinition.ImpulseTypes.Dissipating; // Other options: Uniform, Dissipating, Propagating
+        def.m_DissipationDistance = 100f;
+        def.m_DissipationRate = 1f;
+        def.m_ImpulseShape = CinemachineImpulseDefinition.ImpulseShapes.Recoil; // Other options: Rumble, Bump, Recoil, Custom
+        def.m_ImpulseDuration = 0.1f;
+        impulseSource.m_DefaultVelocity = new Vector3(0.05f, 0f, 0f);
+
+        impulseSource.GenerateImpulse();
     }
 }

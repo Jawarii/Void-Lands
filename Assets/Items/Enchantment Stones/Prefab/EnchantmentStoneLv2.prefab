@@ -104,6 +104,7 @@ MonoBehaviour:
   myButton: {fileID: 0}
   textTmp: {fileID: 0}
   amount: 0
+  direction: 1
 --- !u!114 &3600413816630274629
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -116,15 +117,16 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3406b756c293d17488af85bc022f780e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stackSize: 999
+  stackSize: 9999
   itemId: 2
   itemName: Rare Stone
   itemDescription: 
   itemType: UpgradeMaterial
-  itemLvl: 11
+  itemLvl: 1
   itemQuality: Rare
   textColor: {r: 1, g: 0.9476305, b: 0, a: 1}
   upgradeLevel: 0
+  itemUISprite: {fileID: 21300000, guid: f5a5c72287d1bd24bb284b0c04415fad, type: 3}
   amount: 1
 --- !u!1001 &2416740039874358885
 PrefabInstance:
@@ -134,6 +136,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 4521754464397372226}
     m_Modifications:
+    - target: {fileID: 186649746865782012, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186649746865782012, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 186649747021709909, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
       propertyPath: m_Name
       value: ItemCanvas
@@ -228,6 +238,30 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 186649747021709910, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186649747393043754, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186649747393043754, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186649747393043754, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_SizeDelta.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186649747393043754, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_SizeDelta.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186649747393043754, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 186649747393043754, guid: b4b41fed40f2b264ba75612f327b092b, type: 3}
+      propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []

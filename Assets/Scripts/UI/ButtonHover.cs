@@ -62,7 +62,8 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 itemTooltip.transform.Find("ItemLvlText").gameObject.SetActive(true);
                 itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
-                itemLevelGo.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemLvl.ToString() + " Item Power";
+                int itemTier = inventoryController.inventory[slotId].itemLvl / 5;
+                itemLevelGo.GetComponent<TMP_Text>().text = "Tier " + itemTier.ToString();
                 SetWeaponInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
             }
             else if (inventoryController.inventory[slotId].itemType == "Armor" || inventoryController.inventory[slotId].itemType == "Helmet" ||
@@ -72,7 +73,8 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
             {
                 itemTooltip.transform.Find("ItemLvlText").gameObject.SetActive(true);
                 itemLevelGo = itemTooltip.transform.Find("ItemLvlText").gameObject;
-                itemLevelGo.GetComponent<TMP_Text>().text = inventoryController.inventory[slotId].itemLvl.ToString() + " Item Power";
+                int itemTier = inventoryController.inventory[slotId].itemLvl / 5;
+                itemLevelGo.GetComponent<TMP_Text>().text = "Tier " + itemTier.ToString();
                 SetGearInfo(inventoryController, itemNameObj, itemStatsObj, itemBonusStatsObj, slotId);
             }
             LayoutRebuilder.ForceRebuildLayoutImmediate(panelRectTransform);
@@ -87,6 +89,11 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
 
     public void SetTooltipLocation()
     {
+        // Enable the canvas first so layout is valid
+        canvas.enabled = true;
+        // Force Unity to update all canvases/layouts
+        Canvas.ForceUpdateCanvases();
+        LayoutRebuilder.ForceRebuildLayoutImmediate(panelRectTransform);
         Vector2 canvasPos;
         float offset = buttonRectTransform.sizeDelta.x / 2f + panelRectTransform.sizeDelta.x / 2f;
         float tooltipHeight = panelRectTransform.sizeDelta.y;
@@ -105,8 +112,6 @@ public class ButtonHover : MonoBehaviour, IPointerEnterHandler, IPointerExitHand
         }
 
         panelRectTransform.anchoredPosition = canvasPos + new Vector2(-offset, 0f);
-        LayoutRebuilder.ForceRebuildLayoutImmediate(panelRectTransform);
-        canvas.enabled = true;
     }
 
     public void SetWeaponInfo(InventoryController inventoryController, GameObject itemNameObj, GameObject itemStatsObj, GameObject itemBonusStatsObj, int slotId)

@@ -20,13 +20,19 @@ public class BossMovementController : MonoBehaviour
 
     public float distanceToMove = 3f; // Distance to move towards the player
     private bool isMoving = false; // Flag to check if boss is already moving towards player
+    private bool hasReset = false;
 
     public bool isMovingStar = false;
     public List<Vector3> pentagramPoints = new List<Vector3>();
     private int currentPointIndex = 0;
 
     // Add reference to player health
-    public PlayerStats playerStats; // You will need to assign this reference in the Unity editor or in Start()
+    public PlayerStats playerStats;
+
+    // Light Source Reference
+    private GameObject lightMob; // Child GameObject
+    private UnityEngine.Rendering.Universal.Light2D lightSource; // 2D Light component
+    private SpriteRenderer bossSpriteRenderer; // SpriteRenderer of this GameObject
 
     void Start()
     {
@@ -37,8 +43,17 @@ public class BossMovementController : MonoBehaviour
         agent.speed = speed_;
         originalPos = transform.position;
 
-        // Assuming the player has a PlayerHealth script that manages health and death
         playerStats = playerObject.GetComponent<PlayerStats>();
+
+        // Find the LightMob child GameObject and its Light2D component
+        lightMob = transform.Find("LightMob")?.gameObject;
+        if (lightMob != null)
+        {
+            lightSource = lightMob.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        }
+
+        // Get the SpriteRenderer of this GameObject
+        bossSpriteRenderer = GetComponent<SpriteRenderer>();
     }
 
     void FixedUpdate()
@@ -46,10 +61,18 @@ public class BossMovementController : MonoBehaviour
         agent.speed = speed_;
 
         // Check if the player is dead
-        if (playerStats.isDead)
+        if (playerStats != null && playerStats.isDead)
         {
-            ReturnToOriginalPositionAndReset(); // Stop pursuit and reset the boss
+            if (!hasReset)
+            {
+                ReturnToOriginalPositionAndReset();
+                hasReset = true;
+            }
             return;
+        }
+        else
+        {
+            hasReset = false; // Allow reset again next time player dies
         }
 
         if (inPursuit && canMove)
@@ -58,16 +81,26 @@ public class BossMovementController : MonoBehaviour
             {
                 SetAnimatorBasedOnAngle(GetAngle());
             }
-            else
-            {
-                SetAnimatorBasedOnAngle(GetAngle());
-            }
+        }
+
+        // Update the light sprite
+        UpdateLightSourceSprite();
+    }
+
+
+    private void UpdateLightSourceSprite()
+    {
+        if (lightSource != null && bossSpriteRenderer != null)
+        {
+            // Update the LightSource's sprite to match the current sprite of the boss
+            lightSource.lightType = UnityEngine.Rendering.Universal.Light2D.LightType.Sprite;
+            lightSource.lightCookieSprite = bossSpriteRenderer.sprite;
         }
     }
 
     void Update()
     {
-        if (isMoving) // Check if boss is already moving
+        if (isMoving)
         {
             // Check if boss has reached the destination
             if (!agent.pathPending && agent.remainingDistance <= agent.stoppingDistance)
@@ -293,8 +326,6 @@ public class BossMovementController : MonoBehaviour
             GetComponent<ReaperBossPatternBehaviour>().StopAllCoroutines();
             GetComponent<ReaperBossPatternBehaviour>().ResetVariables();
         }
-        // Stop the agent from pursuing the player
-        //agent.isStopped = true;
 
         // Move the boss back to its original position
         MoveToOriginalPosition();

@@ -10,9 +10,10 @@ public class MenusController : MonoBehaviour
     public Canvas canvas;
     public AudioSource audioSource;
     public AudioClip inventoryOpenClip;
-    void Start()
+    public AudioClip inventoryCloseClip;
+    private void Start()
     {
-        
+        audioSource = GameObject.Find("MenusSoundSource").GetComponent<AudioSource>();
     }
 
     // Update is called once per frame
@@ -39,14 +40,16 @@ public class MenusController : MonoBehaviour
         //    }
         //}
 
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && canvas.gameObject.GetComponent<Canvas>().enabled == true)
         {
+            audioSource.PlayOneShot(inventoryCloseClip);
             canvas.gameObject.GetComponent<Canvas>().enabled = false;
         }
         if (Input.GetKeyDown(KeyCode.I) || Input.GetKeyDown(KeyCode.B))
         {
             if (canvas.gameObject.GetComponent<Canvas>().enabled == true)
             {
+                audioSource.PlayOneShot(inventoryCloseClip);
                 canvas.gameObject.GetComponent<Canvas>().enabled = false;
                 if (activeMenus.Count > 0)
                 {
@@ -55,8 +58,8 @@ public class MenusController : MonoBehaviour
             }
             else
             {
-                canvas.gameObject.GetComponent<Canvas>().enabled = true;
                 audioSource.PlayOneShot(inventoryOpenClip);
+                canvas.gameObject.GetComponent<Canvas>().enabled = true;
                 activeMenus.Add(menus[0]);
             }
         }

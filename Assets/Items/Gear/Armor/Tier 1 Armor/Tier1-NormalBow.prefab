@@ -104,6 +104,7 @@ MonoBehaviour:
   myButton: {fileID: 0}
   textTmp: {fileID: 0}
   amount: 0
+  direction: 1
 --- !u!114 &-14622244584847089
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,10 +122,11 @@ MonoBehaviour:
   itemName: Tunic of the Galeborn
   itemDescription: 
   itemType: 
-  itemLvl: 1
+  itemLvl: 5
   itemQuality: Normal
   textColor: {r: 0, g: 0, b: 0, a: 0}
   upgradeLevel: 0
+  itemUISprite: {fileID: 21300000, guid: d839f37a24dd253448b500757e1d3e4e, type: 3}
   gearMainStats:
     baseHp: 0
     baseArmor: 0

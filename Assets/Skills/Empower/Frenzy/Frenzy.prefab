@@ -45,7 +45,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAttack: {fileID: 0}
-  duration: 6
+  duration: 5
   audioSource: {fileID: 0}
-  audioClip: {fileID: 8300000, guid: ceede7a829d41470a86526620500b878, type: 3}
+  audioClip: {fileID: 8300000, guid: 9ae32f8e1a94c486c9929faca77ff03b, type: 3}
   effectPrefab: {fileID: 5586615793462668497, guid: 8a0340eeba0165f49bc587ca4cfb8f80, type: 3}

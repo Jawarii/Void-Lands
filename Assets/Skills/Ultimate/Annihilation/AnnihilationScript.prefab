@@ -70,6 +70,7 @@ MonoBehaviour:
   bowAnim: {fileID: 7400000, guid: d4ec56259fb97ca4c87c7f5d9cd29ae0, type: 2}
   bowReleaseAnim: {fileID: 7400000, guid: 77e7234c6245d114cb72335cf964427d, type: 2}
   _arrow: {fileID: 3717403527142333829, guid: 20228e06e47d4994f90c8c022e884d57, type: 3}
+  prepArrow: {fileID: 3717403527142333829, guid: d155859d5b785f24a8493e5054a44808, type: 3}
   coolDown: 5
   cdElapsedTime: 0
-  adjustedSpeed: 0
+  adjustedSpeed: 0.3

@@ -44,7 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e7acb2dbcf59d5e40b77c16a3ea06e6a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  circleIndicatorPrefab: {fileID: 9073742920716079178, guid: f11ea2cbfcc998346a3fb10ecec0fa3e, type: 3}
+  circleIndicatorPrefab: {fileID: 9073742920716079178, guid: 092085d101884d04693e09b9ba17cf40, type: 3}
   animationPrefab: {fileID: 2671462482633276915, guid: 3d837b996cab20241be5b3cdbd336008, type: 3}
   enemyStats: {fileID: 0}
   castTime: 1.25

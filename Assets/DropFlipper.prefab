@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f0613ecfd53da31449c6a324c8ab8c1d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  dropsSource: {fileID: 0}
+  dropClip: {fileID: 8300000, guid: 10af55788bdfb0b4b93f69523c043e5d, type: 3}

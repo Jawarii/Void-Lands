@@ -19,6 +19,8 @@ public class PlayerInformation : MonoBehaviour
 
     public GameObject reaperBossPortal;
     public GameObject level1ArenaPortal;
+
+    public bool finishedIntro = false;
     private void FixedUpdate()
     {
         if ( lvl1IsComplete )

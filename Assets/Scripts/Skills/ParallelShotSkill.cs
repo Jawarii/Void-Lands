@@ -36,7 +36,7 @@ public class ParallelShotSkill : SkillsScript
         Instantiate(_arrow, playerAttack.transform.position, Quaternion.LookRotation(Vector3.forward, -directionToMouse));
 
         // Spawn arrows on the left and right
-        for (int i = 1; i <= 3; i++)
+        for (int i = 1; i <= 2; i++)
         {
             Vector3 leftPosition = playerAttack.transform.position - perpendicularDirection * arrowSpacing * i;
             Vector3 rightPosition = playerAttack.transform.position + perpendicularDirection * arrowSpacing * i;

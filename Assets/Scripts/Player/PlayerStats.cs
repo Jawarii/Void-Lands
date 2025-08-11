@@ -4,9 +4,33 @@ using UnityEngine;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using Cinemachine;
 
 public class PlayerStats : MonoBehaviour
 {
+    // Base Stats Constants
+    private const float BASE_HP_MULTIPLIER = 100f;
+    private const float BASE_ATTACK_MULTIPLIER = 20f;
+    private const float BASE_DEFENSE_MULTIPLIER = 15f;
+    private const float STAT_GROWTH_RATE = 1.1f;
+
+    // Combat Constants
+    private const float ARMOR_DIVISOR = 166f;
+    private const float HIT_INDICATOR_DURATION = 0.15f;
+
+    // Cached Components
+    private SpriteRenderer spriteRenderer;
+    private Animator animator;
+    private Collider2D playerCollider;
+    private Transform playerTransform;
+    private Canvas levelUpCanvasComponent;
+    private Image levelUpImage;
+    private TMP_Text levelUpText;
+
+    // Cached Calculations
+    private float levelMultiplier = 1f;  // Will store Mathf.Pow(STAT_GROWTH_RATE, lvl - 1)
+    private float cachedArmorEfficiency = 1f;
+
     // Combat Stats
     [Header("Combat Stats")]
     public float baseHp = 0;
@@ -16,7 +40,16 @@ public class PlayerStats : MonoBehaviour
     public float attack = 0;
     public float atkSpd = 1.0f;
     public float baseDefense = 0;
-    public float defense = 0;
+    private float _defense = 0;
+    public float defense 
+    { 
+        get => _defense;
+        set
+        {
+            _defense = value;
+            UpdateArmorEfficiency();
+        }
+    }
     public float critRate = 5.0f;
     public float critDmg = 150.0f;
     public float staggerDmg = 120f;
@@ -41,19 +74,18 @@ public class PlayerStats : MonoBehaviour
     public float currentExp = 0;
     public float maxExp;
 
+    // Skill Points for skill tree system
+    public int skillPoints = 0;
+
     // Variables
     [Header("Variables")]
-    private bool levelUp = false;
-    private float prevHp;
     public float timeSince = 0;
     public Skills playerSkills;
     public float hpRecCd = 3f;
     public float hpRecCdCur = 0;
     public float hitIndicator = 0f;
     private Color baseColor;
-
-    // Upgrade Variables
-    private System.Random random = new System.Random();
+    private float prevHp;
 
     // PlayTime
     [Header("PlayTime")]
@@ -73,47 +105,66 @@ public class PlayerStats : MonoBehaviour
 
     // Spawner & Boss Objects
     public GameObject bossObj;
-
     public float timeScaleMod = 1.0f;
-
     public bool isImmune = false;
-
     public Canvas levelUpCanvas;
-
-    public GameObject respawnLocations;
-
     public bool isDead = false;
     public PlayerMovement playerMovement;
-
     public float temSpeed = 0;
-
     public PlayerInformation playerInformation;
+    public CinemachineImpulseSource impulseSource;
+    public CinemachineImpulseDefinition def;
+
     void Start()
     {
+        // Cache components
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        animator = GetComponent<Animator>();
+        impulseSource = GetComponent<CinemachineImpulseSource>();
+        def = impulseSource.m_ImpulseDefinition;
         playerInformation = transform.GetComponent<PlayerInformation>();
-        //playerMovement = transform.GetComponent<PlayerMovement>();
-        respawnLocations = GameObject.Find("RespawnLocations");
+        playerCollider = GetComponent<Collider2D>();
+        playerTransform = transform;
+        
+        // Cache UI components
+        levelUpCanvasComponent = levelUpCanvas.GetComponent<Canvas>();
+        levelUpImage = levelUpCanvas.GetComponentInChildren<Image>();
+        levelUpText = levelUpCanvas.GetComponentInChildren<TMP_Text>();
+      
         source = GameObject.Find("PlayerGettingHitSource").GetComponent<AudioSource>();
+        
+        // Calculate initial stats
+        UpdateLevelMultiplier();
         maxExp = Mathf.Pow(lvl, 1.8f) * 100f;
 
         maxHp -= baseHp;
-        baseHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
+        baseHp = (int)(BASE_HP_MULTIPLIER * levelMultiplier);
         maxHp += baseHp;
         currentHp = maxHp;
         prevHp = currentHp;
 
         attack -= baseAttack;
-        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
-        attack += baseAttack; // Initial attack value
+        baseAttack = (int)(BASE_ATTACK_MULTIPLIER * levelMultiplier);
+        attack += baseAttack;
 
         defense -= baseDefense;
-        baseDefense = (int)(15f * Mathf.Pow(1.1f, lvl - 1));
+        baseDefense = (int)(BASE_DEFENSE_MULTIPLIER * levelMultiplier);
         defense += baseDefense;
 
-        baseColor = gameObject.GetComponent<SpriteRenderer>().color;
+        baseColor = spriteRenderer.color;
+        UpdateArmorEfficiency();
 
         levelUpSource = GameObject.Find("LevelUpAudioSource").GetComponent<AudioSource>();
-        levelUpCanvas = GameObject.Find("LevelUpCanvas").GetComponent<Canvas>();
+    }
+
+    private void UpdateLevelMultiplier()
+    {
+        levelMultiplier = Mathf.Pow(STAT_GROWTH_RATE, lvl - 1);
+    }
+
+    private void UpdateArmorEfficiency()
+    {
+        cachedArmorEfficiency = defense / ARMOR_DIVISOR + 1f;
     }
 
     void Update()
@@ -126,14 +177,12 @@ public class PlayerStats : MonoBehaviour
     {
         timeSince += Time.deltaTime;
         hpRecCdCur += Time.deltaTime;
-        //------------------------
-        // Reminder: this is used for delayedHp UI logic. dont delete.
+        
         if (prevHp != currentHp)
         {
             timeSince = 0;
             prevHp = currentHp;
         }
-        //------------------------
 
         if (currentExp >= maxExp)
         {
@@ -146,10 +195,14 @@ public class PlayerStats : MonoBehaviour
                 currentHp = maxHp;
             hpRecCdCur = 0;
         }
-        if (lvl >= 10)
-        {
-            playerInformation.lvl1IsComplete = true;
-        }
+        CheckLevelMilestones();
+    }
+
+    private void CheckLevelMilestones()
+    {
+        if (lvl >= 10) playerInformation.lvl1IsComplete = true;
+        if (lvl >= 20) playerInformation.lvl2IsComplete = true;
+        if (lvl >= 30) playerInformation.lvl3IsComplete = true;
     }
 
     private void HandleHitIndicator()
@@ -160,7 +213,7 @@ public class PlayerStats : MonoBehaviour
         }
         else
         {
-            gameObject.GetComponent<SpriteRenderer>().color = baseColor;
+            spriteRenderer.color = baseColor;
         }
     }
 
@@ -172,18 +225,8 @@ public class PlayerStats : MonoBehaviour
     public void LevelUp()
     {
         lvl++;
-        if (lvl >= 10)
-        {
-            playerInformation.lvl1IsComplete = true;
-        }
-        if (lvl >= 20)
-        {
-            playerInformation.lvl2IsComplete = true;
-        }
-        if (lvl >= 30)
-        {
-            playerInformation.lvl3IsComplete = true;
-        }
+        skillPoints += 1; // Grant 1 skill point per level up
+        CheckLevelMilestones();
         currentExp = currentExp - maxExp;
         maxExp = Mathf.Pow(lvl, 1.8f) * 100f;
         IncreaseStats();
@@ -193,43 +236,40 @@ public class PlayerStats : MonoBehaviour
 
     public void IncreaseStats()
     {
+        UpdateLevelMultiplier();
+        
         maxHp -= baseHp;
-        baseHp = (int)(100f * Mathf.Pow(1.1f, lvl - 1));
+        baseHp = (int)(BASE_HP_MULTIPLIER * levelMultiplier);
         maxHp += baseHp;
         if (!isDead)
             currentHp = maxHp;
 
         attack -= baseAttack;
-        baseAttack = (int)(20f * Mathf.Pow(1.1f, lvl - 1));
+        baseAttack = (int)(BASE_ATTACK_MULTIPLIER * levelMultiplier);
         attack += baseAttack;
 
-        //attack = CalculateAttack(); // Use dynamic calculation
         defense -= baseDefense;
-        baseDefense = (int)(15f * Mathf.Pow(1.1f, lvl - 1));
+        baseDefense = (int)(BASE_DEFENSE_MULTIPLIER * levelMultiplier);
         defense += baseDefense;
-    }
-
-    private float CalculateAttack()
-    {
-        // Calculate the final attack value considering buffs or other modifications
-        return baseAttack + atkMulti * baseAttack;
+        
+        UpdateArmorEfficiency();
     }
 
     public void TakeDamage(int damage, bool isCrit)
     {
-        if (isImmune)
-            return;
-        float armorEfficiency = defense / 166f + 1f;
-        damage = (int)(damage / armorEfficiency);
-        if (damage < 1)
-            damage = 1;
+        if (isImmune) return;
+        
+        damage = (int)(damage / cachedArmorEfficiency);
+        if (damage < 1) damage = 1;
+        
         source.Stop();
         currentHp -= damage;
         damagePopup.isPlayer = true;
-        damagePopup.Create(transform.position, Mathf.Abs(transform.localScale.y / 2f ), damage, isCrit);
-        gameObject.GetComponent<SpriteRenderer>().color = Color.red;
-        hitIndicator = 0.15f;
+        damagePopup.Create(transform.position, Mathf.Abs(transform.localScale.y / 2f), damage, isCrit);
+        spriteRenderer.color = Color.red;
+        hitIndicator = HIT_INDICATOR_DURATION;
         source.PlayOneShot(clip);
+        
         if (currentHp <= 0)
         {
             currentHp = 0;
@@ -240,136 +280,95 @@ public class PlayerStats : MonoBehaviour
     private void HandleDeath()
     {
         isDead = true;
-        GetComponent<Animator>().SetBool("isDead", true);
+        DefineAndGenerateImpulse();
+        animator.SetBool("isDead", true);
         source.PlayOneShot(deathClip);
         StartCoroutine(DeathRoutine());
     }
 
-    private IEnumerator DeathRoutine()
+    public void DefineAndGenerateImpulse()
     {
-        // Disable all components except for PlayerStats and SpriteRenderer
+        def.m_ImpulseType = CinemachineImpulseDefinition.ImpulseTypes.Dissipating; // Other options: Uniform, Dissipating, Propagating
+        def.m_DissipationDistance = 100f;
+        def.m_DissipationRate = 0f;
+        def.m_ImpulseShape = CinemachineImpulseDefinition.ImpulseShapes.Rumble; // Other options: Rumble, Bump, Recoil, Custom
+        def.m_ImpulseDuration = 0.5f;
+        impulseSource.m_DefaultVelocity = new Vector3(-0.3f, -0.3f, 0f);
 
+        impulseSource.GenerateImpulse();
+    }
+    private void SetComponentsState(bool enabled)
+    {
         MonoBehaviour[] components = GetComponents<MonoBehaviour>();
-
         foreach (MonoBehaviour component in components)
         {
             if (component != this && component != playerMovement)
             {
-                component.enabled = false;
+                component.enabled = enabled;
             }
         }
+        
+        if (playerCollider != null) playerCollider.enabled = enabled;
+        
+        if (transform.childCount >= 2)
+        {
+            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = enabled;
+            transform.GetChild(1).gameObject.SetActive(enabled);
+        }
+    }
+
+    private IEnumerator DeathRoutine()
+    {
+        SetComponentsState(false);
         temSpeed = playerMovement.speed;
         playerMovement.speed = 0;
         playerMovement.canMove = false;
         playerMovement.canDash = false;
 
-        // Disable other components like Collider but skip disabling the SpriteRenderer
-        Collider2D collider = GetComponent<Collider2D>();
-        if (collider != null) collider.enabled = false;
+        yield return new WaitForSeconds(5f);
 
-        // Disable the first two children of the player
-        if (transform.childCount >= 2)
-        {
-            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = false;
-            transform.GetChild(1).gameObject.SetActive(false);
-        }
+        Vector3 respawnPos = RespawnManager.Instance.GetClosestUnlockedCheckPoint(transform.position);
+        SetComponentsState(true);
 
-        // Wait for 3 seconds before respawning
-        yield return new WaitForSeconds(3f);
-
-        // Find the closest respawn point
-        Transform closestRespawn = FindClosestRespawnPoint();
-
-        // Re-enable all components
-        foreach (MonoBehaviour component in components)
-        {
-            if (component != this)
-            {
-                component.enabled = true;
-            }
-        }
-
-        // Re-enable other components like Collider
-        if (collider != null) collider.enabled = true;
-
-        // Re-enable the first two children of the player
-        if (transform.childCount >= 2)
-        {
-            transform.GetChild(0).gameObject.GetComponent<SpriteRenderer>().enabled = true;
-            transform.GetChild(1).gameObject.SetActive(true);
-        }
-
-        // Reset HP and reposition the player at the closest respawn point
         currentHp = maxHp;
-        if (closestRespawn != null)
-        {
-            transform.position = closestRespawn.position;
-        }
-        GetComponent<Animator>().SetBool("isDead", false);
+        transform.position = respawnPos;
+        animator.SetBool("isDead", false);
         isDead = false;
         playerMovement.speed = temSpeed;
         playerMovement.canMove = true;
         playerMovement.canDash = true;
     }
 
-    private Transform FindClosestRespawnPoint()
+    private void ShowLevelUpPanel(string message, float duration)
     {
-        Transform closest = null;
-        float minDistance = Mathf.Infinity;
-        Vector3 currentPosition = transform.position;
-
-        // Iterate through all child objects of respawnLocations
-        foreach (Transform respawnPoint in respawnLocations.transform)
-        {
-            float distance = Vector3.Distance(currentPosition, respawnPoint.position);
-            if (distance < minDistance)
-            {
-                minDistance = distance;
-                closest = respawnPoint;
-            }
-        }
-
-        return closest;
+        levelUpCanvasComponent.enabled = true;
+        levelUpText.text = message;
+        StartCoroutine(HideLevelUpPanelAfterDelay(duration));
     }
 
+    private IEnumerator HideLevelUpPanelAfterDelay(float delay)
+    {
+        yield return new WaitForSeconds(delay);
+        levelUpCanvasComponent.enabled = false;
+    }
 
     public IEnumerator HandleLevelUpPanel()
     {
-        levelUpCanvas.GetComponent<Canvas>().enabled = true;
-        levelUpCanvas.GetComponentInChildren<Image>().color.a.Equals(1);
-        levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Leveled Up!";
-        yield return new WaitForSeconds(3f);
-        // Lerp Opacity Here
-        yield return new WaitForSeconds(1f);
-        levelUpCanvas.GetComponent<Canvas>().enabled = false;
-        yield return new WaitForSeconds(0.5f);
+        ShowLevelUpPanel("You Leveled Up!", 3f);
+        yield return new WaitForSeconds(4f);
+
         if (lvl == 3 || lvl == 6 || lvl == 9)
         {
-            levelUpCanvas.GetComponent<Canvas>().enabled = true;
+            ShowLevelUpPanel("You Unlocked New Skills, Press [K]", 3f);
             source.PlayOneShot(notifyClip);
-            levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Unlocked New Skills, Press [K]";
         }
         else if (lvl == 10 || lvl == 20 || lvl == 30)
         {
-            levelUpCanvas.GetComponent<Canvas>().enabled = true;
+            ShowLevelUpPanel("You Unlocked The Boss of This Area", 3f);
             source.PlayOneShot(notifyClip);
-            levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Unlocked The Boss of This Area";
-            yield return new WaitForSeconds(3f);
-            // Lerp Opacity Here
-            yield return new WaitForSeconds(1f);
-            levelUpCanvas.GetComponent<Canvas>().enabled = false;
-            yield return new WaitForSeconds(0.5f);
-            levelUpCanvas.GetComponent<Canvas>().enabled = true;
+            yield return new WaitForSeconds(4f);
+            ShowLevelUpPanel("You Unlocked The Arena of This Area", 3f);
             source.PlayOneShot(notifyClip);
-            levelUpCanvas.GetComponentInChildren<TMP_Text>().text = "You Unlocked The Arena of This Area";
         }
-        else
-        {
-            yield break;
-        }
-        yield return new WaitForSeconds(3f);
-        // Lerp Opacity Here
-        yield return new WaitForSeconds(1f);
-        levelUpCanvas.GetComponent<Canvas>().enabled = false;
     }
 }

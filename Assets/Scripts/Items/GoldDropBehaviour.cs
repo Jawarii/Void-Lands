@@ -6,14 +6,9 @@ public class GoldDropBehaviour : MonoBehaviour
 {
     public float goldAmount = 0;
     public float direction = 1;
+    private float persistDuration = 300f;
     void Start()
     {
-        
-    }
-
-    // Update is called once per frame
-    void Update()
-    {
-        
+        Destroy(gameObject, persistDuration);
     }
 }

@@ -9,7 +9,7 @@ public class PenetratingArrowSkill : SkillsScript
     public GameObject _arrow;
     public float coolDown = 5f;
     public float cdElapsedTime = 0f;
-    public float adjustedSpeed = 0.1f;
+    public float adjustedSpeed = 0.9f;
     public override void ActivateSkill()
     {
         if (cdElapsedTime > 0f) return;

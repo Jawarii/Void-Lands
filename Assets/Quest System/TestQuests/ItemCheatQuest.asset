@@ -1,0 +1,46 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0ae2a393c14fec4418572f4f5e735874, type: 3}
+  m_Name: ItemCheatQuest
+  m_EditorClassIdentifier: 
+  questName: Item Cheat Quest
+  questType: 2
+  questDescription: Free items for development
+  targetTag: 
+  targetAmount: 0
+  goldReward: 0
+  expReward: 5000
+  itemRewards:
+  - itemPrefab: {fileID: 5835571819418052544, guid: 3b420f317fd75c84ea7bb5a11200736d, type: 3}
+    quantity: 1
+    gearTier: 20
+  - itemPrefab: {fileID: 5835571819418052544, guid: 52d1a159382a15643acac484bccaebe9, type: 3}
+    quantity: 1
+    gearTier: 20
+  - itemPrefab: {fileID: 5835571819418052544, guid: 6739180b38137e04180bd129ee1691b3, type: 3}
+    quantity: 1
+    gearTier: 20
+  - itemPrefab: {fileID: 5835571819418052544, guid: 4eddac0e02ded704195195bbfc593a35, type: 3}
+    quantity: 1
+    gearTier: 20
+  - itemPrefab: {fileID: 5835571819418052544, guid: 897418e24ec5eac458ec3d13e44a4861, type: 3}
+    quantity: 1
+    gearTier: 20
+  - itemPrefab: {fileID: 5835571819418052544, guid: 1a7cccfa0b5947c4c9ab0236d926d986, type: 3}
+    quantity: 1
+    gearTier: 20
+  - itemPrefab: {fileID: 5835571819418052544, guid: e4210a0dd0f97d647a5810c6a6bfc451, type: 3}
+    quantity: 1
+    gearTier: 20
+  - itemPrefab: {fileID: 5835571819418052544, guid: 214ee0921596b5646b313d27744ba926, type: 3}
+    quantity: 1
+    gearTier: 20

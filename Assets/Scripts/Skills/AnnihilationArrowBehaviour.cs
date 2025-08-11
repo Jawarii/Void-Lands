@@ -69,9 +69,9 @@ public class AnnihilationArrowBehaviour : MonoBehaviour
             }
 
         }
-        else if (other.gameObject.CompareTag("Obstacle"))
-        {
-            Destroy(gameObject);
-        }
+        //else if (other.gameObject.CompareTag("Obstacle"))
+        //{
+        //    Destroy(gameObject);
+        //}
     }
 }

@@ -131,9 +131,9 @@ MonoBehaviour:
   speed: 20
   player: {fileID: 0}
   playerStats: {fileID: 0}
-  basicAtkDmgMulti: 2
+  basicAtkDmgMulti: 2.8
   arrowPrefab: {fileID: 3717403527142333829, guid: 96ff702ea5bc5c04f83d2df4189b1f35, type: 3}
-  maxDistance: 8
+  maxDistance: 7
   isImbued: 0
   _bow: {fileID: 0}
   attackArcher: {fileID: 0}

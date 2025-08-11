@@ -15,7 +15,7 @@ public class TeleportBehaviour : MonoBehaviour
     public void InvokeTeleportBehaviour()
     {
         // Implement your teleport logic here, for example, invoking the scene load
-        Debug.Log("Teleport behavior invoked.");
+        //Debug.Log("Teleport behavior invoked.");
         teleportManager.GetComponent<LoadSceneOnInput>().LoadScene(sceneName);
     }
 
@@ -32,7 +32,7 @@ public class TeleportBehaviour : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Interactable canvas is not assigned.");
+                //Debug.LogWarning("Interactable canvas is not assigned.");
             }
         }
     }
@@ -49,7 +49,7 @@ public class TeleportBehaviour : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Interactable canvas is not assigned.");
+                //Debug.LogWarning("Interactable canvas is not assigned.");
             }
         }
     }

@@ -1,10 +1,6 @@
-using System.Collections;
-using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
-using static Unity.VisualScripting.Member;
-
 public class LiveHPEnemy : MonoBehaviour
 {
     public Slider slider;
@@ -15,79 +11,89 @@ public class LiveHPEnemy : MonoBehaviour
     public Transform target;
     public Vector3 offset;
     public TMP_Text hpPercentText;
-
+    private GameObject enemyNameGo;
+    public bool isHud = false;
     void Start()
     {
-        if (target == null)
+        if (target == null && !isHud)
         {
             target = transform.parent.parent;
         }
-        stats = target.gameObject;
-        hp1 = stats.GetComponent<EnemyStats>().hp;
-        maxHp1 = stats.GetComponent<EnemyStats>().maxHp;
-        slider.value = hp1 / maxHp1;
-        camera = Camera.main;
+        if (target == null)
+            return;
+        SetVariables();
+
+        // Find the child GameObject named "EnemyName" under the same Canvas
+        enemyNameGo = transform.parent.Find("EnemyName")?.gameObject;
+
+        //if (enemyNameGo == null)
+        //{
+        //    Debug.LogWarning("EnemyName GameObject not found under the parent Canvas.");
+        //}
+
         if (hpPercentText != null)
         {
-            float percentage = Mathf.Round(slider.value * 100f * 100f) / 100f;
-
-            // Check if there's a decimal part
-            if (percentage % 1 == 0)
-            {
-                // No decimal part, show as an integer
-                hpPercentText.text = percentage.ToString("F0") + "%";
-            }
-            else if (percentage * 10 % 10 == 0)
-            {
-                // Only one decimal place (e.g., .x0), show 1 decimal place
-                hpPercentText.text = percentage.ToString("F1") + "%";
-            }
-            else
-            {
-                // Show 2 decimal places
-                hpPercentText.text = percentage.ToString("F2") + "%";
-            }
-
+            UpdateHPPercentageText();
         }
     }
-
-    // Update is called once per frame
     void Update()
     {
-        maxHp1 = stats.GetComponent<EnemyStats>().maxHp;
-        hp1 = stats.GetComponent<EnemyStats>().hp;
-        slider.value = hp1 / maxHp1;
+        if (target == null)
+            return;
+        SetVariables();
         transform.rotation = camera.transform.rotation;
+
         if (hpPercentText != null)
         {
-            float percentage = Mathf.Round(slider.value * 100f * 100f) / 100f;
-
-            // Check if there's a decimal part
-            if (percentage % 1 == 0)
-            {
-                // No decimal part, show as an integer
-                hpPercentText.text = percentage.ToString("F0") + "%";
-            }
-            else if (percentage * 10 % 10 == 0)
-            {
-                // Only one decimal place (e.g., .x0), show 1 decimal place
-                hpPercentText.text = percentage.ToString("F1") + "%";
-            }
-            else
-            {
-                // Show 2 decimal places
-                hpPercentText.text = percentage.ToString("F2") + "%";
-            }
-
+            UpdateHPPercentageText();
         }
+
+        AdjustScaleForDirection();
+    }
+    private void UpdateHPPercentageText()
+    {
+        float percentage = Mathf.Round(slider.value * 100f * 100f) / 100f;
+
+        if (percentage % 1 == 0)
+        {
+            hpPercentText.text = percentage.ToString("F0") + "%";
+        }
+        else if (percentage * 10 % 10 == 0)
+        {
+            hpPercentText.text = percentage.ToString("F1") + "%";
+        }
+        else
+        {
+            hpPercentText.text = percentage.ToString("F2") + "%";
+        }
+    }
+    private void AdjustScaleForDirection()
+    {
+        if (isHud)
+            return;
         if (target.localScale.x < 0)
         {
             transform.localScale = new Vector3(-Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            if (enemyNameGo != null)
+            {
+                enemyNameGo.transform.localScale = new Vector3(-Mathf.Abs(enemyNameGo.transform.localScale.x), enemyNameGo.transform.localScale.y, enemyNameGo.transform.localScale.z);
+            }
         }
         else
         {
             transform.localScale = new Vector3(Mathf.Abs(transform.localScale.x), transform.localScale.y, transform.localScale.z);
+            if (enemyNameGo != null)
+            {
+                enemyNameGo.transform.localScale = new Vector3(Mathf.Abs(enemyNameGo.transform.localScale.x), enemyNameGo.transform.localScale.y, enemyNameGo.transform.localScale.z);
+            }
         }
     }
-
+    public void SetVariables()
+    {
+        stats = target.gameObject;
+        maxHp1 = stats.GetComponent<EnemyStats>().maxHp;
+        hp1 = stats.GetComponent<EnemyStats>().hp;
+        slider.value = hp1 / maxHp1;
+        camera = Camera.main;
+    }
 }

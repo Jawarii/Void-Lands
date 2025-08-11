@@ -104,6 +104,7 @@ MonoBehaviour:
   myButton: {fileID: 0}
   textTmp: {fileID: 0}
   amount: 0
+  direction: 1
 --- !u!114 &6137696129336166562
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +126,7 @@ MonoBehaviour:
   itemQuality: Legendary
   textColor: {r: 0, g: 0, b: 0, a: 0}
   upgradeLevel: 0
+  itemUISprite: {fileID: 21300000, guid: 47b7339157f01e347a3c4ca639f84e11, type: 3}
   gearMainStats:
     baseHp: 0
     baseArmor: 0

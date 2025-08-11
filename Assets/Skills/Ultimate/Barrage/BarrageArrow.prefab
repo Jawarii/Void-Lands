@@ -131,7 +131,7 @@ MonoBehaviour:
   speed: 20
   player: {fileID: 0}
   playerStats: {fileID: 0}
-  basicAtkDmgMulti: 3.6
+  basicAtkDmgMulti: 2.4
   knockbackForce: 10
   maxDistance: 6
   isImbued: 0

@@ -434,6 +434,7 @@ Transform:
   - {fileID: 350915315305402474}
   - {fileID: 4684403844361823870}
   - {fileID: 2725283675527593391}
+  - {fileID: 7002394309187497264}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!212 &3497676198621287209
@@ -522,6 +523,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   myShake: {fileID: 11400000, guid: 710c880799ac4264dab849dc626d5ac8, type: 2}
+  staggerHealth: 0
   baseHp: 16000
   maxHp: 25
   hp: 25
@@ -530,11 +532,28 @@ MonoBehaviour:
   timeSince: 0
   player: {fileID: 0}
   animator_: {fileID: 3497676198621287215}
+  prevHp: 0
+  delayedHp: 0
   enemyLvl: 20
   _exp: 10
+  isDead: 0
+  isAttacking: 0
+  isStunned: 0
+  isCrowdControlled: 0
+  isDazed: 0
+  isKnockedBack: 0
+  handledDrops: 0
+  enemyMovement: {fileID: 0}
+  bossMovementController: {fileID: 0}
   hitIndicator: 0
   source: {fileID: 7005549183149520373}
+  enemyGettingHitSource: {fileID: 0}
+  dropsSource: {fileID: 0}
+  debuffSource: {fileID: 0}
   clip: {fileID: 8300000, guid: d64e91cef03af304fa237225b23c5707, type: 3}
+  deathClip: {fileID: 0}
+  dropClip: {fileID: 0}
+  ccClip: {fileID: 0}
   goldItems:
   - {fileID: 1832307555365820170, guid: 5aafda0f404d6f544803b649eb63e7e7, type: 3}
   - {fileID: 3787356352293041227, guid: 8b921974434c09b4cb6cfc9eb0149976, type: 3}
@@ -578,6 +597,14 @@ MonoBehaviour:
   - {fileID: 4521754464397372224, guid: f52685322dee1d54c95773fd0d1fe967, type: 3}
   damagePopup: {fileID: 1755598523613924470, guid: a29b54c0139fe7449aa277e650e1fcec, type: 3}
   isBoss: 0
+  ccPrefab: {fileID: 0}
+  instantiatedObject: {fileID: 0}
+  originalPos: {x: 0, y: 0, z: 0}
+  isArenaMob: 0
+  directionModifier: 0
+  isStaggered: 0
+  isElite: 0
+  isNormal: 1
 --- !u!58 &3497676198621287213
 CircleCollider2D:
   m_ObjectHideFlags: 0
@@ -769,6 +796,7 @@ MonoBehaviour:
   distanceToMove: 7
   isMovingStar: 0
   pentagramPoints: []
+  playerStats: {fileID: 0}
 --- !u!114 &4503163261798860850
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -993,6 +1021,8 @@ MonoBehaviour:
   camera: {fileID: 0}
   target: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  hpPercentText: {fileID: 0}
+  isHud: 0
 --- !u!1 &4638783581969169290
 GameObject:
   m_ObjectHideFlags: 0
@@ -1237,10 +1267,93 @@ MonoBehaviour:
   stats: {fileID: 0}
   hp1: 0
   maxHp1: 0
-  oldSlider: 0
+  delayedHp: 0
   camera: {fileID: 0}
   target: {fileID: 0}
   offset: {x: 0, y: 0, z: 0}
+  isHud: 0
+--- !u!1 &5976098306548026700
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 7002394309187497264}
+  - component: {fileID: 647619083647550430}
+  m_Layer: 0
+  m_Name: LightMob
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &7002394309187497264
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5976098306548026700}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 3497676198621287214}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &647619083647550430
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5976098306548026700}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 073797afb82c5a1438f328866b10b3f0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_ComponentVersion: 1
+  m_LightType: 2
+  m_BlendStyleIndex: 0
+  m_FalloffIntensity: 0.6
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Intensity: 0.2
+  m_LightVolumeIntensity: 1
+  m_LightVolumeIntensityEnabled: 0
+  m_ApplyToSortingLayers: 25944a83000000000f21844d73de4776993d429a4941e422
+  m_LightCookieSprite: {fileID: -2140345858, guid: be3b6ad3fabcc9b4c8fb224684d79fba, type: 3}
+  m_DeprecatedPointLightCookieSprite: {fileID: 0}
+  m_LightOrder: 0
+  m_AlphaBlendOnOverlap: 0
+  m_OverlapOperation: 0
+  m_NormalMapDistance: 3
+  m_NormalMapQuality: 2
+  m_UseNormalMap: 0
+  m_ShadowIntensityEnabled: 0
+  m_ShadowIntensity: 0.75
+  m_ShadowVolumeIntensityEnabled: 0
+  m_ShadowVolumeIntensity: 0.75
+  m_LocalBounds:
+    m_Center: {x: 0, y: -0.020833328, z: 0}
+    m_Extent: {x: 0.1875, y: 0.1875, z: 0}
+  m_PointLightInnerAngle: 360
+  m_PointLightOuterAngle: 360
+  m_PointLightInnerRadius: 0
+  m_PointLightOuterRadius: 0.15
+  m_ShapeLightParametricSides: 5
+  m_ShapeLightParametricAngleOffset: 0
+  m_ShapeLightParametricRadius: 1
+  m_ShapeLightFalloffSize: 0.5
+  m_ShapeLightFalloffOffset: {x: 0, y: 0}
+  m_ShapePath:
+  - {x: -0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: -0.5, z: 0}
+  - {x: 0.5, y: 0.5, z: 0}
+  - {x: -0.5, y: 0.5, z: 0}
 --- !u!1 &8372991831499356323
 GameObject:
   m_ObjectHideFlags: 0

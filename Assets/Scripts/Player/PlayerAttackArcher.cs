@@ -18,6 +18,7 @@ public class PlayerAttackArcher : MonoBehaviour
 
     public GameObject _arrow;
     public AudioSource source_;
+    public AudioSource anniAudioSource;
     public AudioClip clip_;
 
     public SkillsSO skillSo;
@@ -35,10 +36,12 @@ public class PlayerAttackArcher : MonoBehaviour
 
     public bool hasImbueBuff = false;
     public AudioClip stringClip;
+    public AudioClip annihilationClip;
 
     void Start()
     {
         runSpeed = player.GetComponent<PlayerMovement>().speed;
+        anniAudioSource = GameObject.Find("AnnihilationSource").GetComponent<AudioSource>();
         //adjustedSpeed = 0.0f * runSpeed;
     }
 
@@ -93,7 +96,7 @@ public class PlayerAttackArcher : MonoBehaviour
 
         if (skillButtons[skillIndex] != null)
         {
-            skillButtons[skillIndex].transform.localScale = new Vector3(0.8f, 0.8f, 0.8f);
+            skillButtons[skillIndex].transform.localScale = new Vector3(0.9f, 0.9f, 0.9f);
             StartCoroutine(ButtonClickTimer(skillIndex));
             buttonInfo = skillButtons[skillIndex].GetComponent<SkillButtonInformation>();
             if (buttonInfo.skillsScript != null)
@@ -129,15 +132,25 @@ public class PlayerAttackArcher : MonoBehaviour
     {
         if (source_ != null && stringClip != null)
         {
-            source_.Stop();
+            //source_.Stop();
             source_.pitch = 1.0f;
             source_.volume = 0.3f;
             source_.PlayOneShot(stringClip);
         }
     }
+
+    public void PlayAnnihilationClip()
+    {
+        if (anniAudioSource != null && annihilationClip != null)
+        {
+            //anniAudioSource.Stop();
+            anniAudioSource.pitch = 0.42f * player.GetComponent<PlayerStats>().atkSpd; //Speed of annihilation sound adjustment.
+            anniAudioSource.PlayOneShot(annihilationClip);
+        }
+    }
     IEnumerator ButtonClickTimer(int _index)
     {
-        yield return new WaitForSeconds(0.05f);
+        yield return new WaitForSeconds(0.1f);
         skillButtons[_index].transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
     }
 

@@ -24,7 +24,6 @@ public class SniperAttack : EnemyAttack
     void FixedUpdate()
     {
         isAttacking = GetComponent<EnemyStats>().isAttacking;
-
         if (currentAttackCooldown > 0)
         {
             currentAttackCooldown -= Time.deltaTime;

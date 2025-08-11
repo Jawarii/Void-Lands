@@ -13,10 +13,29 @@ MonoBehaviour:
   m_Name: ParallelShot
   m_EditorClassIdentifier: 
   skillName: Parallel Shot
-  skillDescription: 'Shoots 7 parallel Arrows '
+  skillDescription: Fires 5 parallel arrows that pierce through enemies and stun
+    them for 2 seconds.
   skillLevel: 3
   skillType: Special
   skillIcon: {fileID: 21300000, guid: cfcee51d657f92141a0f1e6bdd8a6f8b, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 8
+  coolDown: 12
+  baseDamage: 1
+  baseDuration: 1
+  baseRange: 1
+  baseArea: 1
+  currentDamage: 0
+  currentDuration: 0
+  currentRange: 0
+  currentArea: 0
+  currentCooldown: 0
+  hasStun: 0
+  stunDuration: 0
+  hasSlow: 0
+  slowPercentage: 0
+  hasBleed: 0
+  bleedDamage: 0
+  bleedDuration: 0
+  effectColor: {r: 1, g: 1, b: 1, a: 1}
+  currentProjectilePrefab: {fileID: 0}

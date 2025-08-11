@@ -27,6 +27,9 @@ public class HomingArrowBehaviour : MonoBehaviour
     public PlayerAttackArcher attackArcher;
     public GameObject miasmaExplosionPrefab;
 
+    private bool isHomingActive = false;
+    private float homingDelay = 0.2f; // Or however long you want
+
     private void Start()
     {
         _bow = GameObject.FindGameObjectWithTag("BowObject");
@@ -40,15 +43,36 @@ public class HomingArrowBehaviour : MonoBehaviour
 
         randomEggFactor = 1.0f;
         turnSpeed = 80f;
+
+        // Instead of instantly finding targets, delay it slightly
+        StartCoroutine(ActivateHomingAfterDelay());
+    }
+
+    private IEnumerator ActivateHomingAfterDelay()
+    {
+        yield return new WaitForSeconds(homingDelay);
+        isHomingActive = true;
         FindInitialTarget();
     }
+
     private void Update()
     {
-        if (target != null)
+        if (isHomingActive && target != null)
         {
             HandleHomingArrowBehaviour();
         }
+        else
+        {
+            // Fly forward normally if not homing yet or no target found
+            transform.Translate(Vector2.down * speed * randomEggFactor * Time.deltaTime);
+            float distanceTraveled = Vector2.Distance(transform.position, startPosition);
+            if (distanceTraveled >= maxDistance && hitCount == 0)
+            {
+                Destroy(gameObject);
+            }
+        }
     }
+
 
     private void OnTriggerEnter2D(Collider2D other)
     {
@@ -76,8 +100,8 @@ public class HomingArrowBehaviour : MonoBehaviour
                 enemyStats.TakeDamage((int)Random.Range(minDmg, maxDmg), false);
             }
 
-            if (other.gameObject == target.gameObject)
-            {
+            if (other.gameObject == target.gameObject) // Reason for this check is to not count accidental hits as hits for the limit. its a clunky way of coding it
+            {                                          // so come back to this later with a better solution. Works overall at the moment atleast.
                 hitCount++;
                 if (hitCount < maxHits)
                 {
@@ -89,10 +113,6 @@ public class HomingArrowBehaviour : MonoBehaviour
                 }
             }
         }
-        //else if (other.gameObject.CompareTag("Obstacle"))
-        //{
-        //    Destroy(gameObject);
-        //}
     }
 
     private void FindInitialTarget()
@@ -120,7 +140,7 @@ public class HomingArrowBehaviour : MonoBehaviour
         }
         else
         {
-            Destroy(gameObject);
+            //Destroy(gameObject);
         }
     }
 

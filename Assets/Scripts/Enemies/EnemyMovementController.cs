@@ -1,6 +1,5 @@
 using System.Collections;
 using System.Collections.Generic;
-using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -46,6 +45,11 @@ public class EnemyMovementController : MonoBehaviour
     private float lastAlternateMoveTime = 0f;
     private float alternateMoveCooldown = 0.5f;
 
+    // Reference to LightMob's Light2D component
+    private GameObject lightMob; // Child GameObject
+    private UnityEngine.Rendering.Universal.Light2D lightSource; // 2D Light component
+    private SpriteRenderer enemySpriteRenderer; // SpriteRenderer of this GameObject
+
     void Start()
     {
         originalSpeed = speed_;
@@ -57,6 +61,32 @@ public class EnemyMovementController : MonoBehaviour
         agent.speed = speed_;
         originalPosition = transform.position;
         StartCoroutine(Roam());
+
+        // Find the LightMob child GameObject and its Light2D component
+        lightMob = transform.Find("LightMob")?.gameObject;
+        if (lightMob != null)
+        {
+            lightSource = lightMob.GetComponent<UnityEngine.Rendering.Universal.Light2D>();
+        }
+
+        // Get the SpriteRenderer of this GameObject
+        enemySpriteRenderer = GetComponent<SpriteRenderer>();
+    }
+
+    void Update()
+    {
+        UpdateLightSourceSprite();
+        UpdateReturnStatus();
+    }
+
+    private void UpdateLightSourceSprite()
+    {
+        if (lightSource != null && enemySpriteRenderer != null)
+        {
+            // Update the LightSource's sprite to match the current sprite of the enemy
+            lightSource.lightType = UnityEngine.Rendering.Universal.Light2D.LightType.Sprite;
+            lightSource.lightCookieSprite = enemySpriteRenderer.sprite;
+        }
     }
 
     void FixedUpdate()
@@ -73,7 +103,6 @@ public class EnemyMovementController : MonoBehaviour
 
         if (inPursuit && canMove)
         {
-            // Check if player is dead or if the enemy is too far from the original position
             if (IsPlayerDead() || IsTooFarFromOriginalPosition())
             {
                 if (transform.GetComponent<EnemyStats>().isArenaMob)
@@ -134,7 +163,7 @@ public class EnemyMovementController : MonoBehaviour
     IEnumerator ReturnToOriginalPosition()
     {
         inPursuit = false;
-        isReturning = true; // Set returning flag
+        isReturning = true;
         agent.isStopped = true;
         animator_.SetFloat("Speed", agent.velocity.magnitude);
         transform.GetComponent<EnemyStats>().hp = transform.GetComponent<EnemyStats>().maxHp;
@@ -143,7 +172,6 @@ public class EnemyMovementController : MonoBehaviour
         agent.isStopped = false;
         agent.speed = speed_;
 
-        // Ensure original position is on NavMesh
         NavMeshHit hit;
         if (NavMesh.SamplePosition(originalPosition, out hit, 1.0f, NavMesh.AllAreas))
         {
@@ -158,17 +186,12 @@ public class EnemyMovementController : MonoBehaviour
     {
         if (isReturning && Vector3.Distance(transform.position, originalPosition) <= 0.1f)
         {
-            isReturning = false; // Reset returning flag once back at original position
+            isReturning = false;
             transform.GetComponent<EnemyStats>().hp = transform.GetComponent<EnemyStats>().maxHp;
             speed_ = originalSpeed;
             agent.speed = speed_;
             gameObject.transform.Find("AgroRadius").gameObject.SetActive(true);
         }
-    }
-
-    void Update()
-    {
-        UpdateReturnStatus();
     }
 
     private Vector3 GetRandomRoamingPosition()
@@ -180,7 +203,6 @@ public class EnemyMovementController : MonoBehaviour
 
     private bool IsPlayerDead()
     {
-        // Implement a check for whether the player is dead
         PlayerStats playerStats = playerObject.GetComponent<PlayerStats>();
         return playerStats != null && playerStats.isDead;
     }
@@ -246,10 +268,9 @@ public class EnemyMovementController : MonoBehaviour
         float slimeRadius = 0.5f;
         Vector2 start2D = new Vector2(transform.position.x, transform.position.y) + direction.normalized * 0.5f;
 
-        // Perform a CircleCast, excluding the enemy's own collider
         RaycastHit2D hit = Physics2D.CircleCast(start2D, slimeRadius, direction, distance);
 
-        if (hit.collider != null && hit.collider.gameObject != gameObject) // Exclude self
+        if (hit.collider != null && hit.collider.gameObject != gameObject)
         {
             if (hit.collider.CompareTag("Enemy"))
                 return false;
@@ -353,16 +374,13 @@ public class EnemyMovementController : MonoBehaviour
 
     void StopAllCoroutinesExceptCurrent()
     {
-        // Get all components on this GameObject
         MonoBehaviour[] components = GetComponents<MonoBehaviour>();
 
         foreach (MonoBehaviour component in components)
         {
-            // Skip the current script
             if (component == this)
                 continue;
 
-            // Stop all coroutines in other scripts
             component.StopAllCoroutines();
         }
     }

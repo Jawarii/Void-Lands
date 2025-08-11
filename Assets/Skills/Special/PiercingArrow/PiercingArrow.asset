@@ -13,10 +13,29 @@ MonoBehaviour:
   m_Name: PiercingArrow
   m_EditorClassIdentifier: 
   skillName: Piercing Arrow
-  skillDescription: Shoots an arrow that pierces through enemies.
+  skillDescription: Fires an arrow that pierces through enemies, stunning them for
+    3 seconds on hit.
   skillLevel: 3
   skillType: Special
   skillIcon: {fileID: 21300000, guid: 174a22e07b74f934e8a623c8902289c8, type: 3}
   skillScript: {fileID: -798453549716521159, guid: 2ad436c7dfb9c644da7c56c4da0699ca, type: 3}
   _animator: {fileID: 0}
-  coolDown: 8
+  coolDown: 12
+  baseDamage: 1
+  baseDuration: 1
+  baseRange: 1
+  baseArea: 1
+  currentDamage: 0
+  currentDuration: 0
+  currentRange: 0
+  currentArea: 0
+  currentCooldown: 0
+  hasStun: 0
+  stunDuration: 0
+  hasSlow: 0
+  slowPercentage: 0
+  hasBleed: 0
+  bleedDamage: 0
+  bleedDuration: 0
+  effectColor: {r: 1, g: 1, b: 1, a: 1}
+  currentProjectilePrefab: {fileID: 0}

@@ -36,17 +36,17 @@ public class EquipmentSoInformation : MonoBehaviour
     }
     public void LoadAllEquipment(List<ItemInfoData> equipmentList)
     {
-        Debug.Log("REACHED LOAD ALL");
+        //Debug.Log("REACHED LOAD ALL");
         foreach (var item in equipmentList)
         {
             if (item == null)
             {
-                Debug.Log("item is null");
+                Debug.Log("LoadAllEquipment: item is null");
                 continue;
             }
             if (equipmentList == null)
             {
-                Debug.Log("list is null");
+                Debug.Log("LoadAllEquipment: equipment list is null");
                 continue;
             }
             string itemType = item.itemType;

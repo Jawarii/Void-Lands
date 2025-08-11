@@ -77,7 +77,7 @@ SpriteRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 3
   m_Sprite: {fileID: 21300000, guid: 26938ed0b7e660644a33e2d904f760ad, type: 3}
-  m_Color: {r: 0.9019608, g: 0.5254902, b: 0.9372549, a: 1}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -104,6 +104,7 @@ MonoBehaviour:
   myButton: {fileID: 0}
   textTmp: {fileID: 0}
   amount: 0
+  direction: 1
 --- !u!114 &-7587107209058759399
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +126,7 @@ MonoBehaviour:
   itemQuality: Magic
   textColor: {r: 0, g: 0, b: 0, a: 0}
   upgradeLevel: 0
+  itemUISprite: {fileID: 21300000, guid: c41adfb30f8b26d4d91c1a8994781fda, type: 3}
   gearMainStats:
     baseHp: 0
     baseArmor: 0

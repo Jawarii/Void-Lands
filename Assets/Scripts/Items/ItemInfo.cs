@@ -10,13 +10,16 @@ public class ItemInfo : MonoBehaviour
     public string itemName;
     public string itemDescription;
     public string itemType;
+    public int itemTier;
     public int itemLvl;
     public string itemQuality;
+
 
     public Color textColor;
 
     public int upgradeLevel;
 
+    public Sprite itemUISprite;
     private void Awake()
     {
         itemType = gameObject.tag;
@@ -44,5 +47,10 @@ public class ItemInfo : MonoBehaviour
         }
         GetComponentInChildren<TMP_Text>().text = itemName;
         GetComponentInChildren<TMP_Text>().color = textColor;
+    }
+
+    public virtual void HandleStatsRoll()
+    {
+        return;
     }
 }

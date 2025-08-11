@@ -13,7 +13,8 @@ MonoBehaviour:
   m_Name: HomingArrows
   m_EditorClassIdentifier: 
   skillName: Homing Arrows
-  skillDescription: Shoots 5 arrows in a straight line that keep homing after hit.
+  skillDescription: Fires 5 arrows that home in on targets, seeking enemies up to
+    5 times each.
   skillLevel: 9
   skillType: Ultimate
   skillIcon: {fileID: 21300000, guid: 0ba14632360c48742aa01fff4727ea90, type: 3}

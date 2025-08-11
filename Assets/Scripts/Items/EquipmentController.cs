@@ -37,7 +37,7 @@ public class EquipmentController : MonoBehaviour
     {
         if (equipInfoSo == null)
         {
-            Debug.LogError("equipInfoSo is null");
+            //Debug.LogError("equipInfoSo is null");
             return;
         }
 
@@ -45,7 +45,7 @@ public class EquipmentController : MonoBehaviour
         {
             if (equipInfoSo.weaponMainStats == null || equipInfoSo.weaponBonusStats == null)
             {
-                Debug.LogError("Weapon stats are null");
+                //Debug.LogError("Weapon stats are null");
                 return;
             }
 
@@ -64,7 +64,7 @@ public class EquipmentController : MonoBehaviour
         {
             if (equipInfoSo.gearMainStats == null || equipInfoSo.gearBonusStats == null)
             {
-                Debug.LogError("Gear stats are null");
+                //Debug.LogError("Gear stats are null");
                 return;
             }
 
@@ -138,7 +138,7 @@ public class EquipmentController : MonoBehaviour
 
     public void LoadEquipment(ItemInfoData equipInfoData)
     {
-        Debug.Log("REACHED LOADING");
+        //Debug.Log("REACHED LOADING");
         player = GameObject.FindGameObjectWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
         if (equipInfoData != null)
@@ -172,7 +172,7 @@ public class EquipmentController : MonoBehaviour
 
         if (!isLoaded)
         {
-            Debug.LogError("Failed to load texture from byte array.");
+            //Debug.LogError("Failed to load texture from byte array.");
             return null;
         }
 
@@ -191,7 +191,7 @@ public class EquipmentController : MonoBehaviour
         SetItemIcon(itemToEquip.itemIcon); // Set the item icon in the UI
         //RemoveStats();
         AddStats(); // Apply the item's stats
-        Debug.Log("Item equipped: " + itemToEquip.itemName);
+        //Debug.Log("Item equipped: " + itemToEquip.itemName);
     }
     public void SetItemIcon(Sprite icon)
     {

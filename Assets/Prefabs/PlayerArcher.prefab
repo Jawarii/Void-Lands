@@ -206,15 +206,15 @@ MonoBehaviour:
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.7
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.7
+  m_Intensity: 0.8
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
-  m_ApplyToSortingLayers: 0000000025944a83
+  m_ApplyToSortingLayers: 25944a8300000000
   m_LightCookieSprite: {fileID: 0}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
-  m_OverlapOperation: 0
+  m_OverlapOperation: 1
   m_NormalMapDistance: 3
   m_NormalMapQuality: 2
   m_UseNormalMap: 0
@@ -259,7 +259,8 @@ GameObject:
   - component: {fileID: 8150448683691889088}
   - component: {fileID: 1815398757330373936}
   - component: {fileID: 7617409269100914398}
-  - component: {fileID: 228432683669815002}
+  - component: {fileID: 8328975243382852551}
+  - component: {fileID: 974406279065831277}
   m_Layer: 0
   m_Name: PlayerArcher
   m_TagString: Player
@@ -308,7 +309,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -329,7 +330,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 5
-  m_Sprite: {fileID: 1414957873, guid: 3e3ad5e5adf908b458ac1a292e7b73d6, type: 3}
+  m_Sprite: {fileID: 646603238, guid: 54f736a67b9a8a44a836f029214edf79, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -383,7 +384,7 @@ MonoBehaviour:
   arrived: 0
   dashCd: 2
   currentDashCd: 0
-  dashDistance: 2
+  dashDistance: 1
   dashSource_: {fileID: 1460879414823648951}
   stepsSource_: {fileID: 0}
   stepsClip_: {fileID: 8300000, guid: fdc05ea2699023143ba7e93533cc5a0b, type: 3}
@@ -566,7 +567,6 @@ MonoBehaviour:
   attack: 20
   atkSpd: 1
   baseDefense: 10
-  defense: 10
   critRate: 5
   critDmg: 150
   staggerDmg: 120
@@ -584,6 +584,7 @@ MonoBehaviour:
   lvl: 1
   currentExp: 0
   maxExp: 0
+  skillPoints: 0
   timeSince: 0
   playerSkills: {fileID: 0}
   hpRecCd: 3
@@ -601,11 +602,11 @@ MonoBehaviour:
   timeScaleMod: 1
   isImmune: 0
   levelUpCanvas: {fileID: 0}
-  respawnLocations: {fileID: 0}
   isDead: 0
   playerMovement: {fileID: 1460879414823648945}
   temSpeed: 0
   playerInformation: {fileID: 0}
+  impulseSource: {fileID: 0}
 --- !u!114 &1460879414823648937
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -772,7 +773,7 @@ MonoBehaviour:
   lvl3BossIsComplete: 0
   reaperBossPortal: {fileID: 0}
   level1ArenaPortal: {fileID: 0}
---- !u!114 &228432683669815002
+--- !u!114 &8328975243382852551
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -781,11 +782,58 @@ MonoBehaviour:
   m_GameObject: {fileID: 1460879414823648956}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 766d8707f0d99744db8119212bba548e, type: 3}
+  m_Script: {fileID: 11500000, guid: 180ecf9b41d478f468eb3e9083753217, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  cursorTexture: {fileID: 2800000, guid: 51cb6ee928f89b64691ef4dfd57c03e9, type: 3}
-  hotSpot: {x: 0, y: 0}
+  m_ImpulseDefinition:
+    m_ImpulseChannel: 1
+    m_ImpulseShape: 4
+    m_CustomImpulseShape:
+      serializedVersion: 2
+      m_Curve: []
+      m_PreInfinity: 2
+      m_PostInfinity: 2
+      m_RotationOrder: 4
+    m_ImpulseDuration: 0.5
+    m_ImpulseType: 1
+    m_DissipationRate: 0
+    m_RawSignal: {fileID: 0}
+    m_AmplitudeGain: 1
+    m_FrequencyGain: 1
+    m_RepeatMode: 0
+    m_Randomize: 1
+    m_TimeEnvelope:
+      m_AttackShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_DecayShape:
+        serializedVersion: 2
+        m_Curve: []
+        m_PreInfinity: 2
+        m_PostInfinity: 2
+        m_RotationOrder: 4
+      m_AttackTime: 0
+      m_SustainTime: 0.2
+      m_DecayTime: 0.7
+      m_ScaleWithImpact: 1
+      m_HoldForever: 0
+    m_ImpactRadius: 100
+    m_DirectionMode: 0
+    m_DissipationMode: 2
+    m_DissipationDistance: 100
+    m_PropagationSpeed: 343
+  m_DefaultVelocity: {x: -0.3, y: -0.3, z: 0}
+--- !u!81 &974406279065831277
+AudioListener:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460879414823648956}
+  m_Enabled: 1
 --- !u!1 &6643819815045503618
 GameObject:
   m_ObjectHideFlags: 0
@@ -843,7 +891,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -932,6 +980,7 @@ MonoBehaviour:
   isAttacking: 0
   _arrow: {fileID: 3717403527142333829, guid: a94e91d15d88bcc4eb56ca0afc304a40, type: 3}
   source_: {fileID: 8334485593516995717}
+  anniAudioSource: {fileID: 0}
   clip_: {fileID: 8300000, guid: 6f383debe93db5c42a9e7083905d38e2, type: 3}
   skillSo: {fileID: 11400000, guid: ec8ab9aa6e40d304496ca5e635cdd2ed, type: 2}
   skillScriptObj: {fileID: 0}
@@ -948,6 +997,7 @@ MonoBehaviour:
   coolDown3: 0
   hasImbueBuff: 0
   stringClip: {fileID: 8300000, guid: 470d35b1638f4234e895ca3e65fb00dc, type: 3}
+  annihilationClip: {fileID: 8300000, guid: 1682be7bc3123409d91a7dcea2cd1f29, type: 3}
 --- !u!82 &8334485593516995717
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1150,6 +1200,14 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 1460879414823648958}
     m_Modifications:
+    - target: {fileID: 3282246101163388570, guid: d467f0fac062edc4a811371a7ba63e46, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
+    - target: {fileID: 3282246101234823274, guid: d467f0fac062edc4a811371a7ba63e46, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
     - target: {fileID: 3282246101234823276, guid: d467f0fac062edc4a811371a7ba63e46, type: 3}
       propertyPath: m_Name
       value: Circle

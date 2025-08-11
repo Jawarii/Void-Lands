@@ -87,6 +87,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   goldAmount: 0
+  direction: 1
 --- !u!1 &6940057243866260100
 GameObject:
   m_ObjectHideFlags: 0
@@ -146,7 +147,7 @@ Canvas:
   m_VertexColorAlwaysGammaSpace: 0
   m_AdditionalShaderChannelsFlag: 25
   m_UpdateRectTransformForStandalone: 0
-  m_SortingLayerID: 0
+  m_SortingLayerID: 1300504847
   m_SortingOrder: 4
   m_TargetDisplay: 0
 --- !u!114 &6940057243866260097

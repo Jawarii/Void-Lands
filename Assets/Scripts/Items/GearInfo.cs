@@ -40,8 +40,7 @@ public class
 
     private void Start()
     {
-        SetItemMainStats();
-        SetItemBonusStats();
+        HandleStatsRoll();
     }
 
     void SetItemBonusStats()
@@ -163,5 +162,12 @@ public class
         gearBonusStats.cdRed = 0;
         gearBonusStats.moveSpeed = 0;
         gearBonusStats.recovery = 0;
+    }
+
+    public override void HandleStatsRoll()
+    {
+        itemLvl = itemTier * 5;
+        SetItemMainStats();
+        SetItemBonusStats();
     }
 }

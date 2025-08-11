@@ -50,7 +50,10 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
             itemNameObj.GetComponent<TMP_Text>().color = itemInfoSO.textColor;
             GameObject itemLvlObj = itemTooltip.transform.Find("ItemLvlText").gameObject;
             itemLvlObj.SetActive(true);
-            itemLvlObj.GetComponent<TMP_Text>().text = itemInfoSO.itemLvl.ToString() + " Item Power";
+
+            int itemTier = itemInfoSO.itemLvl / 5;
+            itemLvlObj.GetComponent<TMP_Text>().text = "Tier " + itemTier.ToString();
+
             GameObject itemStatsObj = itemTooltip.transform.Find("Stats").gameObject;
             GameObject itemBonusStatsObj = itemTooltip.transform.Find("BonusStats").gameObject;
 
@@ -75,6 +78,10 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
 
     public void SetTooltipLocation()
     {
+        // Enable the canvas first so layout is valid
+        canvas.enabled = true;
+        // Force Unity to update all canvases/layouts
+        Canvas.ForceUpdateCanvases();
         LayoutRebuilder.ForceRebuildLayoutImmediate(panelRectTransform);
         Vector2 canvasPos;
         float offset = buttonRectTransform.sizeDelta.x / 2f + panelRectTransform.sizeDelta.x / 2f;
@@ -82,7 +89,6 @@ public class EquipmentHoverBehavior : MonoBehaviour, IPointerEnterHandler, IPoin
         RectTransformUtility.ScreenPointToLocalPointInRectangle(canvasRectTransform, transform.position, canvas.worldCamera, out canvasPos);
         float yUpCheck = canvasPos.y + tooltipHeight / 2f;
         float yDownCheck = canvasPos.y - tooltipHeight / 2f;
-        canvas.enabled = true;
 
         if (yUpCheck > canvasRectTransform.sizeDelta.y / 2f)
         {

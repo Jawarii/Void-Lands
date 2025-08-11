@@ -137,7 +137,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 650661699747a1742b5b44e0806aa2e0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  basicAtkDmgMulti: 1.2
+  basicAtkDmgMulti: 0.3
   playerStats: {fileID: 0}
   player: {fileID: 0}
   crit: 0

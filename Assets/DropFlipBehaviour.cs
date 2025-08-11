@@ -4,8 +4,15 @@ using UnityEngine;
 
 public class DropFlipBehaviour : MonoBehaviour
 {
+    public AudioSource dropsSource;
+    public AudioClip dropClip;
+
     private List<GameObject> trackedItems = new List<GameObject>();
 
+    private void Start()
+    {
+        dropsSource = GameObject.Find("DropAudioSource").GetComponent<AudioSource>();
+    }
     void Update()
     {
         // Detect new items with ClickLootBehaviour in the scene
@@ -119,6 +126,13 @@ public class DropFlipBehaviour : MonoBehaviour
         if (canvas != null)
         {
             canvas.enabled = true;
+        }
+
+        // Play sound if it's a Legendary item
+        ItemInfo info = item?.GetComponent<ItemInfo>();
+        if (info != null && info.itemQuality == "Legendary")
+        {
+            dropsSource?.PlayOneShot(dropClip);
         }
     }
 }

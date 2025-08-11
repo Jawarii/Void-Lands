@@ -25,14 +25,14 @@ public class SkillAdder : MonoBehaviour
             }
             else
             {
-                Debug.LogWarning("Skill icon is missing!");
+                //Debug.LogWarning("Skill icon is missing!");
             }
 
-            Debug.Log("Skill added directly to the skill bar.");
+            //Debug.Log("Skill added directly to the skill bar.");
         }
         else
         {
-            Debug.LogWarning("Skill type mismatch! Cannot add the skill to the target slot.");
+            //Debug.LogWarning("Skill type mismatch! Cannot add the skill to the target slot.");
         }
     }
 

@@ -16,7 +16,7 @@ public class ArenaSpawner : MonoBehaviour
 
     IEnumerator SpawnWaves()
     {
-        yield return new WaitForSeconds(1.5f);
+        yield return new WaitForSeconds(0.75f);
         for (int i = 1; i <= waves; i++)
         {
             StartCoroutine(SpawnMonsters(i));
@@ -26,7 +26,7 @@ public class ArenaSpawner : MonoBehaviour
 
     IEnumerator SpawnMonsters(int wave)
     {
-        int monsterCount = wave <= (waves / 2) ? 2 : 3; // Spawn 2 or 4 monsters based on wave number
+        int monsterCount = wave <= (waves / 2) ? 2 : 3; // Spawn 2 or 3 monsters based on wave number
 
         for (int j = 0; j < monsterCount; j++)
         {

@@ -106,7 +106,7 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   basicAtkDmgMulti: 0.6
   knockbackForce: 5
-  maxDistance: 8
+  maxDistance: 7
   isImbued: 0
   _bow: {fileID: 0}
   attackArcher: {fileID: 0}

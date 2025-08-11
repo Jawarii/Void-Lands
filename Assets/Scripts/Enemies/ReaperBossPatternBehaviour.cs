@@ -33,12 +33,15 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
     public GameObject projectilePrefab;
     public EnemyStats enemyStats;
 
+    public AudioClip crazyDialogueClip;
+    public AudioSource countdownAudioSource;
     void Start()
     {
         player = GameObject.FindGameObjectWithTag("Player");
         hpPercent = transform.GetComponent<EnemyStats>().hp / transform.GetComponent<EnemyStats>().maxHp;
         moveController = transform.GetComponent<BossMovementController>();
         enemyStats = transform.GetComponent<EnemyStats>();
+        countdownAudioSource = GameObject.Find("CountDownSource").GetComponent<AudioSource>();
     }
 
     void Update()
@@ -173,6 +176,7 @@ public class ReaperBossPatternBehaviour : MonoBehaviour
             {
                 StartCoroutine(EnhancedRingAttack());
                 enhancedRingAttackElapsedTime = enhancedRingAttackCd;
+                //countdownAudioSource.PlayOneShot(crazyDialogueClip);
             }
         }
         else

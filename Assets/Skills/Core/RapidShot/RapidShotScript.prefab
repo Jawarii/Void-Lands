@@ -50,7 +50,7 @@ MonoBehaviour:
   finisherAnim: {fileID: 0}
   bowReleaseAnim: {fileID: 7400000, guid: 77e7234c6245d114cb72335cf964427d, type: 2}
   _arrow: {fileID: 3717403527142333829, guid: 6ed0ce6a881715e4b9e4e645bd0b4777, type: 3}
-  adjustedSpeed: 0
+  adjustedSpeed: 0.55
 --- !u!95 &953000323133090100
 Animator:
   serializedVersion: 5

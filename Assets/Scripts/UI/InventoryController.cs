@@ -22,11 +22,15 @@ public class InventoryController : MonoBehaviour
         goldAmountText.text = goldAmount.ToString();
     }
 
+    public void AddGold(float amount)
+    {
+        goldAmount += amount;
+    }
     public void AddItem(ItemInfo itemInfo)
     {
         if (IsInventoryFull())
         {
-            Debug.Log("Inventory is full!");
+            //Debug.Log("Inventory is full!");
             return;
         }
 

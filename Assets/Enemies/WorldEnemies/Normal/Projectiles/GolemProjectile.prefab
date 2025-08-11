@@ -122,8 +122,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 389d31db1fab8a343bfbe97b628a753b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  speed: 3
-  basicAtkDmgMulti: 0.4
+  speed: 4
+  basicAtkDmgMulti: 0.6
   lifeTime: 1.5
   enemyStats: {fileID: 0}
 --- !u!70 &864100243802575138

@@ -3,13 +3,13 @@ using System.Collections;
 
 public class FrenzyScript : SkillsScript
 {
-    public float duration = 6f;
+    public float duration = 5f;
     private PlayerStats playerStats;
     private static Coroutine buffCoroutine;
 
-    private static float atkSpeedIncrease = 0.5f;
+    private static float atkSpeedIncrease = 0.3f;
     private static float atkIncrease;
-    private static float speedIncrease = 0.5f;
+    //private static float speedIncrease = 0.5f; <- Removed Speed increase
     private static bool buffIsActive = false;
 
     public AudioSource audioSource;
@@ -33,12 +33,12 @@ public class FrenzyScript : SkillsScript
 
         // Apply the new buff
 
-        atkSpeedIncrease = playerStats.atkSpd * 0.5f;
-        atkIncrease = playerStats.attack * 0.5f;
-        speedIncrease = playerStats.speed * 0.5f;
+        atkSpeedIncrease = playerStats.atkSpd * 0.3f;
+        atkIncrease = playerStats.attack * 0.3f;
+        //speedIncrease = playerStats.speed * 0.5f; <- Removed Speed increase
         playerStats.atkSpd += atkSpeedIncrease;
         playerStats.attack += atkIncrease;
-        playerStats.speed += speedIncrease;
+        //playerStats.speed += speedIncrease; <- Removed Speed increase
 
         audioSource = GameObject.Find("BuffsSoundSource").GetComponent<AudioSource>();
         audioSource.PlayOneShot(audioClip);
@@ -67,7 +67,7 @@ public class FrenzyScript : SkillsScript
 
         playerStats.atkSpd -= atkSpeedIncrease;
         playerStats.attack -= atkIncrease;
-        playerStats.speed -= speedIncrease;
+        //playerStats.speed -= speedIncrease; <- Removed Speed increase
 
         buffIsActive = false;
         StartCoroutine(DestroyAfterDelay(0.1f)); // Adjust delay as needed

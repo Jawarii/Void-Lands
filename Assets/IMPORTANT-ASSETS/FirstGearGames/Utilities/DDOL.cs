@@ -13,28 +13,28 @@ namespace FirstGearGames.Utilities.Objects
         public static DDOL Instance { get; private set; }
         #endregion
 
-        private void Awake()
-        {
-            FirstInitialize();
-        }
+            private void Awake()
+            {
+                FirstInitialize();
+            }
 
-        /// <summary>
-        /// Initializes this script for use. Should only be completed once.
-        /// </summary>
-        private void FirstInitialize()
-        {
-            if (Instance != null && Instance != this)
+            /// <summary>
+            /// Initializes this script for use. Should only be completed once.
+            /// </summary>
+            private void FirstInitialize()
             {
-                Debug.LogError("Multiple DDOL scripts found. There should be only one.");
-                return;
+                if (Instance != null && Instance != this)
+                {
+                    Debug.LogError("Multiple DDOL scripts found. There should be only one.");
+                    return;
+                }
+                else
+                {
+                    Instance = this;
+                    gameObject.name = "FirstGearGames DDOL";
+                    DontDestroyOnLoad(gameObject);
+                }
             }
-            else
-            {
-                Instance = this;
-                gameObject.name = "FirstGearGames DDOL";
-                DontDestroyOnLoad(gameObject);
-            }
-        }
 
         /// <summary>
         /// Returns the current DDOL or creates one if not yet created.

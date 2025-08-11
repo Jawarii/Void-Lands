@@ -8,7 +8,7 @@ public class HomingArrowsSkill : SkillsScript
     public AnimationClip finisherAnim;
     public AnimationClip bowReleaseAnim;
     public GameObject _arrow;
-    public float adjustedSpeed = 0.4f;
+    public float adjustedSpeed;
     public override void ActivateSkill()
     {
         playerAttack.animTime = bowAnim.length * 5f / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;

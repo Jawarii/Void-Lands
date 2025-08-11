@@ -1,5 +1,9 @@
 using UnityEngine;
+using UnityEngine.UI;
+using TMPro; // Import TextMeshPro namespace
 using FirstGearGames.SmoothCameraShaker;
+using System.Collections;
+
 public class PlayerMovement : MonoBehaviour
 {
     public float speed = 1f;
@@ -13,7 +17,6 @@ public class PlayerMovement : MonoBehaviour
     public float dashCd = 2.0f;
     public float currentDashCd = 0.0f;
     public float dashDistance = 1.5f; // Adjust the dash distance here
-
 
     private Rigidbody2D rb;
     private Vector2 moveDirection;
@@ -29,11 +32,25 @@ public class PlayerMovement : MonoBehaviour
     public AudioClip dashClip_;
 
     public ShakeData myShake;
+
+    // UI references
+    private Image dashSlider;
+    private TextMeshProUGUI cooldownText; // Use TMP for the text
+    private GameObject dashSlot;
+
     private void Start()
     {
         speed = GetComponent<PlayerStats>().speed;
         rb = GetComponent<Rigidbody2D>();
         animator = GetComponent<Animator>();
+
+        // Find UI elements for cooldown display
+        dashSlot = GameObject.Find("DashSlot");
+        if (dashSlot != null)
+        {
+            dashSlider = dashSlot.transform.Find("Grayout").GetComponent<Image>();
+            cooldownText = dashSlot.transform.Find("CooldownText").GetComponent<TextMeshProUGUI>();
+        }
     }
 
     private void Update()
@@ -41,6 +58,13 @@ public class PlayerMovement : MonoBehaviour
         if (currentDashCd > 0)
         {
             currentDashCd -= Time.deltaTime;
+            UpdateCooldownUI();
+        }
+
+        if (currentDashCd <= 0 && !canDash)
+        {
+            canDash = true;
+            cooldownText.text = ""; // Clear the cooldown text
         }
 
         RotateObjectToMouse();
@@ -76,7 +100,9 @@ public class PlayerMovement : MonoBehaviour
             PlayDashClip();
             CalculateExpectedDashDuration();
             GetComponent<TrailRenderer>().enabled = true;
-            //CameraShakerHandler.Shake(myShake);
+
+            StartCoroutine(ScaleDashSlotEffect()); // Scale the DashSlot
+            UpdateCooldownUI();                   // Immediately update the cooldown UI
         }
 
         if (isDashAttack)
@@ -128,6 +154,7 @@ public class PlayerMovement : MonoBehaviour
             stepsSource_.PlayOneShot(stepsClip_);
         }
     }
+
     public void PlayDashClip()
     {
         if (dashSource_ != null)
@@ -143,6 +170,43 @@ public class PlayerMovement : MonoBehaviour
         float distance = Vector2.Distance(rb.position, rb.position + dashDirection * dashDistance);
         expectedDashDuration = Time.time + distance / (12f); // Adjust force multiplier as needed
     }
+
+    private void UpdateCooldownUI()
+    {
+        if (dashSlider != null)
+        {
+            dashSlider.fillAmount = currentDashCd / dashCd; // Update slider based on cooldown
+        }
+
+        if (cooldownText != null)
+        {
+            if (currentDashCd > 0)
+            {
+                cooldownText.text = currentDashCd.ToString("F1"); // Show cooldown with 1 decimal
+            }
+            else
+            {
+                cooldownText.text = ""; // Clear text when cooldown is over
+                dashSlider.fillAmount = 0.0f;
+            }
+        }
+    }
+
+    private IEnumerator ScaleDashSlotEffect()
+    {
+        if (dashSlot != null)
+        {
+            // Scale the DashSlot to 0.9
+            dashSlot.transform.localScale = new Vector3(0.9f, 0.9f, 1.0f);
+
+            // Wait for 0.1 seconds
+            yield return new WaitForSeconds(0.1f);
+
+            // Scale it back to 1.0
+            dashSlot.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+    }
+
     void RotateObjectToMouse()
     {
         Vector3 mouseScreenPosition = Input.mousePosition;
@@ -171,7 +235,5 @@ public class PlayerMovement : MonoBehaviour
             animator.SetFloat("Rotation", -1f);
             animator.SetFloat("Rotation2", 0f);
         }
-        //tra
-        //transform.rotation = Quaternion.Euler(new Vector3(0f, 0f, angle + 90f));
     }
 }

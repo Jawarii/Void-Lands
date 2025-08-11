@@ -9,11 +9,12 @@ public class VolleySkill : SkillsScript
     public AnimationClip bowReleaseAnim;
     public GameObject _arrow;
     public float adjustedSpeed = 0.1f;
+    public float arrowsAmmount = 5;
 
     public override void ActivateSkill()
     {
-        playerAttack.animTime = bowAnim.length * 9f / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
-        playerAttack.releaseTime = bowAnim.length * 9f / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
+        playerAttack.animTime = bowAnim.length * arrowsAmmount / playerAttack.player.GetComponent<PlayerStats>().atkSpd + bowReleaseAnim.length;
+        playerAttack.releaseTime = bowAnim.length * arrowsAmmount / playerAttack.player.GetComponent<PlayerStats>().atkSpd;
         playerAttack.player.GetComponent<PlayerMovement>().speed *= adjustedSpeed;
         playerAttack.animator.SetBool("isAttacking", true);
         playerAttack.animator.SetFloat("AtkSpeed", playerAttack.player.GetComponent<PlayerStats>().atkSpd);
@@ -53,7 +54,7 @@ public class VolleySkill : SkillsScript
         playerAttack.PlayArrowClip(0.38f);
 
         // Destroy the GameObject after the final arrow
-        if (arrowNumber == 9)
+        if (arrowNumber == arrowsAmmount)
             Destroy(gameObject);
     }
 

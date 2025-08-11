@@ -34,12 +34,14 @@ public class LoadSceneOnInput : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        // Check if the player presses the "T" key for default teleportation
         if (Input.GetKeyDown(KeyCode.T))
         {
             if (playerStats.transform.GetComponent<PlayerMovement>().isMoving == false)
             {
-                playerAttack = playerStats.transform.GetComponentInChildren <PlayerAttackArcher>();
+                // Scale the TeleportButton
+                StartCoroutine(ScaleTeleportButtonEffect());
+
+                playerAttack = playerStats.transform.GetComponentInChildren<PlayerAttackArcher>();
                 initialPosition = playerStats.transform.position;
                 initialHealth = playerStats.currentHp;
                 audioSource = playerStats.gameObject.GetComponent<AudioSource>();
@@ -49,7 +51,27 @@ public class LoadSceneOnInput : MonoBehaviour
             }
         }
     }
+    // Coroutine to handle the scaling effect of the TeleportButton
+    private IEnumerator ScaleTeleportButtonEffect()
+    {
+        // Find the TeleportButton GameObject
+        GameObject teleportButton = GameObject.Find("TeleportButton");
+        if (teleportButton != null)
+        {
+            // Scale the button down to 0.9f
+            teleportButton.transform.localScale = new Vector3(0.9f, 0.9f, 1.0f);
 
+            // Wait for 0.1 seconds
+            yield return new WaitForSeconds(0.1f);
+
+            // Scale the button back to its original size
+            teleportButton.transform.localScale = new Vector3(1.0f, 1.0f, 1.0f);
+        }
+        else
+        {
+            //Debug.LogWarning("TeleportButton not found in the scene.");
+        }
+    }
     // Public method to load a scene with a specified name (used by portals)
     public void LoadScene(string sceneName)
     {
@@ -107,7 +129,7 @@ public class LoadSceneOnInput : MonoBehaviour
             // Check if teleportation should be cancelled (HP loss, movement, or attack)
             if (playerStats.currentHp < initialHealth * 0.95f)
             {
-                Debug.Log("Teleportation cancelled: Player lost more than 5% HP.");
+                //Debug.Log("Teleportation cancelled: Player lost more than 5% HP.");
                 DisableCastingCanvas();
                 DisableTeleportEffect();
                 audioSource.Stop();
@@ -116,7 +138,7 @@ public class LoadSceneOnInput : MonoBehaviour
 
             if (playerStats.transform.GetComponent<PlayerMovement>().isMoving == true)
             {
-                Debug.Log("Teleportation cancelled: Player moved.");
+                //Debug.Log("Teleportation cancelled: Player moved.");
                 DisableCastingCanvas();
                 DisableTeleportEffect();
                 audioSource.Stop();
@@ -125,7 +147,7 @@ public class LoadSceneOnInput : MonoBehaviour
 
             if (playerAttack.isAttacking)
             {
-                Debug.Log("Teleportation cancelled: Player attacked.");
+                //Debug.Log("Teleportation cancelled: Player attacked.");
                 DisableCastingCanvas();
                 DisableTeleportEffect();
                 audioSource.Stop();
@@ -138,7 +160,18 @@ public class LoadSceneOnInput : MonoBehaviour
         }
 
         // Load the specified scene after the delay if no conditions were met
-        if (SceneManager.GetActiveScene().name == sceneName)
+        bool sceneIsLoaded = false;
+        for (int i = 0; i < SceneManager.sceneCount; i++)
+        {
+            Scene scene = SceneManager.GetSceneAt(i);
+            if (scene.name == sceneName)
+            {
+                sceneIsLoaded = true;
+                break;
+            }
+        }
+
+        if (sceneIsLoaded)
         {
             DisableCastingCanvas();
             DisableTeleportEffect();

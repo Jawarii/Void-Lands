@@ -62,6 +62,6 @@ public class SkillBarInfo : MonoBehaviour
     }
     public void PrintSkillNamesTest(List<SkillButtonInformation> skillButtonInfoList)
     {
-        skillButtonInfoList.ForEach(skillButton => { Debug.Log(skillButton.skillSo.skillName); });
+        skillButtonInfoList.ForEach(skillButton => { /*Debug.Log(skillButton.skillSo.skillName);*/ });
     }
 }

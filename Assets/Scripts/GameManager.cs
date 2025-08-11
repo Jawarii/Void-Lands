@@ -43,8 +43,13 @@ public class GameManager : MonoBehaviour
     // Called whenever a new scene is loaded
     private void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
+        if (scene.name == "BootstrapScene")
+            return;
         AssignReferences();
         LoadPlayerStats();
+        if (SaveDataWrapperLoaded())
+            SaveData.ApplyCheckpointDataList(SaveData.GetCachedCheckpointData());
+
     }
 
     public void AssignReferences()
@@ -56,7 +61,7 @@ public class GameManager : MonoBehaviour
 
         if (playerStats == null || inventoryController == null || equipmentSo == null || skillBarInfo == null)
         {
-            Debug.LogError("One or more references could not be assigned. Check if objects exist in the scene.");
+            //Debug.LogError("One or more references could not be assigned. Check if objects exist in the scene.");
         }
     }
 
@@ -77,7 +82,7 @@ public class GameManager : MonoBehaviour
     {
         if (playerStats == null || inventoryController == null || equipmentSo == null)
         {
-            Debug.LogError("One or more references are null: playerStats, inventoryController, or equipmentController");
+            //Debug.LogError("One or more references are null: playerStats, inventoryController, or equipmentController");
             return;
         }
 
@@ -95,21 +100,27 @@ public class GameManager : MonoBehaviour
         playerStats.currentExp = data.playerData.currentExp;
         playerStats.maxExp = data.playerData.maxExp;
 
-        Vector3 position = new Vector3(data.playerData.position[0], data.playerData.position[1], data.playerData.position[2]);
-        Vector3 position2 = GameObject.Find("RespawnLocations").transform.GetChild(0).transform.position;
-        if (position2 != null)
-        {
-            playerStats.transform.position = position2;
-        }
-        else
-        {
-            playerStats.transform.position = position;
-        }
-
         // Load Inventory
         inventoryController.goldAmount = data.goldAmount;
         inventoryController.LoadInventory(data.inventoryData);
         equipmentSo.LoadAllEquipment(data.equipmentData);
         skillBarInfo.AddSkills(data.skillNames);
+
+        Vector3 savedPosition = new Vector3(data.playerData.position[0], data.playerData.position[1], data.playerData.position[2]);
+
+        // Fallback to closest unlocked checkpoint if needed
+        SaveData.ApplyCheckpointDataList(data.checkpointDataPerScene);
+        Vector3 respawnPosition = RespawnManager.Instance.GetClosestUnlockedCheckPoint(savedPosition);
+        if (respawnPosition != Vector3.zero)
+        {
+            playerStats.transform.position = respawnPosition;
+        }
+        else
+        {
+            playerStats.transform.position = savedPosition;
+        }
+
+
     }
+
 }

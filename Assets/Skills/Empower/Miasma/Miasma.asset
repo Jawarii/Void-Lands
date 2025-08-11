@@ -13,10 +13,29 @@ MonoBehaviour:
   m_Name: Miasma
   m_EditorClassIdentifier: 
   skillName: Miasma
-  skillDescription: Imbue skills for 5 seconds with explosions
+  skillDescription: Empower your skills with explosive effects for 5 seconds, causing
+    additional area damage on impact.
   skillLevel: 6
   skillType: Empower
   skillIcon: {fileID: 21300000, guid: 2dd6af68224ae804d90a4b7cf626c386, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 16
+  coolDown: 24
+  baseDamage: 1
+  baseDuration: 1
+  baseRange: 1
+  baseArea: 1
+  currentDamage: 0
+  currentDuration: 0
+  currentRange: 0
+  currentArea: 0
+  currentCooldown: 0
+  hasStun: 0
+  stunDuration: 0
+  hasSlow: 0
+  slowPercentage: 0
+  hasBleed: 0
+  bleedDamage: 0
+  bleedDuration: 0
+  effectColor: {r: 1, g: 1, b: 1, a: 1}
+  currentProjectilePrefab: {fileID: 0}

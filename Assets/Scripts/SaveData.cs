@@ -7,6 +7,16 @@ using static SkillButtonInformation;
 public static class SaveData
 {
     private static readonly string SavePath = Application.persistentDataPath + "/playerDataSave1.savetest";
+    private static SaveDataWrapper cachedData;
+
+    [System.Serializable]
+    public class CheckpointData
+    {
+        public int indexInParent;
+        public bool isUnlockedByDefault;
+        public bool isInvisible;
+        public bool isUnlocked;
+    }
 
     public static void SavePlayerStats(PlayerStats playerStats, InventoryController inventoryController, EquipmentSoInformation equipmentSo, SkillBarInfo skillBarInfo)
     {
@@ -14,26 +24,51 @@ public static class SaveData
 
         using (var stream = new FileStream(SavePath, FileMode.Create))
         {
-            var data = new SaveDataWrapper
-            {
-                playerData = new PlayerData(playerStats),
-                inventoryData = CreateItemInfoDataList(inventoryController.inventory),
-                equipmentData = CreateEquipmentDataList(equipmentSo.equipmentInfo),
-                goldAmount = inventoryController.goldAmount,
-                skillNames = CreateSkillNameList(skillBarInfo.skillButtonInfoList)
-            };
+            string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+            List<CheckpointData> currentSceneCheckpoints = CreateCheckpointDataList();
 
-            formatter.Serialize(stream, data);
+            if (cachedData != null)
+            {
+                cachedData.playerData = new PlayerData(playerStats);
+                cachedData.inventoryData = CreateItemInfoDataList(inventoryController.inventory);
+                cachedData.equipmentData = CreateEquipmentDataList(equipmentSo.equipmentInfo);
+                cachedData.goldAmount = inventoryController.goldAmount;
+                cachedData.skillNames = CreateSkillNameList(skillBarInfo.skillButtonInfoList);
+                cachedData.sceneName = currentScene;
+
+                if (cachedData.checkpointDataPerScene == null)
+                    cachedData.checkpointDataPerScene = new Dictionary<string, List<CheckpointData>>();
+
+                cachedData.checkpointDataPerScene[currentScene] = currentSceneCheckpoints;
+
+                formatter.Serialize(stream, cachedData);
+            }
+            else
+            {
+                var newData = new SaveDataWrapper
+                {
+                    playerData = new PlayerData(playerStats),
+                    inventoryData = CreateItemInfoDataList(inventoryController.inventory),
+                    equipmentData = CreateEquipmentDataList(equipmentSo.equipmentInfo),
+                    goldAmount = inventoryController.goldAmount,
+                    skillNames = CreateSkillNameList(skillBarInfo.skillButtonInfoList),
+                    sceneName = currentScene,
+                    checkpointDataPerScene = new Dictionary<string, List<CheckpointData>>
+                    {
+                        { currentScene, currentSceneCheckpoints }
+                    }
+                };
+
+                cachedData = newData;
+                formatter.Serialize(stream, newData);
+            }
         }
     }
 
     public static SaveDataWrapper LoadPlayerStats()
     {
         if (!File.Exists(SavePath))
-        {
-            Debug.Log("Save file not found");
             return null;
-        }
 
         var formatter = new BinaryFormatter();
 
@@ -42,16 +77,60 @@ public static class SaveData
             var data = formatter.Deserialize(stream) as SaveDataWrapper;
 
             if (data == null)
-            {
-                Debug.LogError("Failed to deserialize save data");
                 return null;
-            }
 
-            // Assuming PlayerStats is a singleton or accessible via a global reference
+            cachedData = data;
+
             var playerStats = GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>();
             LoadBasicStats(playerStats, data.playerData);
 
             return data;
+        }
+    }
+
+    private static List<CheckpointData> CreateCheckpointDataList()
+    {
+        var list = new List<CheckpointData>();
+        GameObject parent = GameObject.Find("RespawnLocations");
+        if (parent == null) return list;
+
+        for (int i = 0; i < parent.transform.childCount; i++)
+        {
+            var cp = parent.transform.GetChild(i).GetComponent<CheckPoint>();
+            if (cp == null) continue;
+
+            list.Add(new CheckpointData
+            {
+                indexInParent = i,
+                isUnlockedByDefault = cp.isUnlockedByDefault,
+                isInvisible = cp.isInvisible,
+                isUnlocked = cp.IsUnlocked
+            });
+        }
+
+        return list;
+    }
+
+    public static void ApplyCheckpointDataList(Dictionary<string, List<CheckpointData>> dataPerScene)
+    {
+        string sceneName = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
+        if (!dataPerScene.ContainsKey(sceneName)) return;
+
+        var dataList = dataPerScene[sceneName];
+        GameObject parent = GameObject.Find("RespawnLocations");
+        if (parent == null) return;
+
+        foreach (var data in dataList)
+        {
+            if (data.indexInParent >= parent.transform.childCount) continue;
+
+            var cp = parent.transform.GetChild(data.indexInParent).GetComponent<CheckPoint>();
+            if (cp == null) continue;
+
+            cp.isUnlockedByDefault = data.isUnlockedByDefault;
+            cp.isInvisible = data.isInvisible;
+            if (data.isUnlocked)
+                cp.Unlock();
         }
     }
 
@@ -120,19 +199,20 @@ public static class SaveData
 
         return equipDataList;
     }
+
     private static List<string> CreateSkillNameList(IEnumerable<SkillButtonInformation> skillButInfo)
     {
         var list = new List<string>();
 
         foreach (var skill in skillButInfo)
         {
-            if (skill == null || skill.skillSo == null)
-            { continue; }
-            string skillName = skill.skillSo.skillName;
-            list.Add(skillName);
+            if (skill == null || skill.skillSo == null) continue;
+            list.Add(skill.skillSo.skillName);
         }
+
         return list;
     }
+
     private static void LoadBasicStats(PlayerStats playerStats, PlayerData playerData)
     {
         playerStats.lvl = playerData.level;
@@ -148,22 +228,13 @@ public static class SaveData
     public static Sprite ByteArrayToSprite(byte[] byteArray)
     {
         Texture2D texture = new Texture2D(2, 2);
-        bool isLoaded = texture.LoadImage(byteArray);
+        if (!texture.LoadImage(byteArray)) return null;
 
-        if (!isLoaded)
-        {
-            Debug.LogError("Failed to load texture from byte array.");
-            return null;
-        }
-
-        // Set texture filter mode to Point (no filtering)
         texture.filterMode = FilterMode.Point;
         texture.Apply();
 
-        // Create the sprite from the texture
         return Sprite.Create(texture, new Rect(0, 0, texture.width, texture.height), new Vector2(0.5f, 0.5f));
     }
-
 
     [System.Serializable]
     public class SaveDataWrapper
@@ -173,5 +244,18 @@ public static class SaveData
         public List<ItemInfoData> equipmentData;
         public float goldAmount;
         public List<string> skillNames;
+        public Dictionary<string, List<CheckpointData>> checkpointDataPerScene;
+        public string sceneName;
     }
+
+    public static bool SaveDataWrapperLoaded()
+    {
+        return cachedData != null && cachedData.checkpointDataPerScene != null;
+    }
+
+    public static Dictionary<string, List<CheckpointData>> GetCachedCheckpointData()
+    {
+        return cachedData?.checkpointDataPerScene;
+    }
+
 }

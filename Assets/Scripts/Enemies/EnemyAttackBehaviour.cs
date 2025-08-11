@@ -13,14 +13,14 @@ public class EnemyAttackBehaviour : MonoBehaviour
             PlayerStats playerStats = other.GetComponent<PlayerStats>();
             if (playerStats == null)
             {
-                Debug.LogError("PlayerStats component not found on the player.");
+                //Debug.LogError("PlayerStats component not found on the player.");
                 return;
             }
 
             EnemyStats enemyStats = GetComponentInParent<EnemyStats>();
             if (enemyStats == null)
             {
-                Debug.LogError("EnemyStats component not found on the enemy.");
+                //Debug.LogError("EnemyStats component not found on the enemy.");
                 return;
             }
 

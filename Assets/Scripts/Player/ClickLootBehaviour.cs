@@ -12,6 +12,8 @@ public class ClickLootBehaviour : MonoBehaviour
     public int amount = 0;
     EnchantmentStoneInfo enchantmentStoneInfo;
     public int direction = 1;
+
+    private float persistDuration = 300f;
     void Start()
     {
         item = transform.gameObject;
@@ -32,6 +34,8 @@ public class ClickLootBehaviour : MonoBehaviour
         {
             textTmp.text += " (" + amount + ")";
         }
+
+        Destroy(gameObject, persistDuration);
     }
 
     void Update()
@@ -42,13 +46,17 @@ public class ClickLootBehaviour : MonoBehaviour
 
         }
     }
-
     public void LootItem()
     {
         ItemInfo itemInfo = item.GetComponent<ItemInfo>();
         InventoryController inventoryController = inventory.GetComponent<InventoryController>();
 
-        if (!inventoryController.IsInventoryFull()) // Check if inventory is full
+        if (itemInfo.itemType == "UpgradeMaterial")
+        {
+            inventoryController.AddItem(itemInfo); // Add the item if inventory is not full
+            Destroy(item); // Destroy the looted item
+        }
+        else if (!inventoryController.IsInventoryFull()) // Check if inventory is full
         {
             inventoryController.AddItem(itemInfo); // Add the item if inventory is not full
             Destroy(item); // Destroy the looted item

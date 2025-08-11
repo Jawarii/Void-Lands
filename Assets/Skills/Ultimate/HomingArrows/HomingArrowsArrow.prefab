@@ -168,8 +168,8 @@ MonoBehaviour:
   playerStats: {fileID: 0}
   basicAtkDmgMulti: 1.6
   knockbackForce: 0
-  maxDistance: 10
-  homingRadius: 10
+  maxDistance: 7
+  homingRadius: 2
   maxHits: 5
   turnSpeed: 300
   isImbued: 0

@@ -6,9 +6,13 @@ using UnityEngine.UI;
 
 public class DraggableSkillBehaviour : MonoBehaviour, IBeginDragHandler, IDragHandler, IEndDragHandler
 {
-    Transform draggedSkill;
+    public static bool IsDragging; // Flag to indicate if a skill is being dragged
+
+    private Transform draggedSkill;
+
     public void OnBeginDrag(PointerEventData eventData)
     {
+        IsDragging = true; // Set flag to true when dragging starts
         draggedSkill = Instantiate(transform, transform.parent.parent, true);
         draggedSkill.localScale *= 0.5f;
     }
@@ -43,6 +47,7 @@ public class DraggableSkillBehaviour : MonoBehaviour, IBeginDragHandler, IDragHa
                 }
             }
         }
+        IsDragging = false; // Reset flag when dragging ends
         Destroy(draggedSkill.gameObject);
     }
 }

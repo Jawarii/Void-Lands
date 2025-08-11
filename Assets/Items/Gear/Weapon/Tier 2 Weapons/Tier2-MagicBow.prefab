@@ -104,6 +104,7 @@ MonoBehaviour:
   myButton: {fileID: 0}
   textTmp: {fileID: 0}
   amount: 0
+  direction: 1
 --- !u!114 &-3728177023601847190
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -125,6 +126,7 @@ MonoBehaviour:
   itemQuality: Magic
   textColor: {r: 1, g: 1, b: 1, a: 1}
   upgradeLevel: 0
+  itemUISprite: {fileID: 21300000, guid: c33a675267e398e4db05a0a7f918d7bb, type: 3}
   weaponMainStats:
     baseAttack: 0
     attack: 22

@@ -72,7 +72,7 @@ public class PenetratingArrowBehaviour : MonoBehaviour
             {
                 bossTransform = other.transform;
             }
-            SpawnAdditionalArrows(enemyStats.isBoss);
+            //SpawnAdditionalArrows(enemyStats.isBoss);
 
         }
         else if (other.gameObject.CompareTag("Obstacle"))

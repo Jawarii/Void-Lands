@@ -51,10 +51,21 @@ public class InteractButtonAnimator : MonoBehaviour
     {
         if (interactableGo == null)
             return;
+
+        // Check for TeleportBehaviour
         TeleportBehaviour teleportBehaviour = interactableGo.GetComponent<TeleportBehaviour>();
-        if (interactableGo && teleportBehaviour)
+        if (teleportBehaviour != null)
         {
             teleportBehaviour.InvokeTeleportBehaviour();
+            return;
+        }
+
+        // Check for InteractableNPCBehaviour
+        InteractableNPCBehaviour npcBehaviour = interactableGo.GetComponent<InteractableNPCBehaviour>();
+        if (npcBehaviour != null)
+        {
+            npcBehaviour.InvokeNPCInteraction(); // or whatever method handles the dialogue
+            return;
         }
     }
 }

@@ -9,7 +9,7 @@ public class VolleyArrowBehaviour : MonoBehaviour
     public GameObject player;
     public PlayerStats playerStats;
     public float basicAtkDmgMulti = 0.5f;
-    public float knockbackForce = 10f; // Adjust the force of knockback as needed
+    public float knockbackForce = 3f; // Adjust the force of knockback as needed
     public float maxDistance = 8f; // Maximum distance the arrow can travel
     public bool isImbued = false;
     private Vector2 startPosition;
@@ -23,7 +23,7 @@ public class VolleyArrowBehaviour : MonoBehaviour
         attackArcher = _bow.GetComponent<PlayerAttackArcher>();
         player = GameObject.FindWithTag("Player");
         playerStats = player.GetComponent<PlayerStats>();
-        knockbackForce = 10f;
+        knockbackForce = 3f;
         startPosition = transform.position;
         if (attackArcher.hasImbueBuff)
             isImbued = true;
@@ -72,8 +72,8 @@ public class VolleyArrowBehaviour : MonoBehaviour
             Vector2 knockbackDirection = new Vector2(Mathf.Cos(angle * Mathf.Deg2Rad), Mathf.Sin(angle * Mathf.Deg2Rad));
 
             // Apply knockback to the enemy
-            enemyStats.ApplyKnockback(knockbackDirection, 2f);
-            enemyStats.ApplyCrowdControl("Daze", 1f);
+            enemyStats.ApplyKnockback(knockbackDirection, knockbackForce);
+            enemyStats.ApplyCrowdControl("Daze", 1.5f);
             // Optionally destroy the arrow upon hitting an enemy
             Destroy(gameObject);
         }

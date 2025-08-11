@@ -15,6 +15,7 @@ GameObject:
   - component: {fileID: 6220610857349729344}
   - component: {fileID: 6550342993054756577}
   - component: {fileID: 2931160237693099791}
+  - component: {fileID: 464711313427014935}
   m_Layer: 0
   m_Name: ReaperBossProjectile
   m_TagString: Untagged
@@ -32,7 +33,7 @@ Transform:
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
   m_LocalPosition: {x: -0.519, y: 0, z: 0}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalScale: {x: 2, y: 2, z: 2}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
@@ -57,7 +58,7 @@ SpriteRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 9dfc825aed78fcd4ba02077103263b40, type: 2}
+  - {fileID: 2100000, guid: a97c105638bdf8b4a8650670310a4cd3, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -78,8 +79,8 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 10
-  m_Sprite: {fileID: -226560949, guid: 89b5c858fb22c8446b5a812dccf92f77, type: 3}
-  m_Color: {r: 0.14117648, g: 0.4392157, b: 0.12941177, a: 1}
+  m_Sprite: {fileID: 4829263394173993237, guid: 17d4906971d6bda4e933ec3e391815ea, type: 3}
+  m_Color: {r: 0.10930057, g: 0.31132078, b: 0.1013261, a: 1}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0
@@ -99,7 +100,7 @@ Animator:
   m_GameObject: {fileID: 864100243802575142}
   m_Enabled: 1
   m_Avatar: {fileID: 0}
-  m_Controller: {fileID: 9100000, guid: ecbb29dfd1f104549bf4079d518be1ba, type: 2}
+  m_Controller: {fileID: 9100000, guid: a61a05a325d7e4b41a09169fbb5cd730, type: 2}
   m_CullingMode: 0
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -123,7 +124,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   speed: 4
-  basicAtkDmgMulti: 1.2
+  basicAtkDmgMulti: 0.6
   lifeTime: 3
   enemyStats: {fileID: 0}
 --- !u!60 &6220610857349729344
@@ -162,7 +163,7 @@ PolygonCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.64, y: 0.64}
+    oldSize: {x: 1, y: 1}
     newSize: {x: 0.64, y: 0.64}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -170,17 +171,22 @@ PolygonCollider2D:
   m_AutoTiling: 0
   m_Points:
     m_Paths:
-    - - {x: 0.24636206, y: 0.113352515}
-      - {x: 0.11990486, y: 0.09228592}
-      - {x: -0.03815221, y: 0.06024787}
-      - {x: -0.2829144, y: 0.018838258}
-      - {x: -0.2989334, y: 0.015390582}
-      - {x: -0.3004381, y: -0.01034301}
-      - {x: 0.02344764, y: -0.0022859257}
-      - {x: 0.12291442, y: -0.009809718}
-      - {x: 0.22247621, y: -0.0033525252}
-      - {x: 0.25078115, y: 0.050628446}
-      - {x: 0.25078118, y: 0.10043815}
+    - - {x: 0.04679416, y: 0.06432074}
+      - {x: 0.044206694, y: 0.04755519}
+      - {x: -0.079442136, y: 0.049065184}
+      - {x: -0.079045475, y: 0.030881144}
+      - {x: -0.15699932, y: 0.03259471}
+      - {x: -0.15764385, y: 0.012882559}
+      - {x: -0.09426004, y: 0.014605844}
+      - {x: -0.094062954, y: 0.0010222401}
+      - {x: 0.02946908, y: -0.0014257245}
+      - {x: 0.029686466, y: -0.015021364}
+      - {x: 0.13980749, y: -0.016609073}
+      - {x: 0.14269917, y: -0.0012076497}
+      - {x: 0.15677534, y: -0.0013941629}
+      - {x: 0.15710053, y: 0.04653945}
+      - {x: 0.14325532, y: 0.049768228}
+      - {x: 0.14325537, y: 0.06344927}
   m_UseDelaunayMesh: 0
 --- !u!114 &6550342993054756577
 MonoBehaviour:
@@ -209,15 +215,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_ComponentVersion: 1
-  m_LightType: 3
+  m_LightType: 2
   m_BlendStyleIndex: 0
   m_FalloffIntensity: 0.5
   m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_Intensity: 0.1
+  m_Intensity: 0.5
   m_LightVolumeIntensity: 1
   m_LightVolumeIntensityEnabled: 0
   m_ApplyToSortingLayers: 25944a83000000000f21844d73de4776993d429a4941e422
-  m_LightCookieSprite: {fileID: 0}
+  m_LightCookieSprite: {fileID: 4829263394173993237, guid: 17d4906971d6bda4e933ec3e391815ea, type: 3}
   m_DeprecatedPointLightCookieSprite: {fileID: 0}
   m_LightOrder: 0
   m_AlphaBlendOnOverlap: 0
@@ -230,12 +236,12 @@ MonoBehaviour:
   m_ShadowVolumeIntensityEnabled: 0
   m_ShadowVolumeIntensity: 0.75
   m_LocalBounds:
-    m_Center: {x: 0, y: -0.00000011920929, z: 0}
-    m_Extent: {x: 0.9985302, y: 0.99853027, z: 0}
+    m_Center: {x: 0, y: 0.0234375, z: 0}
+    m_Extent: {x: 0.1875, y: 0.0703125, z: 0}
   m_PointLightInnerAngle: 360
   m_PointLightOuterAngle: 360
   m_PointLightInnerRadius: 0
-  m_PointLightOuterRadius: 1
+  m_PointLightOuterRadius: 0.7
   m_ShapeLightParametricSides: 5
   m_ShapeLightParametricAngleOffset: 0
   m_ShapeLightParametricRadius: 1
@@ -246,3 +252,99 @@ MonoBehaviour:
   - {x: 0.5, y: -0.5, z: 0}
   - {x: 0.5, y: 0.5, z: 0}
   - {x: -0.5, y: 0.5, z: 0}
+--- !u!82 &464711313427014935
+AudioSource:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 864100243802575142}
+  m_Enabled: 1
+  serializedVersion: 4
+  OutputAudioMixerGroup: {fileID: 0}
+  m_audioClip: {fileID: 8300000, guid: 1449136fb3eb5994897ffc4ab9f47de4, type: 3}
+  m_PlayOnAwake: 1
+  m_Volume: 0.8
+  m_Pitch: 1
+  Loop: 1
+  Mute: 0
+  Spatialize: 0
+  SpatializePostEffects: 0
+  Priority: 128
+  DopplerLevel: 1
+  MinDistance: 0.5
+  MaxDistance: 10
+  Pan2D: 0
+  rolloffMode: 0
+  BypassEffects: 0
+  BypassListenerEffects: 0
+  BypassReverbZones: 0
+  rolloffCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  panLevelCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  spreadCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  reverbZoneMixCustomCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4

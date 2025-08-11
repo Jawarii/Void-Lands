@@ -11,11 +11,16 @@ public class ProfileController : MonoBehaviour
 
     public AudioSource audioSource;
     public AudioClip profileOpenClip;
-
+    public AudioClip profileCloseClip;
+    private void Start()
+    {
+        audioSource = GameObject.Find("MenusSoundSource").GetComponent<AudioSource>();
+    }
     void Update()
     {
-        if (Input.GetKeyDown(KeyCode.Escape))
+        if (Input.GetKeyDown(KeyCode.Escape) && canvas.gameObject.GetComponent<Canvas>().enabled == true)
         {
+            audioSource.PlayOneShot(profileCloseClip);
             canvas.gameObject.GetComponent<Canvas>().enabled = false;
         }
 
@@ -23,13 +28,14 @@ public class ProfileController : MonoBehaviour
         {
             if (canvas.gameObject.GetComponent<Canvas>().enabled == true)
             {
+                audioSource.PlayOneShot(profileCloseClip);
                 canvas.gameObject.GetComponent<Canvas>().enabled = false;
 
             }
             else
             {
-                canvas.gameObject.GetComponent<Canvas>().enabled = true;
                 audioSource.PlayOneShot(profileOpenClip);
+                canvas.gameObject.GetComponent<Canvas>().enabled = true;
             }
         }
     }

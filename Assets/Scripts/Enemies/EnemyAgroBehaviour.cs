@@ -16,6 +16,8 @@ public class EnemyAgroBehaviour : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Player"))
         {
+            if (other.gameObject.GetComponent<PlayerStats>().isDead)
+                return;
             // Agro the current enemy.
             EnemyMovementController enemyMovement = enemy.GetComponent<EnemyMovementController>();
             if (enemyMovement == null)

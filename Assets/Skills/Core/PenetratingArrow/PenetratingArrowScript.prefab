@@ -51,7 +51,7 @@ MonoBehaviour:
   _arrow: {fileID: 3717403527142333829, guid: a94e91d15d88bcc4eb56ca0afc304a40, type: 3}
   coolDown: 5
   cdElapsedTime: 0
-  adjustedSpeed: 0
+  adjustedSpeed: 0.55
 --- !u!95 &-4058884340705071060
 Animator:
   serializedVersion: 5

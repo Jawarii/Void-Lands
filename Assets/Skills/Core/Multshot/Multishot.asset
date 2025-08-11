@@ -13,10 +13,29 @@ MonoBehaviour:
   m_Name: Multishot
   m_EditorClassIdentifier: 
   skillName: Multishot
-  skillDescription: Shoots 5 Arrows in a cone in front the player.
+  skillDescription: Fires 3 arrows in a broad cone ahead of you, piercing through
+    enemies and striking multiple targets.
   skillLevel: 1
   skillType: Core
   skillIcon: {fileID: 21300000, guid: 135137ecfb4b57a45a5209d7452f1f79, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
   coolDown: 0
+  baseDamage: 1
+  baseDuration: 1
+  baseRange: 1
+  baseArea: 1
+  currentDamage: 0
+  currentDuration: 0
+  currentRange: 0
+  currentArea: 0
+  currentCooldown: 0
+  hasStun: 0
+  stunDuration: 0
+  hasSlow: 0
+  slowPercentage: 0
+  hasBleed: 0
+  bleedDamage: 0
+  bleedDuration: 0
+  effectColor: {r: 1, g: 1, b: 1, a: 1}
+  currentProjectilePrefab: {fileID: 0}

@@ -31,7 +31,7 @@ public class ButtonInfo : MonoBehaviour
         }
         else
         {
-            Debug.LogWarning("No numbers found in the GameObject name.");
+            //Debug.LogWarning("No numbers found in the GameObject name.");
             slotId = 70;  // Set a default value if no numbers were found
         }
 

@@ -13,11 +13,28 @@ MonoBehaviour:
   m_Name: Frenzy
   m_EditorClassIdentifier: 
   skillName: Frenzy
-  skillDescription: Increases Damage, Attack Speed & Movement Speed by 50% Each for
-    6 Seconds.
+  skillDescription: Boosts Damage and Attack Speed by 30% each for 5 seconds.
   skillLevel: 6
   skillType: Empower
   skillIcon: {fileID: 21300000, guid: 57592ecb8dd807c45aed2d44c4fdebcc, type: 3}
   skillScript: {fileID: 0}
   _animator: {fileID: 0}
-  coolDown: 16
+  coolDown: 24
+  baseDamage: 1
+  baseDuration: 1
+  baseRange: 1
+  baseArea: 1
+  currentDamage: 0
+  currentDuration: 0
+  currentRange: 0
+  currentArea: 0
+  currentCooldown: 0
+  hasStun: 0
+  stunDuration: 0
+  hasSlow: 0
+  slowPercentage: 0
+  hasBleed: 0
+  bleedDamage: 0
+  bleedDuration: 0
+  effectColor: {r: 1, g: 1, b: 1, a: 1}
+  currentProjectilePrefab: {fileID: 0}

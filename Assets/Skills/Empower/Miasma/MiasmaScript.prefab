@@ -45,9 +45,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerAttack: {fileID: 0}
-  coolDown: 18
+  coolDown: 24
   cdElapsedTime: 0
-  duration: 6
+  duration: 5
   _bow: {fileID: 0}
   audioSource: {fileID: 0}
   audioClip: {fileID: 8300000, guid: 20cb9da9b1e674c2dadbeff749c8fc14, type: 3}
