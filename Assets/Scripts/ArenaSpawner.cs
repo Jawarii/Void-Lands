@@ -8,7 +8,6 @@ public class ArenaSpawner : MonoBehaviour
     public int interval = 15;
     public int waves = 11;
 
-    // Start is called before the first frame update
     void Start()
     {
         StartCoroutine(SpawnWaves());
@@ -19,14 +18,14 @@ public class ArenaSpawner : MonoBehaviour
         yield return new WaitForSeconds(0.75f);
         for (int i = 1; i <= waves; i++)
         {
-            StartCoroutine(SpawnMonsters(i));
+            StartCoroutine(SpawnMonsters());
             yield return new WaitForSeconds(interval);
         }
     }
 
-    IEnumerator SpawnMonsters(int wave)
+    IEnumerator SpawnMonsters()
     {
-        int monsterCount = wave <= (waves / 2) ? 2 : 3; // Spawn 2 or 3 monsters based on wave number
+        int monsterCount = 1; // Always spawn exactly 1 monster
 
         for (int j = 0; j < monsterCount; j++)
         {
@@ -34,9 +33,10 @@ public class ArenaSpawner : MonoBehaviour
             Vector3 spawnPosition = transform.position + new Vector3(Random.Range(-1f, 1f), 0, Random.Range(-1f, 1f));
             Instantiate(prefabToSpawn, spawnPosition, Quaternion.identity);
 
-            yield return new WaitForSeconds(0.2f); // Optional: delay between spawns
+            yield return new WaitForSeconds(0.2f); // Small delay just in case you ever change monsterCount
         }
     }
+
     private void Update()
     {
         if (GameObject.FindGameObjectWithTag("Player").GetComponent<PlayerStats>().isDead)

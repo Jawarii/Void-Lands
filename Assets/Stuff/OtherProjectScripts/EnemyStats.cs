@@ -5,7 +5,6 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using static Unity.VisualScripting.Member;
 
 public class EnemyStats : MonoBehaviour
 {
@@ -147,7 +146,7 @@ public class EnemyStats : MonoBehaviour
         maxHp = maxHp / 1.5f;
         if (isElite)
         {
-            maxHp *= 8;
+            maxHp *= 6;
         }
         hp = maxHp;
         prevHp = hp;
@@ -158,11 +157,11 @@ public class EnemyStats : MonoBehaviour
         if (isElite)
         {
             transform.localScale *= 1.35f;
-            attack *= 1.4f;
+            attack *= 1.3f;
         }
         // Other properties
         baseColor = gameObject.GetComponent<SpriteRenderer>().color;
-        _exp = isBoss ? enemyLvl * 360 : isElite ? enemyLvl * 60 : enemyLvl * 10;
+        _exp = isBoss ? enemyLvl * 360 : isElite ? enemyLvl * 60 : enemyLvl * 12;
         originalPos = transform.position;
         isBoss = gameObject.GetComponent<BossMovementController>();
         dropsSource = GameObject.Find("DropAudioSource").GetComponent<AudioSource>();
@@ -439,10 +438,21 @@ public class EnemyStats : MonoBehaviour
             {
                 goldAmount *= 24;
             }
+
             float baseRolls = lootAmountMod;
             float randomOffset = Random.Range(-0.0f, 0.0f); // Slight upward skew
             float totalRolls = baseRolls + randomOffset;
             int lootAttempts = Mathf.Clamp(Mathf.RoundToInt(totalRolls), 1, 10);
+
+            //Cancel out previous 4 lines because they dont work currently
+            if (isBoss)
+            {
+                lootAttempts = 5;
+            }
+            else
+            {
+                lootAttempts = 1;
+            }
 
             for (int i = 0; i < lootAttempts; i++)
             {
@@ -464,15 +474,15 @@ public class EnemyStats : MonoBehaviour
             int adjustedExp;
             if (levelDiff == 1)
             {
-                adjustedExp = (int)(_exp * 0.75f);
+                adjustedExp = (int)(_exp * 0.9f);
             }
             else if (levelDiff == 2)
             {
-                adjustedExp = (int)(_exp * 0.1f);
+                adjustedExp = (int)(_exp * 0.2f);
             }
             else if (levelDiff == 3)
             {
-                adjustedExp = (int)(_exp * 0.03f);
+                adjustedExp = (int)(_exp * 0.01f);
             }
             else if (levelDiff > 3)
             {
@@ -526,7 +536,7 @@ public class EnemyStats : MonoBehaviour
 
     private void DropGold()
     {
-        if (Random.value <= (0.1f * lootChanceMod) && !isBoss && !isElite)
+        if (Random.value <= (0.4f * lootChanceMod) && !isBoss && !isElite) // 40% chance to drop gold upon loot attempt (overall 10% chance)
         {
             int goldDropIndex = goldAmount < 30 ? 0 : goldAmount < 90 ? 1 : 2;
             Vector3 dropPosition = RandomDropPosition();
@@ -572,11 +582,11 @@ public class EnemyStats : MonoBehaviour
 
     private void DropGear()
     {
-        if (Random.value <= 0.04f * lootChanceMod && isNormal && !isArenaMob) // 4% chance to drop gear for World Normal Mobs
+        if (Random.value <= 0.1f * lootChanceMod && isNormal && !isArenaMob) // 10% chance to drop gear for World Normal Mobs, upon loot attempt
         {
             DropGearItem(gearItems);
         }
-        else if (Random.value <= 0.005f * lootChanceMod && isArenaMob) // 0.5% chance to drop gear for Arena Normal & Elite mobs.
+        else if (Random.value <= 0.02f * lootChanceMod && isArenaMob) // 2% chance to drop gear for Arena Normal & Elite mobs. upon loot attempt
         {
             DropGearItem(gearItems);
         }
@@ -587,11 +597,11 @@ public class EnemyStats : MonoBehaviour
     }
     private void DropUpgrades()
     {
-        if (Random.value <= 0.04f * lootChanceMod && isNormal) // 0.5% chance to drop upgrades from World Normal Mobs & Elites
+        if (Random.value <= 0.02f * lootChanceMod && isNormal) // 2% chance to drop upgrades from World Normal Mobs & Elites upon loot attempt
         {
             DropUpgradeItem(upgradeItems);
         }
-        else if (Random.value <= 0.04f * lootChanceMod && isNormal && isArenaMob) // 4% chance to drop upgrades from Arena Normal Mobs
+        else if (Random.value <= 0.2f * lootChanceMod && isNormal && isArenaMob) // 20% chance to drop upgrades from Arena Normal Mobs upon loot attempt
         {
             DropUpgradeItem(upgradeItems);
         }
@@ -611,15 +621,16 @@ public class EnemyStats : MonoBehaviour
         float legendaryChance = 0.01f + (0.19f * (currentTierLevel - 1) / 9); // From 1% to 20%
         float rareChance = 0.04f + (0.36f * (currentTierLevel - 1) / 9);      // From 4% to 40%
         float magicChance = 0.2f + (0.38f * (currentTierLevel - 1) / 9);      // From 20% to 40%
-        if (enemyLvl > 30)
-        {
-            legendaryChance = 0.2f;
-            rareChance = 0.35f;
-            magicChance = 0.45f;
-        }
-        legendaryChance *= lootRarityMod;
-        rareChance *= lootRarityMod;
-        magicChance = 1f - (rareChance + legendaryChance);
+
+        //if (enemyLvl > 30)
+        //{
+        //    legendaryChance = 0.2f;
+        //    rareChance = 0.35f;
+        //    magicChance = 0.45f;
+        //}
+        //legendaryChance *= lootRarityMod;
+        //rareChance *= lootRarityMod;
+        //magicChance = 1f - (rareChance + legendaryChance);
 
         string rarity;
         float roll;
@@ -629,19 +640,6 @@ public class EnemyStats : MonoBehaviour
                         roll <= (legendaryChance + rareChance) ? "Rare" :
                         roll <= (legendaryChance + rareChance + magicChance) ? "Magic" : "Normal";
         DropItemBasedOnRarity(items, rarity);
-
-        // If the enemy is a boss, roll 3 additional times with a 35% chance each for extra drops
-        if (isBoss)
-        {
-            rarity = "Legendary";
-            for (int i = 0; i < 3; i++)
-            {
-                if (Random.value <= 0.35f) // 35% chance per roll
-                {
-                    DropItemBasedOnRarity(items, rarity);
-                }
-            }
-        }
     }
     private void PerformLootAttempt()
     {

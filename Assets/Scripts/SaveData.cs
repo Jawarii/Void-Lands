@@ -2,7 +2,6 @@ using System.Collections.Generic;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using UnityEngine;
-using static SkillButtonInformation;
 
 public static class SaveData
 {
@@ -17,6 +16,15 @@ public static class SaveData
         public bool isInvisible;
         public bool isUnlocked;
     }
+    [System.Serializable]
+    public class ActiveQuestSave
+    {
+        public int index;              // element index in Active Quests
+        public string questId;         // from questData (e.g., questName)
+        public int currentProgress;
+        public bool isComplete;
+        public bool isRewarded;
+    }
 
     public static void SavePlayerStats(PlayerStats playerStats, InventoryController inventoryController, EquipmentSoInformation equipmentSo, SkillBarInfo skillBarInfo)
     {
@@ -26,6 +34,7 @@ public static class SaveData
         {
             string currentScene = UnityEngine.SceneManagement.SceneManager.GetActiveScene().name;
             List<CheckpointData> currentSceneCheckpoints = CreateCheckpointDataList();
+            List<ActiveQuestSave> currentActiveQuests = CreateActiveQuestSaves(QuestManager.Instance);
 
             if (cachedData != null)
             {
@@ -35,6 +44,7 @@ public static class SaveData
                 cachedData.goldAmount = inventoryController.goldAmount;
                 cachedData.skillNames = CreateSkillNameList(skillBarInfo.skillButtonInfoList);
                 cachedData.sceneName = currentScene;
+                cachedData.activeQuests = currentActiveQuests;
 
                 if (cachedData.checkpointDataPerScene == null)
                     cachedData.checkpointDataPerScene = new Dictionary<string, List<CheckpointData>>();
@@ -53,10 +63,11 @@ public static class SaveData
                     goldAmount = inventoryController.goldAmount,
                     skillNames = CreateSkillNameList(skillBarInfo.skillButtonInfoList),
                     sceneName = currentScene,
+                    activeQuests = currentActiveQuests,
                     checkpointDataPerScene = new Dictionary<string, List<CheckpointData>>
-                    {
-                        { currentScene, currentSceneCheckpoints }
-                    }
+                {
+                    { currentScene, currentSceneCheckpoints }
+                }
                 };
 
                 cachedData = newData;
@@ -246,6 +257,7 @@ public static class SaveData
         public List<string> skillNames;
         public Dictionary<string, List<CheckpointData>> checkpointDataPerScene;
         public string sceneName;
+        public List<ActiveQuestSave> activeQuests;
     }
 
     public static bool SaveDataWrapperLoaded()
@@ -256,6 +268,61 @@ public static class SaveData
     public static Dictionary<string, List<CheckpointData>> GetCachedCheckpointData()
     {
         return cachedData?.checkpointDataPerScene;
+    }
+    public static List<ActiveQuestSave> CreateActiveQuestSaves(QuestManager qm)
+    {
+        var list = new List<ActiveQuestSave>();
+        var qs = qm.activeQuests;
+        for (int i = 0; i < qs.Count; i++)
+        {
+            var q = qs[i];
+            if (q == null || q.questData == null) continue;
+
+            list.Add(new ActiveQuestSave
+            {
+                index = i,
+                questId = q.questData.questName,
+                currentProgress = q.currentProgress,
+                isComplete = q.isComplete,
+                isRewarded = q.isRewarded
+            });
+        }
+        return list;
+    }
+
+    public static void ApplyActiveQuestSaves(QuestManager qm, List<ActiveQuestSave> saves)
+    {
+        if (saves == null || saves.Count == 0) return;
+
+        // build a buffer sized to the highest saved index
+        int maxIndex = 0;
+        for (int i = 0; i < saves.Count; i++)
+            if (saves[i].index > maxIndex) maxIndex = saves[i].index;
+
+        var buffer = new QuestInstance[maxIndex + 1];
+
+        for (int i = 0; i < saves.Count; i++)
+        {
+            var s = saves[i];
+            var so = qm.GetQuestAssetById(s.questId);
+            if (so == null) { Debug.LogWarning("Quest SO not found for id: " + s.questId); continue; }
+
+            var inst = new QuestInstance
+            {
+                questData = so,
+                currentProgress = s.currentProgress,
+                isComplete = s.isComplete,
+                isRewarded = s.isRewarded
+            };
+
+            if (s.index >= 0 && s.index < buffer.Length)
+                buffer[s.index] = inst;
+        }
+
+        // replace activeQuests with compacted buffer (skip null holes)
+        qm.activeQuests.Clear();
+        for (int i = 0; i < buffer.Length; i++)
+            if (buffer[i] != null) qm.activeQuests.Add(buffer[i]);
     }
 
 }

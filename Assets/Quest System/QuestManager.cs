@@ -19,6 +19,23 @@ public class QuestManager : MonoBehaviour
     public InventoryController inventoryController;
     public PlayerStats playerStats;
 
+    public List<QuestSO> questDatabase = new(); // assign all quest assets here
+
+    public QuestSO GetQuestAssetById(string questId)
+    {
+        for (int i = 0; i < questDatabase.Count; i++)
+        {
+            var so = questDatabase[i];
+            if (so != null && so.questName == questId) return so;
+        }
+
+        // Optional fallback if you keep quests under Resources/Quests
+        // var fromResources = Resources.Load<QuestSO>("Quests/" + questId);
+        // return fromResources;
+
+        return null;
+    }
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

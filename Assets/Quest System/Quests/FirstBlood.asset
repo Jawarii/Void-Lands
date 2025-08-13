@@ -19,9 +19,14 @@ MonoBehaviour:
   targetTag: Enemy
   targetAmount: 10
   goldReward: 30
-  expReward: 140
+  expReward: 180
   itemRewards:
-  - itemPrefab: {fileID: 5835571819418052544, guid: 909029a41be5d3647b0123fd3fe3ba8b, type: 3}
+  - itemPrefab: {fileID: 5835571819418052544, guid: eca6a74e90dbf504f9662357707fcadd, type: 3}
     quantity: 1
-  - itemPrefab: {fileID: 5835571819418052544, guid: 8a8d25d3d8bce3e419b1362c39c3757e, type: 3}
+    gearTier: 1
+  - itemPrefab: {fileID: 5835571819418052544, guid: fb4fbafd2cb0dfc419746f2f7f0c7da0, type: 3}
     quantity: 1
+    gearTier: 1
+  - itemPrefab: {fileID: 5835571819418052544, guid: 329e0b652e1d2e345aebdb5f888caae0, type: 3}
+    quantity: 1
+    gearTier: 1

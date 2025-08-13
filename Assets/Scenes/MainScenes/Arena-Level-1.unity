@@ -2779,8 +2779,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  - {fileID: 3497676198621287211, guid: 2e2ecb1561f751b47af84b90a1c00912, type: 3}
-  interval: 30
+  interval: 24
   waves: 6
 --- !u!1001 &213805505
 PrefabInstance:
@@ -2948,8 +2947,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  - {fileID: 3497676198621287211, guid: 66fe1beed865e394a80a6e219a2a87cd, type: 3}
-  interval: 30
+  interval: 24
   waves: 6
 --- !u!1 &338503032
 GameObject:
@@ -3162,7 +3160,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  interval: 15
+  interval: 12
   waves: 11
 --- !u!82 &594831772 stripped
 AudioSource:
@@ -3280,7 +3278,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  interval: 15
+  interval: 12
   waves: 11
 --- !u!20 &723029450 stripped
 Camera:
@@ -6088,7 +6086,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  interval: 15
+  interval: 12
   waves: 11
 --- !u!82 &922228203 stripped
 AudioSource:
@@ -21541,7 +21539,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  interval: 30
+  interval: 24
   waves: 6
 --- !u!1001 &1286701883
 PrefabInstance:
@@ -21865,7 +21863,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  interval: 30
+  interval: 24
   waves: 6
 --- !u!1 &1463651645
 GameObject:
@@ -22160,7 +22158,7 @@ MonoBehaviour:
   - {fileID: 3497676198621287211, guid: 5cc7d834d37a5534fb168f5ab696454c, type: 3}
   - {fileID: 3497676198621287211, guid: b77f3f2fbfdffda40957d5679f17d695, type: 3}
   - {fileID: 3497676198621287211, guid: eb6c677b75b220d47a802ef983d56eb6, type: 3}
-  interval: 15
+  interval: 12
   waves: 11
 --- !u!1 &1645271217
 GameObject:
@@ -22194,7 +22192,7 @@ MonoBehaviour:
   notifcationGO: {fileID: 729881719}
   chestPrefab: {fileID: 1680849203494820650, guid: afe0678babf1c5147bdcc287db23ce9d, type: 3}
   monstersKilled: 0
-  monstersToWin: 172
+  monstersToWin: 68
   player: {fileID: 0}
   isSuccessful: 0
   isFailed: 0

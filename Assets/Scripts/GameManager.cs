@@ -106,10 +106,16 @@ public class GameManager : MonoBehaviour
         equipmentSo.LoadAllEquipment(data.equipmentData);
         skillBarInfo.AddSkills(data.skillNames);
 
-        Vector3 savedPosition = new Vector3(data.playerData.position[0], data.playerData.position[1], data.playerData.position[2]);
+        Vector3 savedPosition = new Vector3(
+            data.playerData.position[0],
+            data.playerData.position[1],
+            data.playerData.position[2]
+        );
 
-        // Fallback to closest unlocked checkpoint if needed
+        // Apply checkpoint states
         SaveData.ApplyCheckpointDataList(data.checkpointDataPerScene);
+
+        // Restore player position
         Vector3 respawnPosition = RespawnManager.Instance.GetClosestUnlockedCheckPoint(savedPosition);
         if (respawnPosition != Vector3.zero)
         {
@@ -120,7 +126,12 @@ public class GameManager : MonoBehaviour
             playerStats.transform.position = savedPosition;
         }
 
-
+        // Apply active quest states (AFTER QuestManager is initialized)
+        if (QuestManager.Instance != null && data.activeQuests != null)
+        {
+            SaveData.ApplyActiveQuestSaves(QuestManager.Instance, data.activeQuests);
+        }
     }
+
 
 }

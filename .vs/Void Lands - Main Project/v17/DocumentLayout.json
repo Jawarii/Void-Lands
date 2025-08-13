@@ -3,15 +3,39 @@
   "WorkspaceRootPath": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\",
   "Documents": [
     {
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\stuff\\otherprojectscripts\\enemystats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\stuff\\otherprojectscripts\\enemystats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\scripts\\player\\playerstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\player\\playerstats.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\scripts\\arenaspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\arenaspawner.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\scripts\\arenaresultbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\arenaresultbehaviour.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
       "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\gamemanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\scripts\\savedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\questuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\questuimanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\quest system\\questmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\quest system\\questmanager.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
+    },
+    {
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\assets\\scripts\\savedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\savedata.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     },
     {
-      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|d:\\backup\\tempo\\onedrive\\desktop\\game projects\\void lands - main project\\assets\\scripts\\checkpoint\\checkpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
+      "AbsoluteMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\assets\\scripts\\checkpoint\\checkpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}",
       "RelativeMoniker": "D:0:0:{D96F3AFC-7E8E-CB2C-5143-4A5551078DB4}|Assembly-CSharp.csproj|solutionrelative:assets\\scripts\\checkpoint\\checkpoint.cs||{A6C744A8-0E4A-4FC6-886A-064283054674}"
     }
   ],
@@ -22,37 +46,115 @@
       "DocumentGroups": [
         {
           "DockedWidth": 200,
-          "SelectedChildIndex": 1,
+          "SelectedChildIndex": 2,
           "Children": [
             {
               "$type": "Document",
+              "DocumentIndex": 2,
+              "Title": "ArenaSpawner.cs",
+              "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\ArenaSpawner.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ArenaSpawner.cs",
+              "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\ArenaSpawner.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ArenaSpawner.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAQwBgAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T03:18:37.784Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
               "DocumentIndex": 1,
+              "Title": "PlayerStats.cs",
+              "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\Player\\PlayerStats.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\Player\\PlayerStats.cs",
+              "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\Player\\PlayerStats.cs",
+              "RelativeToolTip": "Assets\\Scripts\\Player\\PlayerStats.cs",
+              "ViewState": "AgIAAH4AAAAAAAAAAAAuwMcAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T03:00:40.834Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 0,
+              "Title": "EnemyStats.cs",
+              "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Stuff\\OtherProjectScripts\\EnemyStats.cs",
+              "RelativeDocumentMoniker": "Assets\\Stuff\\OtherProjectScripts\\EnemyStats.cs",
+              "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Stuff\\OtherProjectScripts\\EnemyStats.cs",
+              "RelativeToolTip": "Assets\\Stuff\\OtherProjectScripts\\EnemyStats.cs",
+              "ViewState": "AgIAAL8BAAAAAAAAAAAqwMUBAAAhAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T02:44:13.315Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 3,
+              "Title": "ArenaResultBehaviour.cs",
+              "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\ArenaResultBehaviour.cs",
+              "RelativeDocumentMoniker": "Assets\\Scripts\\ArenaResultBehaviour.cs",
+              "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\ArenaResultBehaviour.cs",
+              "RelativeToolTip": "Assets\\Scripts\\ArenaResultBehaviour.cs",
+              "ViewState": "AgIAABAAAAAAAAAAAAAgwAAAAAAAAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T01:39:32.03Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 5,
+              "Title": "QuestUIManager.cs",
+              "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\QuestUIManager.cs",
+              "RelativeDocumentMoniker": "Assets\\QuestUIManager.cs",
+              "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\QuestUIManager.cs",
+              "RelativeToolTip": "Assets\\QuestUIManager.cs",
+              "ViewState": "AgIAAB8AAAAAAAAAAAAAADUAAAAUAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-12T00:49:52.08Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 6,
+              "Title": "QuestManager.cs",
+              "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Quest System\\QuestManager.cs",
+              "RelativeDocumentMoniker": "Assets\\Quest System\\QuestManager.cs",
+              "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Quest System\\QuestManager.cs",
+              "RelativeToolTip": "Assets\\Quest System\\QuestManager.cs",
+              "ViewState": "AgIAADgAAAAAAAAAAAAIwBUAAAAEAAAAAAAAAA==",
+              "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
+              "WhenOpened": "2025-08-11T23:50:14.11Z",
+              "EditorCaption": ""
+            },
+            {
+              "$type": "Document",
+              "DocumentIndex": 7,
               "Title": "SaveData.cs",
               "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\SaveData.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\SaveData.cs",
               "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\SaveData.cs",
               "RelativeToolTip": "Assets\\Scripts\\SaveData.cs",
-              "ViewState": "AgIAAN4AAAAAAAAAAAAiwAMBAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAAsBAAAAAAAAAAAAwCUBAAAFAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-04T10:51:43.672Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 0,
+              "DocumentIndex": 4,
               "Title": "GameManager.cs",
               "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\GameManager.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\GameManager.cs",
               "ToolTip": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\GameManager.cs",
               "RelativeToolTip": "Assets\\Scripts\\GameManager.cs",
-              "ViewState": "AgIAABsAAAAAAAAAAAAqwDMAAAAAAAAAAAAAAA==",
+              "ViewState": "AgIAAF0AAAAAAAAAAAAAAHYAAABmAAAAAAAAAA==",
               "Icon": "ae27a6b0-e345-4288-96df-5eaf394ee369.000738|",
               "WhenOpened": "2025-08-04T10:46:32.21Z",
               "EditorCaption": ""
             },
             {
               "$type": "Document",
-              "DocumentIndex": 2,
+              "DocumentIndex": 8,
               "Title": "CheckPoint.cs",
               "DocumentMoniker": "D:\\Backup\\tempo\\OneDrive\\Desktop\\Game Projects\\Void Lands - Main Project\\Assets\\Scripts\\Checkpoint\\CheckPoint.cs",
               "RelativeDocumentMoniker": "Assets\\Scripts\\Checkpoint\\CheckPoint.cs",

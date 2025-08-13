@@ -468,6 +468,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1423099895798941942, guid: 0add6978caae9f94abe2f23bcb9f2b0a, type: 3}
+      propertyPath: questDatabase.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1423099895798941942, guid: 0add6978caae9f94abe2f23bcb9f2b0a, type: 3}
+      propertyPath: questDatabase.Array.data[0]
+      value: 
+      objectReference: {fileID: 11400000, guid: 069e6fdab8015d64aae1a836590a2054, type: 2}
+    - target: {fileID: 1423099895798941942, guid: 0add6978caae9f94abe2f23bcb9f2b0a, type: 3}
+      propertyPath: questDatabase.Array.data[1]
+      value: 
+      objectReference: {fileID: 11400000, guid: d1b0e42f9a4d1d14da6436170562194f, type: 2}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []

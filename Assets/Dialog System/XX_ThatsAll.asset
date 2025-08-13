@@ -13,8 +13,7 @@ MonoBehaviour:
   m_Name: XX_ThatsAll
   m_EditorClassIdentifier: 
   dialogLines:
-  - "You've proven capable. For now, that is enough.\nThere is more I could show
-    you... in time.\nRest, or wander \u2014 but don\u2019t stray far.\nThe void isn\u2019t
-    done with you yet."
+  - "Reach level 10, then teleport back here with [T]. When you return, the arena
+    will await your skill\u2026 and the boss will test your resolve."
   dialogType: 4
   relatedQuest: {fileID: 0}

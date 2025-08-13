@@ -135,7 +135,7 @@ public class PlayerStats : MonoBehaviour
         
         // Calculate initial stats
         UpdateLevelMultiplier();
-        maxExp = Mathf.Pow(lvl, 1.8f) * 100f;
+        maxExp = Mathf.Pow(lvl, 1.65f) * 100f;
 
         maxHp -= baseHp;
         baseHp = (int)(BASE_HP_MULTIPLIER * levelMultiplier);
@@ -228,7 +228,7 @@ public class PlayerStats : MonoBehaviour
         skillPoints += 1; // Grant 1 skill point per level up
         CheckLevelMilestones();
         currentExp = currentExp - maxExp;
-        maxExp = Mathf.Pow(lvl, 1.8f) * 100f;
+        maxExp = Mathf.Pow(lvl, 1.65f) * 100f;
         IncreaseStats();
         levelUpSource.PlayOneShot(levelUpClip);
         StartCoroutine(HandleLevelUpPanel());

@@ -47,8 +47,12 @@ public class QuestUIManager : MonoBehaviour
         StartCoroutine(DelayedSubscription());
 
         audioSource = GetComponent<AudioSource>();
+        RefreshUI();    
     }
-
+    private void Start()
+    {
+        RefreshUI();
+    }
     private IEnumerator DelayedSubscription()
     {
         yield return null;
